@@ -63,7 +63,7 @@ class Rox_Form_Prepared_DbConnection extends Rox_Form {
                 'id' => 'dbconnection_dbprefix',
                 'required' => true,
                 'size' => 20,
-                'value' => 'rox_'
+                'value' => 'gonium_'
             )),
             'dbuser' => array('text', array(
                 'label' => _('dbconnection_user'),
@@ -84,6 +84,7 @@ class Rox_Form_Prepared_DbConnection extends Rox_Form {
         ));
         $this->dbadapter->setValue('pdo_mysql');
 
+		Zend_Loader::loadClass('Zend_Filter_StringTrim');
         $stringTrim = new Zend_Filter_StringTrim();
         $this->dbhost->addFilter($stringTrim);
         $this->dbname->addFilter($stringTrim);

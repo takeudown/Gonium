@@ -40,6 +40,7 @@ class Init_Plugin_Install_View extends Zend_Controller_Plugin_Abstract
 {
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
+		Zend_Loader::loadClass('Rox_Base');
     	Rox_Base::null($request);
 
     	$view = Zend_Registry::get('core_view');

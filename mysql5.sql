@@ -1,247 +1,200 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.3deb1ubuntu1
+-- version 3.1.1
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-08-2008 a las 17:09:40
--- Versión del servidor: 5.0.51
--- Versión de PHP: 5.2.4-2ubuntu5.3
+-- Tiempo de generación: 10-05-2009 a las 20:00:26
+-- Versión del servidor: 5.1.33
+-- Versión de PHP: 5.2.9
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
 --
--- Base de datos: `roxyton`
+-- Base de datos: `roxyton_testing`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rox_acl_access`
+-- Estructura de tabla para la tabla `gonium_core_acl_access`
 --
 
-CREATE TABLE IF NOT EXISTS `rox_acl_access` (
+CREATE TABLE IF NOT EXISTS `gonium_core_acl_access` (
+  `rule_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `role_id` varchar(50) DEFAULT NULL,
+  `resource_name` varchar(50) DEFAULT NULL,
+  `privilege` varchar(50) DEFAULT NULL,
+  `allow` tinyint(1) unsigned NOT NULL,
+  PRIMARY KEY (`rule_id`) USING BTREE,
+  UNIQUE KEY `rule_unique` (`role_id`,`resource_name`,`privilege`) USING BTREE,
+  KEY `gonium_core_acl_access_resource_id_fkey` (`resource_name`,`privilege`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+
+--
+-- Volcar la base de datos para la tabla `gonium_core_acl_access`
+--
+
+INSERT INTO `gonium_core_acl_access` (`rule_id`, `role_id`, `resource_name`, `privilege`, `allow`) VALUES
+(8, 'Writers', 'Printer', NULL, 1),
+(9, 'Writers', 'TextWritingProggie', NULL, 1),
+(10, 'Editors', 'TextWritingProggie', NULL, 1),
+(11, 'Admins', NULL, NULL, 1),
+(12, 'Editors', 'svn', NULL, 1),
+(13, 'Writers', 'svn', NULL, 1),
+(14, 'Publishers', 'PhoneBook', NULL, 1),
+(15, 'Publishers', 'svn', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gonium_core_acl_inheritance`
+--
+
+CREATE TABLE IF NOT EXISTS `gonium_core_acl_inheritance` (
+  `inheritance_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `role_id` varchar(50) NOT NULL,
-  `resource_id` varchar(50) default NULL,
-  `privilege` varchar(50) default NULL,
-  `allow` tinyint(1) NOT NULL default '0',
-  UNIQUE KEY `role_id` (`role_id`,`resource_id`,`privilege`),
-  KEY `resource_id` (`resource_id`,`privilege`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcar la base de datos para la tabla `rox_acl_access`
---
-
-INSERT INTO `rox_acl_access` (`role_id`, `resource_id`, `privilege`, `allow`) VALUES
-('Writers', 'Printer', NULL, 1),
-('Writers', 'TextWritingProggie', NULL, 1),
-('Editors', 'TextWritingProggie', NULL, 1),
-('Admins', NULL, NULL, 1),
-('Editors', 'svn', NULL, 1),
-('Writers', 'svn', NULL, 1),
-('Publishers', 'PhoneBook', '', 1),
-('Publishers', 'svn', '', 1),
-('Publishers', 'svn', 'commit', 0);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `rox_acl_inheritance`
---
-
-CREATE TABLE IF NOT EXISTS `rox_acl_inheritance` (
-  `user_id` int(11) NOT NULL,
   `parent_id` varchar(50) NOT NULL,
-  `order` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`user_id`,`parent_id`),
+  `priority` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`inheritance_id`),
+  UNIQUE KEY `rule_unique` (`role_id`,`parent_id`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Volcar la base de datos para la tabla `rox_acl_inheritance`
+-- Volcar la base de datos para la tabla `gonium_core_acl_inheritance`
 --
 
-INSERT INTO `rox_acl_inheritance` (`user_id`, `parent_id`, `order`) VALUES
-(1, 'Admins', 0),
-(2, 'Editors', 0),
-(2, 'Writers', 1),
-(3, 'Publishers', 0),
-(4, 'Writers', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rox_acl_resources`
+-- Estructura de tabla para la tabla `gonium_core_acl_resources`
 --
 
-CREATE TABLE IF NOT EXISTS `rox_acl_resources` (
-  `resource_id` varchar(50) NOT NULL,
-  `parent_id` varchar(50) default NULL,
-  `privilege` varchar(50) NOT NULL default '',
-  `scope` varchar(50) NOT NULL default 'system',
-  PRIMARY KEY  (`resource_id`,`privilege`),
+CREATE TABLE IF NOT EXISTS `gonium_core_acl_resources` (
+  `resource_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) unsigned DEFAULT NULL,
+  `resource_name` varchar(50) NOT NULL DEFAULT '',
+  `privilege` varchar(50) DEFAULT NULL,
+  `scope` varchar(50) NOT NULL DEFAULT 'system',
+  PRIMARY KEY (`resource_id`),
+  UNIQUE KEY `resource_unique` (`resource_name`,`privilege`),
   KEY `parent_id` (`parent_id`),
   KEY `scope` (`scope`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
--- Volcar la base de datos para la tabla `rox_acl_resources`
+-- Volcar la base de datos para la tabla `gonium_core_acl_resources`
 --
 
-INSERT INTO `rox_acl_resources` (`resource_id`, `parent_id`, `privilege`, `scope`) VALUES
-('bathroom', 'home', '', 'system'),
-('default', NULL, '', 'module'),
-('home', NULL, '', 'system'),
-('LaTeX', 'TextWritingProggie', '', 'system'),
-('mod_blog', NULL, '', 'module'),
-('mod_default', NULL, '', 'module'),
-('mod_tienda', NULL, '', 'module'),
-('OOfficeWriter', 'TextWritingProggie', '', 'system'),
-('PhoneBook', NULL, '', 'system'),
-('Printer', NULL, '', 'system'),
-('svn', NULL, 'checkout', 'system'),
-('svn', NULL, 'commit', 'system'),
-('svn', NULL, 'update', 'system'),
-('TextWritingProggie', NULL, '', 'system');
+INSERT INTO `gonium_core_acl_resources` (`resource_id`, `parent_id`, `resource_name`, `privilege`, `scope`) VALUES
+(1, NULL, 'default', NULL, 'module'),
+(2, NULL, 'home', NULL, 'system'),
+(3, NULL, 'mod_blog', NULL, 'module'),
+(4, NULL, 'mod_default', NULL, 'module'),
+(5, NULL, 'mod_tienda', NULL, 'module'),
+(6, NULL, 'PhoneBook', NULL, 'system'),
+(7, NULL, 'Printer', NULL, 'system'),
+(8, NULL, 'svn', 'checkout', 'system'),
+(9, NULL, 'svn', 'commit', 'system'),
+(10, NULL, 'svn', 'update', 'system'),
+(11, NULL, 'TextWritingProggie', NULL, 'system'),
+(12, 2, 'bathroom', NULL, 'system'),
+(13, 11, 'LaTeX', NULL, 'system'),
+(14, 11, 'OOfficeWriter', NULL, 'system'),
+(15, NULL, 'a', NULL, 'testing'),
+(16, 15, 'b', NULL, 'testing'),
+(17, 15, 'b', NULL, 'testing'),
+(18, 15, 'c', NULL, 'testing'),
+(19, 15, 'd', NULL, 'testing'),
+(20, 19, 'e', NULL, 'testing'),
+(21, 19, 'f', NULL, 'testing'),
+(22, 17, 'g', NULL, 'testing');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rox_acl_roles`
+-- Estructura de tabla para la tabla `gonium_core_acl_roles`
 --
 
-CREATE TABLE IF NOT EXISTS `rox_acl_roles` (
+CREATE TABLE IF NOT EXISTS `gonium_core_acl_roles` (
   `role_id` varchar(50) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY  (`role_id`)
+  PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcar la base de datos para la tabla `rox_acl_roles`
+-- Volcar la base de datos para la tabla `gonium_core_acl_roles`
 --
 
-INSERT INTO `rox_acl_roles` (`role_id`, `name`) VALUES
-('Admins', ''),
-('Editors', ''),
-('Publishers', ''),
-('some.editor@example.org', ''),
-('some.publisher@example.org', ''),
-('some.writer@example.org', ''),
-('uberadmin@example.org', ''),
-('Writers', '');
+INSERT INTO `gonium_core_acl_roles` (`role_id`) VALUES
+('Admins'),
+('Editors'),
+('Guest'),
+('Publishers'),
+('some.editor@example.org'),
+('some.publisher@example.org'),
+('some.writer@example.org'),
+('uberadmin@example.org'),
+('Writers');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rox_blocks`
+-- Estructura de tabla para la tabla `gonium_core_modules`
 --
 
-CREATE TABLE IF NOT EXISTS `rox_blocks` (
-  `title` varchar(60) NOT NULL,
-  `rox_block` varchar(60) NOT NULL,
-  `rox_position` varchar(30) NOT NULL,
-  PRIMARY KEY  (`title`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcar la base de datos para la tabla `rox_blocks`
---
-
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `rox_blog_comments`
---
-
-CREATE TABLE IF NOT EXISTS `rox_blog_comments` (
-  `uid` int(11) NOT NULL,
-  `comment_name` varchar(200) NOT NULL,
-  `comment_email` varchar(200) NOT NULL,
-  `comment_website` varchar(200) NOT NULL,
-  `comment_text` text NOT NULL,
-  KEY `user_comments_fk` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcar la base de datos para la tabla `rox_blog_comments`
---
-
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `rox_blog_posts`
---
-
-CREATE TABLE IF NOT EXISTS `rox_blog_posts` (
-  `id` int(11) NOT NULL,
-  `post_title` varchar(200) NOT NULL,
-  `post_text` text NOT NULL,
-  `post_permalink` varchar(200) NOT NULL,
-  `uid` int(11) NOT NULL,
-  KEY `user` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcar la base de datos para la tabla `rox_blog_posts`
---
-
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `rox_modules`
---
-
-CREATE TABLE IF NOT EXISTS `rox_modules` (
+CREATE TABLE IF NOT EXISTS `gonium_core_modules` (
   `directory` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `resource_id` varchar(50) NOT NULL,
+  `resource_id` int(11) unsigned NOT NULL,
   UNIQUE KEY `resource_id` (`resource_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcar la base de datos para la tabla `rox_modules`
+-- Volcar la base de datos para la tabla `gonium_core_modules`
 --
 
-INSERT INTO `rox_modules` (`directory`, `name`, `resource_id`) VALUES
-('blog', 'Blog', 'mod_blog'),
-('default', 'Default', 'mod_default'),
-('tienda', 'Tienda', 'mod_tienda');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rox_users`
+-- Estructura de tabla para la tabla `gonium_core_users`
 --
 
-CREATE TABLE IF NOT EXISTS `rox_users` (
-  `uid` int(11) NOT NULL auto_increment,
+CREATE TABLE IF NOT EXISTS `gonium_core_users` (
+  `uid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  PRIMARY KEY  (`uid`)
+  `role_id` varchar(50) NOT NULL,
+  PRIMARY KEY (`uid`),
+  KEY `gonium_core_users_role_id_fkey` (`role_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- Volcar la base de datos para la tabla `rox_users`
+-- Volcar la base de datos para la tabla `gonium_core_users`
 --
 
-INSERT INTO `rox_users` (`uid`, `username`, `password`) VALUES
-(0, 'Anonymous', ''),
-(1, 'admin', '320d1a474a0dece4a7fac9136406fd6d63d62ec5'),
-(2, 'some.editor', 'a444c6174a11913f69916d4486083e909f2e516f'),
-(3, 'some.publisher', 'd791aad38ccd7dc598178e90493f72cd6949881e'),
-(4, 'some.writer', 'bf9f2de4daf079aebd44a68261579bde1a09dc52');
+INSERT INTO `gonium_core_users` (`uid`, `username`, `password`, `role_id`) VALUES
+(0, 'Anonymous', '', 'Guest'),
+(1, 'admin', '320d1a474a0dece4a7fac9136406fd6d63d62ec5', 'Admins'),
+(2, 'some.editor', 'a444c6174a11913f69916d4486083e909f2e516f', 'Editors'),
+(3, 'some.publisher', 'd791aad38ccd7dc598178e90493f72cd6949881e', 'Publishers'),
+(4, 'some.writer', 'bf9f2de4daf079aebd44a68261579bde1a09dc52', 'Writers');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rox_user_profile`
+-- Estructura de tabla para la tabla `gonium_core_user_profile`
 --
 
-CREATE TABLE IF NOT EXISTS `rox_user_profile` (
-  `uid` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `gonium_core_user_profile` (
+  `uid` int(11) unsigned NOT NULL,
   `email` varchar(100) NOT NULL,
   `name` varchar(200) NOT NULL,
   `web` varchar(200) NOT NULL,
@@ -249,7 +202,74 @@ CREATE TABLE IF NOT EXISTS `rox_user_profile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcar la base de datos para la tabla `rox_user_profile`
+-- Volcar la base de datos para la tabla `gonium_core_user_profile`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gonium_core_widgets`
+--
+
+CREATE TABLE IF NOT EXISTS `gonium_core_widgets` (
+  `widget_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `resource_id` int(11) unsigned DEFAULT NULL,
+  `title` varchar(60) NOT NULL,
+  `gonium_block` varchar(60) NOT NULL,
+  `gonium_position` varchar(30) NOT NULL,
+  PRIMARY KEY (`widget_id`),
+  UNIQUE KEY `title` (`title`),
+  KEY `gonium_core_widgets_resource_id_fkey` (`resource_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `gonium_core_widgets`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gonium_mod_blog_comments`
+--
+
+CREATE TABLE IF NOT EXISTS `gonium_mod_blog_comments` (
+  `comment_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) unsigned NOT NULL,
+  `uid` int(11) unsigned NOT NULL,
+  `comment_name` varchar(200) NOT NULL,
+  `comment_email` varchar(200) NOT NULL,
+  `comment_website` varchar(200) NOT NULL,
+  `comment_text` text NOT NULL,
+  PRIMARY KEY (`comment_id`),
+  KEY `gonium_mod_blog_comments_post_id_fkey` (`post_id`),
+  KEY `gonium_mod_blog_comments_uid_fkey` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `gonium_mod_blog_comments`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gonium_mod_blog_posts`
+--
+
+CREATE TABLE IF NOT EXISTS `gonium_mod_blog_posts` (
+  `post_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `post_title` varchar(200) NOT NULL,
+  `post_text` text NOT NULL,
+  `post_permalink` varchar(200) NOT NULL,
+  `uid` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`post_id`),
+  KEY `gonium_mod_blog_posts_uid_fkey` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `gonium_mod_blog_posts`
 --
 
 
@@ -258,45 +278,58 @@ CREATE TABLE IF NOT EXISTS `rox_user_profile` (
 --
 
 --
--- Filtros para la tabla `rox_acl_access`
+-- Filtros para la tabla `gonium_core_acl_access`
 --
-ALTER TABLE `rox_acl_access`
-  ADD CONSTRAINT `rox_acl_access_ibfk_4` FOREIGN KEY (`resource_id`) REFERENCES `rox_acl_resources` (`resource_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `rox_acl_access_ibfk_5` FOREIGN KEY (`role_id`) REFERENCES `rox_acl_roles` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `gonium_core_acl_access`
+  ADD CONSTRAINT `gonium_core_acl_access_resource_id_fkey` FOREIGN KEY (`resource_name`, `privilege`) REFERENCES `gonium_core_acl_resources` (`resource_name`, `privilege`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gonium_core_acl_access_role_id_fkey` FOREIGN KEY (`role_id`) REFERENCES `gonium_core_acl_roles` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `rox_acl_inheritance`
+-- Filtros para la tabla `gonium_core_acl_inheritance`
 --
-ALTER TABLE `rox_acl_inheritance`
-  ADD CONSTRAINT `rox_acl_inheritance_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `rox_acl_roles` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `rox_acl_inheritance_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `rox_users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `gonium_core_acl_inheritance`
+  ADD CONSTRAINT `gonium_core_acl_inheritance_parent_id_fkey` FOREIGN KEY (`parent_id`) REFERENCES `gonium_core_acl_roles` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gonium_core_acl_inheritance_role_id_fkey` FOREIGN KEY (`role_id`) REFERENCES `gonium_core_acl_roles` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `rox_acl_resources`
+-- Filtros para la tabla `gonium_core_acl_resources`
 --
-ALTER TABLE `rox_acl_resources`
-  ADD CONSTRAINT `rox_acl_resources_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `rox_acl_resources` (`resource_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `gonium_core_acl_resources`
+  ADD CONSTRAINT `gonium_core_acl_resources_parent_id_fkey` FOREIGN KEY (`parent_id`) REFERENCES `gonium_core_acl_resources` (`resource_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `rox_blog_comments`
+-- Filtros para la tabla `gonium_core_modules`
 --
-ALTER TABLE `rox_blog_comments`
-  ADD CONSTRAINT `user_comments_fk` FOREIGN KEY (`uid`) REFERENCES `rox_users` (`uid`);
+ALTER TABLE `gonium_core_modules`
+  ADD CONSTRAINT `gonium_core_modules_resource_id_fkey` FOREIGN KEY (`resource_id`) REFERENCES `gonium_core_acl_resources` (`resource_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `rox_blog_posts`
+-- Filtros para la tabla `gonium_core_users`
 --
-ALTER TABLE `rox_blog_posts`
-  ADD CONSTRAINT `users_fk` FOREIGN KEY (`uid`) REFERENCES `rox_users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `gonium_core_users`
+  ADD CONSTRAINT `gonium_core_users_role_id_fkey` FOREIGN KEY (`role_id`) REFERENCES `gonium_core_acl_roles` (`role_id`);
 
 --
--- Filtros para la tabla `rox_modules`
+-- Filtros para la tabla `gonium_core_user_profile`
 --
-ALTER TABLE `rox_modules`
-  ADD CONSTRAINT `rox_modules_ibfk_1` FOREIGN KEY (`resource_id`) REFERENCES `rox_acl_resources` (`resource_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `gonium_core_user_profile`
+  ADD CONSTRAINT `gonium_core_user_profile_uid_fkey` FOREIGN KEY (`uid`) REFERENCES `gonium_core_users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `rox_user_profile`
+-- Filtros para la tabla `gonium_core_widgets`
 --
-ALTER TABLE `rox_user_profile`
-  ADD CONSTRAINT `rox_user_profile_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `rox_users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `gonium_core_widgets`
+  ADD CONSTRAINT `gonium_core_widgets_resource_id_fkey` FOREIGN KEY (`resource_id`) REFERENCES `gonium_core_acl_resources` (`resource_id`);
+
+--
+-- Filtros para la tabla `gonium_mod_blog_comments`
+--
+ALTER TABLE `gonium_mod_blog_comments`
+  ADD CONSTRAINT `gonium_mod_blog_comments_post_id_fkey` FOREIGN KEY (`post_id`) REFERENCES `gonium_mod_blog_posts` (`post_id`),
+  ADD CONSTRAINT `gonium_mod_blog_comments_uid_fkey` FOREIGN KEY (`uid`) REFERENCES `gonium_core_users` (`uid`);
+
+--
+-- Filtros para la tabla `gonium_mod_blog_posts`
+--
+ALTER TABLE `gonium_mod_blog_posts`
+  ADD CONSTRAINT `gonium_mod_blog_posts_uid_fkey` FOREIGN KEY (`uid`) REFERENCES `gonium_core_users` (`uid`);

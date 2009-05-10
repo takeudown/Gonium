@@ -44,7 +44,6 @@ class Rox_Form_Prepared_SiteInstaller extends Rox_Form {
     {
     	$DbConnection = new Rox_Form_Prepared_DbConnection();
 
-
         $this->addElements(array(
             'site_name' => array('text', array(
                 'label' => _('site_name'),
@@ -58,6 +57,10 @@ class Rox_Form_Prepared_SiteInstaller extends Rox_Form {
             ))
         ));
 
+		Zend_Loader::loadClass('Zend_Filter_StripTags');
+		Zend_Loader::loadClass('Zend_Filter_StringTrim');
+		Zend_Loader::loadClass('Zend_Filter_HtmlEntities');
+		
         $stripTags = new Zend_Filter_StripTags();
         $stringTrim = new Zend_Filter_StringTrim();
         $htmlEntities = new Zend_Filter_HtmlEntities();

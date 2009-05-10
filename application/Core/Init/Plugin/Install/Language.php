@@ -47,6 +47,7 @@ class Init_Plugin_Install_Language extends Zend_Controller_Plugin_Abstract
     {
         parent::routeStartup($request);
         Zend_Loader::loadClass('Zend_Translate');
+        Zend_Loader::loadClass('Zend_Locale');
 
         $translate = new Zend_Translate(
             'gettext',

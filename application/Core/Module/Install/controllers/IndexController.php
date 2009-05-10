@@ -86,6 +86,7 @@ class IndexController extends Zend_Controller_Action
      */
     private function tryConnection(Rox_Form_Prepared_SiteInstaller $dbForm)
     {
+		Zend_loader::loadClass('Zend_Db');
         try{
             $db = Zend_Db::factory( $dbForm->dbConnection->dbadapter->getValue(), array(
                 'host'             => $dbForm->dbConnection->dbhost->getValue(),
@@ -174,6 +175,7 @@ class IndexController extends Zend_Controller_Action
             'dbInfo'        => true   // show detailed database info
         );
         
+		Zend_Loader::loadClass('Rox_Config_Writer_Ini');
         $writer = new Rox_Config_Writer_Ini(array(
                 'config'   => $config,
                 'filename' => $this->_etc.'config.ini'
