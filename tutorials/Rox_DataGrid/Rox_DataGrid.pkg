@@ -1,0 +1,631 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+          "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="{@id}">
+
+	<refmeta>
+		<refentrytitle>User Guide for Rox_DataGrid</refentrytitle>
+	</refmeta>
+
+	<refnamediv>
+		<refname>User Guide for Rox_DataGrid</refname>
+		<refpurpose>To display your data as a nice Grid</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv>
+
+	</refsynopsisdiv>
+	<author>
+		<firstname>Gonzalo</firstname>
+		<surname>Diaz</surname>
+		<authorblurb>
+			<para>
+				{@link http://devgon.wordpress.com}
+        </para>
+		</authorblurb>
+	</author>
+	{@toc}
+	<refsect1 id="{@id intro}">
+		<title>Introduction</title>
+		<para>
+			Original Information (in spanish):
+			http://bolsadeideas.cl/zsamer/2008/09/datagrid-con-zend-framework/
+		</para>
+	</refsect1>
+	<refsect1 id="{@id ColumnOptions}">
+		<title>Column Options</title>
+		<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>
+					header: title of column
+                    </para>
+			</listitem>
+			<listitem>
+				<para>
+					width: (integer) width of column in pixels.
+                    </para>
+			</listitem>
+			<listitem>
+				<para>
+					sortable: (boolean) if column can be sorted
+                    </para>
+			</listitem>
+			<listitem>
+				<para>
+					align: Left, Center, Right
+                    </para>
+			</listitem>
+			<listitem>
+				<para>
+					type: Data type of column.
+					Data type supported:
+					</para>
+					<itemizedlist mark='opencircle'>
+						<listitem>
+							<para>
+								String (default)
+                                </para>
+						</listitem>
+						<listitem>
+							<para>
+								Text
+                                </para>
+						</listitem>
+						<listitem>
+							<para>
+								Números
+                                </para>
+						</listitem>
+						<listitem>
+							<para>
+								Options
+                                </para>
+						</listitem>
+						<listitem>
+							<para>
+								Links(url)
+                                </para>
+						</listitem>
+						<listitem>
+							<para>
+								Actions (like: view, edit, delete)
+                                </para>
+						</listitem>
+					</itemizedlist>
+                <para>
+					You can extend ...
+				</para>
+			</listitem>
+		</itemizedlist>
+	</refsect1>
+
+	<refsect1 id="{@id Translate}">
+		<title>Translate</title>
+		<para>
+			These are the keys that will be translated in the Pager Adapter:
+		</para>
+		<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>
+					Next
+                </para>
+			</listitem>
+			<listitem>
+				<para>
+					Previous
+                </para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			To translate the Page Adapter, you must use an instance of Zend
+			Translate:
+        </para>
+		<programlisting role="php">
+   <![CDATA[
+// Translate
+$lang = Zend_Registry::get('Zend_Translate'); // $lang is a Zend_Translate object
+$grid->getPager()->translate($lang);
+   ]]>
+		</programlisting>
+	</refsect1>
+
+	<refsect1 id="{@id Examples}">
+		<title>Examples</title>
+		<refsect2 id="{@id WithArray}">
+			<title>With Array</title>
+			<refsect3 id="{@id WithArrayI}">
+				<title>Example Array Auto Generates Columns I</title>
+				<programlisting role="php">
+   <![CDATA[
+<?php
+require 'cms/models/Project.php';
+
+class Cms_GridController extends Zend_Controller_Action
+{
+        public function init()
+        {
+                $this->view->baseUrl() = $this->_request->getBaseUrl();
+
+                $this->view->addScriptPath(Core::getRoot() . DIRECTORY_SEPARATOR . 'skins/scripts/datagrid/');
+        }
+
+        public function testAction()
+        {       
+                $projctModel = new Project();
+                
+                $projectArray = $projctModel->fetchAll()->toArray();
+
+                $grid = new Rox_DataGrid(null, 6);
+
+                $grid->setDefaultSort(array('id' => "desc"))
+                     ->bindDataSource(new Rox_DataGrid_DataSource_Array($projectArray));
+
+                $this->view->grid = $grid;
+        }
+}
+]]>
+
+				</programlisting>
+			</refsect3>
+			<refsect3 id="{@id WithArrayII}">
+				<title>Example Array Auto Generates Columns II</title>
+				<programlisting role="php">
+   <![CDATA[
+<?php
+require 'cms/models/Project.php';
+
+class Cms_GridController extends Zend_Controller_Action
+{
+        public function init()
+        {
+                $this->view->baseUrl() = $this->_request->getBaseUrl();
+
+                $this->view->addScriptPath(Core::getRoot() . DIRECTORY_SEPARATOR . 'skins/scripts/datagrid/');
+        }
+
+        public function testAction()
+        {       
+                $projctModel = new Project();
+                
+                $projectArray = $projctModel->fetchAll()->toArray();
+
+                $grid = new Rox_DataGrid(new Rox_DataGrid_DataSource_Array($projectArray), 6);
+
+                $grid->setDefaultSort('title')
+                     ->setDefaultDir("asc");
+
+                $this->view->grid = $grid;
+        }
+}
+   ]]>
+				</programlisting>
+				<para>
+					In the view, we have:
+					quickstart\application\modules\cms\views\scripts\grid\test.phtml
+				</para>
+				<programlisting role="php">
+   <![CDATA[
+<?php echo $this->grid; ?>
+   ]]>
+				</programlisting>
+			</refsect3>
+		</refsect2>
+		<refsect2 id="{@id WithZendDB}">
+			<title>With ZendDb</title>
+			<refsect3 id="{@id WithZendDBI}">
+				<title>Example Zend_Db_Adapter Auto Generates Columns I
+				</title>
+				<para>
+					<programlisting role="php">
+   <![CDATA[
+<?php
+class Cms_GridController extends Zend_Controller_Action
+{
+        public function init()
+        {
+                $this->view->baseUrl() = $this->_request->getBaseUrl();
+
+                $this->view->addScriptPath(Core::getRoot() . DIRECTORY_SEPARATOR . 'skins/scripts/datagrid/');
+        }
+
+        public function testAction()
+        {       
+                $sql = "SELECT id, title, description, address, sale_office, created_at FROM project WHERE is_active=1";
+                
+                $grid = new Rox_DataGrid(null, 5);
+                $grid->setDefaultSort(array('title' => "asc"))
+                ->bindDataSource(new Rox_DataGrid_DataSource_ZendDB($sql));
+                
+                $this->view->grid = $grid;
+        }
+}
+   ]]>
+					</programlisting>
+
+					In the view, we have:
+					quickstart\application\modules\cms\views\scripts\grid\test.phtml
+					<programlisting role="php">
+   <![CDATA[
+<?php echo $this->grid; ?>
+   ]]>
+					</programlisting>
+
+					You must give the instance of Data Source
+					"Rox_DataGrid_DataSource_ZendDB" to the constructor of the object
+					DataGrid (Simultaneously, you must give a SQL Query String to the
+					Data Source ZendDB) and the registry number per page. In our
+					example
+					are 5 per page, but optionally you can give the Request
+					Object. If
+					this last parameter is omitted, the DataGrid Object will
+					take by
+					default the Zend_Controller_Request_Http Object in a
+					transparent
+					way.
+
+					Finally it calls the method setDefaultSort() to set
+					the default
+					order.
+				</para>
+			</refsect3>
+			<refsect3 id="{@id WithZendDBII}">
+				<title>Example Zend_Db_Adapter Auto Generates Columns II
+				</title>
+				<para>
+
+					<programlisting role="php">
+   <![CDATA[
+<?php
+class Cms_GridController extends Zend_Controller_Action
+{
+        public function init()
+        {
+                $this->view->baseUrl() = $this->_request->getBaseUrl();
+
+                $this->view->addScriptPath(Core::getRoot() . DIRECTORY_SEPARATOR . 'skins/scripts/datagrid/');
+        }
+
+        public function testAction()
+        {       
+                $sql = "SELECT id, title, description, address, sale_office, created_at FROM project WHERE is_active=1";
+                
+                $grid = new Rox_DataGrid(null, 5);
+                $grid->setDefaultSort(array('title' => "asc"))
+                ->bindDataSource(new Rox_DataGrid_DataSource_ZendDB($sql));
+                
+                $this->view->grid = $grid;
+        }
+}
+   ]]>
+					</programlisting>
+					In the view, we have:
+					quickstart\application\modules\cms\views\scripts\grid\test.phtml
+
+					<programlisting role="php">
+   <![CDATA[
+<?php echo $this->grid; ?>
+   ]]>
+					</programlisting>
+				</para>
+			</refsect3>
+		</refsect2>
+		<refsect2 id="{@id WithZendDbSelect}">
+			<title>With Zend_Db_Select</title>
+			<refsect3 id="{@id WithZendDbSelectI}">
+				<title>Example Zend_Db_Select Auto Generates Columns</title>
+				<programlisting role="php">
+   <![CDATA[
+<?php
+class Cms_GridController extends Zend_Controller_Action
+{
+        public function init()
+        {
+                $this->view->baseUrl() = $this->_request->getBaseUrl();
+
+                $this->view->addScriptPath(Core::getRoot() . DIRECTORY_SEPARATOR . 'skins/scripts/datagrid/');
+        }
+
+        public function testAction()
+        {       
+                $grid = new Rox_DataGrid(new Rox_DataGrid_DataSource_DbSelect(), 5);
+
+                $grid->setDefaultSort('title')
+                     ->setDefaultDir("asc");
+                
+                $grid->getSelect()->from('project', array('id', 'title', 'description', 'address', 'sale_office' , 'created_at'));
+
+                $this->view->grid = $grid;
+        }
+}
+   ]]>
+				</programlisting>
+				<para>
+					In the view, we have:
+					quickstart\application\modules\cms\views\scripts\grid\test.phtml
+				</para>
+
+				<programlisting role="php">
+   <![CDATA[
+<?php echo $this->grid; ?>
+   ]]>
+				</programlisting>
+				<para>
+					You must give the instance of Data Source
+					"Rox_DataGrid_DataSource_DbSelect" to the constructor of the
+					object
+					DataGrid and the registry number per page. In our example
+					are 5 per
+					page, but optionally you can give the Request Object. If
+					this last
+					parameter is omitted, the DataGrid Object will take by
+					default the
+					Zend_Controller_Request_Http Object in a transparent
+					way.
+				</para>
+			</refsect3>
+			<refsect3 id="{@id WithZendDbSelectII}">
+				<title>Example Zend_Db_Select whith Columns</title>
+				<programlisting role="php">
+   <![CDATA[
+<?php
+class Cms_GridController extends Zend_Controller_Action
+{
+        public function init()
+        {
+                $this->view->baseUrl() = $this->_request->getBaseUrl();
+
+                $this->view->addScriptPath(Core::getRoot() . DIRECTORY_SEPARATOR . 'skins/scripts/datagrid/');
+        }
+
+        public function testAction()
+        {
+                $grid = new Rox_DataGrid(new Rox_DataGrid_DataSource_DbSelect(), 5);
+                
+                $grid->setDefaultSort('title')
+                     ->setDefaultDir("asc");
+                
+                $grid->getSelect()->from('project');
+
+                $titulo = new Rox_DataGrid_Column('link', 'Title', null , 'left');
+
+                $titulo->setLinks($this->view->baseUrl() . '/cms/grid/view/id/$id/');
+                
+                $grid->addColumn('title', $titulo);
+
+                $grid->addColumn('description', new Rox_DataGrid_Column('text', 'Description', null , 'left'));
+                
+                $grid->addColumn('updated_at', new Rox_DataGrid_Column('text', 'Last Modified', 180));
+
+                $grid->addColumn('is_active', array('header' => 'Status',
+                                                    'width' => 80,
+                                                    'type' => 'options',
+                                                    'options' => array(0 => 'Disabled', 
+                                                                       1 => 'Enabled')));
+                       
+               $this->view->grid = $grid;
+
+        }
+}
+   ]]>
+				</programlisting>
+				<para>Different to the previous example, here are created
+					objects columns manually. In the method addColumn it's given as a
+					first parameter the physical name of the field or column (of the
+					table or array, typically from the data source in question) and as
+					a second parameter an object Rox_DataGrid_Column or an array with
+					the properties of the column.
+
+					In the case of giving an array, the
+					most important values are the
+					header and type. Header represents the
+					Label or title, while Type
+					is the type of column. If you omit the
+					type by default, it will be
+					a string that will be displayed without
+					format.
+
+					In the case of giving a Rox_DataGrid_Column object, it's
+					necessary
+					to give to the object constructor at least the two first
+					parameters. The first parameter is the type, if it becomes null it
+					will take the type string by default. The second parameter is the
+					header or label. There are two more parameters that are optional,
+					the width of the cell and its alignment (left, right, center).
+				</para>
+
+				<para>Set Zend_Db_Select Object:</para>
+				<programlisting role="php">
+   <![CDATA[
+$miSelect = Zend_Registry::getInstance()->get('db')->select();
+$grid->setSelect($miSelect);
+$grid->getSelect()->from('project', array('id', 'title', 'description', 'address', 'sale_office' , 'created_at'));
+   ]]>
+				</programlisting>
+				or:
+				<programlisting role="php">
+   <![CDATA[
+$miSelect = Zend_Db_Table::getDefaultAdapter()->select();
+$grid->setSelect($miSelect);
+$grid->getSelect()->from('project', array('id', 'title', 'description', 'address', 'sale_office' , 'created_at'));
+   ]]>
+				</programlisting>
+			</refsect3>
+		</refsect2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<refsect2 id="{@id WithZendDbSelect}">
+			<title>With Zend_Db_Table</title>
+			<refsect3 id="{@id WithZendDbSelectI}">
+				<title>Example Zend_Db_Table Auto Generates Columns</title>
+				<programlisting role="php">
+   <![CDATA[
+<?php
+require 'cms/models/Project.php';
+
+class Cms_GridController extends Zend_Controller_Action
+{
+        public function init()
+        {
+                $this->view->baseUrl() = $this->_request->getBaseUrl();
+
+                $this->view->addScriptPath(Core::getBaseDir() . DIRECTORY_SEPARATOR . 'skins/scripts/datagrid/');
+        }
+
+        public function testAction()
+        {       
+                $grid = new Rox_DataGrid(new Rox_DataGrid_DataSource_Table(new Project()), 5);
+                
+                $grid->setDefaultSort('title')
+                     ->setDefaultDir("asc");
+                
+                $this->view->grid = $grid;
+        }
+}
+   ]]>
+				</programlisting>
+				<para>
+					In the view, we have:
+					quickstart\application\modules\cms\views\scripts\grid\test.phtml
+				</para>
+
+				<programlisting role="php">
+   <![CDATA[
+<?php echo $this->grid; ?>
+   ]]>
+				</programlisting>
+				<para>
+					You must give the instance of Data Source
+					"Rox_DataGrid_DataSource_Table" to the constructor of the object
+					DataGrid (Simultaneously, you must give the Zend_Db_Table object to
+					the Data Source Table) and the registry number per page. In our
+					example are 5 per page, but optionally you can give the Request
+					Object. If this last parameter is omitted, the DataGrid Object will
+					take by default the Zend_Controller_Request_Http Object in a
+					transparent way.
+
+					If we need to add some kind of criteria or
+					conditions such as where,
+					orWhere, joins, etc, we can get the object
+					Zend_Db_Table_Select:
+				</para>
+				<programlisting role="php">
+   <![CDATA[
+$grid->getSelect()->where('is_active = ?', 1);
+   ]]>
+				</programlisting>
+
+			</refsect3>
+			<refsect3 id="{@id WithZendDbSelectII}">
+				<title>Example Zend_Db_Table whith Columns and Controls
+					(View, Edit, Delete)</title>
+				<programlisting role="php">
+   <![CDATA[
+<?php
+require 'cms/models/Project.php';
+
+class Cms_GridController extends Zend_Controller_Action
+{
+        public function init()
+        {
+                $this->view->baseUrl() = $this->_request->getBaseUrl(); 
+                $this->view->addScriptPath(Core::getBaseDir() . DIRECTORY_SEPARATOR . 'skins/scripts/datagrid/');
+        }
+
+        public function testAction()
+        {       
+                $grid = new Rox_DataGrid(new Rox_DataGrid_DataSource_Table(new Project()), 5);
+
+                $grid->setDefaultSort('title')
+                     ->setDefaultDir("asc");
+                
+                $titulo = new Rox_DataGrid_Column('link', 'Title', null , 'left');
+
+                $titulo->setLinks($this->view->baseUrl() . '/cms/grid/view/id/$id/');
+                
+                $grid->addColumn('title', $titulo);
+
+                $grid->addColumn('description', new Rox_DataGrid_Column('text', 'Description', null , 'left'));
+                
+                $grid->addColumn('updated_at', new Rox_DataGrid_Column('text', 'Last Modified', 180));
+
+                $grid->addColumn('is_active', array('header' => 'Status',
+                                                    'width' => 80,
+                                                    'type' => 'options',
+                                                    'options' => array(0 => 'Disabled', 
+                                                                       1 => 'Enabled')));
+
+                $grid->addColumn('preview', array('header' => 'Preview',
+                                                  'width' => 10,
+                                                  'sortable' => false,
+                                                  'align' => 'center',
+                                                  'type' => 'action',
+                                                  'actions' => array('url' => $this->view->baseUrl() . '/cms/grid/view/id/$id/',
+                                                                     'caption' => 'Preview',
+                                                                     'target' => '_blank',
+                                                                     'image' => $this->view->baseUrl() . '/public/images/view.gif')));
+                
+                $grid->addColumn('edit', array('header' => 'Edit',
+                                               'width' => 10,
+                                               'style' => 'text-align: center',
+                                               'sortable'  => false,
+                                               'type' => 'action',
+                                               'actions' => array('url' => $this->view->baseUrl() . '/cms/grid/edit/id/$id/',
+                                                                  'caption' => 'Edit',
+                                                                  'image' => $this->view->baseUrl() . '/public/images/edit.png')));
+                 
+                $grid->addColumn('delete', array('header' => 'Delete',
+                                                 'width' => 10,
+                                                 'style' => 'text-align: center',
+                                                 'sortable' => false,
+                                                 'type' => 'action',
+                                                 'actions' => array('url' => $this->view->baseUrl() . '/cms/grid/delete/id/$id/',
+                                                                    'confirm' => '¿Are you sure you want to delete $title ($id)?',
+                                                                    'caption' => 'Delete',
+                                                                    'image' => $this->view->baseUrl() . '/public/images/delete.png')));
+                
+                $this->view->grid = $grid;
+        }
+}
+   ]]>
+				</programlisting>
+				<para>Different to the previous example, here are created
+					objects columns manually. In the method addColumn it's given as a
+					first parameter the physical name of the field or column (of the
+					table or array, typically from the data source in question) and as
+					a second parameter an object Rox_DataGrid_Column or an array with
+					the properties of the column.
+				</para>
+				<para>
+					In the case of giving an array, the most important values are
+					the
+					header and type. Header represents the Label or title, while
+					Type
+					is the type of column. If you omit the type by default, it will
+					be
+					a string that will be displayed without format.
+				</para>
+				<para>
+					In the case of giving a Rox_DataGrid_Column object, it's
+					necessary
+					to give to the object constructor at least the two first
+					parameters. The first parameter is the type, if it becomes null it
+					will take the type string by default. The second parameter is the
+					header or label. There are two more parameters that are optional,
+					the width of the cell and its alignment (left, right, center).
+				</para>
+			</refsect3>
+		</refsect2>
+	</refsect1>
+
+</refentry>

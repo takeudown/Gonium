@@ -1,0 +1,379 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Roxyton $Id: coreLibs.po 136 2008-12-17 05:56:57Z gnzsquall $\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-17 00:13-0300\n"
+"PO-Revision-Date: 2008-12-17 02:10-0300\n"
+"Last-Translator: Gonzalo Díaz <gnzsquall@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: ./\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-SearchPath-0: ../../../library\n"
+"VERSION: $Id: coreLibs.po 136 2008-12-17 05:56:57Z gnzsquall $"
+
+#: ../../../library/Rox/Translate/Date.php:72
+#: ../../../library/Rox/Translate/Date.php:90
+msgid "date_day_monday"
+msgstr "monday"
+
+#: ../../../library/Rox/Translate/Date.php:73
+#: ../../../library/Rox/Translate/Date.php:91
+msgid "date_day_tuesday"
+msgstr "tuesday"
+
+#: ../../../library/Rox/Translate/Date.php:74
+#: ../../../library/Rox/Translate/Date.php:92
+msgid "date_day_wednesday"
+msgstr "wednesday"
+
+#: ../../../library/Rox/Translate/Date.php:75
+#: ../../../library/Rox/Translate/Date.php:93
+msgid "date_day_thursday"
+msgstr "thursday"
+
+#: ../../../library/Rox/Translate/Date.php:76
+#: ../../../library/Rox/Translate/Date.php:94
+msgid "date_day_friday"
+msgstr "friday"
+
+#: ../../../library/Rox/Translate/Date.php:77
+#: ../../../library/Rox/Translate/Date.php:95
+msgid "date_day_saturday"
+msgstr "saturday"
+
+#: ../../../library/Rox/Translate/Date.php:78
+#: ../../../library/Rox/Translate/Date.php:96
+msgid "date_day_sunday"
+msgstr "sunday"
+
+#: ../../../library/Rox/Translate/Date.php:108
+msgid "date_day_short_sunday"
+msgstr "sun"
+
+#: ../../../library/Rox/Translate/Date.php:109
+msgid "date_day_short_monday"
+msgstr "mon"
+
+#: ../../../library/Rox/Translate/Date.php:110
+msgid "date_day_short_tuesday"
+msgstr "tue"
+
+#: ../../../library/Rox/Translate/Date.php:111
+msgid "date_day_short_wednesday"
+msgstr "wed"
+
+#: ../../../library/Rox/Translate/Date.php:112
+msgid "date_day_short_thursday"
+msgstr "thu"
+
+#: ../../../library/Rox/Translate/Date.php:113
+msgid "date_day_short_friday"
+msgstr "fri"
+
+#: ../../../library/Rox/Translate/Date.php:114
+msgid "date_day_short_saturday"
+msgstr "sat"
+
+#: ../../../library/Rox/Translate/Date.php:126
+msgid "date_day_min_sunday"
+msgstr "sun"
+
+#: ../../../library/Rox/Translate/Date.php:127
+msgid "date_day_min_monday"
+msgstr "mo"
+
+#: ../../../library/Rox/Translate/Date.php:128
+msgid "date_day_min_tuesday"
+msgstr "tu"
+
+#: ../../../library/Rox/Translate/Date.php:129
+msgid "date_day_min_wednesday"
+msgstr "we"
+
+#: ../../../library/Rox/Translate/Date.php:130
+msgid "date_day_min_thursday"
+msgstr "thu"
+
+#: ../../../library/Rox/Translate/Date.php:131
+msgid "date_day_min_friday"
+msgstr "fri"
+
+#: ../../../library/Rox/Translate/Date.php:132
+msgid "date_day_min_saturday"
+msgstr "sa"
+
+#: ../../../library/Rox/Translate/Date.php:143
+#: ../../../library/Rox/Translate/Date.php:188
+msgid "date_month_january"
+msgstr "january"
+
+#: ../../../library/Rox/Translate/Date.php:144
+#: ../../../library/Rox/Translate/Date.php:189
+msgid "date_month_february"
+msgstr "february"
+
+#: ../../../library/Rox/Translate/Date.php:145
+#: ../../../library/Rox/Translate/Date.php:190
+msgid "date_month_march"
+msgstr "march"
+
+#: ../../../library/Rox/Translate/Date.php:146
+#: ../../../library/Rox/Translate/Date.php:191
+msgid "date_month_april"
+msgstr "april"
+
+#: ../../../library/Rox/Translate/Date.php:147
+#: ../../../library/Rox/Translate/Date.php:192
+msgid "date_month_may"
+msgstr "may"
+
+#: ../../../library/Rox/Translate/Date.php:148
+#: ../../../library/Rox/Translate/Date.php:193
+msgid "date_month_june"
+msgstr "june"
+
+#: ../../../library/Rox/Translate/Date.php:149
+#: ../../../library/Rox/Translate/Date.php:194
+msgid "date_month_july"
+msgstr "july"
+
+#: ../../../library/Rox/Translate/Date.php:150
+#: ../../../library/Rox/Translate/Date.php:195
+msgid "date_month_august"
+msgstr "august"
+
+#: ../../../library/Rox/Translate/Date.php:151
+#: ../../../library/Rox/Translate/Date.php:196
+msgid "date_month_september"
+msgstr "september"
+
+#: ../../../library/Rox/Translate/Date.php:152
+#: ../../../library/Rox/Translate/Date.php:197
+msgid "date_month_october"
+msgstr "october"
+
+#: ../../../library/Rox/Translate/Date.php:153
+#: ../../../library/Rox/Translate/Date.php:198
+msgid "date_month_november"
+msgstr "november"
+
+#: ../../../library/Rox/Translate/Date.php:154
+#: ../../../library/Rox/Translate/Date.php:199
+msgid "date_month_december"
+msgstr "december"
+
+#: ../../../library/Rox/Translate/Date.php:165
+msgid "date_month_short_january"
+msgstr "jan"
+
+#: ../../../library/Rox/Translate/Date.php:166
+msgid "date_month_short_february"
+msgstr "feb"
+
+#: ../../../library/Rox/Translate/Date.php:167
+msgid "date_month_short_march"
+msgstr "mar"
+
+#: ../../../library/Rox/Translate/Date.php:168
+msgid "date_month_short_april"
+msgstr "apr"
+
+#: ../../../library/Rox/Translate/Date.php:169
+msgid "date_month_short_may"
+msgstr "may"
+
+#: ../../../library/Rox/Translate/Date.php:170
+msgid "date_month_short_june"
+msgstr "jun"
+
+#: ../../../library/Rox/Translate/Date.php:171
+msgid "date_month_short_july"
+msgstr "jul"
+
+#: ../../../library/Rox/Translate/Date.php:172
+msgid "date_month_short_august"
+msgstr "aug"
+
+#: ../../../library/Rox/Translate/Date.php:173
+msgid "date_month_short_september"
+msgstr "sep"
+
+#: ../../../library/Rox/Translate/Date.php:174
+msgid "date_month_short_october"
+msgstr "oct"
+
+#: ../../../library/Rox/Translate/Date.php:175
+msgid "date_month_short_november"
+msgstr "nov"
+
+#: ../../../library/Rox/Translate/Date.php:176
+msgid "date_month_short_december"
+msgstr "dec"
+
+#: ../../../library/Rox/Translate/Date.php:206
+msgid "date_unit_second"
+msgstr "second"
+
+#: ../../../library/Rox/Translate/Date.php:207
+msgid "date_unit_minute"
+msgstr "minute"
+
+#: ../../../library/Rox/Translate/Date.php:208
+msgid "date_unit_hour"
+msgstr "hour"
+
+#: ../../../library/Rox/Translate/Date.php:209
+msgid "date_unit_day"
+msgstr "day"
+
+#: ../../../library/Rox/Translate/Date.php:210
+msgid "date_unit_week"
+msgstr "week"
+
+#: ../../../library/Rox/Translate/Date.php:211
+msgid "date_unit_month"
+msgstr "month"
+
+#: ../../../library/Rox/Translate/Date.php:212
+msgid "date_unit_year"
+msgstr "year"
+
+#: ../../../library/Rox/Translate/Date.php:213
+msgid "date_unit_decade"
+msgstr "decade"
+
+#: ../../../library/Rox/Translate/Date.php:214
+msgid "date_unit_century"
+msgstr "century"
+
+#: ../../../library/Rox/Translate/Date.php:215
+msgid "date_unit_millenium"
+msgstr "millenium"
+
+#: ../../../library/Rox/Translate/Date.php:225
+msgid "date_session_spring"
+msgstr "spring"
+
+#: ../../../library/Rox/Translate/Date.php:226
+msgid "date_session_summer"
+msgstr "summer"
+
+#: ../../../library/Rox/Translate/Date.php:227
+msgid "date_session_autumn"
+msgstr "autumn"
+
+#: ../../../library/Rox/Translate/Date.php:228
+msgid "date_session_winter"
+msgstr "winter"
+
+#: ../../../library/Rox/Controller/Action/Helper/LoadModel.php:181
+#, php-format
+msgid "Model class %s not found"
+msgstr "Model class [%s] not found"
+
+#: ../../../library/Rox/Form/Prepared/OpenId.php:46
+msgid "loginForm_OpenId_Url"
+msgstr "Openid Address"
+
+#: ../../../library/Rox/Form/Prepared/OpenId.php:54
+#: ../../../library/Rox/Form/Prepared/Login.php:57
+msgid "loginForm_Remember"
+msgstr "Remember"
+
+#: ../../../library/Rox/Form/Prepared/OpenId.php:58
+#: ../../../library/Rox/Form/Prepared/Login.php:61
+msgid "loginForm_Login"
+msgstr "Sign in"
+
+#: ../../../library/Rox/Form/Prepared/DbConnection.php:45
+msgid "dbconnection_adapter"
+msgstr "Database adapter"
+
+#: ../../../library/Rox/Form/Prepared/DbConnection.php:50
+msgid "dbconnection_dbhost"
+msgstr "IP Address or Domain"
+
+#: ../../../library/Rox/Form/Prepared/DbConnection.php:56
+msgid "dbconnection_dbname"
+msgstr "Database name"
+
+#: ../../../library/Rox/Form/Prepared/DbConnection.php:62
+msgid "dbconnection_dbprefix"
+msgstr "Prefix of table names"
+
+#: ../../../library/Rox/Form/Prepared/DbConnection.php:69
+msgid "dbconnection_user"
+msgstr "Username"
+
+#: ../../../library/Rox/Form/Prepared/DbConnection.php:74
+msgid "dbconnection_password"
+msgstr "ContraseÃ±a"
+
+#: ../../../library/Rox/Form/Prepared/DbConnection.php:79
+msgid "dbconnection_connect"
+msgstr "Try connect"
+
+#: ../../../library/Rox/Form/Prepared/Login.php:46
+msgid "loginForm_Username"
+msgstr "Username"
+
+#: ../../../library/Rox/Form/Prepared/Login.php:52
+msgid "loginForm_Password"
+msgstr "Password"
+
+#: ../../../library/Rox/Form/Prepared/Logout.php:45
+msgid "loginForm_Logout"
+msgstr "Sign out"
+
+#: ../../../library/Rox/Validate/Uri.php:50
+msgid "badUri"
+msgstr "Invalid URI"
+
+#: ../../../library/Rox/Form/Prepared/OpenId.php:46
+msgid "loginForm_OpenId_Url"
+msgstr "Openid Adress"
+
+#: ../../../library/Rox/Form/Prepared/OpenId.php:54
+#: ../../../library/Rox/Form/Prepared/Login.php:57
+msgid "loginForm_Remember"
+msgstr "Remember"
+
+#: ../../../library/Rox/Form/Prepared/OpenId.php:58
+#: ../../../library/Rox/Form/Prepared/Login.php:61
+msgid "loginForm_Login"
+msgstr "Sign in"
+
+#: ../../../library/Rox/Form/Prepared/Login.php:46
+msgid "loginForm_Username"
+msgstr "Username"
+
+#: ../../../library/Rox/Form/Prepared/Login.php:52
+msgid "loginForm_Password"
+msgstr "Password"
+
+#: ../../../library/Rox/Form/Prepared/Logout.php:45
+msgid "loginForm_Logout"
+msgstr "Sign out"
+
+#: ../../../library/Rox/Validate/Uri.php:50
+msgid "badUri"
+msgstr "Invalid URI Adress"
+
+#: ../../../library/Rox/Validate/PasswordConfirmation.php:46
+msgid "notMatch"
+msgstr "The submitted data does not match"
+
+#: ../../../library/Rox/DataGrid/Pager/Abstract.php:350
+msgid "Next"
+msgstr "Next"
+
+#: ../../../library/Rox/DataGrid/Pager/Abstract.php:351
+msgid "Previous"
+msgstr "Previous"
+

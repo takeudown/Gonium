@@ -1,0 +1,33 @@
+<IfModule rewrite_module>
+  RewriteEngine on
+  #RewriteBase /
+  
+  ## Original ZF rewrite rule for Apache mod_rewrite:
+  #RewriteRule !\.(pdf|php|js|ico|txt|gif|jpg|png|css|rss|zip|tar\.gz)$ index.php
+  
+  ## Use this in PRODUCTION environment:
+  #RewriteRule !admin|\.(html|docs|pdf|php|js|ico|txt|gif|jpg|png|css|rss|zip|tar\.gz)$ index.php.php
+  
+  ## Use this in DEVELOPMENT environment:
+  RewriteRule !admin|\.(html|docs|pdf|php|js|ico|txt|gif|jpg|png|css|rss|zip|tar\.gz)$ devel.php
+  
+  ## Backend rule
+  RewriteRule ^admin admin.php     [L,NC]
+</IfModule>
+
+#<IfModule php5_module>
+    #php_flag zlib.output_compression on
+
+    ##Con el numero se controla el nivel de compresion donde 0 es null y 9 el maximo
+    #php_value zlib.output_compression_level 5
+    #AddHandler application/x-httpd-php .css .js
+
+    ###Poner una ruta local cualquiera hacia un archivo php
+    #php_value auto_prepend_file D:/web/htdocs/roxyton/app/gzip-head.php
+
+    ## On-the-fly CSS+JS compression
+    #AddHandler application/x-httpd-php .js
+    #AddHandler application/x-httpd-php .js .css
+    #php_value auto_prepend_file D:/web/htdocs/roxyton/app/gzip-start.php
+    #php_value auto_append_file D:/web/htdocs/roxyton/app/gzip-end.php
+#</IfModule>

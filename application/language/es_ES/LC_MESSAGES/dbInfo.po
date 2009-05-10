@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Roxyton $Revision: 136 $\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-29 15:13-0400\n"
+"PO-Revision-Date: 2008-08-29 15:13-0400\n"
+"Last-Translator: Gonzalo Díaz Cruz <gnzsquall@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: CHILE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: ./\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-SearchPath-0: ../../../usr/widgets/dbInfo\n"
+"VERSION: $Id: dbInfo.po 136 2008-12-17 05:56:57Z gnzsquall $"
+
+#: ../../../usr/widgets/dbInfo/views/scripts/DbInfo.phtml:2
+#, php-format
+msgid "%1$d queries in %2$f seconds"
+msgstr "Se ejecutaron %1$d consultas en %2$.4f segundos"
+
+#: ../../../usr/widgets/dbInfo/views/scripts/DbInfo.phtml:10
+#, php-format
+msgid "AverageQueryLenght: %1$f | QueriesPerSecond %2$f"
+msgstr "En promedio %1$.4f segundos por consulta, %2$.4f consultas por segundo. "
+
+#: ../../../usr/widgets/dbInfo/views/scripts/DbInfo.phtml:18
+#, php-format
+msgid "Query longestTime: %1$f seconds"
+msgstr "La consulta m&aacute;s larga dur&oacute; %1$f segundos."
+
+#: ../../../usr/widgets/dbInfo/views/scripts/DbInfo.phtml:24
+#, php-format
+msgid "longestQuery: %1$s"
+msgstr "La consulta m&aacute;s larga fu&eacute;: %1$s"
+

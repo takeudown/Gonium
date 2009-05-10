@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+/**
+ * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
+ * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
+ * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
+ * @version     $Id: common.css 153 2009-05-10 21:20:21Z gnzsquall $
+ */
+.openid input[type=text] {
+	background-color: #ffffff;
+	background-image: url(../images/openid_small_logo.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 0pt 50%;
+	padding-left: 18px;
+	padding-top: 0.2em;
+}

@@ -1,0 +1,21 @@
+<?php if($this->messageError): ?>
+<div class="error">
+    <?php echo $this->messageError; ?>
+</div>
+<?php endif; ?>
+
+<?php if($this->messageSuccess): ?>
+<div class="success">
+    <?php echo $this->messageSuccess; ?>
+
+    <?php if($this->homeLink): ?>
+        <div>
+            <a href="<?php echo $this->url(array('action' => 'index')); ?>">
+                <?php echo $this->translate('Go to home'); ?>
+            </a>
+        </div>
+    <?php endif; ?>
+</div>
+<?php endif; ?>
+
+<?php echo $this->form; ?>

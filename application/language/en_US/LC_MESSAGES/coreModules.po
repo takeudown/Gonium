@@ -1,0 +1,134 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Roxyton $Id: coreModules.po 142 2008-12-25 20:44:25Z gnzsquall $\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-19 03:21-0300\n"
+"PO-Revision-Date: 2008-12-19 03:22-0300\n"
+"Last-Translator: Gonzalo Díaz <gnzsquall@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: ./\n"
+"X-Poedit-KeywordsList: translate\n"
+"VERSION: $Id: coreModules.po 142 2008-12-25 20:44:25Z gnzsquall $\n"
+"X-Poedit-SearchPath-0: ../../../Core/Module\n"
+
+#: ../../../Core/Module/Admin/user/helpers/UserForm.php:48
+#: ../../../Core/Module/Admin/user/controllers/IndexController.php:65
+msgid "username"
+msgstr "username"
+
+#: ../../../Core/Module/Admin/user/helpers/UserForm.php:53
+msgid "password"
+msgstr "password"
+
+#: ../../../Core/Module/Admin/user/helpers/UserForm.php:58
+msgid "confirm password"
+msgstr "confirm password"
+
+#: ../../../Core/Module/Admin/user/helpers/UserForm.php:62
+msgid "Add User"
+msgstr "Add User"
+
+#: ../../../Core/Module/Admin/user/controllers/IndexController.php:43
+msgid "User's Management"
+msgstr "User's Management"
+
+#: ../../../Core/Module/Admin/user/controllers/IndexController.php:75
+msgid "Edit"
+msgstr "Edit"
+
+#: ../../../Core/Module/Admin/user/controllers/IndexController.php:92
+msgid "Delete"
+msgstr "Delete"
+
+#: ../../../Core/Module/Error/IndexController.php:116
+msgid "Remote Error"
+msgstr "Remote Error"
+
+#: ../../../Core/Module/Error/IndexController.php:117
+msgid "Remote Error Message"
+msgstr "An error occurred during the remote connection."
+
+#: ../../../Core/Module/Error/IndexController.php:131
+msgid "Error 403"
+msgstr "Error 403: Denied access to this page."
+
+#: ../../../Core/Module/Error/IndexController.php:147
+msgid "Error 404"
+msgstr "Error 404: Requested page not found"
+
+#: ../../../Core/Module/Error/IndexController.php:159
+msgid "Error 500"
+msgstr "Error 500: Internal Error"
+
+#: ../../../Core/Module/Error/IndexController.php:175
+#: ../../../Core/Module/Error/IndexController.php:181
+msgid "Database Error"
+msgstr "Database Error"
+
+#: ../../../Core/Module/Error/IndexController.php:176
+msgid "Database Connection Error"
+msgstr "Database Connection Error"
+
+#: ../../../Core/Module/Error/IndexController.php:182
+msgid "Database Execution Error"
+msgstr "An error occurred during the query to the database."
+
+#: ../../../Core/Module/Install/controllers/IndexController.php:59
+msgid "Install"
+msgstr "Instalar"
+
+#: ../../../Core/Module/Install/controllers/IndexController.php:122
+msgid "Try to write config file"
+msgstr "Try to write configuration file"
+
+#: ../../../Core/Module/Install/controllers/IndexController.php:165
+msgid "Write configuration file"
+msgstr "Write configuration file"
+
+#: ../../../Core/Module/Install/controllers/IndexController.php:183
+msgid "Download configuration file"
+msgstr "Download configuration file"
+
+#: ../../../Core/Module/Install/controllers/IndexController.php:194
+msgid "Error: writing file"
+msgstr "Error: can't write configuration file"
+
+#: ../../../Core/Module/Install/controllers/IndexController.php:195
+msgid "Download config.ini file and upload to application/etc/"
+msgstr "Download config.ini file and upload to application/etc/"
+
+#: ../../../Core/Module/Install/controllers/IndexController.php:229
+msgid "Installation success"
+msgstr "Installation success"
+
+#: ../../../Core/Module/Frontend/user/controllers/AuthController.php:106
+msgid "userLogin_IndentityNotFound"
+msgstr "The username is incorrect. Are you registered with this name?"
+
+#: ../../../Core/Module/Frontend/user/controllers/AuthController.php:112
+msgid "userLogin_FailureCredentialInvalid"
+msgstr "Incorrect password"
+
+#: ../../../Core/Module/Frontend/user/controllers/AuthController.php:132
+msgid "userLogin_Success"
+msgstr "Logged correctly"
+
+#: ../../../Core/Module/Frontend/user/controllers/AuthController.php:147
+#: ../../../Core/Module/Frontend/user/controllers/OpenidController.php:145
+msgid "userLogin_SignedOut"
+msgstr "Session closed correctly"
+
+#: ../../../Core/Module/Install/views/scripts/index.phtml:14
+msgid "Go to home"
+msgstr "Go to home"
+
+#: ../../../Core/Module/Frontend/user/views/scripts/index.phtml:1
+msgid "User Panel"
+msgstr "User Panel"
+

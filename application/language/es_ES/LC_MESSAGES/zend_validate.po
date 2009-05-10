@@ -1,0 +1,171 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Roxyton $Revision: 136 $\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-31 14:35-0300\n"
+"PO-Revision-Date: 2008-08-31 14:35-0300\n"
+"Last-Translator: Gonzalo Diaz Cuz <gnzsquall@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: CHILE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: ./\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-SearchPath-0: ../../templates/form\n"
+"VERSION: $Id: zend_validate.po 136 2008-12-17 05:56:57Z gnzsquall $"
+
+#: ../../templates/form/zend_validate.php:3
+msgid "isEmpty"
+msgstr "Se requiere un valor no vacío"
+
+#: ../../templates/form/zend_validate.php:4
+msgid "stringEmpty"
+msgstr "'%value%' es una cadena vacía"
+
+#: ../../templates/form/zend_validate.php:7
+msgid "notAlnum"
+msgstr "'%value%' no solo tiene caracteres alfabéticos o números"
+
+#: ../../templates/form/zend_validate.php:10
+msgid "notAlpha"
+msgstr "'%value%' no solo tiene caracteres alfabéticos"
+
+#: ../../templates/form/zend_validate.php:13
+msgid "notBetween"
+msgstr "'%value%' no esta entre '%min%' y '%max%', inclusive"
+
+#: ../../templates/form/zend_validate.php:14
+msgid "notBetweenStrict"
+msgstr "'%value%' no esta estrictamente entre '%min%' y '%max%'"
+
+#: ../../templates/form/zend_validate.php:17
+msgid "ccnumLength"
+msgstr "'%value%' debe contener entre 13 y 19 digitos"
+
+#: ../../templates/form/zend_validate.php:18
+msgid "ccnumChecksum"
+msgstr "Algoritmo Luhn (mod-10 checksum) ha fallado con '%value%'"
+
+#: ../../templates/form/zend_validate.php:21
+msgid "dateNotYYYY-MM-DD"
+msgstr "'%value%' no está en el formato YYYY-MM-DD"
+
+#: ../../templates/form/zend_validate.php:22
+msgid "dateInvalid"
+msgstr "'%value%' no parece ser una fecha válida"
+
+#: ../../templates/form/zend_validate.php:23
+msgid "dateFalseFormat"
+msgstr "'%value%' no encaja con el formato de fecha dado"
+
+#: ../../templates/form/zend_validate.php:26
+msgid "notDigits"
+msgstr "'%value%' contiene caracteres que no son digitos"
+
+#: ../../templates/form/zend_validate.php:29
+msgid "emailAddressInvalid"
+msgstr "'% valor%' no es una dirección válida de correo electrónico en formato básico local-part@hostname"
+
+#: ../../templates/form/zend_validate.php:30
+msgid "emailAddressInvalidHostname"
+msgstr "'%hostname%' nombre de host inválido para la dirección de correo electrónico '%value%'"
+
+#: ../../templates/form/zend_validate.php:31
+msgid "emailAddressInvalidMxRecord"
+msgstr "'%hostname%' no parece tener un registro MX válido para la dirección de correo electrónico '%value%'"
+
+#: ../../templates/form/zend_validate.php:32
+msgid "emailAddressDotAtom"
+msgstr "'%localPart%' no coincide con el formato dot-atom"
+
+#: ../../templates/form/zend_validate.php:33
+msgid "emailAddressQuotedString"
+msgstr "'%localPart%' no coincide con el formato cadena-citada"
+
+#: ../../templates/form/zend_validate.php:34
+msgid "emailAddressInvalidLocalPart"
+msgstr "'%localPart%' no es una parte local válida para la dirección de correo electronico '%value%'"
+
+#: ../../templates/form/zend_validate.php:37
+msgid "notFloat"
+msgstr "'%value%' no parece ser un valor decimal"
+
+#: ../../templates/form/zend_validate.php:40
+msgid "notGreaterThan"
+msgstr "'%value%' no es mayor que '%min%'"
+
+#: ../../templates/form/zend_validate.php:43
+msgid "notHex"
+msgstr "'%value%' no solo contiene caracteres de digito hexadecimal"
+
+#: ../../templates/form/zend_validate.php:46
+msgid "hostnameIpAddressNotAllowed"
+msgstr "'%value%' parece ser una dirección IP, pero una dirección IP no está permitida."
+
+#: ../../templates/form/zend_validate.php:47
+msgid "hostnameUnknownTld"
+msgstr "'%value%' parece ser un nombre de host DNS, pero no coincide el TLD con la lista conocida"
+
+#: ../../templates/form/zend_validate.php:48
+msgid "hostnameDashCharacter"
+msgstr "'%value%' parece ser un nombre de host DNS, pero contiene un guión (-) en una posición inválida"
+
+#: ../../templates/form/zend_validate.php:49
+msgid "hostnameInvalidHostnameSchema"
+msgstr "'%value%' parece ser un nombre de dominio DNS, pero el TLD '%tld%' no coincide en el esquema"
+
+#: ../../templates/form/zend_validate.php:50
+msgid "hostnameUndecipherableTld"
+msgstr "'%value%' parece ser un nombre de host DNS, pero no se puede extraer la parte del TLD"
+
+#: ../../templates/form/zend_validate.php:51
+msgid "hostnameInvalidHostname"
+msgstr "'%value%' no coincide con la estructura de un nombre de host DNS"
+
+#: ../../templates/form/zend_validate.php:52
+msgid "hostnameInvalidLocalName"
+msgstr "'% valor%' no parece ser un nombre de red local válido"
+
+#: ../../templates/form/zend_validate.php:53
+msgid "hostnameLocalNameNotAllowed"
+msgstr "'%value%' parece ser un nombre de red local, pero los nombres de red local no están permitidos"
+
+#: ../../templates/form/zend_validate.php:56
+msgid "notSame"
+msgstr "Tokens no coinciden"
+
+#: ../../templates/form/zend_validate.php:57
+msgid "missingToken"
+msgstr "No se proporcionó el Token para hacer la comparación"
+
+#: ../../templates/form/zend_validate.php:60
+msgid "notInArray"
+msgstr "'%value%' no se ha encontrado en el conjunto"
+
+#: ../../templates/form/zend_validate.php:63
+msgid "notInt"
+msgstr "'%value%' no es un Número Entero"
+
+#: ../../templates/form/zend_validate.php:66
+msgid "notIpAddress"
+msgstr "'%value%' no parece ser una dirección IP válida"
+
+#: ../../templates/form/zend_validate.php:69
+msgid "notLessThan"
+msgstr "'%value%' no es menor que '%max%'"
+
+#: ../../templates/form/zend_validate.php:72
+msgid "regexNotMatch"
+msgstr "'%value%' no coincide con el patrón '%pattern%'"
+
+#: ../../templates/form/zend_validate.php:75
+msgid "stringLengthTooShort"
+msgstr "'%value%' tiene una longitud de caracteres más corta que %min%"
+
+#: ../../templates/form/zend_validate.php:76
+msgid "stringLengthTooLong"
+msgstr "'%value%' tiene una longitud de caracteres más larga que %max%"
+

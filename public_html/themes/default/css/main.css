@@ -1,0 +1,447 @@
+@CHARSET "UTF-8";
+
+/**
+ * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
+ * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
+ * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
+ * @version     $Id: main.css 153 2009-05-10 21:20:21Z gnzsquall $
+ */
+body {
+	font: 14px Verdana, Arial, Helvetica, sans-serif;
+	background-color: #FFF;
+	background: #ffffff;
+	text-align: justify;
+	line-height: 16px;
+	margin-top: 0;
+}
+
+p {
+	font-size: 11px;
+	color: #586885;
+	line-height: 120%;
+}
+
+h1 {
+	font-size: 30pt;
+	text-align: center;
+	margin: 0px;
+	padding: 20px;
+}
+
+h2 {
+	font-size: 20px;
+	text-align: left;
+	color: #486895;
+	margin: 7px;
+}
+
+h3 {
+	font-size: 18px;
+	text-align: left;
+	color: #666666;
+}
+
+h4 {
+	font-size: 15px;
+	text-align: left;
+	color: #666666;
+}
+
+h5 {
+	font-size: 13px;
+	text-align: left;
+	color: #666666;
+}
+
+h6 {
+	font-size: 12px;
+	text-align: left;
+	color: #666666;
+}
+
+/* Links */
+a {
+	text-decoration: none;
+}
+
+a:link, a:visited
+{
+    color: #ff6600;
+    text-decoration: none;
+    outline-style: none;
+    outline-width: medium;
+}
+
+a:hover {
+	color: #0099CC;
+	outline: none;
+}
+
+a:active {
+	color: #B2BEC8;
+}
+
+/* TABLES */
+table {
+	border: 0;
+}
+
+th {
+	font-size: 12px;
+	text-align: center;
+	color: #FFF;
+	background: #586885;
+}
+
+td {
+	font-size: 12px;
+	text-align: left;
+	vertical-align: top;
+	color: #586885;
+	border: 0;
+}
+
+tr.highlight {
+	background: #DEDED2;
+}
+
+/** */
+ul {
+	text-align: justify;
+	line-height: 15px;
+}
+
+img {
+	border: 0;
+}
+
+input {
+	background-color: #FFF;
+	border: 1px #999 solid;
+}
+
+input:focus {
+	background-color: #EEF;
+	border: 1px #333 solid;
+}
+
+/**** SHADOW *****/
+.shadow-top-left {
+	background: url(../images/shadow-top-left.png) left top no-repeat;
+}
+
+.shadow-top-right {
+	background: url(../images/shadow-top-right.png) right top no-repeat;
+}
+
+.shadow-bottom-left {
+	background: url(../images/shadow-bottom-left.png) left bottom no-repeat;
+}
+
+.shadow-bottom-right {
+	background: url(../images/shadow-bottom-right.png) right bottom
+	no-repeat;
+}
+
+.shadow-top {
+	background: url(../images/shadow-top.png) left top repeat-x;
+	padding-top: 8px;
+}
+
+.shadow-bottom {
+	background: url(../images/shadow-bottom.png) left bottom repeat-x;
+	height: 8px;
+	font-size: 0;
+}
+
+.shadow-top,.shadow-bottom {
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+.shadow-left {
+	background: url(../images/shadow-left.png) left top repeat-y;
+}
+
+.shadow-right {
+	background: url(../images/shadow-right.png) right top repeat-y;
+}
+
+.innerbox {
+	border: 1px black solid;
+	position: relative;
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+/**** *****/
+#global {
+	width: 100%;
+	margin: 10px auto 0px;
+	text-align: left;
+}
+
+#container {
+	background-image: url('../images/backtiled.png');
+	background-color: #b2bec8;
+	margin: 0 auto;
+	width: 100%;
+	height: auto;
+	overflow: auto;
+}
+
+.header {
+	margin: 0;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	border-bottom: 1px black solid;
+}
+
+.footer {
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #000000;
+	margin: 0;
+}
+
+.blockLeft {
+	width: 170px;
+	height: auto;
+	margin: 0;
+	float: left;
+	padding: 5px;
+	overflow: auto;
+}
+
+.blockRight {
+	width: 170px;
+	height: auto;
+	float: right;
+	padding: 5px;
+	position: static;
+}
+
+.default {
+	background-color: #FFF;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+	border-top-width: 0;
+	margin: 0;
+	padding: 10px;
+	overflow: auto;
+}
+
+.default p {
+	font-size: 14pt;
+}
+
+.footer {
+	width: auto;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.footer h6 {
+	text-align: center;
+	text-transform: uppercase;
+	margin: 5px auto;
+	font-size: 10px;
+}
+
+.header,.footer {
+	background-image: url('../images/back.png');
+	background-color: #111111;
+	color: #C5C5C5;
+}
+
+.header h1, .header h2{
+    color: #B2BEC8;
+}
+
+.header a:link,.header a:visited {
+	color: #B2BEC8;
+}
+
+.header h2 {
+	font-size: 20px;
+	text-align: center;
+	color: #486895;
+	text-transform: capitalize;
+	padding: 10px;
+}
+
+
+.error-message {
+	font-size: 16pt;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.error-log {
+	color: #000;
+	background-color: #FFF;
+	border-style: solid;
+	border-width: 3px;
+	border-color: #FF0000;
+	padding: 10px;
+}
+
+.ads {
+	width: auto;
+	height: 50px;
+	background-color: #777877;
+	margin: 0;
+}
+
+div.center,.title {
+	text-align: center;
+}
+
+div.center table {
+	margin: 0 auto 20px;
+	text-align: left;
+}
+
+#preloader {
+	position: absolute;
+	z-index: 99;
+	top: 0px;
+	left: 0px;
+	line-height: 16pt;
+	padding: 3px;
+	background-color: blue;
+}
+
+.dbInfo {
+	font-size: 8pt;
+	margin: 8px;
+}
+
+.code{
+    font-family: Courier New, monospace;
+}
+
+.Pager {
+	margin: 20px auto 20px;
+	font-size: 20pt;
+}
+
+.Info {
+	margin: 10px auto 10px;
+	padding: 10px;
+	border: 1px black solid;
+}
+
+.field .errors li {
+	font-size: 18px;
+	color: red;
+}
+
+.field .errors li {
+	line-height: 120%;
+	font-size: 18px;
+	color: red;
+}
+
+/** DOCKS & WIDGETS */
+.widget {
+    color: #000;
+    background-color: #DDE;
+    line-height: 100%;
+    padding: 8px;
+    border: 1px black solid;
+    margin: 0 auto 10px;
+    text-align: center;
+}
+
+.widget h2 {
+    color: #000;
+}
+
+.dock-footer .widget {
+    color: #fff;
+    background-color: transparent;
+    text-align: center;
+    border: 0;
+}
+
+
+/* mod_user Auth Form */
+#user-auth-form {
+	color: #000;
+	line-height: 100%;
+	padding: 8px;
+	margin: 0 auto 0px;
+	text-align: center;
+	font: 14pt Verdana, Arial, Helvetica, sans-serif;
+}
+
+#user-auth-form .form {
+	margin: 0 auto 0 auto;
+	width: 200px;
+	text-align: left;
+}
+
+#user-auth-form .field {
+	border: 1px transparent solid;
+}
+
+#user-auth-form .field input {
+	font: 18pt Verdana, Arial, Helvetica, sans-serif;
+}
+
+/** Login Widget */
+.widget-auth-form .field {
+	border: 0;
+	text-align: center;
+	margin: 5px 0 5px 0;
+}
+
+.widget-auth-form .field label {
+	margin: 5px 0 5px 0;
+	font: 12pt Verdana, Arial, Helvetica, sans-serif;
+}
+
+.widget-auth-form .field input {
+	font: 12pt Verdana, Arial, Helvetica, sans-serif;
+	margin: 5px 0 5px 0;
+}
+
+/* dock - top */
+.dock {
+	position: relative;
+	height: 50px;
+	text-align: center;
+}
+
+.dock-container {
+	position: absolute;
+	height: 50px;
+	background: url(../images/dock-bg.gif);
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+a.dock-item {
+	display: block;
+	width: 40px;
+	color: #000;
+	position: absolute;
+	top: 0px;
+	text-align: center;
+	text-decoration: none;
+	font: bold 12px Arial, Helvetica, sans-serif;
+}
+
+.dock-item img {
+	border: none;
+	margin: 5px 10px 0px;
+	width: 100%;
+}
+
+.dock-item span {
+	display: none;
+}

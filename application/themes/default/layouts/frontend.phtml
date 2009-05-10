@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<?php /** Site Title */         echo $this->headTitle(); ?>
+
+<?php /** Metadata */           echo $this->headMeta(); ?>
+
+<link rel="shorcut icon" href="<?php echo $this->baseUrl(); ?>images/favicon.ico" />
+<?php /** Linkable content */   echo $this->headLink(); ?>
+
+<!-- Framework CSS --> 
+<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>css/blueprint/screen.css" type="text/css" media="screen, projection" /> 
+<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>css/blueprint/print.css" type="text/css" media="print" /> 
+<!--[if IE]><link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>css/blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+<!-- Default Theme  -->
+<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>css/common.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>themes/default/css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>themes/default/css/print.css" type="text/css" media="print" />
+<?php /** CSS Styles */         echo $this->headStyle(); ?>
+
+<?php /** Javascripts */        echo $this->headScript(); ?>
+</head>
+
+<body>
+<div id="global">
+ <div class="shadow-top-left">
+  <div class="shadow-top-right">
+   <div class="shadow-bottom-left">
+    <div class="shadow-bottom-right">
+     <div class="shadow-vertical">
+      <div class="shadow-top"></div>
+       <div class="shadow-left">
+        <div class="shadow-right">
+         <div class="innerbox">
+
+<div class="header">
+    <h1><a href="<?php echo $this->baseUrl(); ?>"><?php echo $this->page_title; ?></a></h1>
+    <h2><?php echo $this->page_slogan; ?></h2>
+</div><!--/header-->
+
+<!--<div class="ads"></div>-->
+
+<div id="container">
+
+    <div class="blockLeft">
+        <?php echo $this->layout()->leftSidebar; ?>
+    </div><!--blockLeft-->
+
+    <div class="blockRight">
+        <?php echo $this->layout()->rightSidebar; ?>
+    </div>
+
+    <div id="content" class="default">
+
+        <?php echo $this->layout()->content; ?>
+
+    </div><!--/default-->
+
+</div><!--/container-->
+
+<div class="footer">
+    <div class="center">
+        <?php echo $this->layout()->footerSidebar; ?>
+
+        <?php echo Core::getAppName(); ?> | Version: <?php echo Core::getVersion(); ?> | Copyleft <?php echo $this->year ?>.
+        <?php echo $this->translate('Theme designed by'); ?> <a href="http://gon.sociallinux.org/"> Gonzalo D&iacute;az &lt;Gon&gt;</a>
+    </div>
+</div>
+
+         </div><!--/innerbox-->
+        </div><!--/shadow-right-->
+       </div><!--/shadow-left-->
+      <div class="shadow-bottom"></div>
+     </div><!--/shadow-vertical-->
+    </div><!--/shadow-bottom-right-->
+   </div><!--/shadow-bottom-left-->
+  </div><!--/shadow-top-right-->
+ </div><!--/shadow-top-left-->
+</div><!--/global-->
+
+</body>
+</html>

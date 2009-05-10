@@ -1,0 +1,82 @@
+<?php
+/**
+ * Gonium, Zend Framework based Content Manager System.
+ *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ *
+ * LICENSE
+ *
+ * Gonium is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or any
+ * later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * This is a procedural script to bootstrap the application.
+ *
+ * @category    Gonium
+ * @package     Bootstrap
+ * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
+ * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
+ * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
+ * @version     $Id: init.php 153 2009-05-10 21:20:21Z gnzsquall $
+ */
+
+// Output Buffering
+ob_start();
+ini_set('default_charset', 'UTF-8');
+date_default_timezone_set('America/Santiago');
+
+// Define ROXYTON_INIT
+if( !defined('ROXYTON_INIT') )
+/** ROXYTON_INIT */
+define ('ROXYTON_INIT', true );
+
+// Define some util Constants
+if( !defined('CLASS_SEPARATOR') )
+/** CLASS_SEPARATOR */
+define ('CLASS_SEPARATOR', '_');
+
+if( !defined('DS') )
+    /** DS */
+    define ('DS', DIRECTORY_SEPARATOR );
+
+if( !defined('PS') )
+    /** DS */
+    define ('PS', PATH_SEPARATOR );
+
+if( !defined('CS') )
+    /** CS */
+    define ('CS', CLASS_SEPARATOR);
+
+if( !defined('APP_ROOT') )
+    /** APP_ROOT */
+    define ('APP_ROOT', realpath(dirname(__FILE__)).DS );
+
+// Set new include_path
+set_include_path('.'
+        . PS . APP_ROOT
+        . PS . APP_ROOT . 'library'
+        . PS . APP_ROOT . 'Core'
+        . PS . get_include_path()
+    );
+
+// Magic Quotes GPC workaround
+if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
+    function stripslashes_deep($value)
+    {
+        $value = is_array($value) ?
+                    array_map('stripslashes_deep', $value) :
+                    stripslashes($value);
+
+        return $value;
+    }
+
+    $_POST = array_map('stripslashes_deep', $_POST);
+    $_GET = array_map('stripslashes_deep', $_GET);
+    $_COOKIE = array_map('stripslashes_deep', $_COOKIE);
+    $_REQUEST = array_map('stripslashes_deep', $_REQUEST);
+}

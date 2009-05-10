@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Roxyton $Id: dbInfo.po 136 2008-12-17 05:56:57Z gnzsquall $\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-17 01:15-0300\n"
+"PO-Revision-Date: 2008-12-17 01:32-0300\n"
+"Last-Translator: Gonzalo Díaz <gnzsquall@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: ./\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-SearchPath-0: ../../../usr/widgets/DbInfo\n"
+"VERSION: $Id: dbInfo.po 136 2008-12-17 05:56:57Z gnzsquall $"
+
+#: ../../../usr/widgets/DbInfo/views/scripts/DbInfo.phtml:2
+#, php-format
+msgid "%1$d queries in %2$f seconds"
+msgstr "%1$d queries executed in %2$.4f seconds."
+
+#: ../../../usr/widgets/DbInfo/views/scripts/DbInfo.phtml:10
+#, php-format
+msgid "AverageQueryLenght: %1$f | QueriesPerSecond %2$f"
+msgstr "In average %1$.4f seconds per query, %2$.4f queries per second."
+
+#: ../../../usr/widgets/DbInfo/views/scripts/DbInfo.phtml:18
+#, php-format
+msgid "Query longestTime: %1$f seconds"
+msgstr "The longest query lasted %1$f seconds."
+
+#: ../../../usr/widgets/DbInfo/views/scripts/DbInfo.phtml:25
+#, php-format
+msgid "longestQuery: %1$s"
+msgstr "The longest query was %1$s"
+
