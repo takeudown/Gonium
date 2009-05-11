@@ -20,7 +20,7 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: Table.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 
 /** @see Rox_Form_Style_Interface */
@@ -32,7 +32,7 @@ require_once 'Rox/Form/Style/Interface.php';
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: Table.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 class Rox_Form_Style_Table implements Rox_Form_Style_Interface {
 	public function setStyle(Zend_Form $form) {

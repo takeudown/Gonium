@@ -14,7 +14,7 @@
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   Copyright (c) 2008 Bolsa de Ideas. Consultor en TIC {@link http://www.bolsadeideas.cl}
  * @author      Andres Guzman F. <aguzman@bolsadeideas.cl>
- * @version     $Id: Column.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 
 /**
@@ -23,7 +23,7 @@
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   Copyright (c) 2008 Bolsa de Ideas. Consultor en TIC {@link http://www.bolsadeideas.cl}
  * @author      Andres Guzman F. <aguzman@bolsadeideas.cl>
- * @version     $Id: Column.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 class Rox_DataGrid_Column
 {
@@ -364,6 +364,8 @@ class Rox_DataGrid_Column
 	{
 		if (!$this->_renderer) {
 			$rendererClass = $this->_getRendererByType();
+			
+			Zend_Loader::loadClass($rendererClass);
 			$this->_renderer = new $rendererClass();
 			$this->_renderer->setColumn($this);
 		}

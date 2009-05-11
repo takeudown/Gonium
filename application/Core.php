@@ -20,7 +20,7 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: Core.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 
 // FRONT CONTROLLER
@@ -42,7 +42,7 @@ require_once 'Zend/Controller/Response/Http.php';
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: Core.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 final class Core
 {
@@ -54,7 +54,7 @@ final class Core
     /** Version of Application */
     const VERSION = '0.1';
     /** Last revision from SVN */
-    const REVISION = '$LastChangedRevision: 153 $';
+    const REVISION = '$LastChangedRevision$';
     /**#@-*/
 
     /**#@+

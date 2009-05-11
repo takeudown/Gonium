@@ -45,6 +45,11 @@ class User_IndexController extends Zend_Controller_Action
         );
 
         // Create datagrid
+		Zend_Loader::loadClass('Rox_DataGrid');
+		Zend_Loader::loadClass('Rox_DataGrid_DataSource_Table');
+		Zend_Loader::loadClass('Rox_DataGrid_Pager');
+		
+		
         $grid = new Rox_DataGrid(new Rox_DataGrid_DataSource_Table(
             $this->_helper->LoadModel('User'))
         , 5);

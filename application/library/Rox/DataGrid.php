@@ -12,7 +12,7 @@
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   Copyright (c) 2008 Bolsa de Ideas. Consultor en TIC {@link http://www.bolsadeideas.cl}
  * @author      Andres Guzman F. <aguzman@bolsadeideas.cl>
- * @version     $Id: DataGrid.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 
 /** @see Rox_DataGrid_Interface */
@@ -27,7 +27,7 @@ require_once 'Rox/DataGrid/Interface.php';
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   Copyright (c) 2008 Bolsa de Ideas. Consultor en TIC {@link http://www.bolsadeideas.cl}
  * @author      Andres Guzman F. <aguzman@bolsadeideas.cl>
- * @version     $Id: DataGrid.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 class Rox_DataGrid
     extends Rox_DataGrid_Abstract
@@ -338,6 +338,8 @@ class Rox_DataGrid
 	 */
 	public function addColumn($columnId, $column)
 	{
+		Zend_Loader::loadClass('Rox_DataGrid_Column');
+		
 		if (is_array($column)) {
 			$this->_columns[$columnId] = new Rox_DataGrid_Column();
 			$this->_columns[$columnId]->setData($column);
@@ -407,6 +409,8 @@ class Rox_DataGrid
 			throw new Rox_DataGrid_Exception("Cannot render columns: the columns are empty.");
 		}
 
+		Zend_Loader::loadClass('Rox_DataGrid_Render');
+		
 		return Rox_DataGrid_Render::factory($this, $adapterName)->render();
 	}
 }

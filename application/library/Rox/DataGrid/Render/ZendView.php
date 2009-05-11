@@ -11,8 +11,15 @@
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   Copyright (c) 2008 Bolsa de Ideas. Consultor en TIC {@link http://www.bolsadeideas.cl}
  * @author      Andres Guzman F. <aguzman@bolsadeideas.cl>
- * @version     $Id: ZendView.php 118 2008-12-03 08:13:17Z gnzsquall $
+ * @version     $Id$
  */
+
+/** @see Rox_DataGrid_Render_Interface */
+include_once 'Rox/DataGrid/Render/Interface.php';
+
+/** @see Rox_DataGrid_Render_Abstract */
+include_once 'Rox/DataGrid/Render/Abstract.php';
+
 
 /**
  * @package     Rox_DataGrid
@@ -20,7 +27,7 @@
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   Copyright (c) 2008 Bolsa de Ideas. Consultor en TIC {@link http://www.bolsadeideas.cl}
  * @author      Andres Guzman F. <aguzman@bolsadeideas.cl>
- * @version     $Id: ZendView.php 118 2008-12-03 08:13:17Z gnzsquall $
+ * @version     $Id$
  */
 class Rox_DataGrid_Render_ZendView
 	extends Rox_DataGrid_Render_Abstract 

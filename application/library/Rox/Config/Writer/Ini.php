@@ -20,7 +20,7 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: View.php 146 2009-01-01 06:25:22Z gnzsquall $
+ * @version     $Id$
  */
 
 /** Zend_Config_Writer_Ini */
@@ -32,7 +32,7 @@ require_once 'Zend/Config/Writer/Ini.php';
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: View.php 146 2009-01-01 06:25:22Z gnzsquall $
+ * @version     $Id$
  */
 class Rox_Config_Writer_Ini extends Zend_Config_Writer_Ini
 {

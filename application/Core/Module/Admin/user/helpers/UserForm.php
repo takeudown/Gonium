@@ -20,7 +20,7 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: UserForm.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 
 /**
@@ -29,7 +29,7 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: UserForm.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 class Core_Module_Admin_User_Helper_UserForm 
     extends Zend_Controller_Action_Helper_Abstract

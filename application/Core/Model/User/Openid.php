@@ -20,7 +20,7 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: Openid.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 
 /** Zend_Auth */
@@ -34,7 +34,7 @@ require_once 'Rox/Db/Table/Abstract.php';
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: Openid.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 class Core_Model_User_Openid
     extends Rox_Db_Table_Abstract

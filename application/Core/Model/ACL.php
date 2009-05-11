@@ -20,7 +20,7 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: ACL.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 
 /** @see Rox_Db_Table_Abstract */
@@ -63,7 +63,7 @@ require_once 'Core/Model/ACL/Resources.php';
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: ACL.php 153 2009-05-10 21:20:21Z gnzsquall $
+ * @version     $Id$
  */
 class Core_Model_ACL extends Rox_Model_Abstract // implements Rox_Model_Resource_Interface // , Rox_Model_Roles_Interface, Rox_Model_Access_Interface
 {
