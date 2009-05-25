@@ -24,7 +24,6 @@
 /** Define public files base directory */
 define('PUBLIC_ROOT', dirname(__FILE__));
 /** Define home files base directory */
-define('HOME_ROOT', dirname(__FILE__).'/../home/someuser');
 define('HOME_ROOT', dirname(__FILE__).'/../home/someuser/');
 
 /** Common Procedural Initialization */
