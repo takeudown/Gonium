@@ -1,5 +1,5 @@
-﻿/**
- * Rox_Table
+/**
+ * Gnm_Table
  *
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
@@ -7,7 +7,7 @@
  * @version     $Id$
  */
 
-var Rox_Table = {
+var Gnm_Table = {
     /**
     * Class name of highlightable tables
     * @var string

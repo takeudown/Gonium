@@ -1,12 +1,12 @@
-﻿/**
- * Rox_Link
+/**
+ * Gnm_Link
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
 
-var Rox_Link = {
+var Gnm_Link = {
     /**
     * Rel value of external
     * @var string
