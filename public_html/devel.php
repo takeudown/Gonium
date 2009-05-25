@@ -25,6 +25,7 @@
 define('PUBLIC_ROOT', dirname(__FILE__));
 /** Define home files base directory */
 define('HOME_ROOT', dirname(__FILE__).'/../home/someuser');
+define('HOME_ROOT', dirname(__FILE__).'/../home/someuser/');
 
 /** Common Procedural Initialization */
 require_once '../application/init.php';
@@ -46,6 +47,9 @@ Core::setHomeDir(HOME_ROOT);
  * Setting 'development' environment explicity
  */
 Core::setEnvironment('development');
+
+Core::setHomeDir(HOME_ROOT);
+
 
 /**
  * Boot the application (only once)
