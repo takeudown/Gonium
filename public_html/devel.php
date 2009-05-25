@@ -38,17 +38,14 @@ chdir( APP_ROOT );
 require_once 'Core.php';
 
 /**
- * Setting personal user dir
- */
-Core::setHomeDir(HOME_ROOT);
-
-/**
  * Setting 'development' environment explicity
  */
 Core::setEnvironment('development');
 
+/**
+ * Setting Home Directory
+ */
 Core::setHomeDir(HOME_ROOT);
-
 
 /**
  * Boot the application (only once)
