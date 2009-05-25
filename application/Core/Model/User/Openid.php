@@ -25,8 +25,8 @@
 
 /** Zend_Auth */
 require_once 'Zend/Auth.php';
-/** @see Rox_Model_Abstract */
-require_once 'Rox/Db/Table/Abstract.php';
+/** @see Gonium_Model_Abstract */
+require_once 'Gonium/Db/Table/Abstract.php';
 
 /**
  * @category    Gonium
@@ -37,8 +37,8 @@ require_once 'Rox/Db/Table/Abstract.php';
  * @version     $Id$
  */
 class Core_Model_User_Openid
-    extends Rox_Db_Table_Abstract
-    implements Rox_Model_User_Interface
+    extends Gonium_Db_Table_Abstract
+    implements Gonium_Model_User_Interface
 
 {
     public $_name = 'users_openid';

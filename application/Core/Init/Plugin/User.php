@@ -23,10 +23,10 @@
  * @version     $Id$
  */
 
-/** @see Rox_ACL */
-require_once 'Rox/ACL.php';
-/** @see Rox_User */
-require_once 'Rox/User.php';
+/** @see Gonium_ACL */
+require_once 'Gonium/ACL.php';
+/** @see Gonium_User */
+require_once 'Gonium/User.php';
 
 /** Core_Model_ACL_Roles */
 require_once 'Core/Model/ACL/Roles.php';        // Who have the access
@@ -58,7 +58,7 @@ class Init_Plugin_User extends Zend_Controller_Plugin_Abstract
     	parent::routeStartup($request);
     	Zend_Loader::loadClass('Zend_Auth');
         Zend_Loader::loadClass('Zend_Session_Namespace');
-        Zend_Loader::loadClass('Rox_Controller_Action_Helper_LoadModel');
+        Zend_Loader::loadClass('Gonium_Controller_Action_Helper_LoadModel');
         $config = Zend_Registry::get('core_config');
 
         // Session data of user
@@ -72,13 +72,13 @@ class Init_Plugin_User extends Zend_Controller_Plugin_Abstract
         }
 
         // Check cookie for login
-        Zend_Loader::loadClass('Rox_Crypt_HmacCookie');
-        Zend_Loader::loadClass('Rox_Auth_Storage_SecureCookie');
+        Zend_Loader::loadClass('Gonium_Crypt_HmacCookie');
+        Zend_Loader::loadClass('Gonium_Auth_Storage_SecureCookie');
 
         $auth = Zend_Auth::getInstance();
         Zend_Registry::set('core_auth',  $auth);
 
-        $hmacCookie = new Rox_Crypt_HmacCookie($config->system->key, array(
+        $hmacCookie = new Gonium_Crypt_HmacCookie($config->system->key, array(
             'high_confidentiality' => true,
             'enable_ssl' => true
         ));
@@ -86,7 +86,7 @@ class Init_Plugin_User extends Zend_Controller_Plugin_Abstract
         $bUrl = $this->getRequest()->getBaseUrl();
         $bUrl = $bUrl != '' ? $bUrl : '/';
 
-        $cookieAuth = new Rox_Auth_Storage_SecureCookie($hmacCookie, array(
+        $cookieAuth = new Gonium_Auth_Storage_SecureCookie($hmacCookie, array(
                 'cookieName' => 'RoxAuth',
                 'cookieExpire' => (time() + 86400),
                 'cookiePath' => $bUrl
@@ -96,32 +96,32 @@ class Init_Plugin_User extends Zend_Controller_Plugin_Abstract
 
         if(!$auth->hasIdentity())
         {
-            Zend_Loader::loadClass('Rox_Auth_Storage_UserSession');
-            $auth->setStorage(new Rox_Auth_Storage_UserSession('user', 'data') );
+            Zend_Loader::loadClass('Gonium_Auth_Storage_UserSession');
+            $auth->setStorage(new Gonium_Auth_Storage_UserSession('user', 'data') );
 
             //var_dump($auth->getIdentity());
         }
 
         // ACL
-        $acl = new Rox_ACL();
+        $acl = new Gonium_ACL();
         Zend_Registry::set('core_acl', $acl);
 
         ////////////// TESTING AREA:
         // @todo change everything:
 
         $user = $auth->getIdentity();
-        if( !($user instanceof Rox_User) )
+        if( !($user instanceof Gonium_User) )
         {
         	$auth->clearIdentity();
         }
 
-        $user = new Rox_User();
+        $user = new Gonium_User();
 
         //var_dump($_SESSION);
 
-        //$userTable = Rox_Controller_Action_Helper_LoadModel::getModel('User');
+        //$userTable = Gonium_Controller_Action_Helper_LoadModel::getModel('User');
 
-        //$roles = Rox_Controller_Action_Helper_LoadModel::getModel('ACL_Roles');
+        //$roles = Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Roles');
         //var_dump($roles->getRoles());
 
         require_once 'Zend/Acl.php';

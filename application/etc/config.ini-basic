@@ -13,9 +13,9 @@ database.params.dbname    = {dbname}    ; name of database
 database.params.profiler  = "1"         ; Enable/disable profiler
 
 system.key                = "{secretkey}" ; A top secret string
-;; Root url to your Roxyton system. Example: "/roxyton/"
+;; Root url to your Gonium system. Example: "/gonium/"
 system.frontendBaseUrl    = "/"
-;; Root url to your Roxyton backend. Example: "/roxyton/admin/"
+;; Root url to your Gonium backend. Example: "/gonium/admin/"
 system.backendBaseUrl     = "/admin/"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

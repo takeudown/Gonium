@@ -24,8 +24,8 @@
  */
 
 
-/** @see Rox_ACL */
-require_once 'Rox/ACL.php';
+/** @see Gonium_ACL */
+require_once 'Gonium/ACL.php';
 /** Core_Model_ACL_Roles */
 require_once 'Model/ACL/Roles.php';        // Who have the access
 /** Core_Model_ACL_Access */
@@ -98,35 +98,35 @@ class Init_Plugin_Frontend_Module extends Zend_Controller_Plugin_Abstract
         */
 
         $this->resources =
-            Rox_Controller_Action_Helper_LoadModel::getModel('ACL_Resources');
+            Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Resources');
         $this->access =
-            Rox_Controller_Action_Helper_LoadModel::getModel('ACL_Access');
+            Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Access');
         $this->roles =
-            Rox_Controller_Action_Helper_LoadModel::getModel('ACL_Roles');
+            Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Roles');
     }
 
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
 
     	parent::preDispatch($request);
-        Zend_Loader::loadClass('Rox_Controller_Action_Helper_LoadModel');
+        Zend_Loader::loadClass('Gonium_Controller_Action_Helper_LoadModel');
 
         if( !$this->hasAcl() )
         {
-            $this->_acl = new Rox_ACL;
+            $this->_acl = new Gonium_ACL;
             //$mod = $request->getModuleName();
-            $modules = Rox_Controller_Action_Helper_LoadModel::getModel('Modules');
+            $modules = Gonium_Controller_Action_Helper_LoadModel::getModel('Modules');
             $modules->setIterable(true);
 
             //$acl->loadResources($modules->getResources( array($mod) ));
 
-            $modules = Rox_Controller_Action_Helper_LoadModel::getModel('ACL_Resources');
+            $modules = Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Resources');
             $modules->setIterable(true);
 
-            $this->_acl->loadResources($modules->getResources( array('g', 'e') ), Rox_ACL::ORPHAN_RESOURCE_ADD);
+            $this->_acl->loadResources($modules->getResources( array('g', 'e') ), Gonium_ACL::ORPHAN_RESOURCE_ADD);
         }
 /*
-        $modules = Rox_Controller_Action_Helper_LoadModel::getModel('Modules');
+        $modules = Gonium_Controller_Action_Helper_LoadModel::getModel('Modules');
 
         var_dump( $request->getModuleName() );
         var_dump( $request->getControllerName() );

@@ -23,8 +23,8 @@
  * @version     $Id$
  */
 
-/** @see Rox_Db_Table_Abstract */
-require_once 'Rox/Db/Table/Abstract.php';
+/** @see Gonium_Db_Table_Abstract */
+require_once 'Gonium/Db/Table/Abstract.php';
 
 /**
  * @package     Core_Model
@@ -34,7 +34,7 @@ require_once 'Rox/Db/Table/Abstract.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class Core_Model_ACL_Roles extends Rox_Db_Table_Abstract
+class Core_Model_ACL_Roles extends Gonium_Db_Table_Abstract
 {
     public $_name = 'core_acl_roles';
     public $_primary = 'role_id';
@@ -46,13 +46,13 @@ class Core_Model_ACL_Roles extends Rox_Db_Table_Abstract
     public static function getRoles(Array $roleIDs = array())
     {
         /*
-         * SELECT `r`.`id`, `i`.`parent_id`, `i`.* FROM `Rox_acl_roles` AS `r` LEFT JOIN `Rox_acl_inheritance` AS `i` ON r.id=i.child_id ORDER BY `child_id` ASC, `order` ASC
+         * SELECT `r`.`id`, `i`.`parent_id`, `i`.* FROM `Gonium_acl_roles` AS `r` LEFT JOIN `Gonium_acl_inheritance` AS `i` ON r.id=i.child_id ORDER BY `child_id` ASC, `order` ASC
          */
         $db = Zend_Registry::get('core_db');
         /// Now create all roles
         $select = $db->select()
-            ->from(     array( 'r' => 'Rox_acl_roles' ), array( 'r.role_id', 'i.parent_role_id' ) )
-            ->joinLeft( array( 'i' => 'Rox_acl_inheritance' ), 'r.role_id=i.parent_role_id' )
+            ->from(     array( 'r' => 'Gonium_acl_roles' ), array( 'r.role_id', 'i.parent_role_id' ) )
+            ->joinLeft( array( 'i' => 'Gonium_acl_inheritance' ), 'r.role_id=i.parent_role_id' )
             ->order(    array( 'user_id', 'order' ) )
             ;
 
@@ -79,8 +79,8 @@ class Core_Model_ACL_Roles extends Rox_Db_Table_Abstract
         $db = Zend_Registry::get('core_db');
         /// Now create all roles
         $select = $db->select()
-            ->from(     array( 'r' => 'Rox_acl_roles' ), array( 'r.role_id', 'i.parent_role_id' ) )
-            ->joinLeft( array( 'i' => 'Rox_acl_inheritance' ), 'r.role_id=i.parent_role_id' )
+            ->from(     array( 'r' => 'Gonium_acl_roles' ), array( 'r.role_id', 'i.parent_role_id' ) )
+            ->joinLeft( array( 'i' => 'Gonium_acl_inheritance' ), 'r.role_id=i.parent_role_id' )
             ->where( 'role_id = ? ', $userID )
             ->order(    array( 'user_id', 'order' ) );
 
@@ -106,8 +106,8 @@ class Core_Model_ACL_Roles extends Rox_Db_Table_Abstract
         do {
             /// Now create all roles
             $select = $db->select()
-                ->from(     array( 'r' => 'Rox_acl_roles' ), array( 'r.role_id', 'i.parent_role_id' ) )
-                ->joinLeft( array( 'i' => 'Rox_acl_inheritance' ), 'r.role_id=i.parent_role_id' )
+                ->from(     array( 'r' => 'Gonium_acl_roles' ), array( 'r.role_id', 'i.parent_role_id' ) )
+                ->joinLeft( array( 'i' => 'Gonium_acl_inheritance' ), 'r.role_id=i.parent_role_id' )
                 ->where( 'role_id = ? ', $userID )
                 ->order(    array( 'user_id', 'order' ) );
             $orWhere = '';

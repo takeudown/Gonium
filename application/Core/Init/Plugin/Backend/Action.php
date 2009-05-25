@@ -41,7 +41,7 @@ class Init_Plugin_Backend_Action extends Zend_Controller_Plugin_Abstract
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
         parent::dispatchLoopStartup($request);
-        Zend_Loader::LoadClass('Rox_Controller_Action_Helper_LoadModel');
+        Zend_Loader::LoadClass('Gonium_Controller_Action_Helper_LoadModel');
 
         $module = $this->getRequest()->getModuleName();
 
@@ -54,10 +54,10 @@ class Init_Plugin_Backend_Action extends Zend_Controller_Plugin_Abstract
 
         //////////////// Configure Paths form LoadModel Helper ////////////////
         // Reset default Model path
-        Rox_Controller_Action_Helper_LoadModel::resetPaths();
+        Gonium_Controller_Action_Helper_LoadModel::resetPaths();
 
         // Add path and prefix of Models of user Module
-        Rox_Controller_Action_Helper_LoadModel::addPath(
+        Gonium_Controller_Action_Helper_LoadModel::addPath(
             'Core/Module/Admin/'.$module.'/models',
             'Core_Module_Admin_'.ucfirst($module).'_Model_'
         );

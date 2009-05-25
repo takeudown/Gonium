@@ -25,10 +25,10 @@
 
 /** Zend_Auth */
 require_once 'Zend/Auth.php';
-/** @see Rox_Model_Abstract */
-require_once 'Rox/Db/Table/Abstract.php';
-/** @see Rox_Model_User_Interface */
-require_once 'Rox/Model/User/Interface.php'; 
+/** @see Gonium_Model_Abstract */
+require_once 'Gonium/Db/Table/Abstract.php';
+/** @see Gonium_Model_User_Interface */
+require_once 'Gonium/Model/User/Interface.php'; 
 
 /**
  * @category    Gonium
@@ -39,8 +39,8 @@ require_once 'Rox/Model/User/Interface.php';
  * @version     $Id$
  */
 class Core_Model_User 
-    extends Rox_Db_Table_Abstract
-    implements Rox_Model_User_Interface 
+    extends Gonium_Db_Table_Abstract
+    implements Gonium_Model_User_Interface 
 {
     public $_name = 'core_users';
     public $_primary = 'uid';

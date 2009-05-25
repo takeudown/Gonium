@@ -25,8 +25,8 @@
 
 /** @see Core_Model_User */
 require_once 'Core/Model/User.php';
-/** @see Rox_Auth_Storage_UserSession */
-require_once 'Rox/Auth/Storage/UserSession.php';
+/** @see Gonium_Auth_Storage_UserSession */
+require_once 'Gonium/Auth/Storage/UserSession.php';
 
 /**
  * Authenticate users through Openid
@@ -71,8 +71,8 @@ class User_OpenidController extends Zend_Controller_Action {
 	 * @todo add storage, and associate with an username
 	 */
 	public function loginAction() {
-		Zend_Loader::loadClass ( 'Rox_Form_Prepared_OpenId' );
-		$form = new Rox_Form_Prepared_OpenId ( );
+		Zend_Loader::loadClass ( 'Gonium_Form_Prepared_OpenId' );
+		$form = new Gonium_Form_Prepared_OpenId ( );
 		$form->setAction ( ( string ) $this->view->url ( array ('module' => 'user', 'controller' => 'openid', 'action' => 'login' ), null, true ) );
 		$form->setElementPrefixId ( 'mod_user-' );
 		$form->setAttrib ( 'class', 'user-auth-form' );
@@ -100,7 +100,7 @@ class User_OpenidController extends Zend_Controller_Action {
 		
 		/** ON SUCCESS:
             $userModel = $this->_helper->LoadModel('User/Openid');
-            $user = new Rox_User();
+            $user = new Gonium_User();
             $user->setId($userModel->getID($resultAuth->getIdentity()));
             $user->setRoleId('uid-' . $userModel->getID());
         */

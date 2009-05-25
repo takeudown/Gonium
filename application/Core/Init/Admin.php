@@ -51,7 +51,6 @@ class Init_Admin extends Init_Abstract
         $layout->setView( Zend_Registry::get('core_view') );
         $layout->setLayoutPath(APP_ROOT . '/themes/default/layouts');
         $layout->setLayout('admin');
-
     }
     /**
      * Initialize Backend Plugins
@@ -118,9 +117,9 @@ class Init_Admin extends Init_Abstract
                 }
             }
         } catch (Exception $exception) {
-			/** @see Rox_Base */
-			require_once 'Rox/Base.php';
-            Rox_Base::dumpException($exception);
+			/** @see Gonium_Base */
+			require_once 'Gonium/Base.php';
+            Gonium_Base::dumpException($exception);
         }
 
         return $router;

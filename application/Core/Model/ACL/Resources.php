@@ -23,10 +23,10 @@
  * @version     $Id$
  */
 
-/** @see Rox_Db_Table_Abstract */
-require_once 'Rox/Db/Table/Abstract.php';
-/** @see Rox_Model_Resource_Interface */
-require_once 'Rox/Model/ACL/Resource/Interface.php';
+/** @see Gonium_Db_Table_Abstract */
+require_once 'Gonium/Db/Table/Abstract.php';
+/** @see Gonium_Model_Resource_Interface */
+require_once 'Gonium/Model/ACL/Resource/Interface.php';
 /** Zend_Acl_Resource */
 require_once 'Zend/Acl/Resource.php';
 
@@ -44,8 +44,8 @@ require_once 'Zend/Acl/Resource.php';
  * @see setIterable()
  * @see isIterable()
  */
-class Core_Model_ACL_Resources extends Rox_Db_Table_Abstract
-        implements Rox_Model_ACL_Resource_Interface
+class Core_Model_ACL_Resources extends Gonium_Db_Table_Abstract
+        implements Gonium_Model_ACL_Resource_Interface
 {
     public $_name = 'core_acl_resources';
     public $_primary = 'resource_id';

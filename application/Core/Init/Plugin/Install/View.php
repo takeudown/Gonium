@@ -40,8 +40,8 @@ class Init_Plugin_Install_View extends Zend_Controller_Plugin_Abstract
 {
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
-		Zend_Loader::loadClass('Rox_Base');
-    	Rox_Base::null($request);
+		Zend_Loader::loadClass('Gonium_Base');
+    	Gonium_Base::null($request);
 
     	$view = Zend_Registry::get('core_view');
 
@@ -57,7 +57,7 @@ class Init_Plugin_Install_View extends Zend_Controller_Plugin_Abstract
         );
 
         // Reset Rox Libraries View Helpers
-        $view->addHelperPath( 'Rox/View/Helper/', 'Rox_View_Helper');
+        $view->addHelperPath( 'Gonium/View/Helper/', 'Gonium_View_Helper');
 
         // Add View helpers path to module
         $view->addHelperPath(

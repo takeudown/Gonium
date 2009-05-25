@@ -58,7 +58,7 @@ class Init_Plugin_Backend_View extends Init_Plugin_View
         $view->setHelperPath(null);
 
         // Reset Rox Libraries View Helpers
-        $view->addHelperPath( 'Rox/View/Helper/', 'Rox_View_Helper');
+        $view->addHelperPath( 'Gonium/View/Helper/', 'Gonium_View_Helper');
 
         // Add View helpers path to module
         $view->addHelperPath(

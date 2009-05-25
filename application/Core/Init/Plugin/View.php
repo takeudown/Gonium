@@ -76,8 +76,8 @@ class Init_Plugin_View extends Zend_Controller_Plugin_Abstract
         $view->setScriptPath(
             array(
                 APP_ROOT . 'Core/views/',
-                APP_ROOT . 'Core/modules/'.$module.'/views/scripts/',
-                APP_ROOT . 'usr/modules/'.$module.'/views/scripts',
+                APP_ROOT . 'Core/Module/'.$module.'/views/scripts/',
+                Core::getHomeDir() . '/Module/'.$module.'/views/scripts',
                 APP_ROOT . 'themes/default/',
                 './',
             )
@@ -87,11 +87,11 @@ class Init_Plugin_View extends Zend_Controller_Plugin_Abstract
         $view->setHelperPath(null);
 
         // Reset Rox Libraries View Helpers
-        $view->addHelperPath( 'Rox/View/Helper/', 'Rox_View_Helper');
+        $view->addHelperPath( 'Gonium/View/Helper/', 'Gonium_View_Helper');
 
         // Add View helpers path to module
         $view->addHelperPath(
-            APP_ROOT . 'usr/modules/'.$module.'/views/helpers',
+            Core::getHomeDir() . DS . 'Module' . DS . $module . '/views/helpers',
             ucfirst($module) . '_View_Helper'
         );
 

@@ -30,10 +30,10 @@ ob_start();
 ini_set('default_charset', 'UTF-8');
 date_default_timezone_set('America/Santiago');
 
-// Define ROXYTON_INIT
-if( !defined('ROXYTON_INIT') )
-/** ROXYTON_INIT */
-define ('ROXYTON_INIT', true );
+// Define GONIUM_INIT
+if( !defined('GONIUM_INIT') )
+/** GONIUM_INIT */
+define ('GONIUM_INIT', true );
 
 // Define some util Constants
 if( !defined('CLASS_SEPARATOR') )
@@ -56,11 +56,20 @@ if( !defined('APP_ROOT') )
     /** APP_ROOT */
     define ('APP_ROOT', realpath(dirname(__FILE__)).DS );
 
+if( !defined('PUBLIC_ROOT') )
+    /** PUBLIC_ROOT */
+    define ('PUBLIC_ROOT', APP_ROOT );
+
+if( !defined('HOME_ROOT') )
+    /** APP_ROOT */
+    define ('HOME_ROOT', PUBLIC_ROOT );
+
 // Set new include_path
 set_include_path('.'
         . PS . APP_ROOT
         . PS . APP_ROOT . 'library'
         . PS . APP_ROOT . 'Core'
+		. PS . HOME_ROOT
         . PS . get_include_path()
     );
 

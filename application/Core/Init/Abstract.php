@@ -55,7 +55,7 @@ abstract class Init_Abstract
         Zend_Loader::loadClass('Zend_Controller_Action_HelperBroker');
 
         Zend_Controller_Action_HelperBroker::addPrefix(
-            'Rox_Controller_Action_Helper'
+            'Gonium_Controller_Action_Helper'
         );
     }
 
@@ -73,7 +73,7 @@ abstract class Init_Abstract
     public function initDb()
     {
         Zend_Loader::loadClass('Zend_Db');
-        Zend_Loader::loadClass('Rox_Db_Table_Abstract');
+        Zend_Loader::loadClass('Gonium_Db_Table_Abstract');
 
         $config = Core::getConfig();
 
@@ -101,8 +101,8 @@ abstract class Init_Abstract
         $db->getConnection();
 
         // Table Prefix
-        Zend_Loader::loadClass('Rox_Db_Table_Abstract');
-        Rox_Db_Table_Abstract::setPrefix( $config->database->prefix );
+        Zend_Loader::loadClass('Gonium_Db_Table_Abstract');
+        Gonium_Db_Table_Abstract::setPrefix( $config->database->prefix );
 
         // Set charset
         if( isset($config->database->charset) && $config->database->charset !== null )
@@ -160,12 +160,12 @@ abstract class Init_Abstract
         try {
             // Config Routes
             // Use section [frontend] of etc/router.ini
-            $config = new Zend_Config_Ini( APP_ROOT . 'etc/router.ini', 'frontend');
+            $config = new Zend_Config_Ini( Core::getHomeDir() . '/etc/router.ini', 'frontend');
             $router->addConfig($config);
 
             // Config Module Directories
             // Use section [frontend] of etc/router.ini
-            $config = new Zend_Config_Ini( APP_ROOT . 'etc/directories.ini', 'frontend');
+            $config = new Zend_Config_Ini( Core::getHomeDir() . '/etc/directories.ini', 'frontend');
             {
                 foreach($config as $modules)
                 {
@@ -174,9 +174,9 @@ abstract class Init_Abstract
             }
 
         } catch (Exception $exception) {
-			/** @see Rox_Base */
-			require_once 'Rox/Base.php';
-            Rox_Base::dumpException($exception);
+			/** @see Gonium_Base */
+			require_once 'Gonium/Base.php';
+            Gonium_Base::dumpException($exception);
         }
         return $router;
     }

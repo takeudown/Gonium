@@ -23,12 +23,12 @@
  * @version     $Id$
  */
 
-/** @see Rox_Widget */
-require_once 'Rox/Widget.php';
-/** @see Rox_Widget_Dock */
-require_once 'Rox/Widget/Dock.php';
-/** @see Rox_Layer */
-require_once 'Rox/Widget/Layer.php';
+/** @see Gonium_Widget */
+require_once 'Gonium/Widget.php';
+/** @see Gonium_Widget_Dock */
+require_once 'Gonium/Widget/Dock.php';
+/** @see Gonium_Layer */
+require_once 'Gonium/Widget/Layer.php';
 
 /** Zend_Controller_Plugin_Abstract */
 require_once 'Zend/Controller/Plugin/Abstract.php';
@@ -48,10 +48,10 @@ class Init_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
 	
 	public $_layer;
 	/*
-     *
-    */
+	*
+	*/
 	public function __construct() {
-		$this->_layer = Rox_Widget_Layer::getInstance ();
+		$this->_layer = Gonium_Widget_Layer::getInstance ();
 	}
 	
 	/**
@@ -63,47 +63,52 @@ class Init_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
 		//if( !$this->getRequest()->isXmlHttpRequest() )
 		//{
 		// Widget Layer
-		$layer = Rox_Widget_Layer::getInstance ();
-		$layer->setResponse ( $this->getResponse () );
-		$layer->enable ();
-		$layer->enableAutoDocking ();
+		$layer = Gonium_Widget_Layer::getInstance();
+		$layer->setResponse ( $this->getResponse() );
+		$layer->enable();
+		$layer->enableAutoDocking();
 		
 		// Widget View
 		$view = Zend_Registry::get ( 'core_view' );
 		$widget_view = clone $view;
-		$widget_view->setScriptPath ( array (APP_ROOT . 'Core/view/', //APP_ROOT . 'Core/widgets/views/scripts/',
-		APP_ROOT . 'usr/widgets/views/scripts/', './' ) );
+		$widget_view->setScriptPath (array(
+		    APP_ROOT . 'Core/view/',
+		    //APP_ROOT . 'Core/widgets/views/scripts/',
+		    APP_ROOT . 'Core/Widget/views/scripts/',
+		    Core::getHomeDir() . 'Widget/views/scripts/',
+			'./'
+		));
 		
-		$dock_left = new Rox_Widget_Dock ( 'header' );
+		$dock_left = new Gonium_Widget_Dock ( 'header' );
 		$dock_left->setView ( $widget_view );
 		//$dock_left->setScript('vertical.dock.phtml');
 		
 
-		$dock_left = new Rox_Widget_Dock ( 'leftSidebar' );
+		$dock_left = new Gonium_Widget_Dock ( 'leftSidebar' );
 		$dock_left->setView ( $widget_view );
 		$dock_left->setScript('vertical.dock.phtml');
 		
 
-		$dock_right = new Rox_Widget_Dock ( 'rightSidebar' );
+		$dock_right = new Gonium_Widget_Dock ( 'rightSidebar' );
 		$dock_right->setView ( $widget_view );
 		$dock_right->setScript ( 'vertical.dock.phtml' );
 		
-		$dock_footer = new Rox_Widget_Dock ( 'footerSidebar' );
+		$dock_footer = new Gonium_Widget_Dock ( 'footerSidebar' );
 		$dock_footer->setView ( $widget_view );
 		$dock_footer->setScript('footer.dock.phtml');
 
 		if ($this->_layer->isEnabled ()) {
-			require_once (APP_ROOT . 'usr/widgets/Login.php');
-			require_once (APP_ROOT . 'usr/widgets/Validator.php');
-			require_once (APP_ROOT . 'usr/widgets/DbInfo.php');
-			require_once (APP_ROOT . 'usr/widgets/Gonium.php');
+			require_once ('Widget/Login.php');
+			require_once ('Widget/Validator.php');
+			require_once ('Widget/DbInfo.php');
+			require_once ('Widget/Gonium.php');
 			
 			$dock_left = $this->_layer->getDock ( 'leftSidebar' );
 			$dock_right = $this->_layer->getDock ( 'rightSidebar' );
 			$dock_footer = $this->_layer->getDock ( 'footerSidebar' );
 			
 			$dock_left->register ( new Widget_Login ( ), 'login' );
-			$dock_right->register ( new Widget_Gonium ( ), 'roxyton' );
+			$dock_right->register ( new Widget_Gonium ( ), 'gonium' );
 			$dock_right->register( new Widget_Validator(), 'validator');
 
 			$dock_footer->register ( new Widget_dbInfo ( ), 'dbInfo' );

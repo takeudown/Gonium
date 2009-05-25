@@ -23,8 +23,8 @@
  * @version     $Id$
  */
 
-/** @see Rox_Db_Table_Abstract */
-require_once 'Rox/Db/Table/Abstract.php';
+/** @see Gonium_Db_Table_Abstract */
+require_once 'Gonium/Db/Table/Abstract.php';
 
 /**
  * @category    Gonium
@@ -34,7 +34,7 @@ require_once 'Rox/Db/Table/Abstract.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class Core_Model_Widgets extends Rox_Model_Abstract
+class Core_Model_Widgets extends Gonium_Model_Abstract
 {
    protected $_name = 'comments';
    protected $_primary = 'comment_id';

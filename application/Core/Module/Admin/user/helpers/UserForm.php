@@ -35,13 +35,13 @@ class Core_Module_Admin_User_Helper_UserForm
     extends Zend_Controller_Action_Helper_Abstract
 {
 	/**
-	 * @return Rox_Form_Table
+	 * @return Gonium_Form_Table
 	 */
     public function createUserForm()
     {
-    	Zend_Loader::loadClass('Rox_Form_Table');
+    	Zend_Loader::loadClass('Gonium_Form_Table');
     	
-    	$form = new Rox_Form_Table(array(
+    	$form = new Gonium_Form_Table(array(
             'elements' => array(
                 'username' => array('text', array(
                     'required' => true,
@@ -67,7 +67,7 @@ class Core_Module_Admin_User_Helper_UserForm
         ));
         
         $form->password->addValidator(
-            new Rox_Validate_PasswordConfirmation()
+            new Gonium_Validate_PasswordConfirmation()
         );
         
         return $form;

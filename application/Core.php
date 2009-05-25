@@ -97,6 +97,12 @@ final class Core
     */
     protected static $_config;
 
+    /**
+    * Home Directory
+    * @var string
+    */
+    protected static $_homeDir = null;
+
     protected static $_request;
 
     /**
@@ -239,7 +245,7 @@ final class Core
      * Set the Core Configuration
      * @param Zend_Config
      */
-    public static static function setConfig(Zend_Config $config)
+    public static function setConfig(Zend_Config $config)
     {
         self::$_config = $config;
     }
@@ -249,9 +255,32 @@ final class Core
      *
      * @return Zend_Config
      */
-    public static static function getConfig()
+    public static function getConfig()
     {
         return self::$_config;
+    }
+
+    /**
+     * Set home directory (personal user tree)
+     *
+     * @return Zend_Config
+     */
+    public static function setHomeDir($homeDir)
+    {
+        self::$_homeDir = $homeDir;
+    }
+
+    /**
+     * Get home directory (personal user tree)
+     *
+     * @return Zend_Config
+     */
+    public static function getHomeDir()
+    {
+        if (self::$_homeDir == null)
+	  self::$_homeDir = APP_ROOT . '/usr/';
+	
+	return self::$_homeDir;
     }
 
     // MVC Methods
@@ -339,9 +368,9 @@ final class Core
             ini_set('display_errors', 1);
         }
 
-        $coreConfigFile = APP_ROOT . 'etc/config.ini';
-        $sessionConfigFile = APP_ROOT . 'etc/session.ini';
-
+        $coreConfigFile = self::getHomeDir(). '/etc/config.ini';
+        $sessionConfigFile = self::getHomeDir() . '/etc/session.ini';
+		
         if( !file_exists($coreConfigFile) )
            return false;
         if( !file_exists( $sessionConfigFile) )
@@ -371,10 +400,10 @@ final class Core
             return true;
 
         } catch (Exception $e) {
-			/** @see Rox_Base */
-            require_once 'Rox/Base.php';
-            Rox_Base::null($e);
-            //Rox_Base::dumpException($e);
+			/** @see Gonium_Base */
+            require_once 'Gonium/Base.php';
+            Gonium_Base::null($e);
+            //Gonium_Base::dumpException($e);
             return false;
         }
 
@@ -401,9 +430,9 @@ final class Core
             $frontController->addControllerDirectory( APP_ROOT . 'Core/Module/Error', 'error');
 
             //$frontController->setParam('noErrorHandler', true);
-            Zend_Loader::loadClass('Rox_Controller_Plugin_ErrorHandler');
+            Zend_Loader::loadClass('Gonium_Controller_Plugin_ErrorHandler');
             $frontController->registerPlugin(
-                new Rox_Controller_Plugin_ErrorHandler(
+                new Gonium_Controller_Plugin_ErrorHandler(
                     self::getDefaultErrorHandler()
                 )
                 ,1000
@@ -419,17 +448,17 @@ final class Core
 
             // Initialise Zend_Layout's MVC helpers
             Core::getLayout();
-            Zend_Loader::loadClass('Rox_Controller_Plugin_Layout');
+            Zend_Loader::loadClass('Gonium_Controller_Plugin_Layout');
             Zend_Layout::startMvc(array(
-               'pluginClass' => 'Rox_Controller_Plugin_Layout'
+               'pluginClass' => 'Gonium_Controller_Plugin_Layout'
             ));
 
             $initializer->postInit();
 
         } catch(Exception $e) {
-			/** @see Rox_Base */
-			require_once 'Rox/Base.php';
-            Rox_Base::dumpException($e);
+			/** @see Gonium_Base */
+			require_once 'Gonium/Base.php';
+            Gonium_Base::dumpException($e);
         }
     }
 
@@ -441,6 +470,7 @@ final class Core
      */
     private static function dispatch()
     {
+		
         Zend_Loader::loadClass('Zend_Controller_Response_Http');
         $frontController = self::getFrontController();
         $frontController->setResponse(new Zend_Controller_Response_Http() );
@@ -448,9 +478,9 @@ final class Core
         try {
             $response = $frontController->dispatch();
         } catch (Exception $exception) {
-			/** @see Rox_Base */
-			require_once 'Rox/Base.php';
-            Rox_Base::dumpException($exception);
+			/** @see Gonium_Base */
+			require_once 'Gonium/Base.php';
+            Gonium_Base::dumpException($exception);
 
             $response = $frontController->getResponse();
         }

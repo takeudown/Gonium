@@ -23,8 +23,8 @@
  * @version     $Id$
  */
 
-/** @see Rox_Db_Table_Abstract */
-require_once 'Rox/Db/Table/Abstract.php';
+/** @see Gonium_Db_Table_Abstract */
+require_once 'Gonium/Db/Table/Abstract.php';
 /** @see Core_Model_ACL_Roles */
 require_once 'Core/Model/ACL/Roles.php';
 /** @see Core_Model_ACL_Access */
@@ -50,7 +50,7 @@ require_once 'Core/Model/ACL/Resources.php';
  *   *field = PRIMARY KEY( field )
  *   -----> = foreign key constraint
  *
- *   The actual table names should be: Rox_acl_resources, Rox_acl_access, acl_roles, Rox_acl_inheritance.
+ *   The actual table names should be: Gonium_acl_resources, Gonium_acl_access, acl_roles, Gonium_acl_inheritance.
  *
  * access.allow is a boolean field, that specifies whether the respective rule is an allow rule or a deny rule (important for inherited access).
  *
@@ -65,7 +65,7 @@ require_once 'Core/Model/ACL/Resources.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class Core_Model_ACL extends Rox_Model_Abstract // implements Rox_Model_Resource_Interface // , Rox_Model_Roles_Interface, Rox_Model_Access_Interface
+class Core_Model_ACL extends Gonium_Model_Abstract // implements Gonium_Model_Resource_Interface // , Gonium_Model_Roles_Interface, Gonium_Model_Access_Interface
 {
 	/*
     public static function getResources($resources_id = null)

@@ -25,8 +25,8 @@
 
 /** @see Core_Model_User */
 require_once 'Core/Model/User.php';
-/** @see Rox_Auth_Storage_UserSession */
-require_once 'Rox/Auth/Storage/UserSession.php';
+/** @see Gonium_Auth_Storage_UserSession */
+require_once 'Gonium/Auth/Storage/UserSession.php';
 
 /**
  * @package     Core_Module_Frontend
@@ -75,19 +75,19 @@ class User_AuthController extends Zend_Controller_Action {
     {
         $config = Zend_Registry::get('core_config');
         /*
-        $user = new Rox_User();
+        $user = new Gonium_User();
         $user->setId('1');
         $user->setRoleId('uid-1');
 
-        $manager = new Rox_Crypt_HmacCookie($config->system->key, array(
+        $manager = new Gonium_Crypt_HmacCookie($config->system->key, array(
           'high_confidentiality' => true,
           'enable_ssl' => true)
         );
         $manager->setCookie('myAuth', $user, 'username', time() + 86400, $this->getRequest()->getBaseUrl());
         */
 
-        Zend_Loader::loadClass('Rox_Form_Prepared_Login');
-        $form = new Rox_Form_Prepared_Login();
+        Zend_Loader::loadClass('Gonium_Form_Prepared_Login');
+        $form = new Gonium_Form_Prepared_Login();
         $form->setStyle('Table');
         $form->setAction( (string) $this->view->url(
             array(
@@ -131,7 +131,7 @@ class User_AuthController extends Zend_Controller_Action {
                 $userModel = $this->_helper->LoadModel('User');
 
                 $id = $userModel->getID($resultAuth->getIdentity());
-                $user = new Rox_User();
+                $user = new Gonium_User();
                 $user->setId($id);
                 $user->setRoleId('uid-' . $id);
 
@@ -142,7 +142,7 @@ class User_AuthController extends Zend_Controller_Action {
                 if($form->remember->getValue() === '1')
                 {
                     // Set a secure cookie
-                    $hmacCookie = new Rox_Crypt_HmacCookie($config->system->key, array(
+                    $hmacCookie = new Gonium_Crypt_HmacCookie($config->system->key, array(
                         'high_confidentiality' => true,
                         'enable_ssl' => true
                     ));
@@ -150,7 +150,7 @@ class User_AuthController extends Zend_Controller_Action {
                     $bUrl = $this->getRequest()->getBaseUrl();
                     $bUrl = $bUrl != '' ? $bUrl : '/';
                 
-                    $cookieAuth = new Rox_Auth_Storage_SecureCookie($hmacCookie, array(
+                    $cookieAuth = new Gonium_Auth_Storage_SecureCookie($hmacCookie, array(
                             'cookieName' => 'RoxAuth',
                             'cookieExpire' => (time() + 86400),
                             'cookiePath' => $bUrl
@@ -186,7 +186,7 @@ class User_AuthController extends Zend_Controller_Action {
 
         Zend_Auth::getInstance()->clearIdentity();
         $config = Zend_Registry::get('core_config');
-        $hmacCookie = new Rox_Crypt_HmacCookie($config->system->key, array(
+        $hmacCookie = new Gonium_Crypt_HmacCookie($config->system->key, array(
                         'high_confidentiality' => true,
                         'enable_ssl' => true
                     ));

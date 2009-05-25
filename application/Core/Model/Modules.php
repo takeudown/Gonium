@@ -55,7 +55,7 @@ class Core_Model_Modules extends Core_Model_ACL_Resources
             $select = $db->select()
             ->distinct()
             ->from( array('mod' => $this->_name) )
-            ->joinLeft( array( 'res' => Rox_Db_Table_Abstract::getPrefix().'acl_resources'),
+            ->joinLeft( array( 'res' => Gonium_Db_Table_Abstract::getPrefix().'acl_resources'),
                     'mod.resource_id = res.resource_id',
                     array( 'resource_id', 'parent_id' ) );
 

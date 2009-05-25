@@ -22,8 +22,8 @@
  * @version     $Id$
  */
 
-/** @see Rox_Form_Prepared_SiteInstaller */
-require_once 'Rox/Form/Prepared/SiteInstaller.php';
+/** @see Gonium_Form_Prepared_SiteInstaller */
+require_once 'Gonium/Form/Prepared/SiteInstaller.php';
 
 /**
  * @package     Core_Module_Error
@@ -56,8 +56,8 @@ class IndexController extends Zend_Controller_Action
     {
         $this->_view->headTitle($this->_lang->translate('Install'), Zend_View_Helper_Placeholder_Container_Abstract::PREPEND);
 
-        Zend_Loader::loadClass('Rox_Form_Prepared_SiteInstaller');
-        $form = new Rox_Form_Prepared_SiteInstaller();
+        Zend_Loader::loadClass('Gonium_Form_Prepared_SiteInstaller');
+        $form = new Gonium_Form_Prepared_SiteInstaller();
         $form->setAction($this->_view->url(array(
                 'module' => $this->_request->getModuleName(),
                 'controller' => $this->_request->getControllerName(),
@@ -84,7 +84,7 @@ class IndexController extends Zend_Controller_Action
      *
      * @return boolean
      */
-    private function tryConnection(Rox_Form_Prepared_SiteInstaller $dbForm)
+    private function tryConnection(Gonium_Form_Prepared_SiteInstaller $dbForm)
     {
 		Zend_loader::loadClass('Zend_Db');
         try{
@@ -119,7 +119,7 @@ class IndexController extends Zend_Controller_Action
         // Import
     }
 
-    private function configure(Rox_Form_Prepared_SiteInstaller $form)
+    private function configure(Gonium_Form_Prepared_SiteInstaller $form)
     {
         $config = new Zend_Config(array(), true);
 
@@ -152,8 +152,8 @@ class IndexController extends Zend_Controller_Action
         ));
 
         // System
-        Zend_Loader::loadClass('Rox_Crypt_Keygen');
-        $keygen = new Rox_Crypt_Keygen();
+        Zend_Loader::loadClass('Gonium_Crypt_Keygen');
+        $keygen = new Gonium_Crypt_Keygen();
         $keygen->setLength(16);
         $keygen->setUseSigns(true);
         
@@ -175,8 +175,8 @@ class IndexController extends Zend_Controller_Action
             'dbInfo'        => true   // show detailed database info
         );
         
-		Zend_Loader::loadClass('Rox_Config_Writer_Ini');
-        $writer = new Rox_Config_Writer_Ini(array(
+		Zend_Loader::loadClass('Gonium_Config_Writer_Ini');
+        $writer = new Gonium_Config_Writer_Ini(array(
                 'config'   => $config,
                 'filename' => $this->_etc.'config.ini'
             ));
@@ -184,7 +184,7 @@ class IndexController extends Zend_Controller_Action
         if(is_writeable($this->_etc))
         {
             /** Config Form */
-            $configForm = new Rox_Form(array(
+            $configForm = new Gonium_Form(array(
                 'elements' => array(
                     'config' => array('hidden'),
                     'submit' => array('submit', array(
@@ -202,7 +202,7 @@ class IndexController extends Zend_Controller_Action
         } else {
 
             /** Config Form */
-            $configForm = new Rox_Form(array(
+            $configForm = new Gonium_Form(array(
                 'elements' => array(
                     'config' => array('textarea'),
                     'submit' => array('submit', array(

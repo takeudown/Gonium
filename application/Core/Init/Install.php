@@ -98,7 +98,7 @@ class Init_Install extends Init_Abstract {
 
         $view = Zend_Registry::get('core_view');
         // Reset Rox Libraries View Helpers
-        $view->addHelperPath( 'Rox/View/Helper/', 'Rox_View_Helper');
+        $view->addHelperPath( 'Gonium/View/Helper/', 'Gonium_View_Helper');
 
         return $view;
     }
