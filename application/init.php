@@ -66,11 +66,11 @@ if( !defined('HOME_ROOT') )
 
 // Set new include_path
 set_include_path('.'
-        . PS . APP_ROOT
-        . PS . APP_ROOT . 'library'
-        . PS . APP_ROOT . 'Core'
-		. PS . HOME_ROOT
-        . PS . get_include_path()
+	. PS . APP_ROOT
+	. PS . APP_ROOT . 'library'
+	. PS . APP_ROOT . 'Core'
+	. PS . HOME_ROOT
+	. PS . get_include_path()
     );
 
 // Magic Quotes GPC workaround

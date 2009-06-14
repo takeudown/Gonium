@@ -24,7 +24,7 @@
  */
 
 /** @see Core */
-require_once 'Init/Abstract.php';
+require_once 'Core/Init/Abstract.php';
 
 /**
  * Production Environtment Initializer
@@ -36,7 +36,7 @@ require_once 'Init/Abstract.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class Init_Production extends Init_Abstract {
+class Core_Init_Production extends Core_Init_Abstract {
 	
 	/**
 	 * Doesn't show any PHP error 

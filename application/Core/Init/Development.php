@@ -24,7 +24,7 @@
  */
 
 /** @see Core */
-require_once 'Init/Abstract.php';
+require_once 'Core/Init/Abstract.php';
 
 /**
  * Development Environtment Initializer
@@ -36,7 +36,7 @@ require_once 'Init/Abstract.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class Init_Development extends Init_Abstract {
+class Core_Init_Development extends Core_Init_Abstract {
     /**
      * Show any PHP error and Strict Standars 
      */

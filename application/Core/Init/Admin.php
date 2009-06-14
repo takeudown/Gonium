@@ -35,7 +35,7 @@ require_once 'Init/Abstract.php';
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  */
-class Init_Admin extends Init_Abstract
+class Core_Init_Admin extends Init_Abstract
 {
 	/**
 	 * Show any PHP error in Backend

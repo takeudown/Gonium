@@ -32,7 +32,7 @@
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  */
-abstract class Init_Abstract
+abstract class Core_Init_Abstract
 {
     public function preInit() {}
 
@@ -130,12 +130,12 @@ abstract class Init_Abstract
 
         // Don't change the order of core Controller Plugins
         $plugins = array(
-            'Init_Plugin_View' => null,
-            'Init_Plugin_Language' => null,
-            'Init_Plugin_User' => null,
-            'Init_Plugin_Frontend_Module' => null,
-            'Init_Plugin_Frontend_Action' => null,
-            'Init_Plugin_Widget' => null
+            'Core_Init_Plugin_View' => null,
+            'Core_Init_Plugin_Language' => null,
+            'Core_Init_Plugin_User' => null,
+            'Core_Init_Plugin_Frontend_Module' => null,
+            'Core_Init_Plugin_Frontend_Action' => null,
+            'Core_Init_Plugin_Widget' => null
         );
 
         foreach($plugins as $plugin => $args)

@@ -44,7 +44,7 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * @todo        Load widgets from database and check ACL privileges.
  *              Currently display default widgets only
  */
-class Init_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
+class Core_Init_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
 	
 	public $_layer;
 	/*

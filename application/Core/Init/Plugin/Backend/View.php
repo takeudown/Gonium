@@ -36,7 +36,7 @@ require_once 'Init/Plugin/View.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class Init_Plugin_Backend_View extends Init_Plugin_View
+class Core_Init_Plugin_Backend_View extends Init_Plugin_View
 {
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {

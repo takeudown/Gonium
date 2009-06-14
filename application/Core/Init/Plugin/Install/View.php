@@ -36,7 +36,7 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class Init_Plugin_Install_View extends Zend_Controller_Plugin_Abstract
+class Core_Init_Plugin_Install_View extends Zend_Controller_Plugin_Abstract
 {
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {

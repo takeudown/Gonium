@@ -419,7 +419,7 @@ final class Core
     {
         try {
             // Initialize
-            $initializer = 'Init_'.ucfirst(self::getEnvironment());
+            $initializer = 'Core_Init_'.ucfirst(self::getEnvironment());
             Zend_Loader::loadClass( $initializer );
             $initializer = new $initializer;
 

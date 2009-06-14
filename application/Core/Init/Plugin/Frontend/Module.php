@@ -27,13 +27,13 @@
 /** @see Gonium_ACL */
 require_once 'Gonium/ACL.php';
 /** Core_Model_ACL_Roles */
-require_once 'Model/ACL/Roles.php';        // Who have the access
+require_once 'Core/Model/ACL/Roles.php';        // Who have the access
 /** Core_Model_ACL_Access */
-require_once 'Model/ACL/Access.php';        // Rules of access
+require_once 'Core/Model/ACL/Access.php';        // Rules of access
 /** Core_Model_ACL_Resources */
-require_once 'Model/ACL/Resources.php';        // Resources to access
+require_once 'Core/Model/ACL/Resources.php';        // Resources to access
 /** Core_Model_Modules */
-require_once 'Model/Modules.php';
+require_once 'Core/Model/Modules.php';
 
 /** Zend_Controller_Plugin_Abstract */
 require_once 'Zend/Controller/Plugin/Abstract.php';
@@ -48,7 +48,7 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class Init_Plugin_Frontend_Module extends Zend_Controller_Plugin_Abstract
+class Core_Init_Plugin_Frontend_Module extends Zend_Controller_Plugin_Abstract
 {
 	protected $_acl;
 
