@@ -23,7 +23,7 @@
  * @version     $Id$
  */
 
-/** @see Core */
+/** @see Core_Init_Abstract */
 require_once 'Core/Init/Abstract.php';
 
 /**
@@ -36,7 +36,7 @@ require_once 'Core/Init/Abstract.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class Core_Init_Install extends Init_Abstract {
+class Core_Init_Install extends Core_Init_Abstract {
 
 	/**
 	 * Doesn't show any PHP error
@@ -71,8 +71,8 @@ class Core_Init_Install extends Init_Abstract {
 
         // Don't change the order of core Controller Plugins
         $plugins = array(
-            'Init_Plugin_Install_View' => null,
-            'Init_Plugin_Install_Language' => null,
+            'Core_Init_Plugin_Install_View' => null,
+            'Core_Init_Plugin_Install_Language' => null,
         );
 
         foreach($plugins as $plugin => $args)

@@ -15,10 +15,10 @@
  */
 
 /** @see Gonium_DataGrid_Render_Interface */
-include_once 'GoniumDataGrid/Render/Interface.php';
+include_once 'Gonium/DataGrid/Render/Interface.php';
 
 /** @see Gonium_DataGrid_Render_Abstract */
-include_once 'GoniumDataGrid/Render/Abstract.php';
+include_once 'Gonium/DataGrid/Render/Abstract.php';
 
 
 /**

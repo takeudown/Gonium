@@ -15,7 +15,7 @@
  */
 
 /** @see Gonium_DataGrid_Column_Renderer_Abstract */
-include_once 'GoniumDataGrid/Column/Renderer/Abstract.php';
+include_once 'Gonium/DataGrid/Column/Renderer/Abstract.php';
 
 /**
  * @package     Gonium_DataGrid

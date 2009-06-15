@@ -23,7 +23,7 @@
  * @version     $Id$
  */
 
-/** @see Core */
+/** @see Core_Init_Abstract */
 require_once 'Core/Init/Abstract.php';
 
 /**

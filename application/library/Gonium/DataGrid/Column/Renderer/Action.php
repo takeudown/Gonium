@@ -15,7 +15,7 @@
  */
 
 /** @see Gonium_DataGrid_Column_Renderer_Text */
-include_once 'GoniumDataGrid/Column/Renderer/Text.php';
+include_once 'Gonium/DataGrid/Column/Renderer/Text.php';
 
 /**
  * @package     Gonium_DataGrid
@@ -81,7 +81,8 @@ class Gonium_DataGrid_Column_Renderer_Action extends Gonium_DataGrid_Column_Rend
 	 */
 	protected function _transformActionData(&$action, &$actionCaption, $row)
 	{
-		foreach ( $action as $attibute => $value ) {
+		//foreach ( $action as $attibute => $value ) { // NO TESTED CHANGE
+		foreach ( array_keys($action) as $attibute) {
 			if(isset($action[$attibute]) && !is_array($action[$attibute])) {
 				$this->getColumn()->setFormat($action[$attibute]);
 				$action[$attibute] = parent::render($row);

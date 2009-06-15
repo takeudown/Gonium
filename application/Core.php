@@ -23,6 +23,8 @@
  * @version     $Id$
  */
 
+if( !defined('GONIUM_INIT') ) die();
+
 // FRONT CONTROLLER
 /** Zend_Controller_Front */
 require_once 'Zend/Controller/Front.php';
@@ -278,9 +280,14 @@ final class Core
     public static function getHomeDir()
     {
         if (self::$_homeDir == null)
-	  self::$_homeDir = APP_ROOT . '/usr/';
+        {
+        	if(defined('HOME_ROOT'))
+        		self::$_homeDir = HOME_ROOT;
+       		else
+				self::$_homeDir = APP_ROOT . '../home/someuser/';
+        }
 	
-	return self::$_homeDir;
+		return self::$_homeDir;
     }
 
     // MVC Methods
