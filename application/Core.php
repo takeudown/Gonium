@@ -54,7 +54,7 @@ final class Core
     /** Application Name */
     const APP = 'Gonium';
     /** Version of Application */
-    const VERSION = '0.1';
+    const VERSION = '0.2';
     /** Last revision from SVN */
     const REVISION = '$LastChangedRevision$';
     /**#@-*/

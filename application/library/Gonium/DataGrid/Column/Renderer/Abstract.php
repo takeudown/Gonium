@@ -87,8 +87,9 @@ abstract class Gonium_DataGrid_Column_Renderer_Abstract implements Gonium_DataGr
 	public function renderProperty()
 	{
 		$out = ' ';
+		$width = $this->getColumn()->getWidth();
 
-		if ($width = $this->getColumn()->getWidth()) {
+		if ($width) {
 			if (!is_numeric($width)) {
 				$width = (int)$width;
 			}
