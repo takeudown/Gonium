@@ -32,4 +32,30 @@
  * @version     $Id: Exception.php 5 2009-05-11 04:08:28Z gnzsquall $
  */
 class Gonium_Exception extends Exception
-{}
+{
+public static function dump(Exception $exception)
+    {
+        echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+                <html><head><title>Oops!</title></head>'
+                . '<body><center>'
+                . 'An exception occured while bootstrapping the application.';
+        echo '<br /><br />' . $exception->getMessage() . '<br />'
+                . '<div align="left">Stack Trace:'
+                . '<pre>' . $exception->getTraceAsString() . '</pre></div>';
+        echo '</center></body></html>';
+        exit(1);
+    }
+
+    /**
+     * To acomplish stric standars, this method does nothing with the param.
+     * Simply, return the same entered value.
+     *  
+     * @param mixed 
+     * @return mixed
+     */
+    public static function null($var)
+    {
+        return $var;
+    }
+}

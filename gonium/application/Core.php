@@ -407,10 +407,9 @@ final class Core
             return true;
 
         } catch (Exception $e) {
-			/** @see Gonium_Base */
-            require_once 'Gonium/Base.php';
-            Gonium_Base::null($e);
-            //Gonium_Base::dumpException($e);
+			/** @see Gonium_Exception */
+            require_once 'Gonium/Exception.php';
+            Gonium_Exception::null($e);
             return false;
         }
 
@@ -463,9 +462,9 @@ final class Core
             $initializer->postInit();
 
         } catch(Exception $e) {
-			/** @see Gonium_Base */
+			/** @see Gonium_Exception */
 			require_once 'Gonium/Base.php';
-            Gonium_Base::dumpException($e);
+            Gonium_Exception::dumpException($e);
         }
     }
 
@@ -485,9 +484,9 @@ final class Core
         try {
             $response = $frontController->dispatch();
         } catch (Exception $exception) {
-			/** @see Gonium_Base */
+			/** @see Gonium_Exception */
 			require_once 'Gonium/Base.php';
-            Gonium_Base::dumpException($exception);
+            Gonium_Exception::dumpException($exception);
 
             $response = $frontController->getResponse();
         }

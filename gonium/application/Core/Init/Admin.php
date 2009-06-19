@@ -118,9 +118,9 @@ class Core_Init_Admin extends Core_Init_Abstract
                 }
             }
         } catch (Exception $exception) {
-			/** @see Gonium_Base */
+			/** @see Gonium_Exception */
 			require_once 'Gonium/Base.php';
-            Gonium_Base::dumpException($exception);
+            Gonium_Exception::dumpException($exception);
         }
 
         return $router;

@@ -62,7 +62,7 @@ class Widget_Login extends Gonium_Widget {
 				$this->setContent( $this->_view->render('forms.phtml') );
 
 			} catch ( Exception $e ) {
-				Gonium_Base::dumpException($e);
+				Gonium_Exception::dumpException($e);
                 trigger_error( $e->getMessage(), E_USER_ERROR);
 			}
 		} else {

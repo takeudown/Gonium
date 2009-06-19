@@ -40,8 +40,8 @@ class Core_Init_Plugin_Install_View extends Zend_Controller_Plugin_Abstract
 {
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
-		Zend_Loader::loadClass('Gonium_Base');
-    	Gonium_Base::null($request);
+		Zend_Loader::loadClass('Gonium_Exception');
+    	Gonium_Exception::null($request);
 
     	$view = Zend_Registry::get('core_view');
 

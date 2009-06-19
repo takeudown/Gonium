@@ -21,11 +21,7 @@
  * @version     $Id$
  */
 
-/** Define public files base directory */
-define('PUBLIC_ROOT', dirname(__FILE__));
-
-/** Common Procedural Initialization */
-require_once '../application/init.php';
+require_once './launch.php';
 
 // Save current working directory
 $cwd = getcwd();

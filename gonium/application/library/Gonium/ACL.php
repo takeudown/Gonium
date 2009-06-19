@@ -61,7 +61,7 @@
  * goes for the privileges.
  */
 
-/** Gonium_Base */
+/** Gonium_Exception */
 require_once 'Gonium/Base.php';
 /** Zend_Db */
 require_once 'Zend/Db.php';
@@ -120,7 +120,7 @@ class Gonium_ACL extends Zend_ACL
 
         foreach($resources as $theRes)
         {
-        	Gonium_Base::null($theRes);
+        	Gonium_Exception::null($theRes);
             // ACL doesn't has the resource
             if( !$this->has($resources->currentResource()) )
             {

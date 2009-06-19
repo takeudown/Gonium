@@ -43,7 +43,7 @@ class IndexController extends Zend_Controller_Action
     {
         $this->_view = Zend_Registry::get('core_view');
         $this->_lang = Zend_Registry::get('Zend_Translate');
-        $this->_etc = APP_ROOT.'etc/';
+        $this->_etc = HOME_ROOT.'/etc/';
     }
 
     public function preDispatch()
