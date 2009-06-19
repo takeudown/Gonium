@@ -62,8 +62,8 @@ class Widget_Login extends Gonium_Widget {
 				$this->setContent( $this->_view->render('forms.phtml') );
 
 			} catch ( Exception $e ) {
-				Gonium_Exception::dumpException($e);
-                trigger_error( $e->getMessage(), E_USER_ERROR);
+				Gonium_Exception::dump($e);
+				trigger_error( $e->getMessage(), E_USER_ERROR);
 			}
 		} else {
 			Zend_Loader::loadClass ( 'Gonium_Form_Prepared_Logout' );

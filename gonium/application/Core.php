@@ -25,6 +25,9 @@
 
 if( !defined('GONIUM_INIT') ) die();
 
+/** @see Gonium_Exception */
+require_once 'Gonium/Exception.php';
+
 // FRONT CONTROLLER
 /** Zend_Controller_Front */
 require_once 'Zend/Controller/Front.php';
@@ -54,7 +57,7 @@ final class Core
     /** Application Name */
     const APP = 'Gonium';
     /** Version of Application */
-    const VERSION = '0.2';
+    const VERSION = '0.3';
     /** Last revision from SVN */
     const REVISION = '$LastChangedRevision$';
     /**#@-*/
@@ -117,7 +120,7 @@ final class Core
      */
     public function __clone()
     {
-       throw new Exception('Clone unavailable');
+       throw new Gonium_Exception('Clone unavailable');
     }
 
     public static function getInstance($environment = 'development')
@@ -134,7 +137,7 @@ final class Core
     public static function isBooted()
     {
         if(self::$_boot) {
-            throw new Exception( _('Bootstrap can be used only one time.') );
+            throw new Gonium_Exception( _('Bootstrap can be used only one time.') );
         }
     }
 
@@ -406,10 +409,8 @@ final class Core
 
             return true;
 
-        } catch (Exception $e) {
-			/** @see Gonium_Exception */
-            require_once 'Gonium/Exception.php';
-            Gonium_Exception::null($e);
+        } catch (Gonium_Exception $e) {
+            $e->nullMe();
             return false;
         }
 
@@ -461,10 +462,8 @@ final class Core
 
             $initializer->postInit();
 
-        } catch(Exception $e) {
-			/** @see Gonium_Exception */
-			require_once 'Gonium/Base.php';
-            Gonium_Exception::dumpException($e);
+        } catch(Gonium_Exception $e) {
+            $e->dumpMe();
         }
     }
 
@@ -483,11 +482,8 @@ final class Core
 
         try {
             $response = $frontController->dispatch();
-        } catch (Exception $exception) {
-			/** @see Gonium_Exception */
-			require_once 'Gonium/Base.php';
-            Gonium_Exception::dumpException($exception);
-
+        } catch (Exception $e) {
+	    Gonium_Exception::dump($e);
             $response = $frontController->getResponse();
         }
 

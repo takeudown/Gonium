@@ -33,18 +33,32 @@
  */
 class Gonium_Exception extends Exception
 {
-public static function dump(Exception $exception)
+	/**
+	 * Dump an exception as output as HTML 
+	 */
+	public static function dump(Exception $exception)
     {
-        echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-                <html><head><title>Oops!</title></head>'
-                . '<body><center>'
-                . 'An exception occured while bootstrapping the application.';
-        echo '<br /><br />' . $exception->getMessage() . '<br />'
-                . '<div align="left">Stack Trace:'
-                . '<pre>' . $exception->getTraceAsString() . '</pre></div>';
-        echo '</center></body></html>';
-        exit(1);
+    	if ($exception != null)
+    	{
+	        echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	                <html><head><title>Oops!</title></head>'
+	                . '<body><center>'
+	                . 'An exception occured while bootstrapping the application.';
+	        echo '<br /><br />' . $exception->getMessage() . '<br />'
+	                . '<div align="left">Stack Trace:'
+	                . '<pre>' . $exception->getTraceAsString() . '</pre></div>';
+	        echo '</center></body></html>';
+	        exit(1);
+    	}
+    }
+
+	/**
+	 * Dump the exception as output as HTML 
+	 */
+	public function dumpMe()
+    {
+    	self::dump($this);
     }
 
     /**
@@ -57,5 +71,13 @@ public static function dump(Exception $exception)
     public static function null($var)
     {
         return $var;
+    }
+    
+    /**
+     * 
+	 */
+	public static function nullMe()
+    {
+        return self::null($this);
     }
 }

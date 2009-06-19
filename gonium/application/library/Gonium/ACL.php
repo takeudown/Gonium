@@ -62,7 +62,10 @@
  */
 
 /** Gonium_Exception */
-require_once 'Gonium/Base.php';
+require_once 'Gonium/Exception.php';
+/** Gonium_Model_ACL_Resource_Interface */
+require_once 'Gonium/Model/ACL/Resource/Interface.php';
+
 /** Zend_Db */
 require_once 'Zend/Db.php';
 /** Zend_Acl */
@@ -71,8 +74,6 @@ require_once 'Zend/Acl.php';
 require_once 'Zend/Acl/Role.php';
 /** Zend_Acl_Resource */
 require_once 'Zend/Acl/Resource.php';
-/** Gonium_Model_ACL_Resource_Interface */
-require_once 'Gonium/Model/ACL/Resource/Interface.php';
 
 /**
  * Access Control List
