@@ -98,10 +98,10 @@ class Core_Init_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
 		$dock_footer->setScript('footer.dock.phtml');
 
 		if ($this->_layer->isEnabled ()) {
-			require_once ('Widget/Login.php');
-			require_once ('Widget/Validator.php');
-			require_once ('Widget/DbInfo.php');
-			require_once ('Widget/Gonium.php');
+			Zend_Loader::loadClass('Widget_Login');
+			Zend_Loader::loadClass('Widget_Validator');
+			Zend_Loader::loadClass('Widget_DbInfo');
+			Zend_Loader::loadClass('Widget_Gonium');
 			
 			$dock_left = $this->_layer->getDock ( 'leftSidebar' );
 			$dock_right = $this->_layer->getDock ( 'rightSidebar' );

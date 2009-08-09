@@ -26,11 +26,11 @@
 /** @see Gonium_Db_Table_Abstract */
 require_once 'Gonium/Db/Table/Abstract.php';
 /** @see Core_Model_ACL_Roles */
-require_once 'Core/Model/ACL/Roles.php';
+require_once 'Core/Model/ACL/Role.php';
 /** @see Core_Model_ACL_Access */
 require_once 'Core/Model/ACL/Access.php';
 /** @see Core_Model_ACL_Resources */
-require_once 'Core/Model/ACL/Resources.php';
+require_once 'Core/Model/ACL/Resource.php';
 
 
 /**
@@ -55,6 +55,8 @@ require_once 'Core/Model/ACL/Resources.php';
  * access.allow is a boolean field, that specifies whether the respective rule is an allow rule or a deny rule (important for inherited access).
  *
  */
+
+require_once "Gonium/Model/Abstract.php";
 
 /**
  * @category    Gonium

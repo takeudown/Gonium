@@ -99,16 +99,14 @@ class Core_Init_Admin extends Core_Init_Abstract
 		Zend_Loader::loadClass('Zend_Controller_Request_Http');
         $request = new Zend_Controller_Request_Http();
         $frontController->setRequest($request);
-        
-        $frontController->setBaseUrl( $request->getBaseUrl(). $config->system->backendBaseUrl );
 
         try {
             // Config Module Directories
             // Use section [admin] of etc/router.ini
-            $config = new Zend_Config_Ini( APP_ROOT . 'etc/router.ini', 'admin');
+            $config = new Zend_Config_Ini( Core::getHomeDir() . '/etc/router.ini', 'admin');
             $router->addConfig($config);
 
-            $config = new Zend_Config_Ini( APP_ROOT . 'etc/directories.ini', 'admin');
+            $config = new Zend_Config_Ini( Core::getHomeDir() . '/etc/directories.ini', 'admin');
             // Config Module Directories
             // Use section [admin] of etc/directories.ini
             {

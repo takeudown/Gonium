@@ -1,0 +1,38 @@
+###############################################
+## Gonium Defaul Rules for Apache web server ##
+###############################################
+##
+## For security reasons, you can rename this directory.
+##
+## If you are using an Apache web server, rename this file as .htaccess    
+##
+## $Id$
+##
+
+## -- Begin Gonium Rules -- ##
+
+##########################
+## Setting Environtment ##
+##########################
+
+## "production" is the default environment.  
+SetEnv APP_ENVIRONMENT production
+## Use the following to set your site as "development" environment.
+#SetEnv APP_ENVIRONMENT development
+
+###############################
+## Setting URL Rewrite rules ##
+###############################
+<IfModule rewrite_module>
+  RewriteEngine on
+  #RewriteBase /gonium/admin
+  
+  ## New Zend Framework proposed mod_rewriter rules for .htaccess  
+  RewriteCond %{REQUEST_FILENAME} -s [OR]
+  RewriteCond %{REQUEST_FILENAME} -l [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^.*$ - [NC,L]
+  RewriteRule ^.*$ index.php [NC,L]
+</IfModule>
+
+## -- End Gonium Rules -- ##

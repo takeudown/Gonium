@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Roxyton $Id: coreLibs.po 136 2008-12-17 05:56:57Z gnzsquall $\n"
+"Project-Id-Version: Roxyton $Id$\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-17 00:13-0300\n"
 "PO-Revision-Date: 2008-12-17 02:10-0300\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-Basepath: ./\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-SearchPath-0: ../../../library\n"
-"VERSION: $Id: coreLibs.po 136 2008-12-17 05:56:57Z gnzsquall $"
+"VERSION: $Id$"
 
 #: ../../../library/Rox/Translate/Date.php:72
 #: ../../../library/Rox/Translate/Date.php:90

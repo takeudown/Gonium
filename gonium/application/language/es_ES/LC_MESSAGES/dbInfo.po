@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-Basepath: ./\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-SearchPath-0: ../../../usr/widgets/dbInfo\n"
-"VERSION: $Id: dbInfo.po 136 2008-12-17 05:56:57Z gnzsquall $"
+"VERSION: $Id$"
 
 #: ../../../usr/widgets/dbInfo/views/scripts/DbInfo.phtml:2
 #, php-format

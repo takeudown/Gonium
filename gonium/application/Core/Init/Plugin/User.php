@@ -29,11 +29,11 @@ require_once 'Gonium/ACL.php';
 require_once 'Gonium/User.php';
 
 /** Core_Model_ACL_Roles */
-require_once 'Core/Model/ACL/Roles.php';        // Who have the access
+require_once 'Core/Model/ACL/Role.php';        // Who have the access
 /** Core_Model_ACL_Access */
 require_once 'Core/Model/ACL/Access.php';        // Rules of access
 /** Core_Model_ACL_Resources */
-require_once 'Core/Model/ACL/Resources.php';        // Resources to access
+require_once 'Core/Model/ACL/Resource.php';        // Resources to access
 /** Core_Model_User */
 require_once 'Core/Model/User.php';
 
@@ -124,47 +124,6 @@ class Core_Init_Plugin_User extends Zend_Controller_Plugin_Abstract
         //$roles = Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Roles');
         //var_dump($roles->getRoles());
 
-        require_once 'Zend/Acl.php';
-        $acl = new Zend_Acl();
-
-        // Principal Roles
-        $acl->addRole(new Zend_Acl_Role('member'));
-        $acl->addRole(new Zend_Acl_Role('admin'));
-
-        $parents = array();
-
-        require_once 'Zend/Acl/Role.php';
-        if( $user->getRoleId() != 'guest' )
-        {
-            $acl->addRole( new Zend_Acl_Role('guest'));
-
-            // Principal Parents
-            $parents = array('guest','member', 'admin');
-
-        }
-
-        $acl->addRole( $user, $parents );
-
-        // Verificar sesion
-
-        //$acl->addRole(new Zend_Acl_Role('moderator'), $parents);
-
-        //$acl->removeRole( 'guest' );
-
-        //$acl->addRole( $user /*, $parents*/ );
-
-        require_once 'Zend/Acl/Resource.php';
-        $acl->add(new Zend_Acl_Resource('someResource'));
-
-        $acl->deny('guest', 'someResource');
-        $acl->allow('member', 'someResource');
-
-        //var_dump( $acl->isAllowed( $user, 'someResource') );
-
-        //var_dump( $_SESSION );
-        //var_dump($acl);
-        //var_dump($user);
-        //var_dump($user->isAuthenticated());
-        //die();
+        
     }
 }

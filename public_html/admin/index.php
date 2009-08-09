@@ -18,11 +18,11 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id$
+ * @version     $Id: admin.php 22 2009-06-19 16:28:36Z gnzsquall $
  */
 
 /** Launcher */
-require_once './launch.php';
+require_once '../launch.php';
 
 // Save current working directory
 $cwd = getcwd();
@@ -33,19 +33,10 @@ chdir( APP_ROOT );
 require_once 'Core.php';
 
 /**
- * Setting 'development' environment explicity
+ * This is an 'admin' environment
  */
-Core::setEnvironment('development');
+Core::setEnvironment('admin');
 
-/**
- * Setting Home Directory
- */
-Core::setHomeDir(HOME_ROOT);
-
-/**
- * Boot the application (only once)
- * Initialize on 'development' environment by default
- */
 Core::main();
 
 // Restore working directory

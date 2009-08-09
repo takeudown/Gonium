@@ -41,15 +41,7 @@ class Core_Model_Widgets extends Gonium_Model_Abstract
 
    public static function getWidgets()
    {
-      $commentsTable = new CommentsTable();
-      return $commentsTable->fetchAll();
-   }
-
-   public static function createNewComments($data)
-   {
-      $commentsTable = new CommentsTable();
-      $comment = $commentsTable->createRow($data);
-      $comment->save();
+      
    }
 }
 

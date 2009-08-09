@@ -34,9 +34,9 @@ require_once 'Gonium/Db/Table/Abstract.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class Core_Model_ACL_Roles extends Gonium_Db_Table_Abstract
+class Core_Model_ACL_Role extends Gonium_Db_Table_Abstract
 {
-    public $_name = 'core_acl_roles';
+    public $_name = 'core_acl_role';
     public $_primary = 'role_id';
 
     /**

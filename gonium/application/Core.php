@@ -59,7 +59,7 @@ final class Core
     /** Version of Application */
     const VERSION = '0.3';
     /** Last revision from SVN */
-    const REVISION = '$LastChangedRevision$';
+    const REVISION = '$LastChangedRevision: 23 $';
     /**#@-*/
 
     /**#@+
@@ -123,13 +123,13 @@ final class Core
        throw new Gonium_Exception('Clone unavailable');
     }
 
-    public static function getInstance($environment = 'development')
+    /** Get a singleton instance */
+    public static function getInstance()
     {
        if (!isset(self::$instance))
        {
           $c = __CLASS__;
           self::$_instance = new $c;
-          self::$_instance->setEnvironment($environment);
        }
        return self::$_instance;
     }
@@ -151,14 +151,8 @@ final class Core
         self::isBooted();
         self::$_boot = true;
 
-        if (!self::$_environment) {
-            self::setEnvironment('development');
-            /*
-            throw new Exception(
-                _('Please set the environment using ::setEnvironment')
-            );
-            */
-        }
+        if (self::$_environment == null)
+        	self::setEnvironment();
 
         //Zend_Loader::registerAutoload();
         Zend_Loader::loadClass('Zend_Registry');
@@ -230,9 +224,16 @@ final class Core
     * @param string $environment - The environment to set
     * @return Core
     */
-    public static function setEnvironment($environment)
+    public static function setEnvironment($environment = null)
     {
-       self::$_environment = $environment;
+    	if($environment == null)
+    	{
+    		// Define application environment from server environment
+            self::$_environment = getenv('APP_ENVIRONMENT') ?
+            	getenv('APP_ENVIRONMENT') : 'production';	
+    	} else {
+			self::$_environment = $environment;
+    	}
        //return $this;
     }
 

@@ -20,7 +20,7 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: ACL.php 5 2009-05-11 04:08:28Z gnzsquall $
+ * @version     $Id$
  */
 
  /*
@@ -85,7 +85,7 @@ require_once 'Zend/Acl/Resource.php';
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: ACL.php 5 2009-05-11 04:08:28Z gnzsquall $
+ * @version     $Id$
  */
 class Gonium_ACL extends Zend_ACL
 {
@@ -117,39 +117,45 @@ class Gonium_ACL extends Zend_ACL
      */
     private function addResources(Gonium_Model_ACL_Resource_Interface $resources, $nocheckparent = false)
     {
-        $lastAddedCount = 0;
+      $lastAddedCount = 0;
+      
+      foreach($resources as $theRes)
+      {
+	ini_set('xdebug.var_display_max_depth', -1);
+	var_dump($resources->currentResource());
+	//var_dump($resources->currentParent());
+	
+	Gonium_Exception::null($theRes);
+	// ACL doesn't has the resource
+	if( !$this->has($resources->currentResource()) )
+	{
+	  if( $resources->currentParent() === null  // No tiene padre
+	    || $this->has( $resources->currentParent() ) // O el padre existe
+	  )
+	  {
+	    //var_dump($resources->currentResource());
+	    // Agregar el Recurso a la ACL
+	    $this->add(
+	      $resources->currentResource(),
+	      $resources->currentParent()
+	    );
+	    // Aumentar contador de recursos agregados
+	    //$lastAddedCount++;
+	    // // Quita el recurso del arreglo, para evitar volver  a considerarlo en otra vuelta del while
+	    //unset($resources[$resid]);
+	  } else
+	  if($nocheckparent)
+	  {
+	    // Agregar el Recurso a la ACL, sin padre
+	    $this->add( $resources->currentResource() );
+	    //$lastAddedCount++;
+	  }
+	  
+	  $lastAddedCount++;
+	}
+      }
 
-        foreach($resources as $theRes)
-        {
-        	Gonium_Exception::null($theRes);
-            // ACL doesn't has the resource
-            if( !$this->has($resources->currentResource()) )
-            {
-                if( $resources->currentParent() === null  // No tiene padre
-                  || $this->has( $resources->currentParent() ) // O el padre existe
-                )
-                {
-                    //var_dump($resources->currentResource());
-                    // Agregar el Recurso a la ACL
-                    $this->add(
-                        $resources->currentResource(),
-                        $resources->currentParent()
-                    );
-                    // Aumentar contador de recursos agregados
-                    $lastAddedCount++;
-                    // // Quita el recurso del arreglo, para evitar volver  a considerarlo en otra vuelta del while
-                    //unset($resources[$resid]);
-                } else
-                if($nocheckparent)
-                {
-                    // Agregar el Recurso a la ACL, sin padre
-                    $this->add( $resources->currentResource() );
-                    $lastAddedCount++;
-                }
-            }
-        }
-
-        return $lastAddedCount;
+      return $lastAddedCount;
     }
 
     /**
@@ -177,9 +183,8 @@ class Gonium_ACL extends Zend_ACL
 
         $totalAddedCount = 0;
 
+        $continue = false;
         do{
-            $continue = false;
-
             $lastAddedCount = $this->addResources($resources);
             $totalAddedCount = $totalAddedCount + $lastAddedCount;
 

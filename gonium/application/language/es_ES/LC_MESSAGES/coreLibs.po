@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: ./\n"
 "X-Poedit-KeywordsList: translate\n"
-"VERSION: $Id: coreLibs.po 137 2008-12-19 04:51:34Z gnzsquall $\n"
+"VERSION: $Id$\n"
 "X-Poedit-SearchPath-0: ../../../library\n"
 
 #: ../../../library/Rox/Translate/Date.php:72

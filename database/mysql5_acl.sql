@@ -1,10 +1,10 @@
--------------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Gonium
 -- 
 -- ACL script for Mysql 5
 --
 -- $Id$
--------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------
 
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ DROP TABLE `gonium_core_acl_role_inheritance` CASCADE;
 DROP TABLE `gonium_core_acl_role` CASCADE;
 DROP TABLE `gonium_core_acl_access` CASCADE;
 
--------------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 
 -- phpMyAdmin SQL Dump
 -- version 3.1.1
@@ -180,17 +180,20 @@ ALTER TABLE `gonium_core_acl_role_inheritance`
   ADD CONSTRAINT `gonium_core_acl_inheritance_role_id_fkey` FOREIGN KEY (`role_id`) REFERENCES `gonium_core_acl_role` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
-/*****************************************************************/
+/*****************************************************************************/
 /* Views */
-/*****************************************************************/
-CREATE OR REPLACE VIEW gonium_view_resource as
+/*****************************************************************************/
+CREATE OR REPLACE VIEW gonium_view_resource AS
 SELECT
   node.*,
-  (COUNT(parent.resource_name) - 1) AS depth,
   trim(concat(
-    repeat( '-', (COUNT(parent.resource_name) - 1)),
-    ' ',
-    node.resource_name)) as tree_name
+      repeat( '-', (COUNT(parent.resource_name) - 1)),
+      ' ',
+      node.resource_name
+    )) AS tree_name,
+  (COUNT(parent.resource_name) - 1) AS depth,
+  (node.rgt - node.lft) AS width
+    
 FROM
   gonium_core_acl_resource AS node
 CROSS JOIN
@@ -202,14 +205,6 @@ WHERE node.lft BETWEEN parent.lft AND parent.rgt
   node.scope
 ORDER BY node.lft;
 
-/*****************************************************************/
-/*
-CREATE OR REPLACE VIEW gonium_view_resource_tree as
-SELECT node.* FROM gonium_view_resource as node
-  LEFT JOIN gonium_core_acl_resource as res
-    ON (node.resource_id = res.resource_id);
-*/
-/*****************************************************************/
 CREATE OR REPLACE VIEW gonium_view_resource_parents as
 SELECT
   parent.resource_name as parent_name,
@@ -222,9 +217,9 @@ LEFT JOIN
       parent.lft < node.lft AND node.rgt < parent.rgt AND node.depth = parent.depth+1
     );
 
-/*****************************************************************/
+/*****************************************************************************/
 /* Triggers */
-/*****************************************************************/
+/*****************************************************************************/
 
 /**
  */
@@ -253,27 +248,67 @@ CREATE TRIGGER gonium_trg_Acl_Resource_Add BEFORE INSERT ON gonium_core_acl_reso
 
 DELIMITER ;
 */
-/*****************************************************************/
+
+
+/*****************************************************************************/
+/* Functions */
+/*****************************************************************************/
+/**
+ * If resourceName is child of resourceParentName return TRUE (1)
+ * In other case, return FALSE (0)
+ *
+ * @param VARCHAR(50) newResourceName
+ */
+DELIMITER $$
+
+DROP FUNCTION IF EXISTS `gonium_testing`.`gonium_sp_core_Acl_Resource_isChild`$$
+CREATE FUNCTION `gonium_sp_core_Acl_Resource_isChild`(resourceName VARCHAR(50), resourceParentName VARCHAR(50)) RETURNS tinyint(1)
+BEGIN
+
+  DECLARE myLeft INT;
+  DECLARE myRight INT;
+  DECLARE tmpRes VARCHAR(50);
+
+  SELECT lft, rgt INTO myLeft, myRight
+  FROM gonium_core_acl_resource
+      WHERE resource_name = resourceParentName;
+
+  SELECT res INTO tmpRes FROM (
+    SELECT resource_name as res FROM gonium_core_acl_resource
+      WHERE myLeft < lft AND rgt < myRight) as childs
+    WHERE childs.res = resourceName;
+
+  IF( tmpRes IS NOT NULL ) THEN
+    RETURN TRUE;
+  ELSE
+    RETURN FALSE;
+  END IF;
+
+END$$
+
+DELIMITER ;
+
+/*****************************************************************************/
 /* Stored Procedures */
-/*****************************************************************/
+/*****************************************************************************/
 
 /**
  * Add Resource left to given resource
  *
  * @param VARCHAR(50) newResourceName
- * @param VARCHAR(50) newResourceBrother
+ * @param VARCHAR(50) pivotResourceName
  */
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `gonium_testing`.`gonium_sp_core_Acl_Resource_AddBefore`$$
-CREATE DEFINER=`gonium`@`localhost` PROCEDURE `gonium_sp_core_Acl_Resource_AddBefore`(newResourceName VARCHAR(50), newResourceBrother VARCHAR(50))
+CREATE PROCEDURE `gonium_sp_core_Acl_Resource_AddBefore`(newResourceName VARCHAR(50), pivotResourceName VARCHAR(50))
 BEGIN
   DECLARE pivot INT;
 
   START TRANSACTION;
 
     -- Si el nodo dado es nulo, se agrega una raiz por la izquierda
-    IF(newResourceBrother IS NULL) THEN
+    IF(pivotResourceName IS NULL) THEN
 
       -- Obtener el valor derecho mas alto
       SET pivot = (SELECT lft FROM gonium_core_acl_resource
@@ -299,7 +334,7 @@ BEGIN
     ELSE
     -- Si no, entonces se agrega un nodo a la izquierda del nodo dado
       SET pivot = (SELECT lft FROM gonium_core_acl_resource
-        WHERE resource_name = newResourceBrother
+        WHERE resource_name = pivotResourceName
       );
   
       IF (pivot IS NOT NULL) THEN
@@ -316,17 +351,16 @@ END$$
 
 DELIMITER ;
 
-
 /**
  * Add Resource right to given resource
  *
  * @param VARCHAR(50) newResourceName
- * @param VARCHAR(50) newResourceBrother
+ * @param VARCHAR(50) pivotResourceName
  */
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `gonium_testing`.`gonium_sp_core_Acl_Resource_AddAfter`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `gonium_sp_core_Acl_Resource_AddAfter`(IN newResourceName VARCHAR(50), IN newResourceBrother VARCHAR(50))
+CREATE PROCEDURE `gonium_sp_core_Acl_Resource_AddAfter`(IN newResourceName VARCHAR(50), IN pivotResourceName VARCHAR(50))
 BEGIN
 
   DECLARE pivot INT;
@@ -334,7 +368,7 @@ BEGIN
   START TRANSACTION;
 
     -- Si el nodo dado es nulo, se agrega una raiz por la derecha
-    IF (newResourceBrother IS NULL) THEN
+    IF (pivotResourceName IS NULL) THEN
     
   -- Obtener el valor derecho mas alto
   SET pivot = (SELECT rgt FROM gonium_core_acl_resource
@@ -354,7 +388,7 @@ BEGIN
     ELSE
   -- Si no, entonces se agrega un nodo a la derecha del nodo dado
   SET pivot = (SELECT rgt FROM gonium_core_acl_resource
-          WHERE resource_name = newResourceBrother
+          WHERE resource_name = pivotResourceName
   );
     
     IF (pivot IS NOT NULL) THEN
@@ -369,17 +403,16 @@ END$$
 
 DELIMITER ;
 
-
 /**
  * Add Resource as a Child of a given resource
  *
  * @param VARCHAR(50) newResourceName
- * @param VARCHAR(50) newResourceBrother
+ * @param VARCHAR(50) newResourceParent
  */
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `gonium_testing`.`gonium_sp_core_Acl_Resource_AddChild`$$
-CREATE DEFINER=`gonium`@`localhost` PROCEDURE `gonium_sp_core_Acl_Resource_AddChild`(newResourceName VARCHAR(50), newResourceParent VARCHAR(50))
+CREATE PROCEDURE `gonium_sp_core_Acl_Resource_AddChild`(newResourceName VARCHAR(50), newResourceParent VARCHAR(50))
 BEGIN
  
   DECLARE pivot INT;
@@ -419,23 +452,26 @@ DELIMITER ;
  *
  * @param VARCHAR(50) newResourceName
  */
-
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `gonium_testing`.`gonium_sp_core_Acl_Resource_Remove`$$
-CREATE DEFINER=`gonium`@`localhost` PROCEDURE `gonium_sp_core_Acl_Resource_Remove`(resourceName VARCHAR(50))
+CREATE PROCEDURE `gonium_sp_core_Acl_Resource_Remove`(resourceName VARCHAR(50))
 BEGIN
+
+  DECLARE myLeft INT;
+  DECLARE myRight INT;
+  DECLARE myWidth INT;
 
   START TRANSACTION;
 
-  SELECT @myLeft := lft, @myRight := rgt, @myWidth := rgt - lft + 1
+  SELECT lft, rgt, (rgt - lft + 1) INTO myLeft, myRight, myWidth
     FROM gonium_core_acl_resource
     WHERE resource_name = resourceName;
 
-  DELETE FROM gonium_core_acl_resource WHERE lft BETWEEN @myLeft AND @myRight;
+  DELETE FROM gonium_core_acl_resource WHERE lft BETWEEN myLeft AND myRight;
 
-  UPDATE gonium_core_acl_resource SET rgt = rgt - @myWidth WHERE rgt > @myRight;
-  UPDATE gonium_core_acl_resource SET lft = lft - @myWidth WHERE lft > @myRight;
+  UPDATE gonium_core_acl_resource SET rgt = rgt - myWidth WHERE rgt > myRight;
+  UPDATE gonium_core_acl_resource SET lft = lft - myWidth WHERE lft > myRight;
 
   COMMIT;
 END$$
@@ -443,39 +479,69 @@ END$$
 DELIMITER ;
 
 /**
- * Delete a Resource (and all its children)
+ * Move a Resource as Child of another given Parent Resource
  *
  * @param VARCHAR(50) newResourceName
  */
-
 DELIMITER $$
 
-DROP FUNCTION IF EXISTS `gonium_testing`.`gonium_sp_core_Acl_Resource_isChild`$$
-CREATE FUNCTION `gonium_sp_core_Acl_Resource_isChild`(resourceName VARCHAR(50), resourceParentName VARCHAR(50))
-    RETURNS boolean
-BEGIN
+DROP PROCEDURE IF EXISTS `gonium_testing`.`gonium_sp_core_Acl_Resource_MoveAsChild`$$
+CREATE PROCEDURE `gonium_sp_core_Acl_Resource_MoveAsChild`(resourceName VARCHAR(50), newParentName VARCHAR(50))
+proc:BEGIN
 
-  DECLARE myLeft INT;
-  DECLARE myRight INT;
-  DECLARE res VARCHAR(50);
-  DECLARE retval INT;
+  DECLARE targetLeft INT;
+  DECLARE targetRight INT;
+  DECLARE targetWidth INT;
+  DECLARE parentLeft INT;
+  DECLARE parentRight INT;
+  DECLARE parentWidth INT;
+  DECLARE isChild BOOLEAN;
+  DECLARE currentParent VARCHAR(50);
 
-  SELECT lft, rgt INTO myLeft, myRight
-  FROM gonium_core_acl_resource
-      WHERE resource_name = resourceParentName;
+  START TRANSACTION;
 
-  SET @res = (SELECT res FROM (
-    SELECT resource_name as res FROM gonium_core_acl_resource
-      WHERE lft > @myLeft AND rgt < @myRigth) as childs
-    WHERE childs.res = resourceName
-  );
+  SELECT width INTO targetWidth
+    FROM gonium_view_resource_parent AS node
+    WHERE node.resource_name = resourceName; 
 
-  IF( @res IS NOT NULL ) THEN
-    RETURN TRUE;
-  ELSE
-    RETURN FALSE;
+  SELECT width INTO parentWidth
+    FROM gonium_view_resource_parent AS node
+    WHERE node.resource_name = newParentName; 
+
+  IF( targetWidth IS NOT NULL AND parentWidth IS NOT NULL )
+
+  -- Probar si padre e hijo son el mismo
+  IF(resourceName = newParentName) THEN 
+    -- El nodo resourceName no puede ser hijo de si mismo
+    LEAVE proc;
   END IF;
 
+  -- Probar si el nuevo padre es hijo del nodo
+  SELECT gonium_sp_core_Acl_Resource_isChild(newParentName, resourceName)
+     INTO isChild;
+
+  IF(isChild = 1) THEN 
+    -- El nuevo padre no puede ser hijo de resourceName
+    -- select 'El nuevo padre no puede ser hijo de resourceName';
+    LEAVE proc;
+  END IF;
+  
+  -- Probar si el nuevo padre es el actual padre
+  SELECT parent_name INTO currentParent
+    FROM gonium_view_resource_parents
+    WHERE resource_name = resourceName;
+  
+  IF(currentParent = newParentName) THEN 
+    -- El nuevo padre ya es el padre
+    -- select 'El nuevo padre ya es el padre';
+    LEAVE proc;
+  END IF;
+
+  select '!';
+  /* tortillamiento de nodos */
+
+  COMMIT;
 END$$
 
 DELIMITER ;
+

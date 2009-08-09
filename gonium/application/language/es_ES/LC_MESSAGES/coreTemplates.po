@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-Basepath: ./\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-SearchPath-0: ../../../themes\n"
-"VERSION: $Id: coreTemplates.po 136 2008-12-17 05:56:57Z gnzsquall $"
+"VERSION: $Id$"
 
 #: ../../../themes/default/layouts/layout.phtml:99
 #: ../../../themes/default/layouts/admin.phtml:54

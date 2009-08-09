@@ -24,7 +24,7 @@
  */
 
 /** @see Core_Model_ACL_Resources */
-require_once 'Core/Model/ACL/Resources.php';
+require_once 'Core/Model/ACL/Resource.php';
 
 /**
  * @category    Gonium
@@ -33,10 +33,13 @@ require_once 'Core/Model/ACL/Resources.php';
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
+ * 
+ * @todo complete new Resource implementation from database
+ * usign Preorder Traversal Tree algorithm 
  */
-class Core_Model_Modules extends Core_Model_ACL_Resources
-{
-    public $_name = 'core_modules';
+class Core_Model_Module extends Core_Model_ACL_Resource
+{	
+    public $_name = 'core_acl_resource';
     //public $_name = 'acl_resources';
     public $_primary = 'directory';
     //public $_primary = 'resource_id';
@@ -49,9 +52,15 @@ class Core_Model_Modules extends Core_Model_ACL_Resources
     {
         $db = Zend_Registry::get('core_db');
         $results = array();
-        $nodes_found = array();
-
-        do {
+        
+        
+        $select = $db->select()
+            ->distinct()
+            ->from( 'view_'. $this->_name );
+        /*
+         $nodes_found = array();
+         
+         do {
             $select = $db->select()
             ->distinct()
             ->from( array('mod' => $this->_name) )
@@ -97,23 +106,26 @@ class Core_Model_Modules extends Core_Model_ACL_Resources
         {
             $this->_result = array_reverse($results);
             return $this;
-        }
+        }*/
 
         return $results;
     }
 
     public static function getModules()
     {
+    	/*
         $table = new ModulesTable();
 
         $select = $table->select()
             ->from($table->_name, '*');
 
         return $table->fetchAll( $select );
+        */
     }
 
     public static function isInstalled($mod)
     {
+    	/*
         $table = new ModulesTable();
         $db = $table->getAdapter();
 
@@ -123,6 +135,7 @@ class Core_Model_Modules extends Core_Model_ACL_Resources
             ->where( $db->quoteInto('directory = ?', $mod ) );
 
         return !is_null($table->fetchRow( $select ));
+        */
     }
 
     /*

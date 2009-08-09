@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Roxyton $Id: dbInfo.po 136 2008-12-17 05:56:57Z gnzsquall $\n"
+"Project-Id-Version: Roxyton $Id$\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-17 01:15-0300\n"
 "PO-Revision-Date: 2008-12-17 01:32-0300\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-Basepath: ./\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-SearchPath-0: ../../../usr/widgets/DbInfo\n"
-"VERSION: $Id: dbInfo.po 136 2008-12-17 05:56:57Z gnzsquall $"
+"VERSION: $Id$"
 
 #: ../../../usr/widgets/DbInfo/views/scripts/DbInfo.phtml:2
 #, php-format

@@ -12,7 +12,7 @@
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   Copyright (c) 2008 Bolsa de Ideas. Consultor en TIC {@link http://www.bolsadeideas.cl}
  * @author      Andres Guzman F. <aguzman@bolsadeideas.cl>
- * @version     $Id: DataGrid.php 5 2009-05-11 04:08:28Z gnzsquall $
+ * @version     $Id$
  */
 
 /** @see Gonium_DataGrid_Interface */
@@ -27,7 +27,7 @@ require_once 'Gonium/DataGrid/Interface.php';
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   Copyright (c) 2008 Bolsa de Ideas. Consultor en TIC {@link http://www.bolsadeideas.cl}
  * @author      Andres Guzman F. <aguzman@bolsadeideas.cl>
- * @version     $Id: DataGrid.php 5 2009-05-11 04:08:28Z gnzsquall $
+ * @version     $Id$
  */
 class Gonium_DataGrid
     extends Gonium_DataGrid_Abstract
@@ -95,7 +95,7 @@ class Gonium_DataGrid
 		$valids = array(
             'orderBy'     => array('allowEmpty' => true),
 		    'direction'   => array('Alpha', 'allowEmpty' => true),
-			'page'        => array('int', 'default' => 0));
+			'page'        => array('int', 'default' => 0, 'allowEmpty' => true));
 
 		Zend_Loader::loadClass('Zend_Filter_Input');
 
@@ -117,7 +117,7 @@ class Gonium_DataGrid
 			 * @see Gonium_DataGrid_Exception
 			 */
 			require_once 'Gonium/DataGrid/Exception.php';
-			throw new Gonium_DataGrid_Exception('Invalid Parmas for DataGrid: '.$errors);
+			throw new Gonium_DataGrid_Exception('Invalid Params for DataGrid: '.$errors);
 		}
 
 		$this->setPage((int)$input->page);

@@ -22,6 +22,9 @@
  * @version     $Id$
  */
 
+/** @see Gonium_Controller_Action_Helper_Error_Interface */
+require_once 'Gonium/Controller/Action/Helper/Error/Interface.php';
+
 /**
  * @package     Core_Module_Error
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
@@ -53,18 +56,17 @@ class Error_IndexController extends Zend_Controller_Action
     {
         //$config = Zend_Registry::get('core_config');
         $errors = $this->_getParam('error_handler');
-
+        $errorType = $errors->type;
+        
         if(!is_null($errors))
         {
-            $error = $errors->type;
             $exception = $errors->exception;
             $this->_request->setParam( 'exception', $exception );
         } else {
-            $error = null;
-            $exception = $this->_request->getParam( 'exception' );
+            //$exception = $this->_request->getParam( 'exception' );
         }
-        
-        switch ($error)
+
+        switch ($errorType)
         {
             // 404 error -- controller or action not found
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
@@ -72,15 +74,7 @@ class Error_IndexController extends Zend_Controller_Action
                 $this->_error404();
 			break;
             default:
-                //$this->_handleException($exception);
-                
-                if ($exception instanceof Zend_Db_Exception)
-                {
-                    $this->databaseAction();
-                } else {
-                    $this->_error500();
-                }
-                
+                $this->_exceptionHandle();
             break;
         }
     }
@@ -88,18 +82,42 @@ class Error_IndexController extends Zend_Controller_Action
     /**
     * !@todo: map Exception's to Action Method
     */
-    /*
     protected function _exceptionHandle(Exception $e)
     {
-        
-        // Create an instance of the ReflectionClass class
-        $class = new ReflectionObject($e);
+        try {
+            $this->getResponse()->setRawHeader('HTTP/1.1 500 Internal Server Error');
+            
+	        try
+	        {
+	        	$exception = $this->_request->getParam('exception');
+	       		$class = new ReflectionObject($exception);
+		        $name = $class->getName();
+		        //$name = str_replace('_','',$name).'Controller';
+		        $name = str_replace('_','',$name);
+		        $path = APP_ROOT . '/Core/Module/Error/helper/';
+	        	
+	        	$this->_helper->addPath($path,'Error_Helper_');
+	        	
+	        	$helper = $this->_helper->{$name};
+	        	if($helper instanceof Gonium_Controller_Action_Helper_Error_Interface)
+	        	{
 
-        $name = $class->getName();
-        var_dump($name);
-        die();
+	        		$this->_errorMessage(
+			            $helper->getTitle(),
+			            $helper->getBody() 
+			        );
+	        		
+	        	}
+
+	        } catch(Exception $e) {
+	        	Gonium_Exception::null($e);
+				$this->_error500();
+	        }
+        } catch(Exception $e) {
+        	Gonium_Exception::null($e);
+			$this->_error500();	
+        }
     }
-    */
     
     public function deniedAction()
     {
@@ -110,7 +128,7 @@ class Error_IndexController extends Zend_Controller_Action
     {
         try {
             $this->getResponse()->setRawHeader('HTTP/1.1 500 Internal Server Error');
-        } catch(Exception $e) { Core::null($e); }
+        } catch(Exception $e) { Gonium_Exception::null($e); }
         
         $this->_errorMessage( 
             $this->language->translate('Remote Error'),
@@ -124,7 +142,7 @@ class Error_IndexController extends Zend_Controller_Action
     {
         try {
             $this->getResponse()->setRawHeader('HTTP/1.1 403 Forbidden');
-        } catch(Exception $e) { Core::null($e); }
+        } catch(Exception $e) { Gonium_Exception::null($e); }
         
         $this->_errorMessage(
             'Error 403', 
@@ -136,7 +154,7 @@ class Error_IndexController extends Zend_Controller_Action
     {        
         try {
             $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
-        } catch(Exception $e) { Core::null($e); }
+        } catch(Exception $e) { Gonium_Exception::null($e); }
         
         $this->view->headMeta()->appendHttpEquiv(
             'Refresh', '3;'. $this->view->url( array(), null, true)
@@ -150,11 +168,7 @@ class Error_IndexController extends Zend_Controller_Action
 
     protected function _error500()
     {
-        try {
-            $this->getResponse()->setRawHeader('HTTP/1.1 500 Internal Server Error');
-        } catch(Exception $e) { Core::null($e); }
-
-        $this->_errorMessage(
+   		$this->_errorMessage(
             'Error 500', 
             $this->language->translate('Error 500')
         );

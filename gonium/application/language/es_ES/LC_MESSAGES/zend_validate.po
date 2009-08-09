@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-Basepath: ./\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-SearchPath-0: ../../templates/form\n"
-"VERSION: $Id: zend_validate.po 136 2008-12-17 05:56:57Z gnzsquall $"
+"VERSION: $Id$"
 
 #: ../../templates/form/zend_validate.php:3
 msgid "isEmpty"

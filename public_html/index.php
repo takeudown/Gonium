@@ -32,11 +32,6 @@ chdir( APP_ROOT );
 require_once 'Core.php';
 
 /**
- * Setting 'production' environment explicity
- */
-Core::setEnvironment('production');
-
-/**
  * Boot the application (only once)
  * Initialize on 'development' environment by default
  */

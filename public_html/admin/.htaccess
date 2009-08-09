@@ -1,0 +1,28 @@
+## 
+## $Id$
+
+## Setting Environtment
+#SetEnv APP_ENVIRONMENT production
+SetEnv APP_ENVIRONMENT development
+
+<IfModule rewrite_module>
+  RewriteEngine on
+  #RewriteBase /gonium/admin
+  #RewriteBase /
+  
+  #RewriteCond %{HTTP_HOST}  !^gonium.home.gon.cl
+  #RewriteRule ^(.*)/admin(.*) /gonium/$ [PT]
+  
+  ###sickd
+  #RewriteCond %{HTTP_HOST} !^gonium.home.gon.cl
+  #RewriteRule (.*) /gonium/$ [PT]
+  
+  
+  ## New Zend Framework proposed mod_rewriter rules for .htaccess  
+  RewriteCond %{REQUEST_FILENAME} -s [OR]
+  RewriteCond %{REQUEST_FILENAME} -l [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^.*$ - [NC,L]
+  #RewriteRule ^.*$ index.php [NC,L]
+  RewriteRule ^.*$ index.php [NC]
+</IfModule>

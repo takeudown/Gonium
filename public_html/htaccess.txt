@@ -1,16 +1,37 @@
+###############################################
+## Gonium Defaul Rules for Apache web server ##
+###############################################
+##
+## If you are using an Apache web server, rename this file as .htaccess 
+## Also remember rename admin/htaccess.txt as admin/.htaccess too.   
+##
+## $Id$
+##
+
+## -- Begin Gonium Rules -- ##
+
+##########################
+## Setting Environtment ##
+##########################
+
+## "production" is the default environment.  
+SetEnv APP_ENVIRONMENT production
+## Use the following to set your site as "development" environment.
+#SetEnv APP_ENVIRONMENT development
+
+###############################
+## Setting URL Rewrite rules ##
+###############################
 <IfModule rewrite_module>
   RewriteEngine on
-  #RewriteBase /
+  #RewriteBase /gonium/
   
-  ## Original ZF rewrite rule for Apache mod_rewrite:
-  #RewriteRule !\.(pdf|php|js|ico|txt|gif|jpg|png|css|rss|zip|tar\.gz)$ index.php
-  
-  ## Use this in PRODUCTION environment:
-  #RewriteRule !admin|\.(html|docs|pdf|php|js|ico|txt|gif|jpg|png|css|rss|zip|tar\.gz)$ index.php.php
-  
-  ## Use this in DEVELOPMENT environment:
-  RewriteRule !admin|\.(html|docs|pdf|php|js|ico|txt|gif|jpg|png|css|rss|zip|tar\.gz)$ devel.php
-  
-  ## Backend rule
-  RewriteRule ^admin admin.php     [L,NC]
+  ## New Zend Framework proposed mod_rewriter rules for .htaccess  
+  RewriteCond %{REQUEST_FILENAME} -s [OR]
+  RewriteCond %{REQUEST_FILENAME} -l [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^.*$ - [NC,L]
+  RewriteRule ^.*$ index.php [NC,L]
 </IfModule>
+
+## -- End Gonium Rules -- ##

@@ -20,7 +20,7 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: SecureCookie.php 5 2009-05-11 04:08:28Z gnzsquall $
+ * @version     $Id$
  */
 
 /** Zend_Auth_Storage_Interface*/
@@ -38,7 +38,7 @@
  * @subpackage  Gonium_Auth_Storage
  * @author      Mofified by {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
- * @version     $Id: SecureCookie.php 5 2009-05-11 04:08:28Z gnzsquall $
+ * @version     $Id$
  * @see Gonium_Crypt_HmacCookie
  */
 class Gonium_Auth_Storage_SecureCookie

@@ -56,5 +56,6 @@ class IndexController extends Zend_Controller_Action
             torquent per conubia nostra, per inceptos hymenaeos. Nam mattis nisl.
             Curabitur sollicitudin vehicula massa. Integer felis leo, accumsan eget,
             cursus ac, venenatis et, quam. Suspendisse eleifend nisl eu ligula.</p>";
+        //throw new Gonium_Exception('FAIL!');
     }
 }

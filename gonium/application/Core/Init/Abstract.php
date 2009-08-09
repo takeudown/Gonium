@@ -98,23 +98,29 @@ abstract class Core_Init_Abstract
 
         $config = Zend_Registry::get('core_config');
         $db = Zend_Registry::get('core_db');
-        $db->getConnection();
-
+        
         // Table Prefix
         Zend_Loader::loadClass('Gonium_Db_Table_Abstract');
         Gonium_Db_Table_Abstract::setPrefix( $config->database->prefix );
-
-        // Set charset
-        if( isset($config->database->charset) && $config->database->charset !== null )
+        
+        try{
+        	//$db->getConnection();
+                // Set charset
+	        if( isset($config->database->charset) && $config->database->charset !== null )
+	        {
+	            switch( $config->database->adapter )
+	            {
+	                case 'mysqli':
+	                case 'pdo_mysql':
+	                    $db->query('SET NAMES \''.strtoupper($config->database->charset).'\'');
+	                    $db->query('SET CHARACTER SET '.strtoupper($config->database->charset));
+	                    break;
+	            }
+	        }
+        }
+        catch (Exception $e)
         {
-            switch( $config->database->adapter )
-            {
-                case 'mysqli':
-                case 'pdo_mysql':
-                    $db->query('SET NAMES \''.strtoupper($config->database->charset).'\'');
-                    $db->query('SET CHARACTER SET '.strtoupper($config->database->charset));
-                    break;
-            }
+        	Core::getFrontController()->setParam('exception', $e);
         }
     }
 

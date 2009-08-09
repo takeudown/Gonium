@@ -27,13 +27,13 @@
 /** @see Gonium_ACL */
 require_once 'Gonium/ACL.php';
 /** Core_Model_ACL_Roles */
-require_once 'Core/Model/ACL/Roles.php';        // Who have the access
+require_once 'Core/Model/ACL/Role.php';        // Who have the access
 /** Core_Model_ACL_Access */
 require_once 'Core/Model/ACL/Access.php';        // Rules of access
 /** Core_Model_ACL_Resources */
-require_once 'Core/Model/ACL/Resources.php';        // Resources to access
+require_once 'Core/Model/ACL/Resource.php';        // Resources to access
 /** Core_Model_Modules */
-require_once 'Core/Model/Modules.php';
+require_once 'Core/Model/Module.php';
 
 /** Zend_Controller_Plugin_Abstract */
 require_once 'Zend/Controller/Plugin/Abstract.php';
@@ -98,32 +98,23 @@ class Core_Init_Plugin_Frontend_Module extends Zend_Controller_Plugin_Abstract
         */
 
         $this->resources =
-            Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Resources');
+            Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Resource');
         $this->access =
             Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Access');
         $this->roles =
-            Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Roles');
+            Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Role');
     }
 
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-
     	parent::preDispatch($request);
         Zend_Loader::loadClass('Gonium_Controller_Action_Helper_LoadModel');
 
         if( !$this->hasAcl() )
         {
-            $this->_acl = new Gonium_ACL;
-            //$mod = $request->getModuleName();
-            $modules = Gonium_Controller_Action_Helper_LoadModel::getModel('Modules');
-            $modules->setIterable(true);
+        	/*
 
-            //$acl->loadResources($modules->getResources( array($mod) ));
-
-            $modules = Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Resources');
-            $modules->setIterable(true);
-
-            $this->_acl->loadResources($modules->getResources( array('g', 'e') ), Gonium_ACL::ORPHAN_RESOURCE_ADD);
+            */
         }
 /*
         $modules = Gonium_Controller_Action_Helper_LoadModel::getModel('Modules');

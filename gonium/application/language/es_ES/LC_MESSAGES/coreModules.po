@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Roxyton $Revision: 142 $\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-19 03:18-0300\n"
-"PO-Revision-Date: 2008-12-19 03:20-0300\n"
-"Last-Translator: Gonzalo Díaz <gnzsquall@gmail.com>\n"
+"POT-Creation-Date: 2009-07-21 03:24-0300\n"
+"PO-Revision-Date: 2009-07-21 03:25-0300\n"
+"Last-Translator: Gonzalo Diaz Cruz <me@gon.cl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,11 +14,11 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: ./\n"
 "X-Poedit-KeywordsList: translate\n"
-"VERSION: $Id: coreModules.po 142 2008-12-25 20:44:25Z gnzsquall $\n"
+"VERSION: $Id$\n"
 "X-Poedit-SearchPath-0: ../../../Core/Module\n"
 
 #: ../../../Core/Module/Admin/user/helpers/UserForm.php:48
-#: ../../../Core/Module/Admin/user/controllers/IndexController.php:65
+#: ../../../Core/Module/Admin/user/controllers/IndexController.php:70
 msgid "username"
 msgstr "Nombre de usuario"
 
@@ -38,97 +38,116 @@ msgstr "Agregar Usuario"
 msgid "User's Management"
 msgstr "Gestión de Usuarios"
 
-#: ../../../Core/Module/Admin/user/controllers/IndexController.php:75
+#: ../../../Core/Module/Admin/user/controllers/IndexController.php:80
+#: ../../../Core/Module/Admin/acl/controllers/ResourceController.php:97
+#: ../../../Core/Module/Admin/acl/controllers/RoleController.php:79
 msgid "Edit"
 msgstr "Editar"
 
-#: ../../../Core/Module/Admin/user/controllers/IndexController.php:92
+#: ../../../Core/Module/Admin/user/controllers/IndexController.php:97
+#: ../../../Core/Module/Admin/acl/controllers/ResourceController.php:114
+#: ../../../Core/Module/Admin/acl/controllers/RoleController.php:96
 msgid "Delete"
 msgstr "Eliminar"
 
-#: ../../../Core/Module/Error/IndexController.php:116
+#: ../../../Core/Module/Admin/acl/controllers/ResourceController.php:48
+#: ../../../Core/Module/Admin/acl/controllers/RoleController.php:48
+#: ../../../Core/Module/Admin/acl/controllers/IndexController.php:48
+msgid "Permission's Management"
+msgstr "Gestión de Permisos"
+
+#: ../../../Core/Module/Admin/acl/controllers/ResourceController.php:76
+msgid "acl_resource_id"
+msgstr "ID Recurso"
+
+#: ../../../Core/Module/Admin/acl/controllers/ResourceController.php:82
+msgid "acl_resource_parent_name"
+msgstr "Nombre del Recurso Padre"
+
+#: ../../../Core/Module/Admin/acl/controllers/ResourceController.php:87
+msgid "acl_resource_name"
+msgstr "Nombre del Recurso"
+
+#: ../../../Core/Module/Error/IndexController.php:134
 msgid "Remote Error"
 msgstr "Error Remoto"
 
-#: ../../../Core/Module/Error/IndexController.php:117
+#: ../../../Core/Module/Error/IndexController.php:135
 msgid "Remote Error Message"
 msgstr "Ocurrió un error durante la conexión remota."
 
-#: ../../../Core/Module/Error/IndexController.php:131
+#: ../../../Core/Module/Error/IndexController.php:149
 msgid "Error 403"
 msgstr "Error 403: Se ha denegado el acceso a esta página"
 
-#: ../../../Core/Module/Error/IndexController.php:147
+#: ../../../Core/Module/Error/IndexController.php:165
 msgid "Error 404"
 msgstr "Error 404: La p&aacute;gina que busca no se encuentra"
 
-#: ../../../Core/Module/Error/IndexController.php:159
+#: ../../../Core/Module/Error/IndexController.php:173
 msgid "Error 500"
 msgstr "Error 500: Ha ocurrido un error interno."
 
-#: ../../../Core/Module/Error/IndexController.php:175
-#: ../../../Core/Module/Error/IndexController.php:181
+#: ../../../Core/Module/Error/IndexController.php:189
+#: ../../../Core/Module/Error/IndexController.php:195
+#: ../../../Core/Module/Error/helper/ZendDbAdapterException.php:42
 msgid "Database Error"
 msgstr "Error de Base de datos"
 
-#: ../../../Core/Module/Error/IndexController.php:176
+#: ../../../Core/Module/Error/IndexController.php:190
+#: ../../../Core/Module/Error/helper/ZendDbAdapterException.php:56
 msgid "Database Connection Error"
 msgstr "No hay conexión con la Base de Datos"
 
-#: ../../../Core/Module/Error/IndexController.php:182
+#: ../../../Core/Module/Error/IndexController.php:196
 msgid "Database Execution Error"
 msgstr "Ocurrió un error durante la consulta a la base de datos."
 
-#: ../../../Core/Module/Install/controllers/IndexController.php:59
+#: ../../../Core/Module/Install/controllers/IndexController.php:57
 msgid "Install"
 msgstr "Instalar"
 
-#: ../../../Core/Module/Install/controllers/IndexController.php:122
-msgid "Try to write config file"
-msgstr "Intentar guardar el archivo de configuración"
-
-#: ../../../Core/Module/Install/controllers/IndexController.php:165
+#: ../../../Core/Module/Install/controllers/IndexController.php:191
 msgid "Write configuration file"
 msgstr "Guardar archivo de configuración"
 
-#: ../../../Core/Module/Install/controllers/IndexController.php:183
+#: ../../../Core/Module/Install/controllers/IndexController.php:209
 msgid "Download configuration file"
 msgstr "Descargar archivo de configuración"
 
-#: ../../../Core/Module/Install/controllers/IndexController.php:194
+#: ../../../Core/Module/Install/controllers/IndexController.php:220
 msgid "Error: writing file"
 msgstr "Error: no se puede guardar el archivo"
 
-#: ../../../Core/Module/Install/controllers/IndexController.php:195
+#: ../../../Core/Module/Install/controllers/IndexController.php:221
 msgid "Download config.ini file and upload to application/etc/"
 msgstr "Descarque el archivo config.ini y subalo a la carpeta application/etc/"
 
-#: ../../../Core/Module/Install/controllers/IndexController.php:229
+#: ../../../Core/Module/Install/controllers/IndexController.php:255
 msgid "Installation success"
 msgstr "Instalación exitosa"
 
-#: ../../../Core/Module/Frontend/user/controllers/AuthController.php:106
+#: ../../../Core/Module/Frontend/user/controllers/AuthController.php:118
 msgid "userLogin_IndentityNotFound"
 msgstr "El nombre de usuario está incorrecto. ¿Está registrado con ese nombre?"
 
-#: ../../../Core/Module/Frontend/user/controllers/AuthController.php:112
+#: ../../../Core/Module/Frontend/user/controllers/AuthController.php:124
 msgid "userLogin_FailureCredentialInvalid"
 msgstr "Contraseña incorrecta"
 
-#: ../../../Core/Module/Frontend/user/controllers/AuthController.php:132
+#: ../../../Core/Module/Frontend/user/controllers/AuthController.php:170
 msgid "userLogin_Success"
 msgstr "Sesión iniciada correctamente"
 
-#: ../../../Core/Module/Frontend/user/controllers/AuthController.php:147
+#: ../../../Core/Module/Frontend/user/controllers/AuthController.php:185
 #: ../../../Core/Module/Frontend/user/controllers/OpenidController.php:145
 msgid "userLogin_SignedOut"
 msgstr "Sesión cerrada correctamente"
 
-#: ../../../Core/Module/Install/views/scripts/index.phtml:14
-msgid "Go to home"
-msgstr "Ir a la página de inicio"
-
-#: ../../../Core/Module/Frontend/user/views/scripts/index.phtml:1
-msgid "User Panel"
-msgstr "Panel de Usuario"
+#~ msgid "Try to write config file"
+#~ msgstr "Intentar guardar el archivo de configuración"
+#~ msgid "Go to home"
+#~ msgstr "Ir a la página de inicio"
+#~ msgid "User Panel"
+#~ msgstr "Panel de Usuario"
 

@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-Basepath: ./\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-SearchPath-0: ../../../usr/widgets/Login\n"
-"VERSION: $Id: widget_login.po 136 2008-12-17 05:56:57Z gnzsquall $"
+"VERSION: $Id$"
 
 #: ../../../usr/widgets/Login/views/scripts/forms.phtml:21
 msgid "User Login Form"

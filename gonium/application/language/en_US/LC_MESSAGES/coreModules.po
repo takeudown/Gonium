@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Roxyton $Id: coreModules.po 142 2008-12-25 20:44:25Z gnzsquall $\n"
+"Project-Id-Version: Roxyton $Id$\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-12-19 03:21-0300\n"
 "PO-Revision-Date: 2008-12-19 03:22-0300\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: ./\n"
 "X-Poedit-KeywordsList: translate\n"
-"VERSION: $Id: coreModules.po 142 2008-12-25 20:44:25Z gnzsquall $\n"
+"VERSION: $Id$\n"
 "X-Poedit-SearchPath-0: ../../../Core/Module\n"
 
 #: ../../../Core/Module/Admin/user/helpers/UserForm.php:48

@@ -20,7 +20,7 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: Abstract.php 5 2009-05-11 04:08:28Z gnzsquall $
+ * @version     $Id$
  */
 
 /** Zend_Db_Table_Abstract */
@@ -34,7 +34,7 @@ require_once 'Gonium/Model/Interface.php';
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id: Abstract.php 5 2009-05-11 04:08:28Z gnzsquall $
+ * @version     $Id$
  */
 abstract class Gonium_Db_Table_Abstract extends Zend_Db_Table_Abstract
         implements Gonium_Model_Interface
@@ -61,13 +61,21 @@ abstract class Gonium_Db_Table_Abstract extends Zend_Db_Table_Abstract
     {
         return self::$_prefix;
     }
+    
+    /**
+     * Get composed prefix for Views
+     */
+    public static function getViewPrefix()
+    {
+    	return self::$_prefix.'view_';
+    }
 
     private function rename()
     {
         $this->_originalName = $this->_name;
         $this->_name = self::$_prefix . $this->_originalName;
     }
-
+    
     /*
      * Get the amount of Rows of table
      */

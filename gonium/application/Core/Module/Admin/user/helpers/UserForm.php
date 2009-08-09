@@ -39,9 +39,9 @@ class Core_Module_Admin_User_Helper_UserForm
 	 */
     public function createUserForm()
     {
-    	Zend_Loader::loadClass('Gonium_Form_Table');
+    	Zend_Loader::loadClass('Gonium_Form_Style_Table');
     	
-    	$form = new Gonium_Form_Table(array(
+    	$form = new Gonium_Form_Style_Table(array(
             'elements' => array(
                 'username' => array('text', array(
                     'required' => true,

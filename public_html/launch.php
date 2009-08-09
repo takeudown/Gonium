@@ -24,7 +24,8 @@
 /** Define public files base directory */
 define('PUBLIC_ROOT', dirname(__FILE__));
 /** Define home files base directory */
-define('HOME_ROOT', dirname(__FILE__).'/../gonium/home/someuser/');
+define('HOME_ROOT', realpath(dirname(__FILE__).'/../gonium/home/someuser/'));
 
 /** Common Procedural Initialization */
-require_once '../gonium/application/init.php';
+//die(dirname(__FILE__).'../gonium/application/init.php');
+require_once realpath(dirname(__FILE__).'/../gonium/application/init.php');
