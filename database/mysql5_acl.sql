@@ -486,38 +486,53 @@ DELIMITER ;
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `gonium_testing`.`gonium_sp_core_Acl_Resource_MoveAsChild`$$
-CREATE PROCEDURE `gonium_sp_core_Acl_Resource_MoveAsChild`(resourceName VARCHAR(50), newParentName VARCHAR(50))
+CREATE PROCEDURE `gonium_sp_core_Acl_Resource_MoveAsChild`(targetName VARCHAR(50), parentName VARCHAR(50))
 proc:BEGIN
 
   DECLARE targetLeft INT;
   DECLARE targetRight INT;
   DECLARE targetWidth INT;
+  DECLARE targetParent VARCHAR(50);
+
   DECLARE parentLeft INT;
   DECLARE parentRight INT;
   DECLARE parentWidth INT;
   DECLARE isChild BOOLEAN;
-  DECLARE currentParent VARCHAR(50);
+
+  DECLARE diff INT;
 
   START TRANSACTION;
 
-  SELECT width INTO targetWidth
-    FROM gonium_view_resource_parent AS node
-    WHERE node.resource_name = resourceName; 
+  SELECT parent_name, lft, rgt, width 
+    INTO targetParent, targetLeft, targetRight, targetWidth
+    FROM gonium_view_resource_parents AS node
+    WHERE node.resource_name = targetName; 
 
-  SELECT width INTO parentWidth
-    FROM gonium_view_resource_parent AS node
-    WHERE node.resource_name = newParentName; 
+  SELECT lft, rgt, width 
+    INTO parentLeft, parentRight, parentWidth
+    FROM gonium_view_resource_parents AS node
+    WHERE node.resource_name = parentName; 
 
-  IF( targetWidth IS NOT NULL AND parentWidth IS NOT NULL )
+  -- Probar si ambos nodos existen
+  IF( targetWidth IS NULL OR parentWidth IS NULL ) THEN
+    -- Si alguno de los 2 no existe, no se puede continuar
+    LEAVE proc;
+  END IF;
+
+  IF(targetParent = parentName) THEN 
+    -- El nuevo padre ya es el padre
+    -- select 'El nuevo padre ya es el padre';
+    LEAVE proc;
+  END IF;
 
   -- Probar si padre e hijo son el mismo
-  IF(resourceName = newParentName) THEN 
+  IF(targetName = parentName) THEN 
     -- El nodo resourceName no puede ser hijo de si mismo
     LEAVE proc;
   END IF;
 
   -- Probar si el nuevo padre es hijo del nodo
-  SELECT gonium_sp_core_Acl_Resource_isChild(newParentName, resourceName)
+  SELECT gonium_sp_core_Acl_Resource_isChild(parentName, targetName)
      INTO isChild;
 
   IF(isChild = 1) THEN 
@@ -525,21 +540,28 @@ proc:BEGIN
     -- select 'El nuevo padre no puede ser hijo de resourceName';
     LEAVE proc;
   END IF;
-  
-  -- Probar si el nuevo padre es el actual padre
-  SELECT parent_name INTO currentParent
-    FROM gonium_view_resource_parents
-    WHERE resource_name = resourceName;
-  
-  IF(currentParent = newParentName) THEN 
-    -- El nuevo padre ya es el padre
-    -- select 'El nuevo padre ya es el padre';
-    LEAVE proc;
+
+  -- Calcular diferencia entre nodo objetivo y el nuevo padre
+  SET diff = parentRight - targetRight;
+
+  UPDATE gonium_core_acl_resource SET rgt = rgt + targetWidth + 1
+    WHERE rgt >= parentRight ORDER BY rgt DESC;
+  UPDATE gonium_core_acl_resource SET lft = lft + targetWidth + 1
+    WHERE lft > parentLeft ORDER BY lft DESC;
+
+  -- Si el nodo objetivo está a la derecha del nodo padre, calcular nuevo left y right      
+  IF ( targetLeft > parentLeft ) THEN
+    SET targetLeft = targetLeft + targetWidth + 1;
+    SET targetRight = targetRight + targetWidth + 1;
+
+    SELECT targetLeft, targetRight;
   END IF;
 
-  select '!';
-  /* tortillamiento de nodos */
+  -- Mover los el nodo objetivo y sus hijos bajo el nuevo padre
+  UPDATE gonium_core_acl_resource SET lft = lft + diff - 1, rgt = rgt + diff - 1
+    WHERE (targetLeft <= lft AND rgt <= targetRight) ORDER BY lft DESC;
 
+  -- Ajustar el espacio que queda despues del desplazamiento
   COMMIT;
 END$$
 
