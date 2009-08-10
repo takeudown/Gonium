@@ -558,10 +558,20 @@ proc:BEGIN
   END IF;
 
   -- Mover los el nodo objetivo y sus hijos bajo el nuevo padre
-  UPDATE gonium_core_acl_resource SET lft = lft + diff - 1, rgt = rgt + diff - 1
+  UPDATE gonium_core_acl_resource SET
+    lft = lft + diff - 1,
+    rgt = rgt + diff - 1
     WHERE (targetLeft <= lft AND rgt <= targetRight) ORDER BY lft DESC;
 
   -- Ajustar el espacio que queda despues del desplazamiento
+  UPDATE gonium_core_acl_resource SET
+    lft = lft - targetWidth - 1
+    WHERE (rgt > targetRight) ORDER BY lft DESC;
+
+  UPDATE gonium_core_acl_resource SET
+    rgt = rgt - targetWidth - 1
+    WHERE (rgt > targetRight) ORDER BY rgt DESC;
+
   COMMIT;
 END$$
 
