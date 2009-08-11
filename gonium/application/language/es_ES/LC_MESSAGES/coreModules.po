@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Roxyton $Revision: 142 $\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-21 03:24-0300\n"
-"PO-Revision-Date: 2009-07-21 03:25-0300\n"
+"POT-Creation-Date: 2009-08-11 14:54-0300\n"
+"PO-Revision-Date: 2009-08-11 14:54-0300\n"
 "Last-Translator: Gonzalo Diaz Cruz <me@gon.cl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -39,13 +39,13 @@ msgid "User's Management"
 msgstr "Gestión de Usuarios"
 
 #: ../../../Core/Module/Admin/user/controllers/IndexController.php:80
-#: ../../../Core/Module/Admin/acl/controllers/ResourceController.php:97
+#: ../../../Core/Module/Admin/acl/controllers/ResourceController.php:98
 #: ../../../Core/Module/Admin/acl/controllers/RoleController.php:79
 msgid "Edit"
 msgstr "Editar"
 
 #: ../../../Core/Module/Admin/user/controllers/IndexController.php:97
-#: ../../../Core/Module/Admin/acl/controllers/ResourceController.php:114
+#: ../../../Core/Module/Admin/acl/controllers/ResourceController.php:115
 #: ../../../Core/Module/Admin/acl/controllers/RoleController.php:96
 msgid "Delete"
 msgstr "Eliminar"
@@ -64,7 +64,7 @@ msgstr "ID Recurso"
 msgid "acl_resource_parent_name"
 msgstr "Nombre del Recurso Padre"
 
-#: ../../../Core/Module/Admin/acl/controllers/ResourceController.php:87
+#: ../../../Core/Module/Admin/acl/controllers/ResourceController.php:88
 msgid "acl_resource_name"
 msgstr "Nombre del Recurso"
 

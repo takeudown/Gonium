@@ -217,7 +217,7 @@ class Gonium_Translate_Date extends Gonium_Translate_Abstract
     }
 
     /**
-    * Spring Â· Summer Â· Autumn Â· Winter
+    * Spring, Summer, Autumn, Winter
     */
     public function getSessions()
     {

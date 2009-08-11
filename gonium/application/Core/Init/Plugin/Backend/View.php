@@ -15,12 +15,12 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * @package     Bootstrap
+ * @package   Bootstrap
  * @subpackage  Init_Plugin_Backend
- * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
- * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
+ * @author    {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
+ * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id$
+ * @version   $Id$
  */
 
 /** @see Core_Init_Plugin_View */
@@ -29,47 +29,47 @@ require_once 'Core/Init/Plugin/View.php';
 /**
  * Configure View scripts and View Helper paths
  *
- * @package     Bootstrap
+ * @package   Bootstrap
  * @subpackage  Init_Plugin_Backend
- * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
- * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
+ * @author    {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
+ * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id$
+ * @version   $Id$
  */
 class Core_Init_Plugin_Backend_View extends Core_Init_Plugin_View
 {
-    public function preDispatch(Zend_Controller_Request_Abstract $request)
-    {
-        Zend_Controller_Plugin_Abstract::preDispatch($request);
-        $module = $this->getRequest()->getModuleName();
-        $config = Zend_Registry::get('core_config');
-        $view = Zend_Registry::get('core_view');
+  public function preDispatch(Zend_Controller_Request_Abstract $request)
+  {
+    Zend_Controller_Plugin_Abstract::preDispatch($request);
+    $module = $this->getRequest()->getModuleName();
+    $config = Zend_Registry::get('core_config');
+    $view = Zend_Registry::get('core_view');
 
-        $view->setScriptPath(
-            array(
-                APP_ROOT . 'Core/Module/Admin/'.$module.'/views/scripts/',
-                APP_ROOT . 'themes/default/',
-                APP_ROOT . 'Core/view/',
-                './',
-            )
-        );
+    $view->setScriptPath(
+      array(
+        APP_ROOT . 'Core/Module/Admin/'.$module.'/views/scripts/',
+        APP_ROOT . 'themes/default/',
+        APP_ROOT . 'Core/view/',
+        './',
+      )
+    );
 
-        // Clear previous Helper paths
-        $view->setHelperPath(null);
+    // Clear previous Helper paths
+    $view->setHelperPath(null);
 
-        // Reset Rox Libraries View Helpers
-        $view->addHelperPath( 'Gonium/View/Helper/', 'Gonium_View_Helper');
+    // Reset Rox Libraries View Helpers
+    $view->addHelperPath( 'Gonium/View/Helper/', 'Gonium_View_Helper');
 
-        // Add View helpers path to module
-        $view->addHelperPath(
-            APP_ROOT . 'Core/Module/Admin/'.$module.'/views/helpers',
-            ucfirst($module) . '_View_Helper'
-        );
-        
-        // (Re)Configure new Title
-        $view->headTitle()->setSeparator(' | ');
-        $view->headTitle( stripslashes($config->page->title), 
-            Zend_View_Helper_Placeholder_Container_Abstract::SET
-        );
-    }
+    // Add View helpers path to module
+    $view->addHelperPath(
+      APP_ROOT . 'Core/Module/Admin/'.$module.'/views/helpers',
+      ucfirst($module) . '_View_Helper'
+    );
+    
+    // (Re)Configure new Title
+    $view->headTitle()->setSeparator(' | ');
+    $view->headTitle( stripslashes($config->page->title), 
+      Zend_View_Helper_Placeholder_Container_Abstract::SET
+    );
+  }
 }
