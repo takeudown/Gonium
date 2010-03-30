@@ -62,7 +62,13 @@
     <div class="center">
         <?php echo $this->layout()->footerSidebar; ?>
 
-        <?php echo Core::getAppName(); ?> | Version: <?php echo Core::getVersion(); ?> | Copyleft <?php echo $this->year ?>.
+        <?php echo Gonium_Version::APP; ?>: 
+        <?php echo Gonium_Version::VERSION; ?> | 
+        Zend Framework: <?php echo Zend_Version::VERSION; ?> | 
+        Copyleft <?php echo date('Y') ?>.
+        
+        <br />
+        
         <?php echo $this->translate('Theme designed by'); ?> <a href="http://gon.cl/"> Gonzalo D&iacute;az &lt;Gon&gt;</a>
     </div>
 </div>

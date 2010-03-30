@@ -26,7 +26,7 @@
  */
 
 // Output Buffering
-ob_start();
+//ob_start();
 ini_set('default_charset', 'UTF-8');
 date_default_timezone_set('America/Santiago');
 
@@ -54,7 +54,11 @@ if( !defined('CS') )
 
 if( !defined('APP_ROOT') )
     /** APP_ROOT */
-    define ('APP_ROOT', realpath(dirname(__FILE__)).DS );
+    define ('APP_ROOT', realpath(dirname(__FILE__)) );
+
+if( !defined('LIB_ROOT') )
+    /** LIB_ROOT */
+    define ('LIB_ROOT', realpath(dirname(__FILE__).DS.'..'.DS.'library') );
 
 if( !defined('PUBLIC_ROOT') )
     /** PUBLIC_ROOT */
@@ -66,10 +70,10 @@ if( !defined('HOME_ROOT') )
 
 // Set new include_path
 set_include_path('.'
-	. PS . APP_ROOT
-	. PS . APP_ROOT . 'library'
-	. PS . APP_ROOT . 'Core'
-	. PS . HOME_ROOT
+	. PS . LIB_ROOT .DS
+	. PS . APP_ROOT .DS
+	//. PS . APP_ROOT .DS. 'Core' .DS
+	. PS . HOME_ROOT .DS
 	. PS . get_include_path()
     );
 
@@ -89,3 +93,44 @@ if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
     $_COOKIE = array_map('stripslashes_deep', $_COOKIE);
     $_REQUEST = array_map('stripslashes_deep', $_REQUEST);
 }
+
+
+/** Zend_Application */
+require_once 'Zend/Application.php';
+require_once 'Zend/Loader.php';
+require_once 'Zend/Loader/Autoloader.php';
+require_once 'Zend/Version.php';
+require_once 'Gonium/Version.php';
+
+Zend_Loader_Autoloader::getInstance()->registerNamespace('GoniumCore_');
+
+if(!file_exists( HOME_ROOT . '/etc/config.ini' ))
+{
+	Zend_Registry::set(
+		'GoniumCore_Config', 
+		new Zend_Config_Ini(APP_ROOT . '/etc/installer.ini', APP_ENV)
+	);
+
+	// Create application
+	$application = new Zend_Application(
+	    'Installer', 
+	    Zend_Registry::get('GoniumCore_Config')
+	);
+} else {
+	
+	Zend_Registry::set(
+		'GoniumCore_Config', 
+		new Zend_Config_Ini(HOME_ROOT . '/etc/config.ini', APP_ENV)
+	);
+	
+	// Create application
+	$application = new Zend_Application(
+	    APP_ENV, 
+	    Zend_Registry::get('GoniumCore_Config')
+	);
+}
+	    
+// Create bootstrap, and run
+$application->bootstrap();
+$application->run();
+unset($application);
