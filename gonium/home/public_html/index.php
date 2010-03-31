@@ -21,4 +21,7 @@
  * @version     $Id$
  */
 
+//// Uncomment the following to activate production environment
+// define ('APP_ENV', 'production');
+
 require_once '../launch.php';

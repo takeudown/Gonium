@@ -52,6 +52,12 @@ class Gonium_Form_Prepared_DbConnection extends Gonium_Form {
                 'required' => true,
                 'size' => 20
             )),
+            'dbport' => array('text', array(
+                'label' => _('dbconnection_dbport'),
+                'id' => 'dbconnection_dbport',
+                'required' => true,
+                'size' => 20
+            )),
             'dbname' => array('text', array(
                 'label' => _('dbconnection_dbname'),
                 'id' => 'dbconnection_dbname',

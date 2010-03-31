@@ -33,6 +33,8 @@ require_once 'Zend/Config/Writer/Ini.php';
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
+ * 
+ * @todo		Allow the introduction of comments
  */
 class Gonium_Config_Writer_Ini extends Zend_Config_Writer_Ini
 {

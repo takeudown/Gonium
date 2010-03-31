@@ -15,7 +15,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * @package     GoniumCore_Module_Error
+ * @package     GoniumCore_Module_Install
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
@@ -44,12 +44,6 @@ class IndexController extends Zend_Controller_Action
     	$this->_view = Zend_Layout::getMvcInstance()->getView();
         $this->_lang = Zend_Registry::get('Zend_Translate');
         $this->_etc = HOME_ROOT.'/etc/';
-    }
-
-    public function preDispatch()
-    {
-        $this->_view->headTitle()->setSeparator(' | ');
-        $this->_view->headTitle(Gonium_Version::APP, Zend_View_Helper_Placeholder_Container_Abstract::SET);
     }
 
     public function indexAction()
@@ -90,10 +84,11 @@ class IndexController extends Zend_Controller_Action
         try{
             $db = Zend_Db::factory( $dbForm->dbConnection->dbadapter->getValue(), array(
                 'host'             => $dbForm->dbConnection->dbhost->getValue(),
+            	'port'             => $dbForm->dbConnection->dbport->getValue(),
                 'username'         => $dbForm->dbConnection->dbuser->getValue(),
                 'password'         => $dbForm->dbConnection->dbpass->getValue(),
                 'dbname'           => $dbForm->dbConnection->dbname->getValue(),
-                //'adapterNamespace' => 'MyProject_Db_Adapter'
+                //'adapterNamespace' => 'MyProject_Db_Adapter
             ));
 
             $db->getConnection();
@@ -157,6 +152,39 @@ class IndexController extends Zend_Controller_Action
         $keygen->setLength(16);
         $keygen->setUseSigns(true);
         
+        $config->all->phpSettings = array(
+	        'display_startup_errors' => 1,
+			'display_errors' => 1
+        );
+
+        // Indicate the path and classname of the bootstrap 
+        $config->all->bootstrap = array(
+			'path' => APP_ROOT . '/Bootstrap.php',
+			'class' => 'Bootstrap'
+		);
+		
+     	$config->all->resources = array();
+        
+        $config->all->resources->frontController = array(
+        	'controllerDirectory' => APP_ROOT . '/GoniumCore/Module/Frontend/default',
+        	'defaultControllerName' => 'index',
+			'defaultAction' => 'index',
+			'defaultModule' => 'default',
+			'baseUrl' => '/',
+			'plugins.view' => 'GoniumCore_Init_Plugin_View',
+        );
+        
+        
+        $config->all->resources->layout = array(
+        
+			'layoutPath' => APP_ROOT . '/themes/default/layouts',
+			'layout' => 'frontend',
+
+        );
+           
+        $config->all->resources->{'modules[]'} = null;
+        $config->all->resources->{'view[]'} = null;
+        
         $config->all->system = array(
             'backendBaseUrl'    => '/admin/',
             'key'               => (string) $keygen
@@ -169,16 +197,32 @@ class IndexController extends Zend_Controller_Action
             'dbInfo'        => false   // do not show detailed database info
         ); 
 
+        $config->development->resources = array();
+        
+        $config->development->resources->frontController = array(
+        	'throwexceptions' => true
+        );
+        
+        $config->development->phpSettings = array(
+	        'display_startup_errors' => true,
+			'display_errors' => true
+        );
+        
         $config->development->show = array(
             'errors'        => true,  // show exceptions in error pages
             'exceptions'    => true,  // show exceptions in bootstrap
             'dbInfo'        => true   // show detailed database info
         );
         
+        $config->production->phpSettings = array(
+	        'display_startup_errors' => false,
+			'display_errors' => false
+        );
+        
 		Zend_Loader::loadClass('Gonium_Config_Writer_Ini');
         $writer = new Gonium_Config_Writer_Ini(array(
                 'config'   => $config,
-                'filename' => $this->_etc.'config.ini'
+                'filename' => $this->_etc.'/config.ini'
             ));
 
         if(is_writeable($this->_etc))
