@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin
+ * @subpackage  Plugin
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
@@ -30,13 +30,13 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * Load Gettext translation adapter and configure user language.
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin
+ * @subpackage  Plugin
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class GoniumCore_Init_Plugin_Language extends Zend_Controller_Plugin_Abstract
+class GoniumCore_Plugin_Language extends Zend_Controller_Plugin_Abstract
 {
     /**
     * @todo Configurar el idioma dependiendo de la preferencia del usuario,
@@ -58,7 +58,7 @@ class GoniumCore_Init_Plugin_Language extends Zend_Controller_Plugin_Abstract
 				
 		Zend_Registry::set('Zend_Translate', $translate);
 		
-		$view = Zend_Layout::getMvcInstance()->getView();
-		$view->headMeta()->appendHttpEquiv('Content-Language', 'es-CL');
+        $view = Zend_Registry::get('GoniumCore_View');
+		//$view->headMeta()->appendHttpEquiv('Content-Language', 'es-CL');
     }
 }

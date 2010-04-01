@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin
+ * @subpackage  Plugin
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
@@ -45,13 +45,13 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * User session and ACL privileges.
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin
+ * @subpackage  Plugin
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class GoniumCore_Init_Plugin_User extends Zend_Controller_Plugin_Abstract
+class GoniumCore_Plugin_User extends Zend_Controller_Plugin_Abstract
 {
     function routeStartup(Zend_Controller_Request_Abstract $request)
     {
@@ -59,7 +59,7 @@ class GoniumCore_Init_Plugin_User extends Zend_Controller_Plugin_Abstract
     	Zend_Loader::loadClass('Zend_Auth');
         Zend_Loader::loadClass('Zend_Session_Namespace');
         Zend_Loader::loadClass('Gonium_Controller_Action_Helper_LoadModel');
-        $config = Zend_Registry::get('GoniumCore_config');
+        $config = Zend_Registry::get('GoniumCore_Config');
 
         // Session data of user
         $userNamespace = new Zend_Session_Namespace('user');
@@ -75,9 +75,6 @@ class GoniumCore_Init_Plugin_User extends Zend_Controller_Plugin_Abstract
         Zend_Loader::loadClass('Gonium_Crypt_HmacCookie');
         Zend_Loader::loadClass('Gonium_Auth_Storage_SecureCookie');
 
-        $auth = Zend_Auth::getInstance();
-        Zend_Registry::set('GoniumCore_auth',  $auth);
-
         $hmacCookie = new Gonium_Crypt_HmacCookie($config->system->key, array(
             'high_confidentiality' => true,
             'enable_ssl' => true
@@ -87,11 +84,14 @@ class GoniumCore_Init_Plugin_User extends Zend_Controller_Plugin_Abstract
         $bUrl = $bUrl != '' ? $bUrl : '/';
 
         $cookieAuth = new Gonium_Auth_Storage_SecureCookie($hmacCookie, array(
-                'cookieName' => 'RoxAuth',
+                'cookieName' => 'GoniumAuth',
                 'cookieExpire' => (time() + 86400),
                 'cookiePath' => $bUrl
             ));
 
+        Zend_Loader::loadClass('Gonium_Auth_Storage_UserSession');
+        // Save a reference to the Singleton instance of Zend_Auth
+		$auth = Zend_Auth::getInstance();
         $auth->setStorage($cookieAuth);
 
         if(!$auth->hasIdentity())
@@ -104,7 +104,7 @@ class GoniumCore_Init_Plugin_User extends Zend_Controller_Plugin_Abstract
 
         // ACL
         $acl = new Gonium_ACL();
-        Zend_Registry::set('GoniumCore_acl', $acl);
+        Zend_Registry::set('GoniumCore_Acl', $acl);
 
         ////////////// TESTING AREA:
         // @todo change everything:

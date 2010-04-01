@@ -37,8 +37,8 @@ require_once 'Gonium/Widget.php';
 class Widget_Login extends Gonium_Widget {
 
 	public function execute() {
-		$auth = Zend_Registry::get ( 'GoniumCore_auth' );
-		$view = Zend_Registry::get ( 'GoniumCore_view' );
+		$auth = Zend_Registry::get ( 'GoniumCore_Auth' );
+		$view = Zend_Registry::get ( 'GoniumCore_View' );
 		//$lang = Zend_Registry::get ( 'Zend_Translate' );
 
 		if ( !$auth->hasIdentity() )

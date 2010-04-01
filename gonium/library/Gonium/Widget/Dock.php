@@ -86,7 +86,7 @@ class Gonium_Widget_Dock {
 		 */
 		$widget->getView ()->addScriptPath (array(	
 				APP_ROOT . 'GoniumCore/view/',
-				Core::getHomeDir() . '/Widget/' . $this->widgetName ( $widget ) . '/views/scripts/',
+				HOME_ROOT . '/Widget/' . $this->widgetName ( $widget ) . '/views/scripts/',
 				'./'
 			));
 		

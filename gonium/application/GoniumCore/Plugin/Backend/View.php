@@ -16,34 +16,34 @@
  * GNU General Public License for more details.
  *
  * @package   Bootstrap
- * @subpackage  Init_Plugin_Backend
+ * @subpackage  Plugin_Backend
  * @author    {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version   $Id$
  */
 
-/** @see GoniumCore_Init_Plugin_View */
+/** @see GoniumCore_Plugin_View */
 require_once 'GoniumCore/Init/Plugin/View.php';
 
 /**
  * Configure View scripts and View Helper paths
  *
  * @package   Bootstrap
- * @subpackage  Init_Plugin_Backend
+ * @subpackage  Plugin_Backend
  * @author    {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version   $Id$
  */
-class GoniumCore_Init_Plugin_Backend_View extends GoniumCore_Init_Plugin_View
+class GoniumCore_Plugin_Backend_View extends GoniumCore_Plugin_View
 {
   public function preDispatch(Zend_Controller_Request_Abstract $request)
   {
     Zend_Controller_Plugin_Abstract::preDispatch($request);
     $module = $this->getRequest()->getModuleName();
     $config = Zend_Registry::get('GoniumCore_config');
-    $view = Zend_Registry::get('GoniumCore_view');
+    $view = Zend_Registry::get('GoniumCore_View');
 
     $view->setScriptPath(
       array(

@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin
+ * @subpackage  Plugin
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
@@ -30,13 +30,13 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * Configure View scripts and View Helper paths
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin
+ * @subpackage  Plugin
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class GoniumCore_Init_Plugin_View extends Zend_Controller_Plugin_Abstract
+class GoniumCore_Plugin_View extends Zend_Controller_Plugin_Abstract
 {
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
@@ -65,12 +65,13 @@ class GoniumCore_Init_Plugin_View extends Zend_Controller_Plugin_Abstract
         $view->currentControllerName = $request->getControllerName();
         $view->currentActionName = $request->getActionName();
     	
+    	
     	// Clear previous Helper paths
         $view->setHelperPath(null);
-
-        // Reset Rox Libraries View Helpers
+		
+        // Reset Gonium Libraries View Helpers
         $view->addHelperPath( 'Gonium/View/Helper/', 'Gonium_View_Helper');
-
+        
         // Add View helpers path to module
         $view->addHelperPath(
             HOME_ROOT . DS . 'Module' . DS . $module . '/views/helpers',

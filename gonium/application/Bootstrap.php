@@ -77,4 +77,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 			}
 		}
     }
+    
+    protected function _initAuth()
+    {
+    	$auth = Zend_Auth::getInstance();
+        Zend_Registry::set('GoniumCore_Auth',  $auth);
+    }
 }

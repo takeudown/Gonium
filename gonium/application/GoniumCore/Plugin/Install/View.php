@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin
+ * @subpackage  Plugin
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
@@ -30,20 +30,20 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * Configure View scripts and View Helper paths
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin
+ * @subpackage  Plugin
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class GoniumCore_Init_Plugin_Install_View extends Zend_Controller_Plugin_Abstract
+class GoniumCore_Plugin_Install_View extends Zend_Controller_Plugin_Abstract
 {
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
 		Zend_Loader::loadClass('Gonium_Exception');
     	Gonium_Exception::null($request);
 
-    	$view = Zend_Registry::get('GoniumCore_view');
+    	$view = Zend_Registry::get('GoniumCore_View');
 
         $view->setEncoding('UTF-8');
         $view->doctype('XHTML1_STRICT');

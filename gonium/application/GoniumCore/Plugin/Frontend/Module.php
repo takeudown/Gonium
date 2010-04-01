@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin_Frontend
+ * @subpackage  Plugin_Frontend
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 Gonzalo Diaz Cruz
@@ -42,13 +42,13 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * Checks the privileges of the user, to allow or to deny the access to a module
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin_Frontend
+ * @subpackage  Plugin_Frontend
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class GoniumCore_Init_Plugin_Frontend_Module extends Zend_Controller_Plugin_Abstract
+class GoniumCore_Plugin_Frontend_Module extends Zend_Controller_Plugin_Abstract
 {
 	protected $_acl;
 
@@ -124,7 +124,7 @@ class GoniumCore_Init_Plugin_Frontend_Module extends Zend_Controller_Plugin_Abst
         $modelLoader = new Zend_Loader_PluginLoader();
         $modelLoader->addPrefixPath(
             'Mod_'.ucfirst($module).'_Model',
-            Core::getHomeDir() . DS . 'Module' . DS . $module . DS . 'models'
+            HOME_ROOT . DS . 'Module' . DS . $module . DS . 'models'
         );
         
         Zend_Registry::set('Loader_Model', $modelLoader);

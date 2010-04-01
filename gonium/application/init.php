@@ -118,9 +118,20 @@ if(!file_exists( HOME_ROOT . '/etc/config.ini' ))
 	);
 } else {
 	
+	$conf = new Zend_Config_Ini(
+		HOME_ROOT . '/etc/config.ini', 
+		APP_ENV, 
+		array(
+			'allowModifications' => true
+		)
+	);
+	
+	$conf->merge( new Zend_Config_Ini(APP_ROOT . '/etc/plugins.ini', APP_ENV));
+	$conf->setReadOnly();
+	
 	Zend_Registry::set(
 		'GoniumCore_Config', 
-		new Zend_Config_Ini(HOME_ROOT . '/etc/config.ini', APP_ENV)
+		$conf
 	);
 	
 	// Create application

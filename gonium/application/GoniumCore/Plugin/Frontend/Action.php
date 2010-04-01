@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin_Frontend
+ * @subpackage  Plugin_Frontend
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
@@ -30,13 +30,13 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * Configure paths to Controller Action Helpers
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin
+ * @subpackage  Plugin
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class GoniumCore_Init_Plugin_Frontend_Action extends Zend_Controller_Plugin_Abstract
+class GoniumCore_Plugin_Frontend_Action extends Zend_Controller_Plugin_Abstract
 {
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
@@ -48,7 +48,7 @@ class GoniumCore_Init_Plugin_Frontend_Action extends Zend_Controller_Plugin_Abst
         //////////////////// Configure Action Helper Paths ////////////////////
         // Add path and prefix of Controller Helpers of user Module
         Zend_Controller_Action_HelperBroker::addPath(
-            Core::getHomeDir() . DS . 'Module' . DS . $module . DS . 'helpers',
+            HOME_ROOT . DS . 'Module' . DS . $module . DS . 'helpers',
             'Mod_'.ucfirst($module).'_Helper_'
         );
 
@@ -56,9 +56,9 @@ class GoniumCore_Init_Plugin_Frontend_Action extends Zend_Controller_Plugin_Abst
 
         $loader = new Zend_Loader_PluginLoader(array(), 'model');
         $loader ->addPrefixPath('GoniumCore_Model_',
-                       Core::getRootDir() . '/Model/')
+                       APP_ROOT . '/Model/')
                 ->addPrefixPath('Mod_'.ucfirst($module).'_Model_',
-                       Core::getHomeDir() . '/Module/'. $module. '/models');
+                       HOME_ROOT . '/Module/'. $module. '/models');
         
         Gonium_Controller_Action_Helper_LoadModel::setLoader($loader);
         /*
@@ -68,7 +68,7 @@ class GoniumCore_Init_Plugin_Frontend_Action extends Zend_Controller_Plugin_Abst
         // Add path and prefix of Models of user Module
 
         Gonium_Controller_Action_Helper_LoadModel::addPath(
-            Core::getHomeDir() . DS . 'Module' . DS . $module . DS . 'models',
+            HOME_ROOT . DS . 'Module' . DS . $module . DS . 'models',
             'Mod_'.ucfirst($module).'_Model_'
         );
         */

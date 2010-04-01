@@ -166,12 +166,10 @@ class IndexController extends Zend_Controller_Action
      	$config->all->resources = array();
         
         $config->all->resources->frontController = array(
-        	'controllerDirectory' => APP_ROOT . '/GoniumCore/Module/Frontend/default',
         	'defaultControllerName' => 'index',
 			'defaultAction' => 'index',
 			'defaultModule' => 'default',
-			'baseUrl' => '/',
-			'plugins.view' => 'GoniumCore_Init_Plugin_View',
+			'baseUrl' => '/'
         );
         
         

@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?php echo $this->doctype() ?>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <?php /** Site Title */         echo $this->headTitle(); ?>
@@ -51,7 +52,6 @@
     </div>
 
     <div id="content" class="default">
-
         <?php echo $this->layout()->content; ?>
 
     </div><!--/default-->
@@ -62,9 +62,10 @@
     <div class="center">
         <?php echo $this->layout()->footerSidebar; ?>
 
-        <?php echo Gonium_Version::APP; ?>: 
+        <a href="http://code.google.com/p/gonium"><?php echo Gonium_Version::APP; ?></a>: 
         <?php echo Gonium_Version::VERSION; ?> | 
-        Zend Framework: <?php echo Zend_Version::VERSION; ?> | 
+        <a href="http://framework.zend.com/">Zend Framework</a>: 
+        <?php echo Zend_Version::VERSION; ?> | 
         Copyleft <?php echo date('Y') ?>.
         
         <br />

@@ -41,7 +41,7 @@ class Widget_DbInfo extends Gonium_Widget
     {
     	$this->_output = '';
 
-        $config = Zend_Registry::get('GoniumCore_config');
+        $config = Zend_Registry::get('GoniumCore_Config');
         $db = Zend_Registry::get('GoniumCore_db');
         $profiler = $db->getProfiler();
         

@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin
+ * @subpackage  Plugin
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
@@ -37,16 +37,17 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * Control display of widgets over the Layout
  *
  * @package     Bootstrap
- * @subpackage  Init_Plugin
+ * @subpackage  Plugin
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @todo        Load widgets from database and check ACL privileges.
  *              Currently display default widgets only
  */
-class GoniumCore_Init_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
+class GoniumCore_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
 	
 	public $_layer;
+	
 	/*
 	*
 	*/
@@ -69,25 +70,24 @@ class GoniumCore_Init_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
 		$layer->enableAutoDocking();
 		
 		// Widget View
-		$view = Zend_Registry::get ( 'GoniumCore_view' );
+		$view = Zend_Registry::get ( 'GoniumCore_View' );
 		$widget_view = clone $view;
 		$widget_view->setScriptPath (array(
-		    APP_ROOT . 'GoniumCore/view/',
-		    //APP_ROOT . 'GoniumCore/widgets/views/scripts/',
-		    APP_ROOT . 'GoniumCore/Widget/views/scripts/',
-		    Core::getHomeDir() . 'Widget/views/scripts/',
+		    APP_ROOT . '/view/',
+		    APP_ROOT . '/GoniumCore/Widget/views/scripts/',
+		    HOME_ROOT . '/Widget/views/scripts/',
 			'./'
 		));
-		
+
 		$dock_left = new Gonium_Widget_Dock ( 'header' );
 		$dock_left->setView ( $widget_view );
+
 		//$dock_left->setScript('vertical.dock.phtml');
-		
 
 		$dock_left = new Gonium_Widget_Dock ( 'leftSidebar' );
 		$dock_left->setView ( $widget_view );
 		$dock_left->setScript('vertical.dock.phtml');
-		
+	
 
 		$dock_right = new Gonium_Widget_Dock ( 'rightSidebar' );
 		$dock_right->setView ( $widget_view );
@@ -100,7 +100,7 @@ class GoniumCore_Init_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
 		if ($this->_layer->isEnabled ()) {
 			Zend_Loader::loadClass('Widget_Login');
 			Zend_Loader::loadClass('Widget_Validator');
-			Zend_Loader::loadClass('Widget_DbInfo');
+			//Zend_Loader::loadClass('Widget_DbInfo');
 			Zend_Loader::loadClass('Widget_Gonium');
 			
 			$dock_left = $this->_layer->getDock ( 'leftSidebar' );
@@ -110,8 +110,7 @@ class GoniumCore_Init_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
 			$dock_left->register ( new Widget_Login ( ), 'login' );
 			$dock_right->register ( new Widget_Gonium ( ), 'gonium' );
 			$dock_right->register( new Widget_Validator(), 'validator');
-
-			$dock_footer->register ( new Widget_dbInfo ( ), 'dbInfo' );
+			//$dock_footer->register ( new Widget_dbInfo ( ), 'dbInfo' );
 		}
 		//}
 	}
@@ -121,8 +120,9 @@ class GoniumCore_Init_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
 	 *
 	 * @param    Zend_Controller_Request_Abstract $request
 	 * @return void
+	 * @todo	Check multiple calls to this method.
 	 */
-	public function dispatchLoopShutdown() {
+	public function postDispatch(Zend_Controller_Request_Abstract $request) {
 		if ($this->_layer->isEnabled ())
 			$this->_layer->toResponse ();
 	}
