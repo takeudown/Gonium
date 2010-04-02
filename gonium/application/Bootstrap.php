@@ -68,7 +68,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 			$front = $this->frontController;
 		
 			$front->addModuleDirectory(HOME_ROOT.'/Module/');
-			$dirConfig = new Zend_Config_Ini( APP_ROOT . '/etc/directories.ini', 'frontend');
+			$dirConfig = new Zend_Config_Ini( APP_ROOT . '/etc/directories.ini', APP_ENV);
 			{
 			    foreach($dirConfig as $modules)
 			    {

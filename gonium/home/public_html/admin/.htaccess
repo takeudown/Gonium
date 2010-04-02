@@ -1,28 +1,34 @@
-## 
+###############################################
+## Gonium Defaul Rules for Apache web server ##
+###############################################
+##
+## If you are using an Apache web server, rename this file as .htaccess 
+## Also remember rename admin/htaccess.txt as admin/.htaccess too.   
+##
 ## $Id$
+##
 
-## Setting Environtment
-#SetEnv APP_ENVIRONMENT production
-SetEnv APP_ENVIRONMENT development
+## -- Begin Gonium Rules -- ##
 
+##########################
+## Setting Environtment ##
+##########################
+
+SetEnv APP_ENV admin
+
+###############################
+## Setting URL Rewrite rules ##
+###############################
 <IfModule rewrite_module>
   RewriteEngine on
-  #RewriteBase /gonium/admin
-  #RewriteBase /
-  
-  #RewriteCond %{HTTP_HOST}  !^gonium.home.gon.cl
-  #RewriteRule ^(.*)/admin(.*) /gonium/$ [PT]
-  
-  ###sickd
-  #RewriteCond %{HTTP_HOST} !^gonium.home.gon.cl
-  #RewriteRule (.*) /gonium/$ [PT]
-  
+  RewriteBase /admin/
   
   ## New Zend Framework proposed mod_rewriter rules for .htaccess  
   RewriteCond %{REQUEST_FILENAME} -s [OR]
   RewriteCond %{REQUEST_FILENAME} -l [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^.*$ - [NC,L]
-  #RewriteRule ^.*$ index.php [NC,L]
-  RewriteRule ^.*$ index.php [NC]
+  RewriteRule ^.*$ index.php [NC,L]
 </IfModule>
+
+## -- End Gonium Rules -- ##

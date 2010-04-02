@@ -1,9 +1,9 @@
 <?php
-$this->headLink()->appendStylesheet($this->baseUrl() . 'css/accordion.css');
+$this->headLink()->appendStylesheet($this->baseUrl('css/accordion.css'));
 
-$this->headScript()->appendFile($this->baseUrl() . 'js/jquery/jquery-1.2.6.js');  
-$this->headScript()->appendFile($this->baseUrl() . 'js/jquery/ui/ui.core.js'); 
-$this->headScript()->appendFile($this->baseUrl() . 'js/jquery/ui/ui.accordion.js');
+$this->headScript()->appendFile($this->baseUrl('js/jquery/jquery-1.2.6.js'));  
+$this->headScript()->appendFile($this->baseUrl('js/jquery/ui/ui.core.js')); 
+$this->headScript()->appendFile($this->baseUrl('js/jquery/ui/ui.accordion.js'));
 $key = 'accordion-'.md5(time());
 ?>
 <script type="text/javascript">

@@ -104,6 +104,8 @@ require_once 'Gonium/Version.php';
 
 Zend_Loader_Autoloader::getInstance()->registerNamespace('GoniumCore_');
 
+/** Config per home */
+
 if(!file_exists( HOME_ROOT . '/etc/config.ini' ))
 {
 	Zend_Registry::set(
@@ -126,7 +128,7 @@ if(!file_exists( HOME_ROOT . '/etc/config.ini' ))
 		)
 	);
 	
-	$conf->merge( new Zend_Config_Ini(APP_ROOT . '/etc/plugins.ini', APP_ENV));
+	$conf->merge( new Zend_Config_Ini(APP_ROOT . '/etc/resources.ini', APP_ENV));
 	$conf->setReadOnly();
 	
 	Zend_Registry::set(
