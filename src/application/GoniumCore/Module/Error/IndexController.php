@@ -54,7 +54,7 @@ class Error_IndexController extends Zend_Controller_Action
     
     public function errorAction()
     {
-        //$config = Zend_Registry::get('GoniumCore_config');
+        //$config = Zend_Registry::get('GoniumCore_Config');
         $errors = $this->_getParam('error_handler');
         $errorType = $errors->type;
         
@@ -201,7 +201,7 @@ class Error_IndexController extends Zend_Controller_Action
     // SET ERROR MESSAGE
     protected function _errorMessage($title, $message)
     {
-    	$config = Zend_Registry::get('GoniumCore_config');
+    	$config = Zend_Registry::get('GoniumCore_Config');
         $e = $this->_getParam('exception');
         
         $this->view->assign( 'errorMessage', $message );

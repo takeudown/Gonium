@@ -20,11 +20,11 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id$
+ * @version     $Id: Validator.php 45 2010-03-30 07:21:30Z gnzsquall $
  */
 
 
-/** @see Gonium_Widget */
+/** @see Gonium_Widget_Plus */
 require_once 'Gonium/Widget.php';
 
 /**
@@ -33,35 +33,12 @@ require_once 'Gonium/Widget.php';
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id$
+ * @version     $Id: Validator.php 45 2010-03-30 07:21:30Z gnzsquall $
  */
-class Widget_StoreManager extends Gonium_Widget
+class Widget_Validator extends Gonium_Widget
 {
     public function execute()
     {
-    	$output = '<ul>';
-    	
-        $urlOptions = array(
-            'module' => 'storemanager',
-            'controller' => 'costumer'
-        );
-
-        $output .= '<li><a href="'.$this->_view->url($urlOptions, null, true).'">Clientes</a></li>';
-
-        $urlOptions = array(
-            'module' => 'storemanager',
-            'controller' => 'product'
-        );
-
-        $output .= '<li><a href="'.$this->_view->url($urlOptions, null, true).'">Productos</a></li>';
-
-        $urlOptions = array(
-            'module' => 'storemanager',
-            'controller' => 'order'
-        );
-
-        $output .= '<li><a href="'.$this->_view->url($urlOptions, null, true).'">Pedidos</a><br/></li>';
-
-        $this->setContent($output);
+        $this->setContent( $this->_view->render('Validator.phtml') );
     }
 }

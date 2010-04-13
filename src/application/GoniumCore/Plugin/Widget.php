@@ -63,54 +63,61 @@ class GoniumCore_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
 		// If request by ajax, change the layout
 		//if( !$this->getRequest()->isXmlHttpRequest() )
 		//{
-		// Widget Layer
-		$layer = Gonium_Widget_Layer::getInstance();
-		$layer->setResponse ( $this->getResponse() );
-		$layer->enable();
-		$layer->enableAutoDocking();
-		
 		// Widget View
 		$view = Zend_Registry::get ( 'GoniumCore_View' );
-		$widget_view = clone $view;
-		$widget_view->setScriptPath (array(
+		$dockView = clone $view;
+		$dockView->setScriptPath (array(
 		    APP_ROOT . '/view/',
 		    APP_ROOT . '/GoniumCore/Widget/views/scripts/',
 		    HOME_ROOT . '/Widget/views/scripts/',
 			'./'
 		));
-
-		$dock_left = new Gonium_Widget_Dock ( 'header' );
-		$dock_left->setView ( $widget_view );
-
-		//$dock_left->setScript('vertical.dock.phtml');
-
-		$dock_left = new Gonium_Widget_Dock ( 'leftSidebar' );
-		$dock_left->setView ( $widget_view );
-		$dock_left->setScript('vertical.dock.phtml');
-	
-
-		$dock_right = new Gonium_Widget_Dock ( 'rightSidebar' );
-		$dock_right->setView ( $widget_view );
-		$dock_right->setScript ( 'vertical.dock.phtml' );
 		
-		$dock_footer = new Gonium_Widget_Dock ( 'footerSidebar' );
-		$dock_footer->setView ( $widget_view );
-		$dock_footer->setScript('footer.dock.phtml');
+		// Widget Layer
+		$conf = new Zend_Config_Ini(HOME_ROOT.'/etc/widget.ini', APP_ENV);
+		$layer = Gonium_Widget_Layer::getInstance();
+		$layer->setResponse ( $this->getResponse() );
+		$layer->enable(); // <- ??
+		$layer->enableAutoDocking();
+		
+		foreach($conf as $dockName => $dockContent)
+		{
+			if($dockContent->dockLayout != null && $dockContent->widgets != null)
+			{
+				$dockObject = new Gonium_Widget_Dock ( $dockName );
+				$dockObject->setView ( $dockView );
+				$dockObject->setScript($dockContent->dockLayout.'.dock.phtml');
+				$dockObject = $this->_layer->getDock ( $dockName );
+		
+				foreach($dockContent->widgets as $widgetName => $widgetInfo)
+				{
+					$widgetDir = ucfirst($widgetName);
+					$widgetClass = 'Widget_'.$widgetDir;					
+					
+					$widgetConf = $dockContent->widgets->{$widgetName};
+					
+					if ($this->_layer->isEnabled () && !is_string($widgetConf) && $widgetConf->class !== null) {
+						Zend_Loader::loadClass($widgetClass);
+						$widgetObject = new $widgetClass ( $widgetConf );
+						
+						$widgetView = clone $dockView;
+						$widgetView->addScriptPath (array(	
+							APP_ROOT . 'GoniumCore/view/',
+							APP_ROOT . '/Widget/' . $widgetDir . '/views/scripts/',
+							HOME_ROOT . '/Widget/' . $widgetDir . '/views/scripts/',
+							'./'
+						));
+						
+						$widgetView->registerHelper( new Gonium_View_Helper_GlobalUrl(), 'GlobalUrl');
 
-		if ($this->_layer->isEnabled ()) {
-			Zend_Loader::loadClass('Widget_Login');
-			Zend_Loader::loadClass('Widget_Validator');
-			//Zend_Loader::loadClass('Widget_DbInfo');
-			Zend_Loader::loadClass('Widget_Gonium');
-			
-			$dock_left = $this->_layer->getDock ( 'leftSidebar' );
-			$dock_right = $this->_layer->getDock ( 'rightSidebar' );
-			$dock_footer = $this->_layer->getDock ( 'footerSidebar' );
-			
-			$dock_left->register ( new Widget_Login ( ), 'login' );
-			$dock_right->register ( new Widget_Gonium ( ), 'gonium' );
-			$dock_right->register( new Widget_Validator(), 'validator');
-			//$dock_footer->register ( new Widget_dbInfo ( ), 'dbInfo' );
+						$widgetView->getHelper('GlobalUrl')->setBaseUrl($widgetConf->globalUrl);
+						$widgetObject->setView($widgetView);
+						
+						$dockObject->register($widgetObject, $widgetName, $widgetView);
+					}
+					
+				}
+			}
 		}
 		//}
 	}

@@ -15,7 +15,7 @@ body {
 }
 
 p {
-	font-size: 11px;
+	font-size: 10px;
 	color: #586885;
 	line-height: 120%;
 }
@@ -32,30 +32,6 @@ h2 {
 	text-align: left;
 	color: #486895;
 	margin: 7px;
-}
-
-h3 {
-	font-size: 18px;
-	text-align: left;
-	color: #666666;
-}
-
-h4 {
-	font-size: 15px;
-	text-align: left;
-	color: #666666;
-}
-
-h5 {
-	font-size: 13px;
-	text-align: left;
-	color: #666666;
-}
-
-h6 {
-	font-size: 12px;
-	text-align: left;
-	color: #666666;
 }
 
 /* Links */
@@ -233,6 +209,14 @@ input:focus {
 
 .default p {
 	font-size: 14pt;
+}
+
+.default h3 {
+	font-size: 2em;
+	line-height: 1;
+	margin-bottom: 1em;
+	text-align: center;
+	color: #666666;
 }
 
 .footer {

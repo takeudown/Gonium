@@ -44,7 +44,9 @@ class Gonium_Widget_Layer
    private static $_docks;
 
    // Constructor privado, para impedir crear nuevos objetos con "new"
-   private function __construct() { }
+   private function __construct() {
+   		self::$_docks = array();
+   }
 
    // Clone prohibido
    public function __clone()
@@ -54,7 +56,7 @@ class Gonium_Widget_Layer
 
    public static function getInstance()
    {
-      if (!isset(self::$instance))
+      if (!isset(self::$_instance))
       {
          $c = __CLASS__;
          self::$_instance = new $c;

@@ -158,7 +158,7 @@ class GoniumCore_Model_ACL_Resource extends Gonium_Db_Table_Abstract implements 
    * @param Array $resourceNames
    */
   public function getResources(Array $resourceNames = array(), $scope = '') {
-    $db = Zend_Registry::get ( 'GoniumCore_db' );
+    $db = Zend_Registry::get ( 'GoniumCore_Db' );
     $results = array ();
     
     $select = $db->select ()->//->distinct()
@@ -193,7 +193,7 @@ class GoniumCore_Model_ACL_Resource extends Gonium_Db_Table_Abstract implements 
    * Get Resources, including the resources of the father who inherit up root
    */
   public function getRelatedResources(Array $resourceIDs = array(), $scope = null) {
-    $db = Zend_Registry::get ( 'GoniumCore_db' );
+    $db = Zend_Registry::get ( 'GoniumCore_Db' );
     $results = array ();
     $resourcesFound = array ();
     //$resourcesSearch = array();

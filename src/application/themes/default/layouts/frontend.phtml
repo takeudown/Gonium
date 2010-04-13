@@ -6,17 +6,17 @@
 
 <?php /** Metadata */           echo $this->headMeta(); ?>
 
-<link rel="shorcut icon" href="<?php echo $this->baseUrl('images/favicon.ico'); ?>" />
+<link rel="shorcut icon" href="<?php echo $this->baseUrl('/images/favicon.ico'); ?>" />
 <?php /** Linkable content */   echo $this->headLink(); ?>
 
 <!-- Framework CSS --> 
-<link rel="stylesheet" href="<?php echo $this->baseUrl('css/blueprint/screen.css'); ?>" type="text/css" media="screen, projection" /> 
-<link rel="stylesheet" href="<?php echo $this->baseUrl('css/blueprint/print.css'); ?>" type="text/css" media="print" /> 
-<!--[if IE]><link rel="stylesheet" href="<?php echo $this->baseUrl('css/blueprint/ie.css'); ?>" type="text/css" media="screen, projection" /><![endif]-->
+<link rel="stylesheet" href="<?php echo $this->globalUrl('/css/blueprint/screen.css'); ?>" type="text/css" media="screen, projection" /> 
+<link rel="stylesheet" href="<?php echo $this->globalUrl('/css/blueprint/print.css'); ?>" type="text/css" media="print" /> 
+<!--[if IE]><link rel="stylesheet" href="<?php echo $this->globalUrl('css/blueprint/ie.css'); ?>" type="text/css" media="screen, projection" /><![endif]-->
 <!-- Default Theme  -->
-<link rel="stylesheet" href="<?php echo $this->baseUrl('css/common.css'); ?>" type="text/css" media="screen" />
-<link rel="stylesheet" href="<?php echo $this->baseUrl('themes/default/css/main.css'); ?>" type="text/css" media="screen" />
-<link rel="stylesheet" href="<?php echo $this->baseUrl('themes/default/css/print.css'); ?>" type="text/css" media="print" />
+<link rel="stylesheet" href="<?php echo $this->globalUrl('/css/common.css'); ?>" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo $this->themeUrl('/css/main.css'); ?>" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo $this->themeUrl('/css/print.css'); ?>" type="text/css" media="print" />
 <?php /** CSS Styles */         echo $this->headStyle(); ?>
 
 <?php /** Javascripts */        echo $this->headScript(); ?>
@@ -35,7 +35,7 @@
          <div class="innerbox">
 
 <div class="header">
-    <h1><a href="<?php echo $this->baseUrl(); ?>"><?php echo $this->page_title; ?></a></h1>
+    <h1><a href="<?php echo $this->baseUrl('/'); ?>"><?php echo $this->page_title; ?></a></h1>
     <h2><?php echo $this->page_slogan; ?></h2>
 </div><!--/header-->
 
@@ -62,15 +62,20 @@
     <div class="center">
         <?php echo $this->layout()->footerSidebar; ?>
 
-        <a href="http://code.google.com/p/gonium"><?php echo Gonium_Version::APP; ?></a>: 
-        <?php echo Gonium_Version::VERSION; ?> | 
-        <a href="http://framework.zend.com/">Zend Framework</a>: 
-        <?php echo Zend_Version::VERSION; ?> | 
-        Copyleft <?php echo date('Y') ?>.
+        <a href="http://code.google.com/p/gonium" target="_blank">
+        	<?php echo Gonium_Version::APP; ?></a>:
+        	 
+        	<?php echo Gonium_Version::VERSION; ?> | 
+        <a href="http://framework.zend.com/" target="_blank">
+        	Zend Framework</a>:
+        	 
+        	<?php echo Zend_Version::VERSION; ?> | 
+        	Copyleft <?php echo date('Y') ?>.
         
         <br />
         
-        <?php echo $this->translate('Theme designed by'); ?> <a href="http://gon.cl/"> Gonzalo D&iacute;az &lt;Gon&gt;</a>
+        <?php echo $this->translate('Theme designed by'); ?>
+        	<a href="http://gon.cl/" target="_blank"> Gonzalo D&iacute;az &lt;Gon&gt;</a>
     </div>
 </div>
 

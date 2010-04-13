@@ -20,7 +20,7 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id$
+ * @version     $Id: Login.php 47 2010-04-01 16:04:03Z gnzsquall $
  */
 
 /** @see Gonium_Widget */
@@ -32,7 +32,7 @@ require_once 'Gonium/Widget.php';
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id$
+ * @version     $Id: Login.php 47 2010-04-01 16:04:03Z gnzsquall $
  */
 class Widget_Login extends Gonium_Widget {
 

@@ -38,21 +38,28 @@ require_once 'Zend/View.php';
  */
 abstract class Gonium_Widget {
 
+	protected $_conf;
+	
 	protected $_output;
 
 	protected $_view;
 
 	protected $_viewScript = 'widget.phtml';
 
-	public function __construct() {
+	public function __construct(Zend_Config $conf = null) {
+		$this->_conf = $conf;
 		$this->clean ();
 	}
 
 	public function setView(Zend_View $view) {
-		$this->_view = $view;
+		if ($view !== null)
+			$this->_view = $view;
 	}
 
 	public function getView() {
+		if ($this->_view === null)
+			$this->_view = new Zend_View ( );
+			
 		return $this->_view;
 	}
 

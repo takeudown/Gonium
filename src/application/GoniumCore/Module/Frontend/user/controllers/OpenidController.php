@@ -52,7 +52,7 @@ class User_OpenidController extends Zend_Controller_Action {
 		// Get a reference to the Singleton instance of Zend_Auth
 		require_once 'Zend/Auth.php';
 		$auth = Zend_Auth::getInstance ();
-		$dbAdapter = Zend_Registry::get ( 'GoniumCore_db' );
+		$dbAdapter = Zend_Registry::get ( 'GoniumCore_Db' );
 		$userModel = $this->_helper->LoadModel ( 'User' );
 		
 		require_once 'Zend/Auth/Adapter/DbTable.php';

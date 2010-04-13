@@ -84,16 +84,17 @@ class Gonium_Widget_Dock {
 		/**
 		 *	@todo agregar estas
 		 */
+		/*
 		$widget->getView ()->addScriptPath (array(	
 				APP_ROOT . 'GoniumCore/view/',
 				HOME_ROOT . '/Widget/' . $this->widgetName ( $widget ) . '/views/scripts/',
 				'./'
 			));
-		
+		*/
 		// Clear previous Helper paths
 		$widget->getView ()->setHelperPath ( null );
 		
-		// Reset Rox Libraries View Helpers
+		// Reset Gonium Libraries View Helpers
 		$widget->getView ()->addHelperPath ( 'Gonium/View/Helper/', 'Gonium_View_Helper' );
 		
 		// Add View helpers path to module

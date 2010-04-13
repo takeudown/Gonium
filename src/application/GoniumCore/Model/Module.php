@@ -50,7 +50,7 @@ class GoniumCore_Model_Module extends GoniumCore_Model_ACL_Resource
     */
     public function getResources(Array $resource_ids = array() )
     {
-        $db = Zend_Registry::get('GoniumCore_db');
+        $db = Zend_Registry::get('GoniumCore_Db');
         $results = array();
         
         

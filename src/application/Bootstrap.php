@@ -62,7 +62,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initModules()
     {
-		if( $this->getEnvironment() != 'Installer' ) 
+    	$conf = Zend_Registry::get('GoniumCore_Config');
+
+		if( $conf->system !== null ) 
 		{
 			$this->bootstrap('frontController');
 			$front = $this->frontController;
@@ -72,7 +74,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 			{
 			    foreach($dirConfig as $modules)
 			    {
-				$front->addModuleDirectory( $modules );
+					$front->addModuleDirectory( $modules );
 			    }
 			}
 		}
@@ -81,6 +83,28 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initAuth()
     {
     	$auth = Zend_Auth::getInstance();
-        Zend_Registry::set('GoniumCore_Auth',  $auth);
+        Zend_Registry::set('GoniumCore_Auth', $auth);
+    }
+    
+    protected function _initDb()
+    {
+    	$conf = Zend_Registry::get('GoniumCore_Config');
+    	
+    	if( $conf->resources->db !== null ) 
+		{
+	    	$db = $this->getPluginResource('db');
+	    	if($db instanceOf Zend_Application_Resource_Db)
+	    	{
+
+	    		$db->getDbAdapter()->getProfiler()->setEnabled(
+	    			$conf->resources->db->profiler->enabled);
+	    	
+		    	Zend_Db_Table_Abstract::setDefaultAdapter($db->getDbAdapter());
+		    	Gonium_Db_Table_Abstract::setPrefix($conf->resources->db->prefix);
+		    	
+		    	
+		    	Zend_Registry::set('GoniumCore_Db', $db->getDbAdapter());
+	    	}
+		}
     }
 }

@@ -8,10 +8,13 @@
 <div class="success">
     <?php echo $this->messageSuccess; ?>
 
-    <?php if($this->homeLink): ?>
+    <?php if($this->homeLinkVisible): ?>
         <div>
-            <a href="<?php echo $this->url(array('action' => 'index')); ?>">
-                <?php echo $this->translate('Go to home'); ?>
+            <a href="<?php echo $this->homeLink; ?>">
+                <?php echo $this->translate('Go to home'); ?> 
+            </a> |
+            <a href="<?php echo $this->adminLink; ?>">
+                <?php echo $this->translate('Go to administrator panel'); ?>
             </a>
         </div>
     <?php endif; ?>

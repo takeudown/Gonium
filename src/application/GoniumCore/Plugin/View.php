@@ -52,7 +52,14 @@ class GoniumCore_Plugin_View extends Zend_Controller_Plugin_Abstract
 
         // GLOBAL VIEW VARIABLES
         $view->assign('page_title', stripslashes($config->page->title));
-        $view->assign('page_slogan', stripslashes($config->page->slogan));        
+        $view->assign('page_slogan', stripslashes($config->page->slogan));
+
+        // Reset Gonium Libraries View Helpers
+        $view->addHelperPath( 'Gonium/View/Helper/', 'Gonium_View_Helper');
+        
+        // @todo Create a mechanism to set theme url
+        $view->getHelper('GlobalUrl')->setBaseUrl($config->resources->layout->globalUrl);
+        $view->getHelper('ThemeUrl')->setBaseUrl($config->resources->layout->themeUrl);
     }
 
     public function preDispatch(Zend_Controller_Request_Abstract $request)
@@ -83,13 +90,15 @@ class GoniumCore_Plugin_View extends Zend_Controller_Plugin_Abstract
         $view->headTitle( stripslashes($config->page->title), 
             Zend_View_Helper_Placeholder_Container_Abstract::SET
         );
-    	
+        
+        //$view->getHelper('ModUrl')->setBaseUrl($config->resources->layout->layoutUrl);
+        
         $view->setScriptPath(
             array(
-                APP_ROOT  . '/views/',
+                APP_ROOT  . '/view/',
                 APP_ROOT  . '/GoniumCore/Module/'.$module.'/views/scripts/',
                 HOME_ROOT . '/Module/'.$module.'/views/scripts',
-                APP_ROOT  . 'themes/default/',
+                //	APP_ROOT  . '/themes/default/',
                 './',
             )
         );

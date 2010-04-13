@@ -35,8 +35,24 @@ class IndexController extends Zend_Controller_Action
 {
     public function indexAction()
     {
-        $this->view->bodyTitle = '<h1>Hello World!</h1>';
-        $this->view->bodyCopy = "<p>Lorem ipsum dolor sit amet, consectetuer
+    	$conf = Zend_Registry::get('GoniumCore_Config');
+    	$this->_helper->viewRenderer->setNoRender();    	
+    	
+    	$action = ($conf->system->defaultModule == 'default') ?
+    			'welcome' : $conf->system->defaultAction;
+    	
+    	$controller = ($conf->system->defaultModule == 'default') ?
+    			'index' : $conf->system->defaultController;
+    	
+    	$this->_helper->actionStack($action,
+                                    $controller,
+                                    $conf->system->defaultModule);
+    }
+    
+    public function welcomeAction()
+    {
+    	$this->view->bodyTitle = 'Hello World!';
+        $this->view->bodyCopy = '<p>Lorem ipsum dolor sit amet, consectetuer
             adipiscing elit. Pellentesque semper dui. Aliquam vestibulum nulla id
             enim. Curabitur ac tortor. Integer quis massa a magna consectetuer
             molestie. Sed sit amet risus. Suspendisse orci. Phasellus mauris dui,
@@ -55,6 +71,6 @@ class IndexController extends Zend_Controller_Action
             aliquet elit tellus id nisi. Class aptent taciti sociosqu ad litora
             torquent per conubia nostra, per inceptos hymenaeos. Nam mattis nisl.
             Curabitur sollicitudin vehicula massa. Integer felis leo, accumsan eget,
-            cursus ac, venenatis et, quam. Suspendisse eleifend nisl eu ligula.</p>";
+            cursus ac, venenatis et, quam. Suspendisse eleifend nisl eu ligula.</p>';
     }
 }

@@ -54,6 +54,16 @@ class Gonium_Form_Prepared_SiteInstaller extends Gonium_Form {
                 'label' => _('site_slogan'),
                 'required' => true,
                 'size' => 20
+            )),
+            'system_baseUrl' => array('text', array(
+                'label' => _('system_baseUrl'),
+                'required' => true,
+                'size' => 20
+            )),
+            'system_baseAdminUrl' => array('text', array(
+                'label' => _('system_baseAdminUrl'),
+                'required' => true,
+                'size' => 20
             ))
         ));
 
@@ -72,12 +82,17 @@ class Gonium_Form_Prepared_SiteInstaller extends Gonium_Form {
         $this->site_slogan->addFilter($stringTrim);
         $this->site_slogan->addFilter($htmlEntities);
 
-        $SiteKeys = array_keys($this->getElements());
 
         $this->addDisplayGroup(
-            $SiteKeys,
+            array('site_name', 'site_slogan'),
             'SiteInformation',
             array('Legend'=> _('Site Information'))
+        );
+        
+        $this->addDisplayGroup(
+            array('system_baseUrl', 'system_baseAdminUrl'),
+            'SystemInformation',
+            array('Legend'=> _('System Information'))
         );
 
         $DbConnectionKeys = array_keys($DbConnection->getElements());

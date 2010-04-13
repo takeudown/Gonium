@@ -20,7 +20,7 @@
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id$
+ * @version     $Id: DbInfo.php 47 2010-04-01 16:04:03Z gnzsquall $
  */
 
 /** @see Gonium_Widget */
@@ -32,17 +32,16 @@ require_once 'Gonium/Widget.php';
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id$
+ * @version     $Id: DbInfo.php 47 2010-04-01 16:04:03Z gnzsquall $
  */
 class Widget_DbInfo extends Gonium_Widget
 {
-
     public function execute()
     {
     	$this->_output = '';
 
         $config = Zend_Registry::get('GoniumCore_Config');
-        $db = Zend_Registry::get('GoniumCore_db');
+        $db = Zend_Registry::get('GoniumCore_Db');
         $profiler = $db->getProfiler();
         
         if($profiler->getEnabled())
@@ -65,8 +64,9 @@ class Widget_DbInfo extends Gonium_Widget
             $this->_view->assign('db_queryCount', $queryCount );
             $this->_view->assign('db_totalTime', round($totalTime, 5));
         
-            if( (bool) $config->show->dbInfo )
-            {
+            /*
+            if( (bool) $config->system->showDbInfo )
+            {*/
                 $this->_view->assign('db_QueriesPerSecond',
                    ($totalTime != 0) ? round($queryCount/$totalTime, 5) : false
                 );
@@ -77,13 +77,14 @@ class Widget_DbInfo extends Gonium_Widget
         
                 $this->_view->assign('db_longestQuery', $longestQuery);
                 $this->_view->assign('db_longestTime', round($longestTime, 5));
-        
+        	/*
             } else {
                 $this->_view->assign('db_QueriesPerSecond', false);
                 $this->_view->assign('db_AverageQueryLength', false);
                 $this->_view->assign('db_longestQuery', false);
                 $this->_view->assign('db_longestTime', false);
             }
+            */
 
             $this->setContent( $this->_view->render('DbInfo.phtml') );
         }

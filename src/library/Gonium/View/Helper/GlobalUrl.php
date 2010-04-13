@@ -7,7 +7,7 @@
  *
  * Gonium is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or any 
+ * the Free Software Foundation; either version 2 of the License, or any
  * later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -15,30 +15,36 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * @package     User
- * @subpackage  User_Widget
+ * @package     Gonium_Controller
+ * @subpackage  Gonium_Controller_Action_Helper
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
- * @version     $Id$
+ * @version     $Id: LoadModel.php 45 2010-03-30 07:21:30Z gnzsquall $
  */
-
-
-/** @see Gonium_Widget */
-require_once 'Gonium/Widget.php';
 
 /**
- * @package     User
- * @subpackage  User_Widget
+ * @package     Gonium_Controller
+ * @subpackage  Gonium_Controller_Action_Helper
  * @author      {@link http://blog.gon.cl/cat/zf Gonzalo Diaz Cruz}
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL v2
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
+ * @deprecated	Zend_Loader_PluginLoader has the same functionality
  */
-class Widget_Gonium  extends Gonium_Widget
+class Gonium_View_Helper_GlobalUrl extends Zend_View_Helper_BaseUrl
 {
-    public function execute()
+	/**
+     * Returns site's base url, or file with base url prepended
+     *
+     * $file is appended to the base url for simplicity
+     *
+     * @param  string|null $file
+     * @return string
+     */
+    public function globalUrl($file = null)
     {
-        $this->setContent( $this->_view->render('Gonium.phtml') );
+		return $this->baseUrl($file);
     }
+	
 }

@@ -48,7 +48,7 @@ class GoniumCore_Model_ACL_Role extends Gonium_Db_Table_Abstract
         /*
          * SELECT `r`.`id`, `i`.`parent_id`, `i`.* FROM `Gonium_acl_roles` AS `r` LEFT JOIN `Gonium_acl_inheritance` AS `i` ON r.id=i.child_id ORDER BY `child_id` ASC, `order` ASC
          */
-        $db = Zend_Registry::get('GoniumCore_db');
+        $db = Zend_Registry::get('GoniumCore_Db');
         /// Now create all roles
         $select = $db->select()
             ->from(     array( 'r' => 'Gonium_acl_roles' ), array( 'r.role_id', 'i.parent_role_id' ) )
@@ -76,7 +76,7 @@ class GoniumCore_Model_ACL_Role extends Gonium_Db_Table_Abstract
     */
     public static function getUserRoles( $userID )
     {
-        $db = Zend_Registry::get('GoniumCore_db');
+        $db = Zend_Registry::get('GoniumCore_Db');
         /// Now create all roles
         $select = $db->select()
             ->from(     array( 'r' => 'Gonium_acl_roles' ), array( 'r.role_id', 'i.parent_role_id' ) )
@@ -98,7 +98,7 @@ class GoniumCore_Model_ACL_Role extends Gonium_Db_Table_Abstract
     /*
     public static function getRolesFromAccess(Array $roleIDs = array(), Array $rolesIDs = array())
     {
-        $db = Zend_Registry::get('GoniumCore_db');
+        $db = Zend_Registry::get('GoniumCore_Db');
         $results = array();
         $rolesFound = array();
         $rolesearch = array();

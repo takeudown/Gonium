@@ -56,7 +56,7 @@ class GoniumCore_Plugin_Install_View extends Zend_Controller_Plugin_Abstract
             )
         );
 
-        // Reset Rox Libraries View Helpers
+        // Reset Gonium Libraries View Helpers
         $view->addHelperPath( 'Gonium/View/Helper/', 'Gonium_View_Helper');
 
         // Add View helpers path to module

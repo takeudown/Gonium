@@ -53,7 +53,7 @@ class User_AuthController extends Zend_Controller_Action {
         // Get a reference to the Singleton instance of Zend_Auth
         require_once 'Zend/Auth.php';
         $auth = Zend_Auth::getInstance();
-        $dbAdapter = Zend_Registry::get('GoniumCore_db');
+        $dbAdapter = Zend_Registry::get('GoniumCore_Db');
         $userModel = $this->_helper->LoadModel('User');
 
         require_once 'Zend/Auth/Adapter/DbTable.php';
@@ -73,7 +73,7 @@ class User_AuthController extends Zend_Controller_Action {
 
     public function loginAction()
     {
-        $config = Zend_Registry::get('GoniumCore_config');
+        $config = Zend_Registry::get('GoniumCore_Config');
         /*
         $user = new Gonium_User();
         $user->setId('1');
@@ -127,7 +127,7 @@ class User_AuthController extends Zend_Controller_Action {
 
             case Zend_Auth_Result::SUCCESS:
                 $auth = Zend_Auth::getInstance();
-                $config = Zend_Registry::get('GoniumCore_config');
+                $config = Zend_Registry::get('GoniumCore_Config');
                 $userModel = $this->_helper->LoadModel('User');
 
                 $id = $userModel->getID($resultAuth->getIdentity());
@@ -151,7 +151,7 @@ class User_AuthController extends Zend_Controller_Action {
                     $bUrl = $bUrl != '' ? $bUrl : '/';
                 
                     $cookieAuth = new Gonium_Auth_Storage_SecureCookie($hmacCookie, array(
-                            'cookieName' => 'RoxAuth',
+                            'cookieName' => 'GoniumAuth',
                             'cookieExpire' => (time() + 86400),
                             'cookiePath' => $bUrl
                         ));
@@ -185,11 +185,11 @@ class User_AuthController extends Zend_Controller_Action {
         echo $this->translate->_('userLogin_SignedOut');
 
         Zend_Auth::getInstance()->clearIdentity();
-        $config = Zend_Registry::get('GoniumCore_config');
+        $config = Zend_Registry::get('GoniumCore_Config');
         $hmacCookie = new Gonium_Crypt_HmacCookie($config->system->key, array(
                         'high_confidentiality' => true,
                         'enable_ssl' => true
                     ));
-        $hmacCookie->deleteCookie('RoxAuth', $this->getRequest()->getBaseUrl());
+        $hmacCookie->deleteCookie('GoniumAuth', $this->getRequest()->getBaseUrl());
     }
 }

@@ -72,7 +72,6 @@ if( !defined('HOME_ROOT') )
 set_include_path('.'
 	. PS . LIB_ROOT .DS
 	. PS . APP_ROOT .DS
-	//. PS . APP_ROOT .DS. 'Core' .DS
 	. PS . HOME_ROOT .DS
 	. PS . get_include_path()
     );
@@ -108,42 +107,31 @@ Zend_Loader_Autoloader::getInstance()->registerNamespace('GoniumCore_');
 
 if(!file_exists( HOME_ROOT . '/etc/config.ini' ))
 {
-	Zend_Registry::set(
-		'GoniumCore_Config', 
-		new Zend_Config_Ini(APP_ROOT . '/etc/installer.ini', APP_ENV)
-	);
-
-	// Create application
-	$application = new Zend_Application(
-	    'Installer', 
-	    Zend_Registry::get('GoniumCore_Config')
-	);
+	$conf = new Zend_Config_Ini(APP_ROOT . '/etc/installer.ini', APP_ENV);
 } else {
 	
 	$conf = new Zend_Config_Ini(
-		HOME_ROOT . '/etc/config.ini', 
+		APP_ROOT . '/etc/resources.ini', 
 		APP_ENV, 
 		array(
 			'allowModifications' => true
 		)
 	);
 	
-	$conf->merge( new Zend_Config_Ini(APP_ROOT . '/etc/resources.ini', APP_ENV));
+	$conf->merge( new Zend_Config_Ini(HOME_ROOT . '/etc/config.ini', APP_ENV));
 	$conf->setReadOnly();
-	
-	Zend_Registry::set(
-		'GoniumCore_Config', 
-		$conf
-	);
-	
-	// Create application
-	$application = new Zend_Application(
-	    APP_ENV, 
-	    Zend_Registry::get('GoniumCore_Config')
-	);
 }
+
+Zend_Registry::set('GoniumCore_Config', $conf);
+
+// Create application
+$application = new Zend_Application(
+    APP_ENV, 
+    Zend_Registry::get('GoniumCore_Config')
+);
 	    
 // Create bootstrap, and run
 $application->bootstrap();
 $application->run();
+unset($conf);
 unset($application);

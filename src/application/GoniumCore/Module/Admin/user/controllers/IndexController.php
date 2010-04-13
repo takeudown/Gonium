@@ -100,7 +100,7 @@ class User_IndexController extends Zend_Controller_Action
             'sortable' => false,
             'type' => 'action',
             'actions' => array('url' => urldecode($url),
-            'confirm' => 'Â¿Are you sure you want to delete $username ($uid)?',
+            'confirm' => _('Are you sure you want to delete $username ($uid)?'),
             'caption' => 'Delete',
             'image' => $this->view->baseUrl() . '../images/icons/delete_24x24.png')
         ));

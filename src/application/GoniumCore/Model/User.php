@@ -42,7 +42,7 @@ class GoniumCore_Model_User
     extends Gonium_Db_Table_Abstract
     implements Gonium_Model_User_Interface 
 {
-    public $_name = 'GoniumCore_users';
+    public $_name = 'core_users';
     public $_primary = 'uid';
     
     protected static $_identityColumn = 'username';

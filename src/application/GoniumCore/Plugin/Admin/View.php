@@ -47,6 +47,8 @@ class GoniumCore_Plugin_Admin_View extends Zend_Controller_Plugin_Abstract
     	$this->config = Zend_Registry::get('GoniumCore_Config');
         $this->view = Zend_Registry::get('GoniumCore_View');
         
-        $this->view->getHelper('BaseUrl')->setBaseUrl('/');        
+        $this->view->getHelper('BaseUrl')->setBaseUrl(
+        	$this->config->page->baseUrl
+        );        
     }
 }
