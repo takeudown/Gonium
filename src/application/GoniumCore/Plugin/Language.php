@@ -49,20 +49,41 @@ class GoniumCore_Plugin_Language extends Zend_Controller_Plugin_Abstract
         Zend_Loader::loadClass('Zend_Translate');
 		Zend_Loader::loadClass('Zend_Locale');
 
-		@$translate = new Zend_Translate(
-			'gettext',
-			APP_ROOT.'/language/',
-			new Zend_Locale('auto'),
-			array('scan' => Zend_Translate::LOCALE_DIRECTORY)
+		// Application Translations
+		$options = array(
+				'scan' => Zend_Translate::LOCALE_DIRECTORY,
+				//'disableNotices'=> true//,
+				'log' => new Zend_Log() // <- Zend_log without writer throws 
+										// exceptions when a error ocurred
 		);
 		
-		@$translate->addTranslation(
-			HOME_ROOT.'/language/',
-			'auto',
-			array(
-		  		'scan' => Zend_Translate::LOCALE_DIRECTORY
-			));
+		try {
+			$translate = new Zend_Translate(
+				'gettext',
+				APP_ROOT.'/language/',
+				new Zend_Locale('auto'),
+				$options);
+		} catch (Exception $e) {
+			$translate = new Zend_Translate(
+				'gettext',
+				APP_ROOT.'/language/',
+				new Zend_Locale('en_US'),
+				$options);
+		}
 		
+		// Home Translations
+		try {		
+			$translate->addTranslation(
+				HOME_ROOT.'/language/',
+				'auto',
+				$options);
+		} catch (Exception $e) {
+			$translate->addTranslation(
+				HOME_ROOT.'/language/',
+				'en_US',
+				$options);
+		}
+
 		Zend_Registry::set('Zend_Translate', $translate);
 		
         $view = Zend_Registry::get('GoniumCore_View');
