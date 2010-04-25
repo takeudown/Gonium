@@ -91,14 +91,17 @@ class GoniumCore_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
 		
 				foreach($dockContent->widgets as $widgetName => $widgetInfo)
 				{
-					$widgetDir = ucfirst($widgetName);
-					$widgetClass = 'Widget_'.$widgetDir;					
-					
-					$widgetConf = $dockContent->widgets->{$widgetName};
+					$widgetConf = $dockContent->widgets->{$widgetName};					
 					
 					if ($this->_layer->isEnabled () && !is_string($widgetConf) && $widgetConf->class !== null) {
+						
+						$widgetDir = ucfirst($widgetName);
+						$widgetClass = 'Widget_'.$widgetConf->class;
+					
 						Zend_Loader::loadClass($widgetClass);
 						$widgetObject = new $widgetClass ( $widgetConf );
+						
+						// need special view?
 						
 						$widgetView = clone $dockView;
 						$widgetView->addScriptPath (array(	
@@ -108,11 +111,14 @@ class GoniumCore_Plugin_Widget extends Zend_Controller_Plugin_Abstract {
 							'./'
 						));
 						
-						$widgetView->registerHelper( new Gonium_View_Helper_GlobalUrl(), 'GlobalUrl');
-
-						$widgetView->getHelper('GlobalUrl')->setBaseUrl($widgetConf->globalUrl);
-						$widgetObject->setView($widgetView);
-						
+						// need special global urls?
+						if($widgetConf->globalUrl)
+						{
+							$widgetView->registerHelper( new Gonium_View_Helper_GlobalUrl(), 'GlobalUrl');
+	
+							$widgetView->getHelper('GlobalUrl')->setBaseUrl($widgetConf->globalUrl);
+							$widgetObject->setView($widgetView);
+						}
 						$dockObject->register($widgetObject, $widgetName, $widgetView);
 					}
 					

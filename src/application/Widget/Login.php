@@ -39,13 +39,13 @@ class Widget_Login extends Gonium_Widget {
 	public function execute() {
 		$auth = Zend_Registry::get ( 'GoniumCore_Auth' );
 		$view = Zend_Registry::get ( 'GoniumCore_View' );
-		//$lang = Zend_Registry::get ( 'Zend_Translate' );
+		$lang = Zend_Registry::get ( 'Zend_Translate' );
 
 		if ( !$auth->hasIdentity() )
 		{
 			try {
 				Zend_Loader::loadClass ( 'Gonium_Form_Prepared_Login' );
-				$form = new Gonium_Form_Prepared_Login ( );
+				$form = new Gonium_Form_Prepared_Login ( $lang );
 				$form->setStyle('Div');
 				$form->setAttrib ( 'id', 'widget-user-auth' );
 				$form->setAttrib ( 'class', 'widget-auth-form' );

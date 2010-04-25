@@ -25,6 +25,8 @@
 
 /** Zend_Form */
 require_once 'Zend/Form.php';
+/** Zend_Translate */
+require_once 'Zend/Translate.php';
 
 /**
  * @package     Gonium_Form
@@ -35,6 +37,7 @@ require_once 'Zend/Form.php';
  * @version     $Id$
  */
 class Gonium_Form extends Zend_Form {
+
 	/**
 	 * Add a prefix in "id" attribute of all elements
 	 * New prefix will be prepended to current id attribute

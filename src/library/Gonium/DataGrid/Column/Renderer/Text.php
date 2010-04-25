@@ -22,6 +22,9 @@
  * @author      Andres Guzman F. <aguzman@bolsadeideas.cl>
  * @version     $Id$
  */
+
+require_once 'Gonium/DataGrid/Column/Renderer/Abstract.php';
+
 class Gonium_DataGrid_Column_Renderer_Text extends Gonium_DataGrid_Column_Renderer_Abstract
 {
     /**

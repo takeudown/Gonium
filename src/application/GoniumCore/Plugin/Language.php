@@ -43,50 +43,64 @@ class GoniumCore_Plugin_Language extends Zend_Controller_Plugin_Abstract
     * o de las cabeceras del navegador.
     * @todo Create a LoadTranslation action/view helper
     */
-    public function routeStartup(Zend_Controller_Request_Abstract $request)
-    {
-    	parent::routeStartup($request);
-        Zend_Loader::loadClass('Zend_Translate');
-		Zend_Loader::loadClass('Zend_Locale');
-
-		// Application Translations
-		$options = array(
+	
+	// Application Translations
+	private	$options;
+	
+	public function __construct()
+	{
+		$this->options = array(
 				'scan' => Zend_Translate::LOCALE_DIRECTORY,
 				//'disableNotices'=> true//,
 				'log' => new Zend_Log() // <- Zend_log without writer throws 
 										// exceptions when a error ocurred
 		);
+	}
+		
+    public function routeStartup(Zend_Controller_Request_Abstract $request)
+    {
+    	parent::routeStartup($request);
+        Zend_Loader::loadClass('Zend_Translate');
+		Zend_Loader::loadClass('Zend_Locale');
 		
 		try {
+			$locale = new Zend_Locale('auto');
 			$translate = new Zend_Translate(
 				'gettext',
 				APP_ROOT.'/language/',
-				new Zend_Locale('auto'),
-				$options);
+				$locale,
+				$this->options);
 		} catch (Exception $e) {
+			$locale = new Zend_Locale('en_US');
 			$translate = new Zend_Translate(
 				'gettext',
 				APP_ROOT.'/language/',
-				new Zend_Locale('en_US'),
-				$options);
+				$locale,
+				$this->options);
 		}
 		
-		// Home Translations
+		Zend_Registry::set('Zend_Translate', $translate);
+		Zend_Registry::set('Zend_Locale', $locale);
+    }
+    
+    public function predispatch(Zend_Controller_Request_Abstract $request)
+    {
+    	parent::predispatch($request);
+    	
+    	$translate = Zend_Registry::get('Zend_Translate');
+    	$locale = Zend_Registry::get('Zend_Locale');
+    	
+    	// Home Translations
 		try {		
 			$translate->addTranslation(
 				HOME_ROOT.'/language/',
-				'auto',
-				$options);
+				$locale,
+				$this->options);
 		} catch (Exception $e) {
 			$translate->addTranslation(
 				HOME_ROOT.'/language/',
-				'en_US',
-				$options);
+				new Zend_Locale('en_US'),
+				$this->options);
 		}
-
-		Zend_Registry::set('Zend_Translate', $translate);
-		
-        $view = Zend_Registry::get('GoniumCore_View');
-		//$view->headMeta()->appendHttpEquiv('Content-Language', 'es-CL');
     }
 }

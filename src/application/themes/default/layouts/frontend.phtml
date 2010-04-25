@@ -20,6 +20,12 @@
 <?php /** CSS Styles */         echo $this->headStyle(); ?>
 
 <?php /** Javascripts */        echo $this->headScript(); ?>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("a[@rel='external']").click(function() { window.open( $(this).attr('href') ); return false; });
+});
+</script>
 </head>
 
 <body>
@@ -62,11 +68,11 @@
     <div class="center">
         <?php echo $this->layout()->footerSidebar; ?>
 
-        <a href="http://code.google.com/p/gonium" target="_blank">
+        <a href="http://code.google.com/p/gonium" rel="external">
         	<?php echo Gonium_Version::APP; ?></a>:
         	 
         	<?php echo Gonium_Version::VERSION; ?> | 
-        <a href="http://framework.zend.com/" target="_blank">
+        <a href="http://framework.zend.com/" rel="external">
         	Zend Framework</a>:
         	 
         	<?php echo Zend_Version::VERSION; ?> | 
@@ -75,7 +81,7 @@
         <br />
         
         <?php echo $this->translate('Theme designed by'); ?>
-        	<a href="http://gon.cl/" target="_blank"> Gonzalo D&iacute;az &lt;Gon&gt;</a>
+        	<a href="http://gon.cl/" rel="external"> Gonzalo D&iacute;az &lt;Gon&gt;</a>
     </div>
 </div>
 
