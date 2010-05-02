@@ -32,7 +32,7 @@
  * @version     $Id$
  * @deprecated	Zend_Loader_PluginLoader has the same functionality
  */
-class Gonium_View_Helper_GlobalUrl extends Zend_View_Helper_BaseUrl
+class Gonium_View_Helper_AbsoluteUrl extends Zend_View_Helper_BaseUrl
 {
 	/**
      * Returns site's base url, or file with base url prepended
@@ -42,9 +42,9 @@ class Gonium_View_Helper_GlobalUrl extends Zend_View_Helper_BaseUrl
      * @param  string|null $file
      * @return string
      */
-    public function globalUrl($file = null)
+    public function absoluteUrl($file = null)
     {
-		return $this->baseUrl($file);
+		return $_SERVER['HTTP_HOST'].'/'. $this->baseUrl($file);
     }
 	
 }
