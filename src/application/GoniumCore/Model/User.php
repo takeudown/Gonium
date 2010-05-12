@@ -42,11 +42,11 @@ class GoniumCore_Model_User
     extends Gonium_Db_Table_Abstract
     implements Gonium_Model_User_Interface 
 {
-    public $_name = 'core_users';
-    public $_primary = 'uid';
+    public $_name = 'core_user';
+    public $_primary = 'user_id';
     
-    protected static $_identityColumn = 'username';
-    protected static $_credentialColumn = 'password';
+    protected static $_identityColumn = 'user_name';
+    protected static $_credentialColumn = 'user_password';
     
     public static function getIdentityColumn()
     {
@@ -65,15 +65,24 @@ class GoniumCore_Model_User
 
         $select = $table->select();
         $select
-            ->from($table->_name, 'uid')
-            ->where( $db->quoteInto('username = ?', $username ) );
+            ->from($table->_name, 'user_id')
+            ->where( $db->quoteInto('user_name = ?', $username ) );
 
         $result = $table->fetchRow( $select );
 
         if( is_null($result) )
             return null;
         else
-            return $result->uid;
+            return $result->user_id;
+    }
+    
+    public function getUser($user_id)
+    {
+    	$select = $this->select();
+		$select->where('user_id = ?', $user_id);
+		
+		// Single Row
+		return $this->fetchRow($select);
     }
     
     /**

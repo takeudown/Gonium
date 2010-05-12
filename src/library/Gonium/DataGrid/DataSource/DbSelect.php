@@ -51,7 +51,7 @@ class Gonium_DataGrid_DataSource_DbSelect implements Gonium_DataGrid_DataSource_
 
 	private static $_count = null;
 
-	public function __construct(Zend_Db_Select $select = null, Zend_Db_Adapter $conn = null)
+	public function __construct(Zend_Db_Select $select = null, Zend_Db_Adapter_Abstract $conn = null)
 	{
 		$this->setSelect($select);
 
@@ -103,7 +103,7 @@ class Gonium_DataGrid_DataSource_DbSelect implements Gonium_DataGrid_DataSource_
 		return $this->_conn;
 	}
 
-	public function setConnection($conn)
+	public function setConnection(Zend_Db_Adapter_Abstract $conn)
 	{
 		$this->_conn = $conn;
 		return $this;
@@ -148,11 +148,12 @@ class Gonium_DataGrid_DataSource_DbSelect implements Gonium_DataGrid_DataSource_
 	 */
 	public function count(){
 		if( null === self::$_count){
-
+			
 			$count = $this->getConnection()->fetchOne($this->_getSelectCountSql());
 
 			self::$_count = (int) $count;
 			return self::$_count;
+			
 		} else {
 			return self::$_count;
 		}

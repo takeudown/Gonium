@@ -68,6 +68,18 @@ class Gonium_DataGrid_Column
 	protected $_cssClass = null;
 
 	protected $_renderer;
+	
+	protected $_linkParams;
+	
+	public function setLinkParams(Array $params)
+	{
+		$this->_linkParams = $params;
+	}
+	
+	public function getLinkParams()
+	{
+		return $this->_linkParams;
+	}
 
 	public function __construct($type = null, $header = null, $width = null, $align = null)
 	{
@@ -379,9 +391,16 @@ class Gonium_DataGrid_Column
 	 * @access public
 	 * @return string
 	 */
-	public function getLink($dir, $sort)
+	public function getLink($dir, $sort, Array $options = null)
 	{
-		return Zend_Controller_Action_HelperBroker::getStaticHelper('url')->url(array( 'direction' => $dir, 'orderBy' => $sort ));
+		if($options === null)
+		{
+			$options = array( 'direction' => $dir, 'orderBy' => $sort );
+		} else {
+			$options = array_merge($options, array( 'direction' => $dir, 'orderBy' => $sort ));
+		}
+		
+		return Zend_Controller_Action_HelperBroker::getStaticHelper('url')->url($options);
 	}
 
 	public function getHtmlProperty()

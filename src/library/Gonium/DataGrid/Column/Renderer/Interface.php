@@ -24,7 +24,7 @@
  */
 interface Gonium_DataGrid_Column_Renderer_Interface
 {
-    public function setColumn($column);
+    public function setColumn(Gonium_DataGrid_Column $column);
     
     public function getColumn();
 

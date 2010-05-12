@@ -48,8 +48,6 @@ class Widget_GoniumFooter  extends Gonium_Widget
         <a href="http://framework.zend.com/" rel="external">
         	Zend Framework</a>:
         	 
-        	' . Zend_Version::VERSION . ' | 
-        	Copyleft '. date('Y') .'        	
-        ' );
+        	' . Zend_Version::VERSION );
     }
 }

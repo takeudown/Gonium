@@ -35,10 +35,32 @@ class User_IndexController extends Zend_Controller_Action
 {
     public function indexAction()
     {
-    	$userModel = $this->_helper->LoadModel('User');
-    	var_dump($userModel);
+    	$auth = Zend_Registry::get ( 'GoniumCore_Auth' );
     	
-    	$userModel = $this->_helper->LoadModel('User');
-      var_dump($userModel);
+    	if ( $auth->hasIdentity() )
+		{
+			return $this->_forward('profile');
+		}
+		else
+			return $this->_forward('login', 'auth');
+    }
+    
+    public function profileAction()
+    {
+    	$auth = Zend_Registry::get ( 'GoniumCore_Auth' );
+    	if ( !$auth->hasIdentity() )
+    		return $this->_forward('login', 'auth'); 
+    		
+		$userModel = $this->_helper->LoadModel('User');
+    	$this->view->userData = $userModel->getUser( $auth->getIdentity()->getId() );
+	    	
+    	Zend_Loader::loadclass('Gravatar_Gravatar');
+	
+		$this->view->pAvatar = new Gravatar_Gravatar();
+			
+		$this->view->pAvatar
+					->setEmail($this->view->userData->user_email)
+					->setSize(80)
+					->setRating(Gravatar_Gravatar::GRAVATAR_RATING_PG);
     }
 }

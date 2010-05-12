@@ -29,7 +29,7 @@ abstract class Gonium_DataGrid_Column_Renderer_Abstract implements Gonium_DataGr
 {
 	protected $_column;
 
-	public function setColumn($column)
+	public function setColumn(Gonium_DataGrid_Column $column)
 	{
 		$this->_column = $column;
 		return $this;
@@ -58,6 +58,8 @@ abstract class Gonium_DataGrid_Column_Renderer_Abstract implements Gonium_DataGr
 
 	public function renderHeader()
 	{
+		$params = array();
+		
 		$out = '';
 		if ( (false !== $this->getColumn()->getGrid()->getSortable()) && (false !== $this->getColumn()->getSortable()) ) {
 			$className = 'not-sort';
@@ -76,7 +78,7 @@ abstract class Gonium_DataGrid_Column_Renderer_Abstract implements Gonium_DataGr
 				$className = 'sort-arrow-' . $dir;
 			}
 
-			$out = '<a href="'.$this->getColumn()->getLink($dir, $this->getColumn()->getIndex()).'" name="'.$this->getColumn()->getId().'" class="' . $className . '"><span class="sort-title">'.$this->getColumn()->getHeader().$icon.'</span></a>';
+			$out = '<a href="'.$this->getColumn()->getLink($dir, $this->getColumn()->getIndex(), $params).'" name="'.$this->getColumn()->getId().'" class="' . $className . '"><span class="sort-title">'.$this->getColumn()->getHeader().$icon.'</span></a>';
 		}
 		else {
 			$out = $this->getColumn()->getHeader();
