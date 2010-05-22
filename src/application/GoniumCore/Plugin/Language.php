@@ -85,22 +85,37 @@ class GoniumCore_Plugin_Language extends Zend_Controller_Plugin_Abstract
     
     public function predispatch(Zend_Controller_Request_Abstract $request)
     {
-    	parent::predispatch($request);
-    	
     	$translate = Zend_Registry::get('Zend_Translate');
     	$locale = Zend_Registry::get('Zend_Locale');
+    	$options = array_merge($this->options, array(
+    		'scan' => Zend_Translate::LOCALE_FILENAME,
+    	));
     	
-    	// Home Translations
-		try {		
+    	$module = strtolower($request->getModuleName());
+    	$modulePath = Zend_Controller_Front::getInstance()->getModuleDirectory();
+    	 
+    	// Home Module Translations
+		try {
 			$translate->addTranslation(
-				HOME_ROOT.'/language/',
+				$modulePath.'/../../language/'.$locale.'/LC_MESSAGES/mod_'.$module.'.mo',
 				$locale,
 				$this->options);
 		} catch (Exception $e) {
+			
+		}
+		
+		$conf = Zend_Registry::get('GoniumCore_Config');
+		$theme = $conf->resources->layout->themeName;
+		$themePath = $conf->resources->layout->layoutPath;
+		$themeLang = $themePath.'/../../../language/'.$locale.'/LC_MESSAGES/theme_'.$theme.'.mo';
+	    // Theme Translations
+		try {
 			$translate->addTranslation(
-				HOME_ROOT.'/language/',
-				new Zend_Locale('en_US'),
+				$themeLang,
+				$locale,
 				$this->options);
+		} catch (Exception $e) {
+			
 		}
     }
 }
