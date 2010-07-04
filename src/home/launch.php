@@ -26,7 +26,10 @@ define('HOME_ROOT', realpath(dirname(__FILE__)));
 /** Define public files base directory */
 define('PUBLIC_ROOT', realpath(dirname(__FILE__).'/public_html/'));
 /** Define application base directory */
-define('APP_ROOT', realpath(dirname(__FILE__).'/../application/'));
+defined('APP_ROOT')
+    || define('APP_ROOT', (getenv('GONIUM_APP_ROOT') ? 
+	getenv('GONIUM_APP_ROOT') : 
+	realpath(dirname(__FILE__).'/../application/')));
 
 /** Define application environment */
 defined('APP_ENV')

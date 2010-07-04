@@ -19,6 +19,19 @@ SetEnv APP_ENVIRONMENT production
 ## Use the following to set your site as "development" environment.
 #SetEnv APP_ENVIRONMENT development
 
+##############################
+## Setting Application Path ##
+##############################
+##
+## Use it to set the path to the Gonium application 
+## directory (trunk/application) without modifying the 
+## code of launch.php
+##
+
+#<IfModule mod_env.c>
+#        SetEnv GONIUM_APP_ROOT "/usr/share/gonium/application"
+#</IfModule>
+
 ###############################
 ## Setting URL Rewrite rules ##
 ###############################
