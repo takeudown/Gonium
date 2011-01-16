@@ -1,0 +1,23 @@
+English:
+
+== Features
+* PHP5 based (object-oriented programming)
+* Built with the MVC design pattern
+* Modular application concept
+* W3C standards compliant
+See Features
+
+== Dependencies
+* A web server with PHP5 + Database Engine. Currently Mysql5 only supported.
+* Url Rewrite Engine enabled in the Web Server, as mod_rewrite in Apache.
+* Zend Framework installed in the PHP include_path.
+See Requirements
+
+== Current status
+* Extreme early, no installer, no admin backend, etc..., but with plenty of enthusiasm
+
+== Roadmap
+* Complete ACL implementation
+* Create a backend for Administration Panel <= OK! (see full Roadmap details)
+* Create an installation wizard <= OK! (see full Roadmap details)
+See full Roadmap.
