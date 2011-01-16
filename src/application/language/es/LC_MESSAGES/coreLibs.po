@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gonium $Revision: 137 $\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-03 23:17-0300\n"
-"PO-Revision-Date: 2010-04-03 23:23-0300\n"
-"Last-Translator: Gonzalo Diaz Cruz <me@gon.cl>\n"
+"POT-Creation-Date: 2011-01-16 03:23-0400\n"
+"PO-Revision-Date: 2011-01-16 03:23-0400\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,6 +16,102 @@ msgstr ""
 "X-Poedit-KeywordsList: translate\n"
 "VERSION: $Id$\n"
 "X-Poedit-SearchPath-0: ../../../../library\n"
+
+#: ../../../../library/Gonium/DataGrid/Pager/Abstract.php:350
+msgid "Next"
+msgstr "Siguiente"
+
+#: ../../../../library/Gonium/DataGrid/Pager/Abstract.php:351
+msgid "Previous"
+msgstr "Anterior"
+
+#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:45
+msgid "dbconnection_adapter"
+msgstr "Adaptador de base de datos"
+
+#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:50
+msgid "dbconnection_dbhost"
+msgstr "Dirección IP o Dominio"
+
+#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:56
+msgid "dbconnection_dbport"
+msgstr "Puerto"
+
+#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:62
+msgid "dbconnection_dbname"
+msgstr "Nombre de la base de datos"
+
+#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:68
+msgid "dbconnection_dbprefix"
+msgstr "Prefijo del nombre de las tablas"
+
+#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:75
+msgid "dbconnection_user"
+msgstr "Nombre de usuario"
+
+#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:80
+msgid "dbconnection_password"
+msgstr "Contraseña"
+
+#: ../../../../library/Gonium/Form/Prepared/Login.php:46
+msgid "loginForm_Username"
+msgstr "Nombre de Usuario"
+
+#: ../../../../library/Gonium/Form/Prepared/Login.php:52
+msgid "loginForm_Password"
+msgstr "Contraseña"
+
+#: ../../../../library/Gonium/Form/Prepared/Login.php:57
+#: ../../../../library/Gonium/Form/Prepared/OpenId.php:54
+msgid "loginForm_Remember"
+msgstr "Recordar sesión"
+
+#: ../../../../library/Gonium/Form/Prepared/Login.php:61
+#: ../../../../library/Gonium/Form/Prepared/OpenId.php:58
+msgid "loginForm_Login"
+msgstr "Entrar"
+
+#: ../../../../library/Gonium/Form/Prepared/Logout.php:45
+msgid "loginForm_Logout"
+msgstr ""
+"Cerrar\n"
+"Sesión"
+
+#: ../../../../library/Gonium/Form/Prepared/OpenId.php:46
+msgid "loginForm_OpenId_Url"
+msgstr "Dirección OpenID"
+
+#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:49
+msgid "site_name"
+msgstr "Nombre del Sitio"
+
+#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:54
+msgid "site_slogan"
+msgstr "Frase distintiva"
+
+#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:59
+msgid "system_baseUrl"
+msgstr "Dirección Base del sitio"
+
+#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:64
+msgid "system_baseAdminUrl"
+msgstr "Dirección Base del panel de administrador"
+
+#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:89
+msgid "Site Information"
+msgstr "Información del sitio"
+
+#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:95
+msgid "System Information"
+msgstr "Información del sistema"
+
+#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:103
+msgid "Database Connection"
+msgstr "Conexión con la base de datos"
+
+#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:108
+msgid "Try Install"
+msgstr "Intentar instalación"
 
 #: ../../../../library/Gonium/Translate/Date.php:72
 #: ../../../../library/Gonium/Translate/Date.php:90
@@ -272,107 +368,11 @@ msgstr "otoño"
 msgid "date_session_winter"
 msgstr "invierno"
 
-#: ../../../../library/Gonium/Form/Prepared/OpenId.php:46
-msgid "loginForm_OpenId_Url"
-msgstr "Dirección OpenID"
-
-#: ../../../../library/Gonium/Form/Prepared/OpenId.php:54
-#: ../../../../library/Gonium/Form/Prepared/Login.php:57
-msgid "loginForm_Remember"
-msgstr "Recordar sesión"
-
-#: ../../../../library/Gonium/Form/Prepared/OpenId.php:58
-#: ../../../../library/Gonium/Form/Prepared/Login.php:61
-msgid "loginForm_Login"
-msgstr "Entrar"
-
-#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:45
-msgid "dbconnection_adapter"
-msgstr "Adaptador de base de datos"
-
-#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:50
-msgid "dbconnection_dbhost"
-msgstr "Dirección IP o Dominio"
-
-#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:56
-msgid "dbconnection_dbport"
-msgstr "Puerto"
-
-#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:62
-msgid "dbconnection_dbname"
-msgstr "Nombre de la base de datos"
-
-#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:68
-msgid "dbconnection_dbprefix"
-msgstr "Prefijo del nombre de las tablas"
-
-#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:75
-msgid "dbconnection_user"
-msgstr "Nombre de usuario"
-
-#: ../../../../library/Gonium/Form/Prepared/DbConnection.php:80
-msgid "dbconnection_password"
-msgstr "Contraseña"
-
-#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:49
-msgid "site_name"
-msgstr "Nombre del Sitio"
-
-#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:54
-msgid "site_slogan"
-msgstr "Frase distintiva"
-
-#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:59
-msgid "system_baseUrl"
-msgstr "Dirección Base del sitio"
-
-#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:64
-msgid "system_baseAdminUrl"
-msgstr "Dirección Base del panel de administrador"
-
-#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:89
-msgid "Site Information"
-msgstr "Información del sitio"
-
-#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:95
-msgid "System Information"
-msgstr "Información del sistema"
-
-#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:103
-msgid "Database Connection"
-msgstr "Conexión con la base de datos"
-
-#: ../../../../library/Gonium/Form/Prepared/SiteInstaller.php:108
-msgid "Try Install"
-msgstr "Intentar instalación"
-
-#: ../../../../library/Gonium/Form/Prepared/Login.php:46
-msgid "loginForm_Username"
-msgstr "Nombre de Usuario"
-
-#: ../../../../library/Gonium/Form/Prepared/Login.php:52
-msgid "loginForm_Password"
-msgstr "Contraseña"
-
-#: ../../../../library/Gonium/Form/Prepared/Logout.php:45
-msgid "loginForm_Logout"
-msgstr ""
-"Cerrar\n"
-"Sesión"
-
-#: ../../../../library/Gonium/Validate/Uri.php:50
-msgid "badUri"
-msgstr "Dirección URI incorrecta"
-
 #: ../../../../library/Gonium/Validate/PasswordConfirmation.php:46
 msgid "notMatch"
 msgstr "Los datos ingresados no coinciden"
 
-#: ../../../../library/Gonium/DataGrid/Pager/Abstract.php:350
-msgid "Next"
-msgstr "Siguiente"
-
-#: ../../../../library/Gonium/DataGrid/Pager/Abstract.php:351
-msgid "Previous"
-msgstr "Anterior"
+#: ../../../../library/Gonium/Validate/Uri.php:50
+msgid "badUri"
+msgstr "Dirección URI incorrecta"
 
