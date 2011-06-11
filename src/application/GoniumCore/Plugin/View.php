@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -38,9 +38,10 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  */
 class GoniumCore_Plugin_View extends Zend_Controller_Plugin_Abstract
 {
-    public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
+    public function dispatchLoopStartup (
+    Zend_Controller_Request_Abstract $request)
     {
-    	parent::dispatchLoopStartup($request);
+        parent::dispatchLoopStartup($request);
         $config = Zend_Registry::get('GoniumCore_Config');
         $view = Zend_Registry::get('GoniumCore_View');
         
@@ -48,59 +49,60 @@ class GoniumCore_Plugin_View extends Zend_Controller_Plugin_Abstract
         $view->doctype('XHTML1_STRICT');
         $view->setEscape('htmlentities');
         
-        $view->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8');
-
+        $view->headMeta()->appendHttpEquiv('Content-Type', 
+        'text/html; charset=UTF-8');
+        
         // GLOBAL VIEW VARIABLES
         $view->assign('page_title', stripslashes($config->page->title));
         $view->assign('page_slogan', stripslashes($config->page->slogan));
-
+        
         // Reset Gonium Libraries View Helpers
-        $view->addHelperPath( 'Gonium/View/Helper/', 'Gonium_View_Helper');
+        $view->addHelperPath('Gonium/View/Helper/', 
+        'Gonium_View_Helper');
         
         // @todo Create a mechanism to set theme url
-        $view->getHelper('GlobalUrl')->setBaseUrl($config->resources->layout->globalUrl);
-        $view->getHelper('ThemeUrl')->setBaseUrl($config->resources->layout->themeUrl);
+        $view->getHelper('GlobalUrl')->setBaseUrl(
+        $config->resources->layout->globalUrl);
+        $view->getHelper('ThemeUrl')->setBaseUrl(
+        $config->resources->layout->themeUrl);
     }
-
-    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    
+    public function preDispatch (Zend_Controller_Request_Abstract $request)
     {
-    	$module = $this->getRequest()->getModuleName();
-    	$config = Zend_Registry::get('GoniumCore_Config');
-    	$view = Zend_Registry::get('GoniumCore_View');
-    	
-    	$view->currentModuleName = $request->getModuleName();
+        $module = $this->getRequest()->getModuleName();
+        $config = Zend_Registry::get('GoniumCore_Config');
+        $view = Zend_Registry::get('GoniumCore_View');
+        
+        $view->currentModuleName = $request->getModuleName();
         $view->currentControllerName = $request->getControllerName();
         $view->currentActionName = $request->getActionName();
-    	
-    	
-    	// Clear previous Helper paths
+        
+        // Clear previous Helper paths
         $view->setHelperPath(null);
-		
+        
         // Reset Gonium Libraries View Helpers
-        $view->addHelperPath( 'Gonium/View/Helper/', 'Gonium_View_Helper');
+        $view->addHelperPath('Gonium/View/Helper/', 
+        'Gonium_View_Helper');
         
         // Add View helpers path to module
         $view->addHelperPath(
-            HOME_ROOT . DS . 'Module' . DS . $module . '/views/helpers',
-            ucfirst($module) . '_View_Helper'
-        );
+        HOME_ROOT . DS . 'Module' . DS . $module . '/views/helpers', 
+        ucfirst($module) . '_View_Helper');
         
         // (Re)Configure new Title
         $view->headTitle()->setSeparator(' | ');
-        $view->headTitle( stripslashes($config->page->title), 
-            Zend_View_Helper_Placeholder_Container_Abstract::SET
-        );
+        $view->headTitle(stripslashes($config->page->title), 
+        Zend_View_Helper_Placeholder_Container_Abstract::SET);
         
         //$view->getHelper('ModUrl')->setBaseUrl($config->resources->layout->layoutUrl);
         
+
         $view->setScriptPath(
-            array(
-                APP_ROOT  . '/view/',
-                APP_ROOT  . '/GoniumCore/Module/'.$module.'/views/scripts/',
-                HOME_ROOT . '/Module/'.$module.'/views/scripts',
+        array(
+            APP_ROOT . '/view/', 
+                APP_ROOT . '/GoniumCore/Module/' . $module . '/views/scripts/', 
+                HOME_ROOT . '/Module/' . $module . '/views/scripts', 
                 //	APP_ROOT  . '/themes/default/',
-                './',
-            )
-        );
+                './'));
     }
 }

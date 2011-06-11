@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -38,33 +38,31 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  */
 class GoniumCore_Plugin_Install_View extends Zend_Controller_Plugin_Abstract
 {
-    public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
+    public function dispatchLoopStartup (
+    Zend_Controller_Request_Abstract $request)
     {
-		Zend_Loader::loadClass('Gonium_Exception');
-    	Gonium_Exception::null($request);
-
-    	$view = Zend_Registry::get('GoniumCore_View');
-
+        Zend_Loader::loadClass('Gonium_Exception');
+        Gonium_Exception::null($request);
+        
+        $view = Zend_Registry::get('GoniumCore_View');
+        
         $view->setEncoding('UTF-8');
         $view->doctype('XHTML1_STRICT');
-        $view->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8');
-
+        $view->headMeta()->appendHttpEquiv('Content-Type', 
+        'text/html; charset=UTF-8');
+        
         $view->setScriptPath(
-            array(
-                APP_ROOT . 'GoniumCore/Module/Install/views/scripts',
-                './',
-            )
-        );
-
+        array(APP_ROOT . 'GoniumCore/Module/Install/views/scripts', './'));
+        
         // Reset Gonium Libraries View Helpers
-        $view->addHelperPath( 'Gonium/View/Helper/', 'Gonium_View_Helper');
-
+        $view->addHelperPath('Gonium/View/Helper/', 
+        'Gonium_View_Helper');
+        
         // Add View helpers path to module
         $view->addHelperPath(
-            APP_ROOT . 'GoniumCore/Module/Install/views/helpers',
-            'Install_View_Helper'
-        );
-
+        APP_ROOT . 'GoniumCore/Module/Install/views/helpers', 
+        'Install_View_Helper');
+        
         $helper = new Zend_Controller_Action_Helper_ViewRenderer();
         $helper->setViewScriptPathSpec(':action.:suffix');
         $helper->setViewSuffix('phtml');

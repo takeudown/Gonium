@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -29,11 +29,11 @@ require_once 'Gonium/ACL.php';
 require_once 'Gonium/User.php';
 
 /** GoniumCore_Model_ACL_Roles */
-require_once 'GoniumCore/Model/ACL/Role.php';        // Who have the access
+require_once 'GoniumCore/Model/ACL/Role.php'; // Who have the access
 /** GoniumCore_Model_ACL_Access */
-require_once 'GoniumCore/Model/ACL/Access.php';        // Rules of access
+require_once 'GoniumCore/Model/ACL/Access.php'; // Rules of access
 /** GoniumCore_Model_ACL_Resources */
-require_once 'GoniumCore/Model/ACL/Resource.php';        // Resources to access
+require_once 'GoniumCore/Model/ACL/Resource.php'; // Resources to access
 /** GoniumCore_Model_User */
 require_once 'GoniumCore/Model/User.php';
 
@@ -53,77 +53,80 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  */
 class GoniumCore_Plugin_User extends Zend_Controller_Plugin_Abstract
 {
-    function routeStartup(Zend_Controller_Request_Abstract $request)
+    function routeStartup (Zend_Controller_Request_Abstract $request)
     {
-    	parent::routeStartup($request);
-    	Zend_Loader::loadClass('Zend_Auth');
+        parent::routeStartup($request);
+        Zend_Loader::loadClass('Zend_Auth');
         Zend_Loader::loadClass('Zend_Session_Namespace');
         Zend_Loader::loadClass('Gonium_Controller_Action_Helper_LoadModel');
         $config = Zend_Registry::get('GoniumCore_Config');
-
+        
         // Session data of user
         $userNamespace = new Zend_Session_Namespace('user');
-
+        
         // Si la sesion no existe o fue destruida (logout),
         // generar un id de sesion nuevo
-        if (!isset($userNamespace->initialized)) {
+        if (! isset($userNamespace->initialized))
+        {
             Zend_Session::regenerateId();
             $userNamespace->initialized = true;
         }
-
+        
         // Check cookie for login
         Zend_Loader::loadClass('Gonium_Crypt_HmacCookie');
         Zend_Loader::loadClass('Gonium_Auth_Storage_SecureCookie');
-
-        $hmacCookie = new Gonium_Crypt_HmacCookie($config->system->key, array(
-            'high_confidentiality' => true,
-            'enable_ssl' => true
-        ));
-
+        
+        $hmacCookie = new Gonium_Crypt_HmacCookie($config->system->key, 
+        array('high_confidentiality' => true, 'enable_ssl' => true));
+        
         $bUrl = $this->getRequest()->getBaseUrl();
         $bUrl = $bUrl != '' ? $bUrl : '/';
-
-        $cookieAuth = new Gonium_Auth_Storage_SecureCookie($hmacCookie, array(
-                'cookieName' => 'GoniumAuth',
-                'cookieExpire' => (time() + 86400),
-                'cookiePath' => $bUrl
-            ));
-
+        
+        $cookieAuth = new Gonium_Auth_Storage_SecureCookie($hmacCookie, 
+        array(
+            'cookieName' => 'GoniumAuth', 
+                'cookieExpire' => (time() + 86400), 
+                'cookiePath' => $bUrl));
+        
         Zend_Loader::loadClass('Gonium_Auth_Storage_UserSession');
         // Save a reference to the Singleton instance of Zend_Auth
-		$auth = Zend_Auth::getInstance();
+        $auth = Zend_Auth::getInstance();
         $auth->setStorage($cookieAuth);
-
-        if(!$auth->hasIdentity())
+        
+        if (! $auth->hasIdentity())
         {
             Zend_Loader::loadClass('Gonium_Auth_Storage_UserSession');
-            $auth->setStorage(new Gonium_Auth_Storage_UserSession('user', 'data') );
-
-            //var_dump($auth->getIdentity());
+            $auth->setStorage(
+            new Gonium_Auth_Storage_UserSession('user', 'data'));
+        
+     //var_dump($auth->getIdentity());
         }
-
+        
         // ACL
         $acl = new Gonium_ACL();
         Zend_Registry::set('GoniumCore_Acl', $acl);
-
+        
         ////////////// TESTING AREA:
         // @todo change everything:
+        
 
         $user = $auth->getIdentity();
-        if( !($user instanceof Gonium_User) )
+        if (! ($user instanceof Gonium_User))
         {
-        	$auth->clearIdentity();
+            $auth->clearIdentity();
         }
-
-        $user = new Gonium_User();
-
-        //var_dump($_SESSION);
-
-        //$userTable = Gonium_Controller_Action_Helper_LoadModel::getModel('User');
-
-        //$roles = Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Roles');
-        //var_dump($roles->getRoles());
-
         
+        $user = new Gonium_User();
+    
+     //var_dump($_SESSION);
+    
+
+    //$userTable = Gonium_Controller_Action_Helper_LoadModel::getModel('User');
+    
+
+    //$roles = Gonium_Controller_Action_Helper_LoadModel::getModel('ACL_Roles');
+    //var_dump($roles->getRoles());
+    
+
     }
 }

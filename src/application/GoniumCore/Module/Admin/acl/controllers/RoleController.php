@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -33,77 +34,80 @@
  */
 class Acl_RoleController extends Zend_Controller_Action
 {
-    public function indexAction()
+    public function indexAction ()
     {
         $this->listAction();
     }
     
-    public function listAction()
+    public function listAction ()
     {
-    	$lang = Zend_Registry::get('Zend_Translate');
+        $lang = Zend_Registry::get('Zend_Translate');
         $this->view->bodyTitle = '<h1>Admin Permission</h1>';
-
+        
         // Title of Module
         $this->view->headTitle(
-            $lang->translate('Permission\'s Management'),
-            Zend_View_Helper_Placeholder_Container_Abstract::PREPEND
-        );
-
+        $lang->translate('Permission\'s Management'), 
+        Zend_View_Helper_Placeholder_Container_Abstract::PREPEND);
+        
         // Create datagrid
-		Zend_Loader::loadClass('Gonium_DataGrid');
-		Zend_Loader::loadClass('Gonium_DataGrid_DataSource_Table');
-		Zend_Loader::loadClass('Gonium_DataGrid_Pager');
-		
-		$grid = new Gonium_DataGrid(new Gonium_DataGrid_DataSource_Table(
-            $this->_helper->LoadModel('ACL_Role'))
-        , 5);
+        Zend_Loader::loadClass('Gonium_DataGrid');
+        Zend_Loader::loadClass('Gonium_DataGrid_DataSource_Table');
+        Zend_Loader::loadClass('Gonium_DataGrid_Pager');
+        
+        $grid = new Gonium_DataGrid(
+        new Gonium_DataGrid_DataSource_Table(
+        $this->_helper->LoadModel('ACL_Role')), 5);
         // Setting default datagrid values
-        $grid->setDefaultSort('role_id')
-             ->setDefaultDir("asc");
+        $grid->setDefaultSort('role_id')->setDefaultDir("asc");
         // Translate
         $grid->getPager()->translate($lang);
         
-        $grid->addColumn('role_id', array(
-                'type' => 'text',
-                'header' => 'acl_role_id',
-                'width' => 10
-            ));
+        $grid->addColumn('role_id', 
+        array('type' => 'text', 'header' => 'acl_role_id', 'width' => 10));
         
-        $url = (string) $this->view->url(array(
-            'module'=> $this->getRequest()->getModuleName() ,
-            'controller' => $this->getRequest()->getControllerName(),
-            'action' => 'edit',
-            'id' => '$role_id'
-        ));
-        $grid->addColumn('edit', array(
-            'header' => $lang->translate('Edit'),
-            'width' => 10,
-            'style' => 'text-align: center',
-            'sortable'  => false,
-            'type' => 'action',
-            'actions' => array('url' => urldecode($url),
-            'caption' => 'Edit',
-            'image' => $this->view->baseUrl() . '../images/icons/edit_24x24.png')
-        ));
+        $url = (string) $this->view->url(
+        array(
+            'module' => $this->getRequest()
+                    ->getModuleName(), 
+                'controller' => $this->getRequest()
+                    ->getControllerName(), 
+                'action' => 'edit', 
+                'id' => '$role_id'));
+        $grid->addColumn('edit', 
+        array(
+            'header' => $lang->translate('Edit'), 
+                'width' => 10, 
+                'style' => 'text-align: center', 
+                'sortable' => false, 
+                'type' => 'action', 
+                'actions' => array(
+                    'url' => urldecode($url), 
+                        'caption' => 'Edit', 
+                        'image' => $this->view->baseUrl() .
+                         '../images/icons/edit_24x24.png')));
         
-        $url = (string) $this->view->url(array(
-            'module'=> $this->getRequest()->getModuleName() ,
-            'controller' => $this->getRequest()->getControllerName(),
-            'action' => 'delete',
-            'id' => '$role_id'
-        ));
-        $grid->addColumn('delete', array(
-            'header' => $lang->translate('Delete'),
-            'width' => 10,
-            'style' => 'text-align: center',
-            'sortable' => false,
-            'type' => 'action',
-            'actions' => array('url' => urldecode($url),
-            'confirm' => 'Are you sure you want to delete $role_id?',
-            'caption' => 'Delete',
-            'image' => $this->view->baseUrl() . '../images/icons/delete_24x24.png')
-        ));
-     
+        $url = (string) $this->view->url(
+        array(
+            'module' => $this->getRequest()
+                    ->getModuleName(), 
+                'controller' => $this->getRequest()
+                    ->getControllerName(), 
+                'action' => 'delete', 
+                'id' => '$role_id'));
+        $grid->addColumn('delete', 
+        array(
+            'header' => $lang->translate('Delete'), 
+                'width' => 10, 
+                'style' => 'text-align: center', 
+                'sortable' => false, 
+                'type' => 'action', 
+                'actions' => array(
+                    'url' => urldecode($url), 
+                        'confirm' => 'Are you sure you want to delete $role_id?', 
+                        'caption' => 'Delete', 
+                        'image' => $this->view->baseUrl() .
+                         '../images/icons/delete_24x24.png')));
+        
         $this->view->grid = $grid;
     }
 }

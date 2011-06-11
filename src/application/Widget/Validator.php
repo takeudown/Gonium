@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -23,7 +23,6 @@
  * @version     $Id: Validator.php 45 2010-03-30 07:21:30Z gnzsquall $
  */
 
-
 /** @see Gonium_Widget_Plus */
 require_once 'Gonium/Widget.php';
 
@@ -37,8 +36,8 @@ require_once 'Gonium/Widget.php';
  */
 class Widget_Validator extends Gonium_Widget
 {
-    public function execute()
+    public function execute ()
     {
-        $this->setContent( $this->_view->render('Validator.phtml') );
+        $this->setContent($this->_view->render('Validator.phtml'));
     }
 }

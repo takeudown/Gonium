@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -39,27 +39,24 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
 class GoniumCore_Plugin_Install_Language extends Zend_Controller_Plugin_Abstract
 {
     /**
-    * @todo Configurar el idioma dependiendo de la preferencia del usuario,
-    * o de las cabeceras del navegador.
-    * @todo Create a LoadTranslation action/view helper
-    */
-    public function routeStartup(Zend_Controller_Request_Abstract $request)
+     * @todo Configurar el idioma dependiendo de la preferencia del usuario,
+     * o de las cabeceras del navegador.
+     * @todo Create a LoadTranslation action/view helper
+     */
+    public function routeStartup (Zend_Controller_Request_Abstract $request)
     {
         parent::routeStartup($request);
         Zend_Loader::loadClass('Zend_Translate');
         Zend_Loader::loadClass('Zend_Locale');
-
-        $translate = new Zend_Translate(
-            'gettext',
-            APP_ROOT.'language/',
-            new Zend_Locale('es_ES'),
-            array('scan' => Zend_Translate::LOCALE_DIRECTORY)
-        );
-
+        
+        $translate = new Zend_Translate('gettext', APP_ROOT . 'language/', 
+        new Zend_Locale('es_ES'), 
+        array('scan' => Zend_Translate::LOCALE_DIRECTORY));
+        
         Zend_Registry::set('Zend_Translate', $translate);
-
+        
         $translate->setLocale('es_ES');
-
+        
         $view = Zend_Registry::get('GoniumCore_View');
         $view->headMeta()->appendHttpEquiv('Content-Language', 'es-CL');
     }

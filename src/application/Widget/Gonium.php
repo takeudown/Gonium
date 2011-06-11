@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -23,7 +23,6 @@
  * @version     $Id: Gonium.php 45 2010-03-30 07:21:30Z gnzsquall $
  */
 
-
 /** @see Gonium_Widget */
 require_once 'Gonium/Widget.php';
 
@@ -35,10 +34,10 @@ require_once 'Gonium/Widget.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id: Gonium.php 45 2010-03-30 07:21:30Z gnzsquall $
  */
-class Widget_Gonium  extends Gonium_Widget
+class Widget_Gonium extends Gonium_Widget
 {
-    public function execute()
+    public function execute ()
     {
-        $this->setContent( $this->_view->render('Gonium.phtml') );
+        $this->setContent($this->_view->render('Gonium.phtml'));
     }
 }

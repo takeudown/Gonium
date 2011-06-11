@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -31,68 +31,55 @@ ini_set('default_charset', 'UTF-8');
 date_default_timezone_set('America/Santiago');
 
 // Define GONIUM_INIT
-if( !defined('GONIUM_INIT') )
-/** GONIUM_INIT */
-define ('GONIUM_INIT', true );
+if (! defined('GONIUM_INIT')) /** GONIUM_INIT */
+define('GONIUM_INIT', true);
 
 // Define some util Constants
-if( !defined('CLASS_SEPARATOR') )
-/** CLASS_SEPARATOR */
-define ('CLASS_SEPARATOR', '_');
+if (! defined('CLASS_SEPARATOR')) /** CLASS_SEPARATOR */
+define('CLASS_SEPARATOR', '_');
 
-if( !defined('DS') )
-    /** DS */
-    define ('DS', DIRECTORY_SEPARATOR );
+if (! defined('DS')) /** DS */
+define('DS', DIRECTORY_SEPARATOR);
 
-if( !defined('PS') )
-    /** DS */
-    define ('PS', PATH_SEPARATOR );
+if (! defined('PS')) /** DS */
+define('PS', PATH_SEPARATOR);
 
-if( !defined('CS') )
-    /** CS */
-    define ('CS', CLASS_SEPARATOR);
+if (! defined('CS')) /** CS */
+define('CS', CLASS_SEPARATOR);
 
-if( !defined('APP_ROOT') )
-    /** APP_ROOT */
-    define ('APP_ROOT', realpath(dirname(__FILE__)) );
+if (! defined('APP_ROOT')) /** APP_ROOT */
+define('APP_ROOT', realpath(dirname(__FILE__)));
 
-if( !defined('LIB_ROOT') )
-    /** LIB_ROOT */
-    define ('LIB_ROOT', realpath(dirname(__FILE__).DS.'..'.DS.'library') );
+if (! defined('LIB_ROOT')) /** LIB_ROOT */
+define('LIB_ROOT', realpath(dirname(__FILE__) . DS . '..' . DS . 'library'));
 
-if( !defined('PUBLIC_ROOT') )
-    /** PUBLIC_ROOT */
-    define ('PUBLIC_ROOT', APP_ROOT );
+if (! defined('PUBLIC_ROOT')) /** PUBLIC_ROOT */
+define('PUBLIC_ROOT', APP_ROOT);
 
-if( !defined('HOME_ROOT') )
-    /** APP_ROOT */
-    define ('HOME_ROOT', PUBLIC_ROOT );
+if (! defined('HOME_ROOT')) /** APP_ROOT */
+define('HOME_ROOT', PUBLIC_ROOT);
 
 // Set new include_path
-set_include_path('.'
-	. PS . LIB_ROOT .DS
-	. PS . APP_ROOT .DS
-	. PS . HOME_ROOT .DS
-	. PS . get_include_path()
-    );
+set_include_path(
+'.' . PS . LIB_ROOT . DS . PS . APP_ROOT . DS . PS . HOME_ROOT . DS . PS .
+ get_include_path());
 
 // Magic Quotes GPC workaround
-if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
-    function stripslashes_deep($value)
+if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc())
+{
+    function stripslashes_deep ($value)
     {
-        $value = is_array($value) ?
-                    array_map('stripslashes_deep', $value) :
-                    stripslashes($value);
-
+        $value = is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes(
+        $value);
+        
         return $value;
     }
-
+    
     $_POST = array_map('stripslashes_deep', $_POST);
     $_GET = array_map('stripslashes_deep', $_GET);
     $_COOKIE = array_map('stripslashes_deep', $_COOKIE);
     $_REQUEST = array_map('stripslashes_deep', $_REQUEST);
 }
-
 
 /** Zend_Application */
 require_once 'Zend/Application.php';
@@ -105,33 +92,28 @@ Zend_Loader_Autoloader::getInstance()->registerNamespace('GoniumCore_');
 
 /** Config per home */
 
-if(!file_exists( HOME_ROOT . '/etc/config.ini' ))
+if (! file_exists(HOME_ROOT . '/etc/config.ini'))
 {
-	$conf = new Zend_Config_Ini(APP_ROOT . '/etc/installer.ini', APP_ENV);
-} else {
-	
-	$conf = new Zend_Config_Ini(
-		APP_ROOT . '/etc/resources.ini', 
-		APP_ENV, 
-		array(
-			'allowModifications' => true
-		)
-	);
-	
-	$conf->merge( new Zend_Config_Ini(HOME_ROOT . '/etc/config.ini', APP_ENV));
-	$conf->setReadOnly();
+    $conf = new Zend_Config_Ini(APP_ROOT . '/etc/installer.ini', APP_ENV);
+} else
+{
+    
+    $conf = new Zend_Config_Ini(APP_ROOT . '/etc/resources.ini', APP_ENV, 
+    array('allowModifications' => true));
+    
+    $conf->merge(new Zend_Config_Ini(HOME_ROOT . '/etc/config.ini', APP_ENV));
+    $conf->setReadOnly();
 }
 
 Zend_Registry::set('GoniumCore_Config', $conf);
 
 // Create application
-$application = new Zend_Application(
-    APP_ENV, 
-    Zend_Registry::get('GoniumCore_Config')
-);
+$application = new Zend_Application(APP_ENV, 
+Zend_Registry::get('GoniumCore_Config'));
 
-if (APP_ENV == 'development') {
-	/*
+if (APP_ENV == 'development')
+{
+    /*
     require_once('Zend/Log.php');
     require_once('Zend/Log/Writer/Firebug.php');
     //require_once('Zend/Controller/Response/Http.php');
@@ -167,7 +149,7 @@ if (APP_ENV == 'development') {
 	Zend_Registry::set('GoniumCore_Logger',$logger);
 	*/
 }
-    
+
 // Create bootstrap, and run
 $application->bootstrap();
 $application->run();

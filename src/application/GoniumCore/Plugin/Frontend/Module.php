@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -23,15 +23,14 @@
  * @version     $Id$
  */
 
-
 /** @see Gonium_ACL */
 require_once 'Gonium/ACL.php';
 /** GoniumCore_Model_ACL_Roles */
-require_once 'GoniumCore/Model/ACL/Role.php';        // Who have the access
+require_once 'GoniumCore/Model/ACL/Role.php'; // Who have the access
 /** GoniumCore_Model_ACL_Access */
-require_once 'GoniumCore/Model/ACL/Access.php';        // Rules of access
+require_once 'GoniumCore/Model/ACL/Access.php'; // Rules of access
 /** GoniumCore_Model_ACL_Resources */
-require_once 'GoniumCore/Model/ACL/Resource.php';        // Resources to access
+require_once 'GoniumCore/Model/ACL/Resource.php'; // Resources to access
 /** GoniumCore_Model_Modules */
 require_once 'GoniumCore/Model/Module.php';
 
@@ -50,54 +49,54 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  */
 class GoniumCore_Plugin_Frontend_Module extends Zend_Controller_Plugin_Abstract
 {
-	protected $_acl;
 
+    protected $_acl;
+    
     /**
-    * Sets the ACL object
-    *
-    * @param mixed $aclData
-    * @return void
-    **/
-    public function setAcl(Zend_Acl $aclData)
+     * Sets the ACL object
+     *
+     * @param mixed $aclData
+     * @return void
+     **/
+    public function setAcl (Zend_Acl $aclData)
     {
         $this->_acl = $aclData;
     }
-
+    
     /**
      * Returns the ACL object
      *
      * @return Zend_Acl
      */
-    public function getAcl()
+    public function getAcl ()
     {
         return $this->_acl;
     }
-
+    
     /**
      * If has valid ACL returns true. In other case, return false
      *
      * @return boolean
      */
-    public function hasAcl()
+    public function hasAcl ()
     {
-    	if($this->_acl !== null)
-    		return true;
-
-   		return false;
+        if ($this->_acl !== null) return true;
+        
+        return false;
     }
-
-    public function routeStartup(Zend_Controller_Request_Abstract $request)
+    
+    public function routeStartup (Zend_Controller_Request_Abstract $request)
     {
-
-    	parent::routeStartup($request);
+        
+        parent::routeStartup($request);
         /*
         if( null === $this->_acl)
         {
             $this->_acl = Zend_Registry::get('GoniumCore_acl');
         }
         */
-    	
-    	/*
+    
+    /*
     	  $modelLoader = Gonium_Controller_Action_Helper_LoadModel::getLoader();
         $this->resources =
             $modelLoader->load('ACL/Resource');
@@ -107,11 +106,11 @@ class GoniumCore_Plugin_Frontend_Module extends Zend_Controller_Plugin_Abstract
             $modelLoader->load('ACL_Role');
             */
     }
-
-    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    
+    public function preDispatch (Zend_Controller_Request_Abstract $request)
     {
-    	parent::preDispatch($request);
-/*
+        parent::preDispatch($request);
+        /*
         Zend_Loader::loadClass('Gonium_Controller_Action_Helper_LoadModel');
 
         if( !$this->hasAcl() )
@@ -129,8 +128,8 @@ class GoniumCore_Plugin_Frontend_Module extends Zend_Controller_Plugin_Abstract
         
         Zend_Registry::set('Loader_Model', $modelLoader);
 */
-
-/*
+    
+    /*
         $modules = Gonium_Controller_Action_Helper_LoadModel::getModel('Modules');
 
         var_dump( $request->getModuleName() );
@@ -149,8 +148,9 @@ class GoniumCore_Plugin_Frontend_Module extends Zend_Controller_Plugin_Abstract
             );
         }
 */
-        //$this->_acl->loadResources( $modules->getResources( array($mod) ) );
+    //$this->_acl->loadResources( $modules->getResources( array($mod) ) );
+    
 
-        //var_dump( $this->_acl->has( 'mod_'.$mod) );
+    //var_dump( $this->_acl->has( 'mod_'.$mod) );
     }
 }

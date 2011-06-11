@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -36,12 +36,14 @@ require_once 'Gonium/Db/Table/Abstract.php';
  */
 class GoniumCore_Model_Widgets extends Gonium_Model_Abstract
 {
-   protected $_name = 'comments';
-   protected $_primary = 'comment_id';
 
-   public static function getWidgets()
-   {
-      
-   }
+    protected $_name = 'comments';
+
+    protected $_primary = 'comment_id';
+    
+    public static function getWidgets ()
+    {
+
+    }
 }
 

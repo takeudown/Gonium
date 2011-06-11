@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -38,17 +38,19 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  */
 class GoniumCore_Plugin_Admin_View extends Zend_Controller_Plugin_Abstract
 {
-	public $config;
-	public $view;
-	
-    public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
+
+    public $config;
+
+    public $view;
+    
+    public function dispatchLoopStartup (
+    Zend_Controller_Request_Abstract $request)
     {
-    	parent::dispatchLoopStartup($request);     
-    	$this->config = Zend_Registry::get('GoniumCore_Config');
+        parent::dispatchLoopStartup($request);
+        $this->config = Zend_Registry::get('GoniumCore_Config');
         $this->view = Zend_Registry::get('GoniumCore_View');
         
         $this->view->getHelper('BaseUrl')->setBaseUrl(
-        	$this->config->page->baseUrl
-        );        
+        $this->config->page->baseUrl);
     }
 }

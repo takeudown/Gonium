@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -37,25 +37,29 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * @version     $Id: View.php 47 2010-04-01 16:04:03Z gnzsquall $
  */
 
-class GoniumCore_Plugin_Router extends Zend_Controller_Plugin_Abstract {
-	
-	public function routeStartup(Zend_Controller_Request_Abstract $request)
-    {
+class GoniumCore_Plugin_Router extends Zend_Controller_Plugin_Abstract
+{
     
-		$frontController = Zend_Controller_Front::getInstance();
+    public function routeStartup (Zend_Controller_Request_Abstract $request)
+    {
+        
+        $frontController = Zend_Controller_Front::getInstance();
         $router = $frontController->getRouter();
         Zend_Registry::set('GoniumCore_Router', $router);
-
-        try {
+        
+        try
+        {
             // Config Routes
             // Use section [frontend] of HOME_ROOT/etc/router.ini
-            $config = new Zend_Config_Ini( HOME_ROOT . '/etc/router.ini', 'frontend');
+            $config = new Zend_Config_Ini(
+            HOME_ROOT . '/etc/router.ini', 'frontend');
             $router->addConfig($config);
-
-        } catch (Exception $exception) {
-                        /** @see Gonium_Exception */
-                        require_once 'Gonium/Exception.php';
+        
+        } catch (Exception $exception)
+        {
+            /** @see Gonium_Exception */
+            require_once 'Gonium/Exception.php';
             Gonium_Exception::dump($exception);
-        }	
+        }
     }
 }

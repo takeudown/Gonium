@@ -1,11 +1,19 @@
 <div class="widget">
-    <?php if($this->title): ?>
+    <?php
+    if ($this->title)
+    :
+        ?>
 	<div class="widget-title">
-	<?php echo $this->title; ?>
+	<?php
+        echo $this->title;
+        ?>
 	</div>
-	<?php endif; /* /$this->title */?>
+	
+    <?php endif; /* /$this->title */    ?>
 	
 	<div class="widget-content">
-    <?php echo $this->content; ?>
+    <?php
+    echo $this->content;
+    ?>
     </div>
 </div>

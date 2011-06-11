@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -33,25 +34,24 @@
  */
 class Acl_IndexController extends Zend_Controller_Action
 {
-    public function indexAction()
+    public function indexAction ()
     {
         $this->listAction();
     }
     
-    public function listAction()
+    public function listAction ()
     {
-    	$lang = Zend_Registry::get('Zend_Translate');
+        $lang = Zend_Registry::get('Zend_Translate');
         $this->view->bodyTitle = '<h1>Admin Permission</h1>';
-
+        
         // Title of Module
         $this->view->headTitle(
-            $lang->translate('Permission\'s Management'),
-            Zend_View_Helper_Placeholder_Container_Abstract::PREPEND
-        );
-
+        $lang->translate('Permission\'s Management'), 
+        Zend_View_Helper_Placeholder_Container_Abstract::PREPEND);
+        
         // Create datagrid
-		Zend_Loader::loadClass('Gonium_DataGrid');
-		Zend_Loader::loadClass('Gonium_DataGrid_DataSource_Table');
-		Zend_Loader::loadClass('Gonium_DataGrid_Pager');
+        Zend_Loader::loadClass('Gonium_DataGrid');
+        Zend_Loader::loadClass('Gonium_DataGrid_DataSource_Table');
+        Zend_Loader::loadClass('Gonium_DataGrid_Pager');
     }
 }

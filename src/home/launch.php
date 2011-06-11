@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -24,21 +24,20 @@
 /** Define home files base directory */
 define('HOME_ROOT', realpath(dirname(__FILE__)));
 /** Define public files base directory */
-define('PUBLIC_ROOT', realpath(dirname(__FILE__).'/public_html/'));
+define('PUBLIC_ROOT', realpath(dirname(__FILE__) . '/public_html/'));
 /** Define application base directory */
-defined('APP_ROOT')
-    || define('APP_ROOT', (getenv('GONIUM_APP_ROOT') ? 
-	getenv('GONIUM_APP_ROOT') : 
-	realpath(dirname(__FILE__).'/../application/')));
+defined('APP_ROOT') || define('APP_ROOT', 
+(getenv('GONIUM_APP_ROOT') ? getenv('GONIUM_APP_ROOT') : realpath(
+dirname(__FILE__) . '/../application/')));
 
 /** Define application environment */
-defined('APP_ENV')
-    || define('APP_ENV', (getenv('APP_ENV') ? getenv('APP_ENV') : 'development'));
+defined('APP_ENV') ||
+ define('APP_ENV', (getenv('APP_ENV') ? getenv('APP_ENV') : 'development'));
 
 // Save current working directory
 $cwd = getcwd();
 // Set new current working directory to /application
-chdir( APP_ROOT );
+chdir(APP_ROOT);
 
 /**
  * Common Procedural Initialization
@@ -47,5 +46,5 @@ chdir( APP_ROOT );
 require_once APP_ROOT . '/init.php';
 
 // Restore working directory
-chdir( $cwd );
-unset( $cwd );
+chdir($cwd);
+unset($cwd);

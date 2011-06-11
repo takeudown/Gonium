@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -33,25 +34,22 @@
  */
 class IndexController extends Zend_Controller_Action
 {
-    public function indexAction()
+    public function indexAction ()
     {
-    	$conf = Zend_Registry::get('GoniumCore_Config');
-    	$this->_helper->viewRenderer->setNoRender();    	
-    	
-    	$action = ($conf->system->defaultModule == 'default') ?
-    			'welcome' : $conf->system->defaultAction;
-    	
-    	$controller = ($conf->system->defaultModule == 'default') ?
-    			'index' : $conf->system->defaultController;
-    	
-    	$this->_helper->actionStack($action,
-                                    $controller,
-                                    $conf->system->defaultModule);
+        $conf = Zend_Registry::get('GoniumCore_Config');
+        $this->_helper->viewRenderer->setNoRender();
+        
+        $action = ($conf->system->defaultModule == 'default') ? 'welcome' : $conf->system->defaultAction;
+        
+        $controller = ($conf->system->defaultModule == 'default') ? 'index' : $conf->system->defaultController;
+        
+        $this->_helper->actionStack($action, $controller, 
+        $conf->system->defaultModule);
     }
     
-    public function welcomeAction()
+    public function welcomeAction ()
     {
-    	$this->view->bodyTitle = 'Hello World!';
+        $this->view->bodyTitle = 'Hello World!';
         $this->view->bodyCopy = '<p>Lorem ipsum dolor sit amet, consectetuer
             adipiscing elit. Pellentesque semper dui. Aliquam vestibulum nulla id
             enim. Curabitur ac tortor. Integer quis massa a magna consectetuer

@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -23,5 +23,6 @@
 
 //// Uncomment the following to activate production environment
 // define ('APP_ENV', 'production');
+
 
 require_once '../launch.php';

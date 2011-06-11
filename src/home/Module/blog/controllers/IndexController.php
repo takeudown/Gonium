@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -20,18 +20,15 @@
  * @author Gonzalo Diaz Cruz - http://labs.gon.cl/gonium
  *
  */
-
 class Blog_IndexController extends Zend_Controller_Action
 {
-   public function init()
-   {
-      $this->title = 'Blog';
-   }
-
-   public function indexAction()
-   {
-      $this->view->headTitle(
-         $this->title,
-         Zend_View_Helper_Placeholder_Container_Abstract::PREPEND);
-   }
+    public function init ()
+    {
+        $this->title = 'Blog';
+    }
+    public function indexAction ()
+    {
+        $this->view->headTitle($this->title, 
+        Zend_View_Helper_Placeholder_Container_Abstract::PREPEND);
+    }
 }

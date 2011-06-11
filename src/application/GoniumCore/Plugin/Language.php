@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -38,84 +38,81 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  */
 class GoniumCore_Plugin_Language extends Zend_Controller_Plugin_Abstract
 {
+
     /**
-    * @todo Configurar el idioma dependiendo de la preferencia del usuario,
-    * o de las cabeceras del navegador.
-    * @todo Create a LoadTranslation action/view helper
-    */
-	
-	// Application Translations
-	private	$options;
-	
-	public function __construct()
-	{
-		$this->options = array(
-				'scan' => Zend_Translate::LOCALE_DIRECTORY,
-				//'disableNotices'=> true//,
-				'log' => new Zend_Log() // <- Zend_log without writer throws 
-										// exceptions when a error ocurred
-		);
-	}
-		
-    public function routeStartup(Zend_Controller_Request_Abstract $request)
+     * @todo Configurar el idioma dependiendo de la preferencia del usuario,
+     * o de las cabeceras del navegador.
+     * @todo Create a LoadTranslation action/view helper
+     */
+    
+    // Application Translations
+    private $options;
+    
+    public function __construct ()
     {
-    	parent::routeStartup($request);
-        Zend_Loader::loadClass('Zend_Translate');
-		Zend_Loader::loadClass('Zend_Locale');
-		
-		try {
-			$locale = new Zend_Locale('auto');
-			$translate = new Zend_Translate(
-				'gettext',
-				APP_ROOT.'/language/',
-				$locale,
-				$this->options);
-		} catch (Exception $e) {
-			$locale = new Zend_Locale('en_US');
-			$translate = new Zend_Translate(
-				'gettext',
-				APP_ROOT.'/language/',
-				$locale,
-				$this->options);
-		}
-		
-		Zend_Registry::set('Zend_Translate', $translate);
-		Zend_Registry::set('Zend_Locale', $locale);
+        $this->options = array(
+            'scan' => Zend_Translate::LOCALE_DIRECTORY, 
+                //'disableNotices'=> true//,
+                'log' => new Zend_Log())// <- Zend_log without writer throws 
+// exceptions when a error ocurred
+        ;
     }
     
-    public function predispatch(Zend_Controller_Request_Abstract $request)
+    public function routeStartup (Zend_Controller_Request_Abstract $request)
     {
-    	$translate = Zend_Registry::get('Zend_Translate');
-    	$locale = Zend_Registry::get('Zend_Locale');
-    	$options = array_merge($this->options, array(
-    		'scan' => Zend_Translate::LOCALE_FILENAME,
-    	));
-    	
-    	$module = strtolower($request->getModuleName());
-    	$modulePath = Zend_Controller_Front::getInstance()->getModuleDirectory();
-    	 
-    	// Home Module Translations
-		try {
-			$translate->addTranslation(
-				$modulePath.'/../../language/'.$locale.'/LC_MESSAGES/mod_'.$module.'.mo',
-				$locale,
-				$this->options);
-		} catch (Exception $e) {
-			
-		}
-		
-		$conf = Zend_Registry::get('GoniumCore_Config');
-		$theme = $conf->resources->layout->themeName;
-		$themePath = $conf->resources->layout->layoutPath;
-		$themeLang = $themePath.'/../../../language/'.$locale.'/LC_MESSAGES/theme_'.$theme.'.mo';
-	    // Theme Translations
-		try {
-			$translate->addTranslation(
-				$themeLang,
-				$locale,
-				$this->options);
-		} catch (Exception $e) {
-			
-		}
+        parent::routeStartup($request);
+        Zend_Loader::loadClass('Zend_Translate');
+        Zend_Loader::loadClass('Zend_Locale');
+        
+        try
+        {
+            $locale = new Zend_Locale('auto');
+            $translate = new Zend_Translate('gettext', APP_ROOT . '/language/', 
+            $locale, $this->options);
+        } catch (Exception $e)
+        {
+            $locale = new Zend_Locale('en_US');
+            $translate = new Zend_Translate('gettext', APP_ROOT . '/language/', 
+            $locale, $this->options);
+        }
+        
+        Zend_Registry::set('Zend_Translate', $translate);
+        Zend_Registry::set('Zend_Locale', $locale);
+    }
+    
+    public function predispatch (Zend_Controller_Request_Abstract $request)
+    {
+        $translate = Zend_Registry::get('Zend_Translate');
+        $locale = Zend_Registry::get('Zend_Locale');
+        $options = array_merge($this->options, 
+        array('scan' => Zend_Translate::LOCALE_FILENAME));
+        
+        $module = strtolower($request->getModuleName());
+        $modulePath = Zend_Controller_Front::getInstance()->getModuleDirectory();
+        
+        // Home Module Translations
+        try
+        {
+            $translate->addTranslation(
+            $modulePath . '/../../language/' . $locale . '/LC_MESSAGES/mod_' .
+             $module . '.mo', $locale, $this->options);
+        } catch (Exception $e)
+        {
+
+        }
+        
+        $conf = Zend_Registry::get('GoniumCore_Config');
+        $theme = $conf->resources->layout->themeName;
+        $themePath = $conf->resources->layout->layoutPath;
+        $themeLang = $themePath . '/../../../language/' . $locale .
+         '/LC_MESSAGES/theme_' . $theme . '.mo';
+        // Theme Translations
+        try
+        {
+            $translate->addTranslation($themeLang, $locale, $this->options);
+        } catch (Exception $e)
+        {
+
+        }
     }
 }

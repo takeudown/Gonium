@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -27,7 +27,7 @@ require_once './launch.php';
 // Save current working directory
 $cwd = getcwd();
 // Set new current working directory to /application
-chdir( APP_ROOT );
+chdir(APP_ROOT);
 
 /** @see Core */
 require_once 'Core.php';
@@ -40,6 +40,6 @@ Core::setEnvironment('admin');
 Core::main();
 
 // Restore working directory
-chdir( $cwd );
-unset( $cwd );
+chdir($cwd);
+unset($cwd);
 

@@ -1,31 +1,42 @@
 <?php
 $this->headLink()->appendStylesheet($this->globalUrl('css/accordion.css'));
 
-$this->headScript()->appendFile($this->globalUrl('js/jquery/jquery-1.2.6.js'));  
-$this->headScript()->appendFile($this->globalUrl('js/jquery/ui/ui.core.js')); 
-$this->headScript()->appendFile($this->globalUrl('js/jquery/ui/ui.accordion.js'));
-$key = 'accordion-'.md5(time());
+$this->headScript()->appendFile($this->globalUrl('js/jquery/jquery-1.2.6.js'));
+$this->headScript()->appendFile($this->globalUrl('js/jquery/ui/ui.core.js'));
+$this->headScript()->appendFile(
+$this->globalUrl('js/jquery/ui/ui.accordion.js'));
+$key = 'accordion-' . md5(time());
 ?>
 <script type="text/javascript">
 $(document).ready(function(){
-  $("#<?php echo $key; ?>").accordion({
+  $("#<?php
+echo $key;
+?>").accordion({
   		header: '.ui-accordion-header' 
   });
 });
 </script>
 
-<ul id="<?php echo $key; ?>" class="ui-accordion-container">
-    <li class="ui-accordion-group">
-	    <h3 class="ui-accordion-header">
-	        <a href='#'><?php echo $this->translate('User Login Form'); ?></a>
-	    </h3>
-        <div class="ui-accordion-data"><?php echo $this->loginForm; ?></div>
-    </li>
-    <li class="ui-accordion-group">
-	    <h3 class="ui-accordion-header">
-	        <a href='#'><?php echo $this->translate('Openid Login Form'); ?></a>
-        </h3>
-        <div class="ui-accordion-data"><?php echo $this->openidForm; ?></div>
-    </li>
+<ul id="<?php
+echo $key;
+?>" class="ui-accordion-container">
+	<li class="ui-accordion-group">
+	<h3 class="ui-accordion-header"><a href='#'><?php
+echo $this->translate('User Login Form');
+?></a>
+	</h3>
+	<div class="ui-accordion-data"><?php
+echo $this->loginForm;
+?></div>
+	</li>
+	<li class="ui-accordion-group">
+	<h3 class="ui-accordion-header"><a href='#'><?php
+echo $this->translate('Openid Login Form');
+?></a>
+	</h3>
+	<div class="ui-accordion-data"><?php
+echo $this->openidForm;
+?></div>
+	</li>
 </ul>
 

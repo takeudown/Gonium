@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -33,7 +34,7 @@
  */
 class IndexController extends Zend_Controller_Action
 {
-    public function indexAction()
+    public function indexAction ()
     {
         $this->view->bodyTitle = 'Hello Admin World!';
         $this->view->bodyCopy = '<p>Lorem ipsum dolor sit amet, consectetuer

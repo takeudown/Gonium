@@ -1,24 +1,50 @@
-<?php if($this->messageError): ?>
+<?php
+if ($this->messageError)
+:
+    ?>
 <div class="error">
-    <?php echo $this->messageError; ?>
+    <?php
+    echo $this->messageError;
+    ?>
 </div>
-<?php endif; ?>
 
-<?php if($this->messageSuccess): ?>
+<?php endif;
+?>
+
+<?php
+if ($this->messageSuccess)
+:
+    ?>
 <div class="success">
-    <?php echo $this->messageSuccess; ?>
+    <?php
+    echo $this->messageSuccess;
+    ?>
 
-    <?php if($this->homeLinkVisible): ?>
-        <div>
-            <a href="<?php echo $this->homeLink; ?>">
-                <?php echo $this->translate('Go to home'); ?> 
-            </a> |
-            <a href="<?php echo $this->adminLink; ?>">
-                <?php echo $this->translate('Go to administrator panel'); ?>
-            </a>
-        </div>
-    <?php endif; ?>
+    <?php
+    if ($this->homeLinkVisible)
+    :
+        ?>
+        <div><a href="<?php
+        echo $this->homeLink;
+        ?>">
+                <?php
+        echo $this->translate('Go to home');
+        ?> 
+            </a> | <a href="<?php
+        echo $this->adminLink;
+        ?>">
+                <?php
+        echo $this->translate('Go to administrator panel');
+        ?>
+            </a></div>
+    
+    <?php endif;
+    ?>
 </div>
-<?php endif; ?>
 
-<?php echo $this->form; ?>
+<?php endif;
+?>
+
+<?php
+echo $this->form;
+?>

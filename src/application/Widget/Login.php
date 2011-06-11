@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -34,45 +34,65 @@ require_once 'Gonium/Widget.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id: Login.php 47 2010-04-01 16:04:03Z gnzsquall $
  */
-class Widget_Login extends Gonium_Widget {
-
-	public function execute() {
-		$auth = Zend_Registry::get ( 'GoniumCore_Auth' );
-		$view = Zend_Registry::get ( 'GoniumCore_View' );
-		$lang = Zend_Registry::get ( 'Zend_Translate' );
-
-		if ( !$auth->hasIdentity() )
-		{
-			try {
-				Zend_Loader::loadClass ( 'Gonium_Form_Prepared_Login' );
-				$form = new Gonium_Form_Prepared_Login ( $lang );
-				$form->setStyle('Div');
-				$form->setAttrib ( 'id', 'widget-user-auth' );
-				$form->setAttrib ( 'class', 'widget-auth-form' );
-				$form->setAction ( ( string ) $view->url ( array ('module' => 'user', 'controller' => 'auth', 'action' => 'login' ), null, true ) );
-				$this->_view->assign('loginForm', $form );
-
-				Zend_Loader::loadClass ( 'Gonium_Form_Prepared_OpenId' );
-				$openidForm = new Gonium_Form_Prepared_OpenId();
-				$openidForm->setStyle('Div');
-				$openidForm->setAttrib ( 'class', 'widget-auth-form openid' );
-				$openidForm->setAction ( ( string ) $view->url ( array( 'module'=> 'user' , 'controller' => 'openid', 'action' => 'login' ), null, true ) );
-				$this->_view->assign('openidForm', $openidForm );
-
-				$this->setContent( $this->_view->render('forms.phtml') );
-
-			} catch ( Exception $e ) {
-				Gonium_Exception::dump($e);
-				trigger_error( $e->getMessage(), E_USER_ERROR);
-			}
-		} else {
-			Zend_Loader::loadClass ( 'Gonium_Form_Prepared_Logout' );
-			$form = new Gonium_Form_Prepared_Logout ( );
-			$form->setStyle('Div');
-			$form->setAttrib ( 'id', 'widget-user-auth' );
-			$form->setAction ( ( string ) $view->url ( array ('module' => 'user', 'controller' => 'auth', 'action' => 'logout' ), null, true ) );
-
-			$this->setContent( ( string ) $form ); //'<a href="' . $view->url ( array ('module' => 'user', 'controller' => 'auth', 'action' => 'logout' ), null, true ) . '">' . $lang->translate ( 'loginForm_Logout' ) . '</a>';
-		}
-	}
+class Widget_Login extends Gonium_Widget
+{
+    
+    public function execute ()
+    {
+        $auth = Zend_Registry::get('GoniumCore_Auth');
+        $view = Zend_Registry::get('GoniumCore_View');
+        $lang = Zend_Registry::get('Zend_Translate');
+        
+        if (! $auth->hasIdentity())
+        {
+            try
+            {
+                Zend_Loader::loadClass('Gonium_Form_Prepared_Login');
+                $form = new Gonium_Form_Prepared_Login($lang);
+                $form->setStyle('Div');
+                $form->setAttrib('id', 'widget-user-auth');
+                $form->setAttrib('class', 'widget-auth-form');
+                $form->setAction(
+                (string) $view->url(
+                array(
+                    'module' => 'user', 
+                        'controller' => 'auth', 
+                        'action' => 'login'), null, true));
+                $this->_view->assign('loginForm', $form);
+                
+                Zend_Loader::loadClass('Gonium_Form_Prepared_OpenId');
+                $openidForm = new Gonium_Form_Prepared_OpenId();
+                $openidForm->setStyle('Div');
+                $openidForm->setAttrib('class', 'widget-auth-form openid');
+                $openidForm->setAction(
+                (string) $view->url(
+                array(
+                    'module' => 'user', 
+                        'controller' => 'openid', 
+                        'action' => 'login'), null, true));
+                $this->_view->assign('openidForm', $openidForm);
+                
+                $this->setContent($this->_view->render('forms.phtml'));
+            
+            } catch (Exception $e)
+            {
+                Gonium_Exception::dump($e);
+                trigger_error($e->getMessage(), E_USER_ERROR);
+            }
+        } else
+        {
+            Zend_Loader::loadClass('Gonium_Form_Prepared_Logout');
+            $form = new Gonium_Form_Prepared_Logout();
+            $form->setStyle('Div');
+            $form->setAttrib('id', 'widget-user-auth');
+            $form->setAction(
+            (string) $view->url(
+            array(
+                'module' => 'user', 
+                    'controller' => 'auth', 
+                    'action' => 'logout'), null, true));
+            
+            $this->setContent((string) $form); //'<a href="' . $view->url ( array ('module' => 'user', 'controller' => 'auth', 'action' => 'logout' ), null, true ) . '">' . $lang->translate ( 'loginForm_Logout' ) . '</a>';
+        }
+    }
 }

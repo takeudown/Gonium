@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -38,96 +38,99 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * 
      * @return Zend_Application_Module_Autoloader
      */
-    protected function _initAutoload()
+    protected function _initAutoload ()
     {
-        $autoloader = new Zend_Application_Module_Autoloader(array(
-            'namespace' => 'Default',
-            'basePath'  => dirname(__FILE__),
-        ));
+        $autoloader = new Zend_Application_Module_Autoloader(
+        array('namespace' => 'Default', 'basePath' => dirname(__FILE__)));
         return $autoloader;
     }
-
-	/**
+    
+    /**
      * Development Logging
      * 
      * @return Zend_Log
      */
-	public function _initLogger()
-	{
-		if (APP_ENV != 'production') {
-			// writer
-     		$writer = new Zend_Log_Writer_Firebug();
-     		// log
-     		$log = new Zend_Log($writer);
-
-			Zend_Registry::set('GoniumCore_Log',$log);
-			return $log;
-		}
-	}
-
+    public function _initLogger ()
+    {
+        if (APP_ENV != 'production')
+        {
+            // writer
+            $writer = new Zend_Log_Writer_Firebug();
+            // log
+            $log = new Zend_Log($writer);
+            
+            Zend_Registry::set('GoniumCore_Log', $log);
+            return $log;
+        }
+    }
+    
     /**
      * Bootstrap the view doctype
      * 
      * @return void
      */
-    protected function _initDoctype()
+    protected function _initDoctype ()
     {
         $this->bootstrap('view');
         $view = $this->getResource('view');
         $view->doctype('XHTML1_STRICT');
-        Zend_Registry::set('GoniumCore_View', $view); 
-    }
-
-    protected function _initModules()
-    {
-    	$conf = Zend_Registry::get('GoniumCore_Config');
-
-		if( $conf->system !== null ) 
-		{
-			$this->bootstrap('frontController');
-			$front = $this->frontController;
-		
-			$front->addModuleDirectory(HOME_ROOT.'/Module/');
-			$dirConfig = new Zend_Config_Ini( APP_ROOT . '/etc/directories.ini', APP_ENV);
-			{
-			    foreach($dirConfig as $modules)
-			    {
-					$front->addModuleDirectory( $modules );
-			    }
-			}
-		}
+        Zend_Registry::set('GoniumCore_View', $view);
     }
     
-    protected function _initAuth()
+    protected function _initModules ()
     {
-    	$auth = Zend_Auth::getInstance();
+        $conf = Zend_Registry::get('GoniumCore_Config');
+        
+        if ($conf->system !== null)
+        {
+            $this->bootstrap('frontController');
+            $front = $this->frontController;
+            
+            $front->addModuleDirectory(HOME_ROOT . '/Module/');
+            $dirConfig = new Zend_Config_Ini(APP_ROOT . '/etc/directories.ini', 
+            APP_ENV);
+            {
+                foreach ($dirConfig as $modules)
+                {
+                    $front->addModuleDirectory($modules);
+                }
+            }
+        }
+    }
+    
+    protected function _initAuth ()
+    {
+        $auth = Zend_Auth::getInstance();
         Zend_Registry::set('GoniumCore_Auth', $auth);
     }
     
-    protected function _initDb()
+    protected function _initDb ()
     {
-    	$conf = Zend_Registry::get('GoniumCore_Config');
-    	
-    	if( $conf->resources->db !== null ) 
-		{
-	    	$db = $this->getPluginResource('db');
-	    	if($db instanceOf Zend_Application_Resource_Db)
-	    	{
-				
-	    		//$db->getDbAdapter()->getProfiler()->setEnabled(
-	    		//	$conf->resources->db->profiler->enabled);
-	    	
-		    	Zend_Db_Table_Abstract::setDefaultAdapter($db->getDbAdapter());
-		    	Gonium_Db_Table_Abstract::setPrefix($conf->resources->db->prefix);
-		    	
-				if (APP_ENV != 'production') {
-					$profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
-					$profiler->setEnabled(true);
-					$db->getDbAdapter()->setProfiler($profiler);
-				}
-		    	
-		    	Zend_Registry::set('GoniumCore_Db', $db->getDbAdapter());
-	    	}
-		}
+        $conf = Zend_Registry::get('GoniumCore_Config');
+        
+        if ($conf->resources->db !== null)
+        {
+            $db = $this->getPluginResource('db');
+            if ($db instanceof Zend_Application_Resource_Db)
+            {
+                
+                //$db->getDbAdapter()->getProfiler()->setEnabled(
+                //	$conf->resources->db->profiler->enabled);
+                
+
+                Zend_Db_Table_Abstract::setDefaultAdapter($db->getDbAdapter());
+                Gonium_Db_Table_Abstract::setPrefix(
+                $conf->resources->db->prefix);
+                
+                if (APP_ENV != 'production')
+                {
+                    $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
+                    $profiler->setEnabled(true);
+                    $db->getDbAdapter()->setProfiler($profiler);
+                }
+                
+                Zend_Registry::set('GoniumCore_Db', $db->getDbAdapter());
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -38,25 +38,27 @@ require_once 'GoniumCore/Model/ACL/Resource.php';
  * usign Preorder Traversal Tree algorithm 
  */
 class GoniumCore_Model_Module extends GoniumCore_Model_ACL_Resource
-{	
+{
+
     public $_name = 'GoniumCore_acl_resource';
+
     //public $_name = 'acl_resources';
     public $_primary = 'directory';
+
     //public $_primary = 'resource_id';
     protected $_scope = 'module';
-
+    
     /**
-    * @return Array of Resources
-    */
-    public function getResources(Array $resource_ids = array() )
+     * @return Array of Resources
+     */
+    public function getResources (Array $resource_ids = array())
     {
         $db = Zend_Registry::get('GoniumCore_Db');
         $results = array();
         
-        
         $select = $db->select()
             ->distinct()
-            ->from( 'view_'. $this->_name );
+            ->from('view_' . $this->_name);
         /*
          $nodes_found = array();
          
@@ -107,13 +109,13 @@ class GoniumCore_Model_Module extends GoniumCore_Model_ACL_Resource
             $this->_result = array_reverse($results);
             return $this;
         }*/
-
+        
         return $results;
     }
-
-    public static function getModules()
+    
+    public static function getModules ()
     {
-    	/*
+        /*
         $table = new ModulesTable();
 
         $select = $table->select()
@@ -122,10 +124,10 @@ class GoniumCore_Model_Module extends GoniumCore_Model_ACL_Resource
         return $table->fetchAll( $select );
         */
     }
-
-    public static function isInstalled($mod)
+    
+    public static function isInstalled ($mod)
     {
-    	/*
+        /*
         $table = new ModulesTable();
         $db = $table->getAdapter();
 
@@ -137,8 +139,8 @@ class GoniumCore_Model_Module extends GoniumCore_Model_ACL_Resource
         return !is_null($table->fetchRow( $select ));
         */
     }
-
-    /*
+    
+/*
     public static function createNewComments($data)
     {
         $commentsTable = new CommentsTable();

@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -44,82 +44,100 @@ require_once 'Zend/Acl/Resource.php';
  * @see setIterable()
  * @see isIterable()
  */
-class GoniumCore_Model_ACL_Resource extends Gonium_Db_Table_Abstract implements Gonium_Model_ACL_Resource_Interface {
-  public $_name = 'GoniumCore_acl_resource';
-  public $_primary = 'resource_id';
-  
-  protected $_iterable = false;
-  protected $_result = null;
-  
-  ///////////////////////////// ITERATOR METHODS /////////////////////////////
-  public function setIterable($bool = true) {
-    $this->_iterable = ( boolean ) $bool;
-  }
-  
-  public function isIterable() {
-    return $this->_iterable;
-  }
-  
-  public function clearIterator() {
-    $this->_result = null;
-  }
-  ///////////////////////////// ITERATOR METHODS /////////////////////////////
-  
+class GoniumCore_Model_ACL_Resource extends Gonium_Db_Table_Abstract implements 
+Gonium_Model_ACL_Resource_Interface
+{
 
-  public function rewind() {
-    //var_dump($this->_result);
-    return ($this->_result !== null ? reset ( $this->_result ) : false);
-  }
-  
-  public function current() {
-    //var_dump($this->_result);
-    return ($this->_result !== null ? current ( $this->_result ) : false);
-  }
-  
-  public function key() {
-    //var_dump($this->_result);
-    return key ( $this->_result );
-  }
-  
-  public function next() {
-    //var_dump($this->_result);
-    return next ( $this->_result );
-  }
-  
-  public function valid() {
-    return $this->current () !== false;
-  }
-  
-  ///////////////////////////// COUNTABLE METHODS /////////////////////////////
-  /**
-   * Count resources from result
-   */
-  public function count() {
-    return count ( $this->_result );
-  }
-  //////////////////////////// EXTENDED ITERATOR /////////////////////////////
-  /**
-   * @return Zend_Acl_Resource|null
-   */
-  public function currentResource() {
-    $aux = $this->current ();
-    if (is_array ( $aux ) && array_key_exists ( 'resource_name', $aux ) && ! empty ( $aux ['resource_name'] ))
-      return new Zend_Acl_Resource ( $aux ['resource_name'] );
-    else
-      return null;
-  }
-  /**
-   * @return Zend_Acl_Resource|null
-   */
-  public function currentParent() {
-    $aux = $this->current ();
-    if (is_array ( $aux ) && array_key_exists ( 'parent_name', $aux ) && ! empty ( $aux ['parent_name'] ))
-      return new Zend_Acl_Resource ( $aux ['parent_name'] );
-    else
-      return null;
-  }
-  
-  /*
+    public $_name = 'GoniumCore_acl_resource';
+
+    public $_primary = 'resource_id';
+
+    protected $_iterable = false;
+
+    protected $_result = null;
+    
+    ///////////////////////////// ITERATOR METHODS /////////////////////////////
+    public function setIterable ($bool = true)
+    {
+        $this->_iterable = (boolean) $bool;
+    }
+    
+    public function isIterable ()
+    {
+        return $this->_iterable;
+    }
+    
+    public function clearIterator ()
+    {
+        $this->_result = null;
+    }
+    ///////////////////////////// ITERATOR METHODS /////////////////////////////
+    
+
+    public function rewind ()
+    {
+        //var_dump($this->_result);
+        return ($this->_result !== null ? reset($this->_result) : false);
+    }
+    
+    public function current ()
+    {
+        //var_dump($this->_result);
+        return ($this->_result !== null ? current($this->_result) : false);
+    }
+    
+    public function key ()
+    {
+        //var_dump($this->_result);
+        return key($this->_result);
+    }
+    
+    public function next ()
+    {
+        //var_dump($this->_result);
+        return next($this->_result);
+    }
+    
+    public function valid ()
+    {
+        return $this->current() !== false;
+    }
+    
+    ///////////////////////////// COUNTABLE METHODS /////////////////////////////
+    /**
+     * Count resources from result
+     */
+    public function count ()
+    {
+        return count($this->_result);
+    }
+    //////////////////////////// EXTENDED ITERATOR /////////////////////////////
+    /**
+     * @return Zend_Acl_Resource|null
+     */
+    public function currentResource ()
+    {
+        $aux = $this->current();
+        if (is_array($aux) && array_key_exists('resource_name', $aux) &&
+         ! empty($aux['resource_name'])) return new Zend_Acl_Resource(
+        $aux['resource_name']);
+        else
+            return null;
+    }
+    /**
+     * @return Zend_Acl_Resource|null
+     */
+    public function currentParent ()
+    {
+        $aux = $this->current();
+        if (is_array($aux) && array_key_exists('parent_name', $aux) &&
+         ! empty($aux['parent_name'])) return new Zend_Acl_Resource(
+        $aux['parent_name']);
+        else
+            return null;
+    }
+    
+    /*
     public function currentPrivilege() {
       $aux = $this->current();
         if( is_array($aux) && array_key_exists('privilege', $aux)
@@ -129,123 +147,149 @@ class GoniumCore_Model_ACL_Resource extends Gonium_Db_Table_Abstract implements 
             return null;
     }
     */
-  ////////////////////////////// MODEL METHODS ///////////////////////////////
-  public function addResource($id, $parent_id = null, $privilege = null, $scope = null) {
-    $data = array ('resource_id' => $id, 'parent_id' => $parent_id, 'privilege' => $privilege, 'scope' => $scope );
+    ////////////////////////////// MODEL METHODS ///////////////////////////////
+    public function addResource ($id, $parent_id = null, $privilege = null, 
+    $scope = null)
+    {
+        $data = array(
+            'resource_id' => $id, 
+                'parent_id' => $parent_id, 
+                'privilege' => $privilege, 
+                'scope' => $scope);
+        
+        parent::insert($data);
+    }
     
-    parent::insert ( $data );
-  }
-  
-  /**
-   * @todo complete ACL model implementation
-   */
-  public function changeParent() {
-  
-  }
-  
-  /**
-   * @todo complete ACL model implementation
-   */
-  /*
+    /**
+     * @todo complete ACL model implementation
+     */
+    public function changeParent ()
+    {
+
+    }
+    
+    /**
+     * @todo complete ACL model implementation
+     */
+    /*
     public function removeResource($id, $privilege = null)
     {
 
     }
     */
-  
-  /**
-   * Get Resources without check inheritance relations
-   * @param Array $resourceNames
-   */
-  public function getResources(Array $resourceNames = array(), $scope = '') {
-    $db = Zend_Registry::get ( 'GoniumCore_Db' );
-    $results = array ();
     
-    $select = $db->select ()->//->distinct()
-      from ( array ('node' => self::getViewPrefix () . 'resource' ), null )->joinCross ( array ('parent' => self::getViewPrefix () . 'resource' ), array ('resource_name', 'parent_name' ) )->group ( array ('parent.resource_name', 'parent.lft' ) )->order ( 'parent.lft' );
-    
-    // Variable Conditions
-    foreach ( $resourceNames as $theResource ) {
-      if (is_scalar ( $theResource ))
-        $select->orWhere ( 'node.resource_name = ?', $theResource );
-    }
-    
-    $orWhere = $select->getPart ( Zend_Db_Select::WHERE );
-    $select->reset ( Zend_Db_Select::WHERE );
-    
-    $select->where ( 'node.lft >= parent.lft' );
-    $select->where ( 'node.lft <= parent.rgt' );
-    
-    if (! empty ( $orWhere ))
-      $select->where ( implode ( ' ', $orWhere ), null, Zend_Db_Select::SQL_WHERE );
-    
-    $results = $db->fetchAll ( $select );
-    
-    if ($this->_iterable) {
-      $this->_result = $results;
-      return $this;
-    }
-    
-    return $results;
-  }
-  
-  /**
-   * Get Resources, including the resources of the father who inherit up root
-   */
-  public function getRelatedResources(Array $resourceIDs = array(), $scope = null) {
-    $db = Zend_Registry::get ( 'GoniumCore_Db' );
-    $results = array ();
-    $resourcesFound = array ();
-    //$resourcesSearch = array();
-    
-
-    do {
-      $select = $db->select ()->distinct ()->from ( $this->_name, array ('resource_id' => 'resource_id', 'parent_id' ) );
-      
-      $orWhere = '';
-      // Componer consulta SQL
-      //if($resourceIDs > 0)
-      //{
-      // Si hay varios recursos, tratarlos como "Or Where"
-      foreach ( $resourceIDs as $theResourceID ) {
-        if (is_scalar ( $theResourceID ))
-          $select->orWhere ( 'resource_id = ?', $theResourceID );
-      }
-      
-      $orWhere = $select->getPart ( Zend_Db_Select::WHERE );
-      $select->reset ( Zend_Db_Select::WHERE );
-      //}
-      
-
-      $resourceIDs = array ();
-      
-      if (! empty ( $orWhere ))
-        $select->OrWhere ( implode ( ' ', $orWhere ), null, Zend_Db_Select::SQL_WHERE );
-      
-      if (! empty ( $scope ))
-        $select->where ( 'scope = ?', $scope );
+    /**
+     * Get Resources without check inheritance relations
+     * @param Array $resourceNames
+     */
+    public function getResources (Array $resourceNames = array(), $scope = '')
+    {
+        $db = Zend_Registry::get('GoniumCore_Db');
+        $results = array();
         
-      // Mezclar resultados
-      $results = array_merge ( $results, $result = $db->fetchAll ( $select ) );
-      
-      // Buscar posible padres
-      foreach ( $result as $res ) {
-        if (! in_array ( $res ['resource_id'], $resourcesFound )) {
-          //echo $res['resource_id'];
-          $resourcesFound [$res ['resource_id']] = $res ['resource_id'];
+        $select = $db->select() //->distinct()
+            ->from(
+        array('node' => self::getViewPrefix() . 'resource'), null)
+            ->joinCross(
+        array('parent' => self::getViewPrefix() . 'resource'), 
+        array('resource_name', 'parent_name'))
+            ->group(array('parent.resource_name', 'parent.lft'))
+            ->order('parent.lft');
+        
+        // Variable Conditions
+        foreach ($resourceNames as $theResource)
+        {
+            if (is_scalar($theResource)) $select->orWhere(
+            'node.resource_name = ?', $theResource);
         }
         
-        if (! in_array ( $res ['parent_id'], $resourcesFound )) {
-          $resourceIDs [] = $res ['parent_id'];
+        $orWhere = $select->getPart(Zend_Db_Select::WHERE);
+        $select->reset(Zend_Db_Select::WHERE);
+        
+        $select->where('node.lft >= parent.lft');
+        $select->where('node.lft <= parent.rgt');
+        
+        if (! empty($orWhere)) $select->where(implode(' ', $orWhere), null, 
+        Zend_Db_Select::SQL_WHERE);
+        
+        $results = $db->fetchAll($select);
+        
+        if ($this->_iterable)
+        {
+            $this->_result = $results;
+            return $this;
         }
-      
-      }
-    } while ( ! empty ( $resourceIDs ) );
+        
+        return $results;
+    }
     
-    return $results;
-  }
-  
-  public function toArray() {
-  
-  }
+    /**
+     * Get Resources, including the resources of the father who inherit up root
+     */
+    public function getRelatedResources (Array $resourceIDs = array(), $scope = null)
+    {
+        $db = Zend_Registry::get('GoniumCore_Db');
+        $results = array();
+        $resourcesFound = array();
+        //$resourcesSearch = array();
+        
+
+        do
+        {
+            $select = $db->select()
+                ->distinct()
+                ->from($this->_name, 
+            array('resource_id' => 'resource_id', 'parent_id'));
+            
+            $orWhere = '';
+            // Componer consulta SQL
+            //if($resourceIDs > 0)
+            //{
+            // Si hay varios recursos, tratarlos como "Or Where"
+            foreach ($resourceIDs as $theResourceID)
+            {
+                if (is_scalar($theResourceID)) $select->orWhere(
+                'resource_id = ?', $theResourceID);
+            }
+            
+            $orWhere = $select->getPart(Zend_Db_Select::WHERE);
+            $select->reset(Zend_Db_Select::WHERE);
+            //}
+            
+
+            $resourceIDs = array();
+            
+            if (! empty($orWhere)) $select->OrWhere(implode(' ', $orWhere), 
+            null, Zend_Db_Select::SQL_WHERE);
+            
+            if (! empty($scope)) $select->where('scope = ?', $scope);
+            
+            // Mezclar resultados
+            $results = array_merge($results, 
+            $result = $db->fetchAll($select));
+            
+            // Buscar posible padres
+            foreach ($result as $res)
+            {
+                if (! in_array($res['resource_id'], $resourcesFound))
+                {
+                    //echo $res['resource_id'];
+                    $resourcesFound[$res['resource_id']] = $res['resource_id'];
+                }
+                
+                if (! in_array($res['parent_id'], $resourcesFound))
+                {
+                    $resourceIDs[] = $res['parent_id'];
+                }
+            
+            }
+        } while (! empty($resourceIDs));
+        
+        return $results;
+    }
+    
+    public function toArray ()
+    {
+
+    }
 }

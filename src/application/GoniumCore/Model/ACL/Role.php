@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -36,14 +36,16 @@ require_once 'Gonium/Db/Table/Abstract.php';
  */
 class GoniumCore_Model_ACL_Role extends Gonium_Db_Table_Abstract
 {
-    public $_name = 'GoniumCore_acl_role';
-    public $_primary = 'role_id';
 
+    public $_name = 'GoniumCore_acl_role';
+
+    public $_primary = 'role_id';
+    
     /**
-    * Gets all roles that have
-    * @param Array $rolesIDSs
-    */
-    public static function getRoles(Array $roleIDs = array())
+     * Gets all roles that have
+     * @param Array $rolesIDSs
+     */
+    public static function getRoles (Array $roleIDs = array())
     {
         /*
          * SELECT `r`.`id`, `i`.`parent_id`, `i`.* FROM `Gonium_acl_roles` AS `r` LEFT JOIN `Gonium_acl_inheritance` AS `i` ON r.id=i.child_id ORDER BY `child_id` ASC, `order` ASC
@@ -51,51 +53,56 @@ class GoniumCore_Model_ACL_Role extends Gonium_Db_Table_Abstract
         $db = Zend_Registry::get('GoniumCore_Db');
         /// Now create all roles
         $select = $db->select()
-            ->from(     array( 'r' => 'Gonium_acl_roles' ), array( 'r.role_id', 'i.parent_role_id' ) )
-            ->joinLeft( array( 'i' => 'Gonium_acl_inheritance' ), 'r.role_id=i.parent_role_id' )
-            ->order(    array( 'user_id', 'order' ) )
-            ;
-
-        if($roleIDs > 0)
+            ->from(array('r' => 'Gonium_acl_roles'), 
+        array('r.role_id', 'i.parent_role_id'))
+            ->joinLeft(array('i' => 'Gonium_acl_inheritance'), 
+        'r.role_id=i.parent_role_id')
+            ->order(array('user_id', 'order'));
+        
+        if ($roleIDs > 0)
         {
             // Si hay varios roles, tratarlos como "Or Where"
-            foreach( $roleIDs as $theRoleID)
+            foreach ($roleIDs as $theRoleID)
             {
-                if( is_scalar($theRoleID) )
-                    $select->orWhere('role_id = ?', $theRoleID);
+                if (is_scalar($theRoleID)) $select->orWhere('role_id = ?', 
+                $theRoleID);
             }
         }
-
+        
         //echo $select->__toString();
+        
 
-        return $db->fetchAll( $select );
+        return $db->fetchAll($select);
     }
-
+    
     /**
-    * @param int $userID
-    */
-    public static function getUserRoles( $userID )
+     * @param int $userID
+     */
+    public static function getUserRoles ($userID)
     {
         $db = Zend_Registry::get('GoniumCore_Db');
         /// Now create all roles
         $select = $db->select()
-            ->from(     array( 'r' => 'Gonium_acl_roles' ), array( 'r.role_id', 'i.parent_role_id' ) )
-            ->joinLeft( array( 'i' => 'Gonium_acl_inheritance' ), 'r.role_id=i.parent_role_id' )
-            ->where( 'role_id = ? ', $userID )
-            ->order(    array( 'user_id', 'order' ) );
-
+            ->from(array('r' => 'Gonium_acl_roles'), 
+        array('r.role_id', 'i.parent_role_id'))
+            ->joinLeft(array('i' => 'Gonium_acl_inheritance'), 
+        'r.role_id=i.parent_role_id')
+            ->where('role_id = ? ', $userID)
+            ->order(array('user_id', 'order'));
+        
         //$select->__toString();
+        
 
-        return $db->fetchAll( $select );
+        return $db->fetchAll($select);
     }
 
-    /**
-     *     Gets the roles that have some access rule for the resources given.
-     *  If there are no resources or roles, then gets all.
-     *
-     * @param mixed
-     */
-    /*
+/**
+ * Gets the roles that have some access rule for the resources given.
+ * If there are no resources or roles, then gets all.
+ *
+ * @param mixed
+ */
+/*
     public static function getRolesFromAccess(Array $roleIDs = array(), Array $rolesIDs = array())
     {
         $db = Zend_Registry::get('GoniumCore_Db');
@@ -153,13 +160,13 @@ class GoniumCore_Model_ACL_Role extends Gonium_Db_Table_Abstract
         } while( !empty( $rolesIDs ) );
     }
     */
-    /**
-     *     Gets the roles that have some access rule for the resources given.
-     *  If there are no resources or roles, then gets all.
-     *
-     * @param mixed
-     */
-    /*
+/**
+ * Gets the roles that have some access rule for the resources given.
+ * If there are no resources or roles, then gets all.
+ *
+ * @param mixed
+ */
+/*
      * public static function getRolesFromAccess()
     {
 

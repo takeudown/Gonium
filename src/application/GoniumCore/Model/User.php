@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -28,7 +28,7 @@ require_once 'Zend/Auth.php';
 /** @see Gonium_Model_Abstract */
 require_once 'Gonium/Db/Table/Abstract.php';
 /** @see Gonium_Model_User_Interface */
-require_once 'Gonium/Model/User/Interface.php'; 
+require_once 'Gonium/Model/User/Interface.php';
 
 /**
  * @category    Gonium
@@ -38,61 +38,59 @@ require_once 'Gonium/Model/User/Interface.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class GoniumCore_Model_User 
-    extends Gonium_Db_Table_Abstract
-    implements Gonium_Model_User_Interface 
+class GoniumCore_Model_User extends Gonium_Db_Table_Abstract implements 
+Gonium_Model_User_Interface
 {
+
     public $_name = 'core_user';
+
     public $_primary = 'user_id';
-    
+
     protected static $_identityColumn = 'user_name';
+
     protected static $_credentialColumn = 'user_password';
     
-    public static function getIdentityColumn()
+    public static function getIdentityColumn ()
     {
-    	return self::$_identityColumn;
+        return self::$_identityColumn;
     }
     
-    public static function getCredentialColumn()
+    public static function getCredentialColumn ()
     {
         return self::$_credentialColumn;
     }
-
-    public function getID($username)
+    
+    public function getID ($username)
     {
-        $table =new self();
+        $table = new self();
         $db = $table->getAdapter();
-
+        
         $select = $table->select();
-        $select
-            ->from($table->_name, 'user_id')
-            ->where( $db->quoteInto('user_name = ?', $username ) );
-
-        $result = $table->fetchRow( $select );
-
-        if( is_null($result) )
-            return null;
+        $select->from($table->_name, 'user_id')->where(
+        $db->quoteInto('user_name = ?', $username));
+        
+        $result = $table->fetchRow($select);
+        
+        if (is_null($result)) return null;
         else
             return $result->user_id;
     }
     
-    public function getUser($user_id)
+    public function getUser ($user_id)
     {
-    	$select = $this->select();
-		$select->where('user_id = ?', $user_id);
-		
-		// Single Row
-		return $this->fetchRow($select);
+        $select = $this->select();
+        $select->where('user_id = ?', $user_id);
+        
+        // Single Row
+        return $this->fetchRow($select);
     }
     
     /**
      * Create a new user account. Password is encoded in SHA1 
      */
-    public function create($username, $password)
+    public function create ($username, $password)
     {
-    	$this->insert(array(
-    	   'username' => $username, 
-    	   'password' => sha1($password)
-    	));
+        $this->insert(
+        array('username' => $username, 'password' => sha1($password)));
     }
 }

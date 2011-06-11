@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -32,7 +32,6 @@ require_once 'GoniumCore/Model/ACL/Access.php';
 /** @see GoniumCore_Model_ACL_Resources */
 require_once 'GoniumCore/Model/ACL/Resource.php';
 
-
 /**
  *
  * Database structure:
@@ -44,13 +43,13 @@ require_once 'GoniumCore/Model/ACL/Resource.php';
  * | parent_id        |---'`--| *resource_id  N|       +-------------+   `--| *parent_id   |
  * | *privilege      N|<------| *privilege    N|                            | order        |
  * +------------------+       | allow          |                            +--------------+
- *                            +----------------+
+ * +----------------+
  *
  *
- *   *field = PRIMARY KEY( field )
- *   -----> = foreign key constraint
+ * *field = PRIMARY KEY( field )
+ * -----> = foreign key constraint
  *
- *   The actual table names should be: Gonium_acl_resources, Gonium_acl_access, acl_roles, Gonium_acl_inheritance.
+ * The actual table names should be: Gonium_acl_resources, Gonium_acl_access, acl_roles, Gonium_acl_inheritance.
  *
  * access.allow is a boolean field, that specifies whether the respective rule is an allow rule or a deny rule (important for inherited access).
  *
@@ -69,7 +68,7 @@ require_once "Gonium/Model/Abstract.php";
  */
 class GoniumCore_Model_ACL extends Gonium_Model_Abstract // implements Gonium_Model_Resource_Interface // , Gonium_Model_Roles_Interface, Gonium_Model_Access_Interface
 {
-	/*
+    /*
     public static function getResources($resources_id = null)
     {
         $resTable = new ResourcesTable($resources_id);

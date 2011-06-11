@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -20,7 +20,7 @@
  * @author Gonzalo Diaz Cruz - http://labs.gon.cl/gonium
  *
  */
- 
+
 $translate[_('isEmpty')] = 'Value is empty, but a non-empty value is required';
 $translate[_('stringEmpty')] = "'%value%' is an empty string";
 

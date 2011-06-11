@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -34,184 +34,192 @@ require_once 'Gonium/Controller/Action/Helper/Error/Interface.php';
  */
 class Error_IndexController extends Zend_Controller_Action
 {
-    public function init()
+    public function init ()
     {
         $layout = Zend_Layout::getMvcInstance();
-        if(Core::getEnvironment() !== 'admin')
-            $layout->setLayout('error');
+        if (Core::getEnvironment() !== 'admin') $layout->setLayout('error');
         else
             $layout->setLayout('error_backend');
-
+        
         $this->language = Zend_Registry::get('Zend_Translate');
-
+        
         $this->_helper->viewRenderer->setNoRender(true);
     }
-   
-    public function indexAction()
+    
+    public function indexAction ()
     {
         return $this->_error403();
     }
     
-    public function errorAction()
+    public function errorAction ()
     {
         //$config = Zend_Registry::get('GoniumCore_Config');
         $errors = $this->_getParam('error_handler');
         $errorType = $errors->type;
         
-        if(!is_null($errors))
+        if (! is_null($errors))
         {
             $exception = $errors->exception;
-            $this->_request->setParam( 'exception', $exception );
-        } else {
+            $this->_request->setParam('exception', $exception);
+        } else
+        {
             //$exception = $this->_request->getParam( 'exception' );
         }
-
+        
         switch ($errorType)
         {
             // 404 error -- controller or action not found
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 $this->_error404();
-			break;
+                break;
             default:
                 $this->_exceptionHandle();
-            break;
+                break;
         }
     }
     
     /**
-    * !@todo: map Exception's to Action Method
-    */
-    protected function _exceptionHandle(Exception $e)
+     * !@todo: map Exception's to Action Method
+     */
+    protected function _exceptionHandle (Exception $e)
     {
-        try {
-            $this->getResponse()->setRawHeader('HTTP/1.1 500 Internal Server Error');
+        try
+        {
+            $this->getResponse()->setRawHeader(
+            'HTTP/1.1 500 Internal Server Error');
             
-	        try
-	        {
-	        	$exception = $this->_request->getParam('exception');
-	       		$class = new ReflectionObject($exception);
-		        $name = $class->getName();
-		        //$name = str_replace('_','',$name).'Controller';
-		        $name = str_replace('_','',$name);
-		        $path = APP_ROOT . '/GoniumCore/Module/Error/helper/';
-	        	
-	        	$this->_helper->addPath($path,'Error_Helper_');
-	        	
-	        	$helper = $this->_helper->{$name};
-	        	if($helper instanceof Gonium_Controller_Action_Helper_Error_Interface)
-	        	{
-
-	        		$this->_errorMessage(
-			            $helper->getTitle(),
-			            $helper->getBody() 
-			        );
-	        		
-	        	}
-
-	        } catch(Exception $e) {
-	        	Gonium_Exception::null($e);
-				$this->_error500();
-	        }
-        } catch(Exception $e) {
-        	Gonium_Exception::null($e);
-			$this->_error500();	
+            try
+            {
+                $exception = $this->_request->getParam('exception');
+                $class = new ReflectionObject($exception);
+                $name = $class->getName();
+                //$name = str_replace('_','',$name).'Controller';
+                $name = str_replace('_', '', $name);
+                $path = APP_ROOT . '/GoniumCore/Module/Error/helper/';
+                
+                $this->_helper->addPath($path, 'Error_Helper_');
+                
+                $helper = $this->_helper->{$name};
+                if ($helper instanceof Gonium_Controller_Action_Helper_Error_Interface)
+                {
+                    
+                    $this->_errorMessage($helper->getTitle(), 
+                    $helper->getBody());
+                
+                }
+            
+            } catch (Exception $e)
+            {
+                Gonium_Exception::null($e);
+                $this->_error500();
+            }
+        } catch (Exception $e)
+        {
+            Gonium_Exception::null($e);
+            $this->_error500();
         }
     }
     
-    public function deniedAction()
+    public function deniedAction ()
     {
         $this->_error403();
     }
     
-    public function remoteAction()
+    public function remoteAction ()
     {
-        try {
-            $this->getResponse()->setRawHeader('HTTP/1.1 500 Internal Server Error');
-        } catch(Exception $e) { Gonium_Exception::null($e); }
+        try
+        {
+            $this->getResponse()->setRawHeader(
+            'HTTP/1.1 500 Internal Server Error');
+        } catch (Exception $e)
+        {
+            Gonium_Exception::null($e);
+        }
         
-        $this->_errorMessage( 
-            $this->language->translate('Remote Error'),
-            $this->language->translate('Remote Error Message')
-        );
+        $this->_errorMessage($this->language->translate('Remote Error'), 
+        $this->language->translate('Remote Error Message'));
     }
     
     // PROTECTED METHODS
     
-    protected function _error403()
+
+    protected function _error403 ()
     {
-        try {
+        try
+        {
             $this->getResponse()->setRawHeader('HTTP/1.1 403 Forbidden');
-        } catch(Exception $e) { Gonium_Exception::null($e); }
+        } catch (Exception $e)
+        {
+            Gonium_Exception::null($e);
+        }
         
-        $this->_errorMessage(
-            'Error 403', 
-            $this->language->translate('Error 403')
-        );
+        $this->_errorMessage('Error 403', 
+        $this->language->translate('Error 403'));
     }
-
-    protected function _error404()
-    {        
-        try {
+    
+    protected function _error404 ()
+    {
+        try
+        {
             $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
-        } catch(Exception $e) { Gonium_Exception::null($e); }
+        } catch (Exception $e)
+        {
+            Gonium_Exception::null($e);
+        }
         
-        $this->view->headMeta()->appendHttpEquiv(
-            'Refresh', '3;'. $this->view->url( array(), null, true)
-        );
-
-        $this->_errorMessage(
-            'Error 404', 
-            $this->language->translate('Error 404')
-        );
+        $this->view->headMeta()->appendHttpEquiv('Refresh', 
+        '3;' . $this->view->url(array(), null, true));
+        
+        $this->_errorMessage('Error 404', 
+        $this->language->translate('Error 404'));
     }
-
-    protected function _error500()
+    
+    protected function _error500 ()
     {
-   		$this->_errorMessage(
-            'Error 500', 
-            $this->language->translate('Error 500')
-        );
+        $this->_errorMessage('Error 500', 
+        $this->language->translate('Error 500'));
     }
-
-    public function databaseAction()
+    
+    public function databaseAction ()
     {
-        try {
-            $this->getResponse()->setRawHeader('HTTP/1.1 500 Internal Server Error');
-        } catch(Exception $e) {}
+        try
+        {
+            $this->getResponse()->setRawHeader(
+            'HTTP/1.1 500 Internal Server Error');
+        } catch (Exception $e)
+        {}
         
         $e = $this->_getParam('exception');
-
-        if( $e instanceof Zend_Db_Adapter_Exception )
+        
+        if ($e instanceof Zend_Db_Adapter_Exception)
         {
             // Connection Exception
-            $this->_errorMessage( 
-                $this->language->translate('Database Error'),
-                $this->language->translate('Database Connection Error')
-            );
-        } else {        
+            $this->_errorMessage(
+            $this->language->translate('Database Error'), 
+            $this->language->translate('Database Connection Error'));
+        } else
+        {
             // Connection Query Exception
-            $this->_errorMessage( 
-                $this->language->translate('Database Error'),
-                $this->language->translate('Database Execution Error')
-            );
+            $this->_errorMessage(
+            $this->language->translate('Database Error'), 
+            $this->language->translate('Database Execution Error'));
         }
     }
     
     // SET ERROR MESSAGE
-    protected function _errorMessage($title, $message)
+    protected function _errorMessage ($title, $message)
     {
-    	$config = Zend_Registry::get('GoniumCore_Config');
+        $config = Zend_Registry::get('GoniumCore_Config');
         $e = $this->_getParam('exception');
         
-        $this->view->assign( 'errorMessage', $message );
+        $this->view->assign('errorMessage', $message);
         
-        if($config->show->errors)
+        if ($config->show->errors)
         {
-	        $this->view->assign( 'errorLog', ((bool) $e) ? nl2br($e) : null );     
+            $this->view->assign('errorLog', ((bool) $e) ? nl2br($e) : null);
         }
-        $this->view->headTitle( $title,
-            Zend_View_Helper_Placeholder_Container_Abstract::PREPEND
-        );
+        $this->view->headTitle($title, 
+        Zend_View_Helper_Placeholder_Container_Abstract::PREPEND);
     }
 }

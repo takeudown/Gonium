@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -36,48 +36,48 @@ require_once 'Gonium/Widget.php';
  */
 class Widget_DbInfo extends Gonium_Widget
 {
-    public function execute()
+    public function execute ()
     {
-    	$this->_output = '';
-
+        $this->_output = '';
+        
         $config = Zend_Registry::get('GoniumCore_Config');
         $db = Zend_Registry::get('GoniumCore_Db');
         $profiler = $db->getProfiler();
         
-        if($profiler->getEnabled())
+        if ($profiler->getEnabled())
         {
-            $totalTime    = $profiler->getTotalElapsedSecs();
-            $queryCount   = $profiler->getTotalNumQueries();
-            $longestTime  = 0;
+            $totalTime = $profiler->getTotalElapsedSecs();
+            $queryCount = $profiler->getTotalNumQueries();
+            $longestTime = 0;
             $longestQuery = null;
-        
+            
             $queries = $profiler->getQueryProfiles();
             $queries = $queries ? $queries : array();
             
-            foreach ( $queries as $query) {
-                if ($query->getElapsedSecs() > $longestTime) {
-                    $longestTime  = $query->getElapsedSecs();
+            foreach ($queries as $query)
+            {
+                if ($query->getElapsedSecs() > $longestTime)
+                {
+                    $longestTime = $query->getElapsedSecs();
                     $longestQuery = $query->getQuery();
                 }
             }
-        
-            $this->_view->assign('db_queryCount', $queryCount );
+            
+            $this->_view->assign('db_queryCount', $queryCount);
             $this->_view->assign('db_totalTime', round($totalTime, 5));
-        
+            
             /*
             if( (bool) $config->system->showDbInfo )
             {*/
-                $this->_view->assign('db_QueriesPerSecond',
-                   ($totalTime != 0) ? round($queryCount/$totalTime, 5) : false
-                );
-        
-                $this->_view->assign('db_AverageQueryLength',
-	               ($queryCount != 0) ? round($totalTime/$queryCount, 5) : false
-	            );
-        
-                $this->_view->assign('db_longestQuery', $longestQuery);
-                $this->_view->assign('db_longestTime', round($longestTime, 5));
-        	/*
+            $this->_view->assign('db_QueriesPerSecond', 
+            ($totalTime != 0) ? round($queryCount / $totalTime, 5) : false);
+            
+            $this->_view->assign('db_AverageQueryLength', 
+            ($queryCount != 0) ? round($totalTime / $queryCount, 5) : false);
+            
+            $this->_view->assign('db_longestQuery', $longestQuery);
+            $this->_view->assign('db_longestTime', round($longestTime, 5));
+            /*
             } else {
                 $this->_view->assign('db_QueriesPerSecond', false);
                 $this->_view->assign('db_AverageQueryLength', false);
@@ -85,8 +85,8 @@ class Widget_DbInfo extends Gonium_Widget
                 $this->_view->assign('db_longestTime', false);
             }
             */
-
-            $this->setContent( $this->_view->render('DbInfo.phtml') );
+            
+            $this->setContent($this->_view->render('DbInfo.phtml'));
         }
     }
 }

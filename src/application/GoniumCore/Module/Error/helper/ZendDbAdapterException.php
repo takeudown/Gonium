@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -32,34 +32,36 @@ require_once 'Zend/Controller/Action.php';
  * @version     $Id$
  */
 
-class Error_Helper_ZendDbAdapterException extends Zend_Controller_Action_Helper_Abstract
-	implements Gonium_Controller_Action_Helper_Error_Interface 
+class Error_Helper_ZendDbAdapterException extends Zend_Controller_Action_Helper_Abstract implements 
+Gonium_Controller_Action_Helper_Error_Interface
 {
-	public function getTitle()
-	{
-		try{
-			$lang = Zend_Registry::get('Zend_Translate');
-			return $lang->translate('Database Error');
-		} catch(Exception $e)
-		{
-			Gonium_Exception::dump($e);
-			die();
-		}
-		
-		return 'FAIL';
-	}
-	
-	public function getBody()
-	{
-		try{
-			$lang = Zend_Registry::get('Zend_Translate');
-			return $lang->translate('Database Connection Error');
-		} catch(Exception $e)
-		{
-			Gonium_Exception::dump($e);
-			die();
-		}
-		
-		return 'FAIL';
-	}
+    public function getTitle ()
+    {
+        try
+        {
+            $lang = Zend_Registry::get('Zend_Translate');
+            return $lang->translate('Database Error');
+        } catch (Exception $e)
+        {
+            Gonium_Exception::dump($e);
+            die();
+        }
+        
+        return 'FAIL';
+    }
+    
+    public function getBody ()
+    {
+        try
+        {
+            $lang = Zend_Registry::get('Zend_Translate');
+            return $lang->translate('Database Connection Error');
+        } catch (Exception $e)
+        {
+            Gonium_Exception::dump($e);
+            die();
+        }
+        
+        return 'FAIL';
+    }
 }

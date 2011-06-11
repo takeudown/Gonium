@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -36,14 +36,16 @@ require_once 'Gonium/Db/Table/Abstract.php';
  */
 class GoniumCore_Model_ACL_Access extends Gonium_Db_Table_Abstract
 {
+
     public $_name = 'GoniumCore_acl_access';
+
     public $_primary = array('role_id', 'resource_id', 'privilege');
 
-    /**
-    * @param mixed [resources_id, ...]
-    * @todo complete ACL model implementation
-    */
-    /*
+/**
+ * @param mixed [resources_id, ...]
+ * @todo complete ACL model implementation
+ */
+/*
     public static function getAccess(Array $resources, Array $roles)
     {
         $select = $this->dbase->select()
