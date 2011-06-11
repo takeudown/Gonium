@@ -129,7 +129,45 @@ $application = new Zend_Application(
     APP_ENV, 
     Zend_Registry::get('GoniumCore_Config')
 );
-	    
+
+if (APP_ENV == 'development') {
+	/*
+    require_once('Zend/Log.php');
+    require_once('Zend/Log/Writer/Firebug.php');
+    //require_once('Zend/Controller/Response/Http.php');
+    //require_once('Zend/Controller/Request/Http.php');
+
+    // create the logger and log writer
+    $writer = new Zend_Log_Writer_Firebug();
+    $logger = new Zend_Log($writer);
+	
+	
+    // get the wildfire channel
+    $channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
+
+    // create and set the HTTP response
+    $response = new Zend_Controller_Response_Http();
+    $channel->setResponse($response);
+
+    // create and set the HTTP request
+    $channel->setRequest(new Zend_Controller_Request_Http());
+
+    // record log messages
+    $logger->info('asdf');
+    //$logger->warn('warning message');
+    //$logger->err('error message');
+
+    // insert the wildfire headers into the HTTP response
+    $channel->flush();
+
+    // send the HTTP response headers
+    $response->sendHeaders();
+	
+
+	Zend_Registry::set('GoniumCore_Logger',$logger);
+	*/
+}
+    
 // Create bootstrap, and run
 $application->bootstrap();
 $application->run();

@@ -47,6 +47,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $autoloader;
     }
 
+	/**
+     * Development Logging
+     * 
+     * @return Zend_Log
+     */
+	public function _initLogger()
+	{
+		if (APP_ENV != 'production') {
+			// writer
+     		$writer = new Zend_Log_Writer_Firebug();
+     		// log
+     		$log = new Zend_Log($writer);
+
+			Zend_Registry::set('GoniumCore_Log',$log);
+			return $log;
+		}
+	}
+
     /**
      * Bootstrap the view doctype
      * 
@@ -95,13 +113,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	    	$db = $this->getPluginResource('db');
 	    	if($db instanceOf Zend_Application_Resource_Db)
 	    	{
-
-	    		$db->getDbAdapter()->getProfiler()->setEnabled(
-	    			$conf->resources->db->profiler->enabled);
+				
+	    		//$db->getDbAdapter()->getProfiler()->setEnabled(
+	    		//	$conf->resources->db->profiler->enabled);
 	    	
 		    	Zend_Db_Table_Abstract::setDefaultAdapter($db->getDbAdapter());
 		    	Gonium_Db_Table_Abstract::setPrefix($conf->resources->db->prefix);
 		    	
+				if (APP_ENV != 'production') {
+					$profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
+					$profiler->setEnabled(true);
+					$db->getDbAdapter()->setProfiler($profiler);
+				}
 		    	
 		    	Zend_Registry::set('GoniumCore_Db', $db->getDbAdapter());
 	    	}

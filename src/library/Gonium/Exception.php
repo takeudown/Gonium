@@ -23,6 +23,8 @@
  * @version     $Id$
  */
 
+require_once 'Zend/Log.php';
+
 /**
  * @package     Gonium
  * @category    Gonium
@@ -33,6 +35,8 @@
  */
 class Gonium_Exception extends Exception
 {
+	private static $log = null;
+	
 	/**
 	 * Dump an exception as output as HTML 
 	 */
@@ -80,4 +84,32 @@ class Gonium_Exception extends Exception
     {
         return self::null($this);
     }
+
+	public static function setLog(Zend_Log $log)
+	{
+		self::$log = $log;
+	}
+	
+	public static function getLog()
+	{
+		return self::$log;
+	}
+	
+	public static function log($message, $label=null)
+	{
+		if (self::$log != null)
+		{
+	    	if ($label!=null) {
+	        	$message = array($label,$message);
+	    	}
+	
+	    	self::$log->debug($message);
+		}
+	}
+		
+	public function logMe()
+	{
+		 return self::log($this);
+	}
+	
 }
