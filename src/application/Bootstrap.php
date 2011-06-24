@@ -33,6 +33,7 @@ require_once 'Zend/Application/Bootstrap/Bootstrap.php';
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+
     /**
      * Bootstrap autoloader for application resources
      * 
@@ -44,7 +45,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         array('namespace' => 'Default', 'basePath' => dirname(__FILE__)));
         return $autoloader;
     }
-    
+
     /**
      * Development Logging
      * 
@@ -52,18 +53,29 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     public function _initLogger ()
     {
+        $conf = Zend_Registry::get('GoniumCore_Config');
+        $log = new Zend_Log();
+        Zend_Registry::set('GoniumCore_Log', $log);
+        
         if (APP_ENV != 'production')
         {
-            // writer
+            // write to Firebug
             $writer = new Zend_Log_Writer_Firebug();
             // log
-            $log = new Zend_Log($writer);
-            
-            Zend_Registry::set('GoniumCore_Log', $log);
-            return $log;
-        }
+            $log->addWriter($writer);
+        
+        } else 
+            if ($conf->system->log->file)
+            {
+                // write to file
+                $writer = new Zend_Log_Writer_Stream(
+                $conf->system->log->file);
+                $log->addWriter($writer);
+            }
+        
+        return $log;
     }
-    
+
     /**
      * Bootstrap the view doctype
      * 
@@ -76,7 +88,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->doctype('XHTML1_STRICT');
         Zend_Registry::set('GoniumCore_View', $view);
     }
-    
+
     protected function _initModules ()
     {
         $conf = Zend_Registry::get('GoniumCore_Config');
@@ -97,13 +109,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             }
         }
     }
-    
+
     protected function _initAuth ()
     {
         $auth = Zend_Auth::getInstance();
         Zend_Registry::set('GoniumCore_Auth', $auth);
     }
-    
+
     protected function _initDb ()
     {
         $conf = Zend_Registry::get('GoniumCore_Config');
@@ -120,7 +132,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
                 Zend_Db_Table_Abstract::setDefaultAdapter($db->getDbAdapter());
                 Gonium_Db_Table_Abstract::setPrefix(
-                $conf->resources->db->prefix);
+                    $conf->resources->db->prefix);
                 
                 if (APP_ENV != 'production')
                 {

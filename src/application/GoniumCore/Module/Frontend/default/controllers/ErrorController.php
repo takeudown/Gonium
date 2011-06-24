@@ -9,6 +9,7 @@
  */
 class ErrorController extends Zend_Controller_Action
 {
+
     /**
      * errorAction() is the action that will be called by the "ErrorHandler" 
      * plugin.  When an error/exception has been encountered
@@ -23,6 +24,8 @@ class ErrorController extends Zend_Controller_Action
     public function errorAction ()
     {
         $errors = $this->_getParam('error_handler');
+        $log = Zend_Registry::get('GoniumCore_Log');
+        $log->err($errors->exception);
         
         switch ($errors->type)
         {
