@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gonium $Id$\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-19 03:21-0300\n"
-"PO-Revision-Date: 2008-12-19 03:22-0300\n"
-"Last-Translator: Gonzalo Díaz <gnzsquall@gmail.com>\n"
+"POT-Creation-Date: 2011-06-18 19:29-0300\n"
+"PO-Revision-Date: 2011-06-18 19:32-0300\n"
+"Last-Translator: Gonzalo Diaz Cruz <translate@gon.cl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,118 +17,163 @@ msgstr ""
 "VERSION: $Id$\n"
 "X-Poedit-SearchPath-0: ../../../GoniumCore/Module\n"
 
-#: ../../../GoniumCore/Module/Admin/user/helpers/UserForm.php:48
-#: ../../../GoniumCore/Module/Admin/user/controllers/IndexController.php:65
-msgid "username"
-msgstr "username"
+#: ../../../GoniumCore/Module/Admin/acl/controllers/IndexController.php:49
+#: ../../../GoniumCore/Module/Admin/acl/controllers/ResourceController.php:49
+#: ../../../GoniumCore/Module/Admin/acl/controllers/RoleController.php:49
+msgid "Permission's Management"
+msgstr "User's Management"
 
-#: ../../../GoniumCore/Module/Admin/user/helpers/UserForm.php:53
-msgid "password"
-msgstr "password"
+#: ../../../GoniumCore/Module/Admin/acl/controllers/ResourceController.php:76
+msgid "acl_resource_id"
+msgstr ""
 
-#: ../../../GoniumCore/Module/Admin/user/helpers/UserForm.php:58
-msgid "confirm password"
-msgstr "confirm password"
+#: ../../../GoniumCore/Module/Admin/acl/controllers/ResourceController.php:82
+msgid "acl_resource_parent_name"
+msgstr ""
 
-#: ../../../GoniumCore/Module/Admin/user/helpers/UserForm.php:62
-msgid "Add User"
-msgstr "Add User"
+#: ../../../GoniumCore/Module/Admin/acl/controllers/ResourceController.php:88
+msgid "acl_resource_name"
+msgstr ""
+
+#: ../../../GoniumCore/Module/Admin/acl/controllers/ResourceController.php:100
+#: ../../../GoniumCore/Module/Admin/acl/controllers/RoleController.php:78
+#: ../../../GoniumCore/Module/Admin/user/controllers/IndexController.php:75
+msgid "Edit"
+msgstr "Edit"
+
+#: ../../../GoniumCore/Module/Admin/acl/controllers/ResourceController.php:121
+#: ../../../GoniumCore/Module/Admin/acl/controllers/RoleController.php:99
+#: ../../../GoniumCore/Module/Admin/user/controllers/IndexController.php:96
+msgid "Delete"
+msgstr "Delete"
 
 #: ../../../GoniumCore/Module/Admin/user/controllers/IndexController.php:43
 msgid "User's Management"
 msgstr "User's Management"
 
-#: ../../../GoniumCore/Module/Admin/user/controllers/IndexController.php:75
-msgid "Edit"
-msgstr "Edit"
+#: ../../../GoniumCore/Module/Admin/user/controllers/IndexController.php:63
+#: ../../../GoniumCore/Module/Admin/user/helpers/UserForm.php:51
+msgid "username"
+msgstr "username"
 
-#: ../../../GoniumCore/Module/Admin/user/controllers/IndexController.php:92
-msgid "Delete"
-msgstr "Delete"
+#: ../../../GoniumCore/Module/Admin/user/controllers/IndexController.php:104
+msgid "Are you sure you want to delete $username ($uid)?"
+msgstr ""
 
-#: ../../../GoniumCore/Module/Error/IndexController.php:116
+#: ../../../GoniumCore/Module/Admin/user/helpers/UserForm.php:57
+msgid "password"
+msgstr "password"
+
+#: ../../../GoniumCore/Module/Admin/user/helpers/UserForm.php:63
+msgid "confirm password"
+msgstr "confirm password"
+
+#: ../../../GoniumCore/Module/Admin/user/helpers/UserForm.php:67
+msgid "Add User"
+msgstr "Add User"
+
+#: ../../../GoniumCore/Module/Error/IndexController.php:140
 msgid "Remote Error"
 msgstr "Remote Error"
 
-#: ../../../GoniumCore/Module/Error/IndexController.php:117
+#: ../../../GoniumCore/Module/Error/IndexController.php:141
 msgid "Remote Error Message"
 msgstr "An error occurred during the remote connection."
 
-#: ../../../GoniumCore/Module/Error/IndexController.php:131
+#: ../../../GoniumCore/Module/Error/IndexController.php:158
 msgid "Error 403"
 msgstr "Error 403: Denied access to this page."
 
-#: ../../../GoniumCore/Module/Error/IndexController.php:147
+#: ../../../GoniumCore/Module/Error/IndexController.php:175
 msgid "Error 404"
 msgstr "Error 404: Requested page not found"
 
-#: ../../../GoniumCore/Module/Error/IndexController.php:159
+#: ../../../GoniumCore/Module/Error/IndexController.php:181
 msgid "Error 500"
 msgstr "Error 500: Internal Error"
 
-#: ../../../GoniumCore/Module/Error/IndexController.php:175
-#: ../../../GoniumCore/Module/Error/IndexController.php:181
+#: ../../../GoniumCore/Module/Error/IndexController.php:199
+#: ../../../GoniumCore/Module/Error/IndexController.php:205
+#: ../../../GoniumCore/Module/Error/helper/ZendDbAdapterException.php:43
 msgid "Database Error"
 msgstr "Database Error"
 
-#: ../../../GoniumCore/Module/Error/IndexController.php:176
+#: ../../../GoniumCore/Module/Error/IndexController.php:200
+#: ../../../GoniumCore/Module/Error/helper/ZendDbAdapterException.php:58
 msgid "Database Connection Error"
 msgstr "Database Connection Error"
 
-#: ../../../GoniumCore/Module/Error/IndexController.php:182
+#: ../../../GoniumCore/Module/Error/IndexController.php:206
 msgid "Database Execution Error"
 msgstr "An error occurred during the query to the database."
 
-#: ../../../GoniumCore/Module/Install/controllers/IndexController.php:59
-msgid "Install"
-msgstr "Instalar"
-
-#: ../../../GoniumCore/Module/Install/controllers/IndexController.php:122
-msgid "Try to write config file"
-msgstr "Try to write configuration file"
-
-#: ../../../GoniumCore/Module/Install/controllers/IndexController.php:165
-msgid "Write configuration file"
-msgstr "Write configuration file"
-
-#: ../../../GoniumCore/Module/Install/controllers/IndexController.php:183
-msgid "Download configuration file"
-msgstr "Download configuration file"
-
-#: ../../../GoniumCore/Module/Install/controllers/IndexController.php:194
-msgid "Error: writing file"
-msgstr "Error: can't write configuration file"
-
-#: ../../../GoniumCore/Module/Install/controllers/IndexController.php:195
-msgid "Download config.ini file and upload to application/etc/"
-msgstr "Download config.ini file and upload to application/etc/"
-
-#: ../../../GoniumCore/Module/Install/controllers/IndexController.php:229
-msgid "Installation success"
-msgstr "Installation success"
-
-#: ../../../GoniumCore/Module/Frontend/user/controllers/AuthController.php:106
+#: ../../../GoniumCore/Module/Frontend/user/controllers/AuthController.php:116
 msgid "userLogin_IndentityNotFound"
 msgstr "The username is incorrect. Are you registered with this name?"
 
-#: ../../../GoniumCore/Module/Frontend/user/controllers/AuthController.php:112
+#: ../../../GoniumCore/Module/Frontend/user/controllers/AuthController.php:123
 msgid "userLogin_FailureCredentialInvalid"
 msgstr "Incorrect password"
 
-#: ../../../GoniumCore/Module/Frontend/user/controllers/AuthController.php:132
+#: ../../../GoniumCore/Module/Frontend/user/controllers/AuthController.php:168
 msgid "userLogin_Success"
 msgstr "Logged correctly"
 
-#: ../../../GoniumCore/Module/Frontend/user/controllers/AuthController.php:147
-#: ../../../GoniumCore/Module/Frontend/user/controllers/OpenidController.php:145
+#: ../../../GoniumCore/Module/Frontend/user/controllers/AuthController.php:182
+#: ../../../GoniumCore/Module/Frontend/user/controllers/OpenidController.php:168
 msgid "userLogin_SignedOut"
 msgstr "Session closed correctly"
 
-#: ../../../GoniumCore/Module/Install/views/scripts/index.phtml:14
-msgid "Go to home"
-msgstr "Go to home"
+#: ../../../GoniumCore/Module/Install/installer/controllers/IndexController.php:52
+msgid "Gonium Installer"
+msgstr "Instalar"
 
-#: ../../../GoniumCore/Module/Frontend/user/views/scripts/index.phtml:1
+#: ../../../GoniumCore/Module/Install/installer/controllers/IndexController.php:53
+msgid "wellcome!"
+msgstr ""
+
+#: ../../../GoniumCore/Module/Install/installer/controllers/IndexController.php:61
+msgid "Install"
+msgstr "Instalar"
+
+#: ../../../GoniumCore/Module/Install/installer/controllers/IndexController.php:142
+msgid "Installation success"
+msgstr "Installation success"
+
+#: ../../../GoniumCore/Module/Install/installer/controllers/IndexController.php:301
+msgid "Write configuration file"
+msgstr "Write configuration file"
+
+#: ../../../GoniumCore/Module/Install/installer/controllers/IndexController.php:322
+msgid "Download configuration file"
+msgstr "Download configuration file"
+
+#: ../../../GoniumCore/Module/Install/installer/controllers/IndexController.php:332
+msgid "Error: writing file"
+msgstr "Error: can't write configuration file"
+
+#: ../../../GoniumCore/Module/Install/installer/controllers/IndexController.php:335
+#, php-format
+msgid "Download config.ini file and upload to %1$s"
+msgstr "Download config.ini file and upload to application/etc/"
+
+#: ../../../GoniumCore/Module/Frontend/user/views/scripts/auth/index.phtml:2
+#: ../../../GoniumCore/Module/Frontend/user/views/scripts/index/profile.phtml:2
+#: ../../../GoniumCore/Module/Frontend/user/views/scripts/openid/index.phtml:2
 msgid "User Panel"
 msgstr "User Panel"
 
+#: ../../../GoniumCore/Module/Frontend/user/views/scripts/index/profile.phtml:9
+msgid "profile image"
+msgstr ""
+
+#: ../../../GoniumCore/Module/Install/installer/views/scripts/index/index.phtml:31
+msgid "Go to home"
+msgstr "Go to home"
+
+#: ../../../GoniumCore/Module/Install/installer/views/scripts/index/index.phtml:37
+msgid "Go to administrator panel"
+msgstr ""
+
+#~ msgid "Try to write config file"
+#~ msgstr "Try to write configuration file"

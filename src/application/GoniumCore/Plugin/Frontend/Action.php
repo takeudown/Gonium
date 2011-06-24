@@ -38,6 +38,7 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  */
 class GoniumCore_Plugin_Frontend_Action extends Zend_Controller_Plugin_Abstract
 {
+
     public function preDispatch (Zend_Controller_Request_Abstract $request)
     {
         parent::dispatchLoopStartup($request);
@@ -48,21 +49,21 @@ class GoniumCore_Plugin_Frontend_Action extends Zend_Controller_Plugin_Abstract
         //////////////////// Configure Action Helper Paths ////////////////////
         // Add path and prefix of Controller Helpers of user Module
         Zend_Controller_Action_HelperBroker::addPath(
-        'GoniumCore/Module/Frontend/' . $module . '/helpers', 
-        'GoniumCore_Module_Frontend_' . ucfirst($module) . '_Helper_');
+            'GoniumCore/Module/Frontend/' . $module . '/helpers', 
+            'GoniumCore_Module_Frontend_' . ucfirst($module) . '_Helper_');
         Zend_Controller_Action_HelperBroker::addPath(
-        HOME_ROOT . DS . 'Module' . DS . $module . '/helpers', 
-        'Mod_' . ucfirst($module) . '_Helper_');
+            HOME_ROOT . DS . 'Module' . DS . $module . '/helpers', 
+            'Mod_' . ucfirst($module) . '_Helper_');
         Zend_Controller_Action_HelperBroker::addPrefix(
-        'Gonium_Controller_Action_Helper');
+            'Gonium_Controller_Action_Helper');
         
         //////////////// Configure Paths for LoadModel Helper //////////////////
         
 
         $loader = new Zend_Loader_PluginLoader(array(), 'model');
         $loader->addPrefixPath('GoniumCore_Model_', APP_ROOT . '/Model/')->addPrefixPath(
-        'Mod_' . ucfirst($module) . '_Model_', 
-        HOME_ROOT . '/Module/' . $module . '/models');
+            'Mod_' . ucfirst($module) . '_Model_', 
+            HOME_ROOT . '/Module/' . $module . '/models');
         
         Gonium_Controller_Action_Helper_LoadModel::setLoader($loader);
     }

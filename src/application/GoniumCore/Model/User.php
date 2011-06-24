@@ -49,17 +49,30 @@ Gonium_Model_User_Interface
     protected static $_identityColumn = 'user_name';
 
     protected static $_credentialColumn = 'user_password';
-    
+
+    protected static $_activationCodeColumn = 'user_activation_code';
+
     public static function getIdentityColumn ()
     {
         return self::$_identityColumn;
     }
-    
+
     public static function getCredentialColumn ()
     {
         return self::$_credentialColumn;
     }
-    
+
+    public static function getIDColumn ()
+    {
+        $table = new self();
+        return $table->_primary;
+    }
+
+    public static function getActivationCodeColumn ()
+    {
+        return self::$_activationCodeColumn;
+    }
+
     public function getID ($username)
     {
         $table = new self();
@@ -67,7 +80,7 @@ Gonium_Model_User_Interface
         
         $select = $table->select();
         $select->from($table->_name, 'user_id')->where(
-        $db->quoteInto('user_name = ?', $username));
+            $db->quoteInto('user_name = ?', $username));
         
         $result = $table->fetchRow($select);
         
@@ -75,22 +88,51 @@ Gonium_Model_User_Interface
         else
             return $result->user_id;
     }
-    
-    public function getUser ($user_id)
+
+    public function getUser ($user_id = null)
     {
+        if ($user_id == null) return null;
+        
         $select = $this->select();
         $select->where('user_id = ?', $user_id);
         
         // Single Row
         return $this->fetchRow($select);
     }
-    
+
+    public function isActivated ($uid)
+    {
+        $user = $this->getUser($uid);
+        if ($user != null) return ((bool) $user->user_activated);
+        
+        return false;
+    }
+
+    public function setActivation ($uid, $code)
+    {
+        $data = array('user_activation_code' => sha1($code));
+        
+        $where = $this->getAdapter()->quoteInto('user_id = ?', $uid);
+        
+        $this->update($data, $where);
+    }
+
+    public function activate ($uid)
+    {
+        $data = array('user_activated' => 1, 'user_activation_code' => null);
+        
+        $where = $this->getAdapter()->quoteInto('user_id = ?', $uid);
+        
+        $this->update($data, $where);
+    }
+
+
     /**
      * Create a new user account. Password is encoded in SHA1 
      */
     public function create ($username, $password)
     {
         $this->insert(
-        array('username' => $username, 'password' => sha1($password)));
+            array('username' => $username, 'password' => sha1($password)));
     }
 }

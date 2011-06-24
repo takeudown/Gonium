@@ -7,7 +7,7 @@ class BlogModel extends Zend_DB_Table
     private $groups;
     public function __construct ()
     {
-        $registry = Registry::GetInstance();
+        $registry = Zend_Registry::getInstance();
         $this->db = $registry->get('db');
         parent::setDefaultAdapter($this->db);
         parent::__construct();

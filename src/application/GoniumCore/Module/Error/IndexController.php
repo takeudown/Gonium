@@ -37,7 +37,7 @@ class Error_IndexController extends Zend_Controller_Action
     public function init ()
     {
         $layout = Zend_Layout::getMvcInstance();
-        if (Core::getEnvironment() !== 'admin') $layout->setLayout('error');
+        if (APP_ENV !== 'admin') $layout->setLayout('error');
         else
             $layout->setLayout('error_backend');
         

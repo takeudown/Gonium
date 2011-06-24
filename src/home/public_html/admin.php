@@ -21,25 +21,10 @@
  * @version     $Id$
  */
 
-/** Launcher */
-require_once './launch.php';
-
-// Save current working directory
-$cwd = getcwd();
-// Set new current working directory to /application
-chdir(APP_ROOT);
-
-/** @see Core */
-require_once 'Core.php';
-
 /**
  * This is an 'admin' environment
  */
-Core::setEnvironment('admin');
+define('APP_ENV', 'admin');
 
-Core::main();
-
-// Restore working directory
-chdir($cwd);
-unset($cwd);
-
+/** Launcher */
+require_once './launch.php';

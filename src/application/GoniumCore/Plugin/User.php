@@ -53,6 +53,7 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  */
 class GoniumCore_Plugin_User extends Zend_Controller_Plugin_Abstract
 {
+
     function routeStartup (Zend_Controller_Request_Abstract $request)
     {
         parent::routeStartup($request);
@@ -77,16 +78,14 @@ class GoniumCore_Plugin_User extends Zend_Controller_Plugin_Abstract
         Zend_Loader::loadClass('Gonium_Auth_Storage_SecureCookie');
         
         $hmacCookie = new Gonium_Crypt_HmacCookie($config->system->key, 
-        array('high_confidentiality' => true, 'enable_ssl' => true));
+            array('high_confidentiality' => true, 'enable_ssl' => true));
         
         $bUrl = $this->getRequest()->getBaseUrl();
         $bUrl = $bUrl != '' ? $bUrl : '/';
         
         $cookieAuth = new Gonium_Auth_Storage_SecureCookie($hmacCookie, 
-        array(
-            'cookieName' => 'GoniumAuth', 
-                'cookieExpire' => (time() + 86400), 
-                'cookiePath' => $bUrl));
+            array('cookieName' => 'GoniumAuth', 
+                'cookieExpire' => (time() + 86400), 'cookiePath' => $bUrl));
         
         Zend_Loader::loadClass('Gonium_Auth_Storage_UserSession');
         // Save a reference to the Singleton instance of Zend_Auth
@@ -97,7 +96,7 @@ class GoniumCore_Plugin_User extends Zend_Controller_Plugin_Abstract
         {
             Zend_Loader::loadClass('Gonium_Auth_Storage_UserSession');
             $auth->setStorage(
-            new Gonium_Auth_Storage_UserSession('user', 'data'));
+                new Gonium_Auth_Storage_UserSession('user', 'data'));
         
      //var_dump($auth->getIdentity());
         }

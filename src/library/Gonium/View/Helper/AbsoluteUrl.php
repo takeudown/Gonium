@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -34,7 +35,8 @@
  */
 class Gonium_View_Helper_AbsoluteUrl extends Zend_View_Helper_BaseUrl
 {
-	/**
+
+    /**
      * Returns site's base url, or file with base url prepended
      *
      * $file is appended to the base url for simplicity
@@ -42,9 +44,19 @@ class Gonium_View_Helper_AbsoluteUrl extends Zend_View_Helper_BaseUrl
      * @param  string|null $file
      * @return string
      */
-    public function absoluteUrl($file = null)
+    public function absoluteUrl ($file = null)
     {
-		return $_SERVER['HTTP_HOST'].'/'. $this->baseUrl($file);
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://';
+        
+        $parts = parse_url(
+            $protocol . $_SERVER['HTTP_HOST'] . $this->baseUrl($file));
+        // use port if non default
+        $port = isset($parts['port']) && (($protocol === 'http://' &&
+         $parts['port'] !== 80) ||
+         ($protocol === 'https://' && $parts['port'] !== 443)) ? ':' .
+         $parts['port'] : '';
+        
+        return $protocol . $parts['host'] . $port . $parts['path'];
     }
-	
+
 }

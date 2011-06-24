@@ -3,27 +3,27 @@ $numColumns = $this->grid->getColumnCount();
 ?>
 
 <table class="grid" cellspacing="0" cellpadding="0" border="0">
-    <?php
+	<?php
     foreach ($this->grid->getColumns() as $_column)
     :
         ?>
-    <col <?php
-        echo $_column->getHtmlProperty()?> />
-    <?php
+	<col <?php
+        echo $_column->getHtmlProperty(); ?> />
+	<?php
     endforeach
     ;
     ?>
 	<thead>
 		<tr class="rowHead">
-		<?php
+			<?php
 foreach ($this->grid->getColumns() as $_column)
 :
     ?>
 			<th <?php
-    echo $_column->getHeaderHtmlProperty()?>><span
+    echo $_column->getHeaderHtmlProperty(); ?>><span
 				class="nobr"><?php
-    echo $_column->getHeaderHtml()?></span></th>
-		<?php
+    echo $_column->getHeaderHtml(); ?></span></th>
+			<?php
 endforeach
 ;
 ?>
@@ -34,63 +34,65 @@ $irow = 0;
 $stripeClass = array('rowOdd', 'rowEven');
 ?>
 	<tbody>
-	<?php
+		<?php
 if (($this->grid->count() > 0))
 :
     ?>
-	<?php
+		<?php
     foreach ($this->grid->getIterator() as $_index => $_item)
     :
         ?>
-	<tr class="<?php
+		<tr
+			class="<?php
         echo $stripeClass[$irow ++ % 2];
         ?>">
-        <?php
+			<?php
         $i = 0;
         foreach ($this->grid->getColumns() as $_column)
         :
             ?>
-            <td <?php
+			<td <?php
             echo $_column->getStyleProperty()?>
 				class="<?php
-            echo $_column->getCssProperty()?> <?php
+            echo $_column->getCssProperty(); ?> <?php
             echo ++ $i == $numColumns ? 'last' : ''?>"><?php
             echo (($_html = $_column->getRowField($_item)) != '' ? $_html : '&nbsp;')?></td>
-        <?php
+			<?php
         endforeach
         ;
         ?>
-	</tr>
-	<?php
+		</tr>
+		<?php
     endforeach
     ;
     ?>
-    
- ?php elseif ($this->grid->getEmptyText())
-:
+
+		<?php elseif ($this->grid->getEmptyText()):
     ?>
-    	<tr class="rowOdd">
-			<td class="empty-text <?php
-    echo $this->grid->getEmptyTextClass()?>"
+		<tr class="rowOdd">
+			<td
+				class="empty-text <?php
+    echo $this->grid->getEmptyTextClass(); ?>"
 				colspan="100"><?php
-    echo $this->grid->getEmptyText()?></td>
+    echo $this->grid->getEmptyText(); ?></td>
 		</tr>
-    
-<?phpendif;
+
+		<?php endif;
 ?>
-        <?php
+		<?php
         if ($this->pager)
         :
             ?>
-    <tr class="rowOdd">
-			<td colspan="<?php
+		<tr class="rowOdd">
+			<td
+				colspan="<?php
             echo $numColumns;
             ?>"><?php
             echo $this->pager;
             ?></td>
 		</tr>
-    
-        <?php endif;
+
+		<?php endif;
         ?>
 	</tbody>
 </table>

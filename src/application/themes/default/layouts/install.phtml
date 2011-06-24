@@ -68,7 +68,8 @@ echo $this->headScript();
 
 <div class="header">
 <h1><?php
-echo Core::APP;
+require_once 'Gonium/Version.php';
+echo Gonium_Version::APP;
 ?></h1>
 </div>
 <!--/header--> <!--<div class="ads"></div>-->
@@ -105,9 +106,9 @@ echo Core::APP;
         ?>
 
         <?php
-        echo Core::getAppName();
+        echo Gonium_Version::APP;
         ?> | Version: <?php
-        echo Core::getVersion();
+        echo Gonium_Version::VERSION;
         ?> | Copyleft <?php
         echo $this->year?>.
         <?php
