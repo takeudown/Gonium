@@ -61,16 +61,17 @@ define('HOME_ROOT', PUBLIC_ROOT);
 
 // Set new include_path
 set_include_path(
-'.' . PS . LIB_ROOT . DS . PS . APP_ROOT . DS . PS . HOME_ROOT . DS . PS .
- get_include_path());
+    '.' . PS . LIB_ROOT . DS . PS . APP_ROOT . DS . PS . HOME_ROOT . DS . PS .
+     HOME_ROOT . DS . 'library' . DS . PS . get_include_path());
 
 // Magic Quotes GPC workaround
 if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc())
 {
+
     function stripslashes_deep ($value)
     {
         $value = is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes(
-        $value);
+            $value);
         
         return $value;
     }

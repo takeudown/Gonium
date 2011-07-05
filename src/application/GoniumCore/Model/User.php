@@ -73,6 +73,12 @@ Gonium_Model_User_Interface
         return self::$_activationCodeColumn;
     }
 
+    public function countUsers() {
+        $select = $this->select();
+        $select->from($this->_name,'COUNT(*) AS num');
+        return $this->fetchRow($select)->num;
+    }
+    
     public function getID ($username)
     {
         $table = new self();
