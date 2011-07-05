@@ -1,7 +1,7 @@
 <?php
 /**
  * Gonium, Zend Framework based Content Manager System.
- *  Copyright (C) 2008 Gonzalo Diaz Cruz
+ * Copyright (C) 2008 Gonzalo Diaz Cruz
  *
  * LICENSE
  *
@@ -34,21 +34,31 @@ require_once 'Gonium/Form/Style/Interface.php';
  * @copyright   2008 {@link http://labs.gon.cl/gonium Gonzalo Diaz Cruz}
  * @version     $Id$
  */
-class Gonium_Form_Style_Div implements Gonium_Form_Style_Interface {
-	public function setStyle(Zend_Form $form) {
-		// Form decorators
-		$form->setDecorators ( array ('FormElements', array ('HtmlTag', array ('tag' => '<div>', 'class' => 'form' ) ), 'Form' ) );
-		
-		// Form Element decorators
-		$form->setElementDecorators ( array ('ViewHelper', array ('Description', array ('tag' => 'div', 'class' => 'help' ) ), 'Errors', array ('Label' ), array ('HtmlTag', array ('tag' => 'div', 'class' => 'field' ) ) ) );
-		
-		// Submit
-		$submit = $form->getElement('submit');
-		
-		if ($submit !== null) {
-			$submit->removeDecorator('Label');
-			$submit->setOrder ( 100 );
-		}
-		return $form;
-	}
+class Gonium_Form_Style_Div implements Gonium_Form_Style_Interface
+{
+
+    public function setStyle (Zend_Form $form)
+    {
+        // Form decorators
+        $form->setDecorators(
+            array('FormElements', 
+                array('HtmlTag', array('tag' => '<div>', 'class' => 'form')), 
+                'Form'));
+        
+        // Form Element decorators
+        $form->setElementDecorators(
+            array('ViewHelper', 
+                array('Description', array('tag' => 'div', 'class' => 'help')), 
+                'Errors', array('Label'), 
+                array('HtmlTag', array('tag' => 'div', 'class' => 'field'))));
+        
+        foreach ($form as $element)
+        {            
+            if($element->getType() == 'Zend_Form_Element_Button' || $element->getType() == 'Zend_Form_Element_Submit')
+            {
+                $element->removeDecorator('Label');
+            }
+        }
+        return $form;
+    }
 }
