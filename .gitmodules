@@ -1,0 +1,3 @@
+[submodule "src/home/public_html/js/jquery-plugins/corner"]
+	path = src/home/public_html/js/jquery-plugins/corner
+	url = https://github.com/malsup/corner.git
