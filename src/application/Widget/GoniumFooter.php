@@ -41,7 +41,7 @@ class Widget_GoniumFooter extends Gonium_Widget
         $this->setContent(
         '
         
-        <a href="http://code.google.com/p/gonium" rel="external">
+        <a href="' . Gonium_Version::URL . '" rel="external">
         	' . Gonium_Version::APP . '</a>:
         	
         	' . Gonium_Version::VERSION . ' | 

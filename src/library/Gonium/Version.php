@@ -40,9 +40,7 @@ class Gonium_Version
     const APP = 'Gonium';
     /** Version of Application */
     const VERSION = '0.4-alpha';
-    /** Last revision from SVN */
-    const REVISION = '$LastChangedRevision: 23 $';
+    /** Project URL */
+    const URL = 'https://github.com/sir-gon/gonium';
     /**#@-*/
-
-
 }
